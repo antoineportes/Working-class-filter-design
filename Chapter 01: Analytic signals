@@ -29,7 +29,7 @@
     where x is the real part of z:      Re (z)  =  x
     and y is the imaginary part of z:   Im (z)  =  y
 
-  Let's imagine a Carthesian plane whose horizontal axis (abscissa) is the ensemble ℝ (real numbers) and whose vertical axis (ordinate)
+  Let's imagine a Cartesian plane whose horizontal axis (abscissa) is the ensemble ℝ (real numbers) and whose vertical axis (ordinate)
   is the ensemble I (pure imaginary numbers). This plane is called the complex plane.
 
   Now imagine we plot z on this plane. It shows how any complex number can be regarded as a vector joining the origin of both axis and the
