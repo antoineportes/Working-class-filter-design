@@ -1,0 +1,573 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                               Chapter I:  Analytic signals
+###############################################################################################
+
+===============================================================================================
+#1  Complex numbers
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Complex_number
+  https://en.wikipedia.org/wiki/Argument_(complex_analysis)
+  https://en.wikipedia.org/wiki/Cartesian_coordinate_system
+  https://en.wikipedia.org/wiki/Complex_plane
+  https://en.wikipedia.org/wiki/Pythagorean_theorem
+  https://en.wikipedia.org/wiki/Trigonometry
+  https://en.wikipedia.org/wiki/Trigonometric_functions
+  https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+
+  A complex number is the sum of a real number and an imaginary number.
+  It takes the form:
+
+    z  =  x  +  √(-1) * y                //  √(x) means "square root of x".
+
+    where x is the real part of z:      Re (z)  =  x
+    and y is the imaginary part of z:   Im (z)  =  y
+
+  Let's imagine a Carthesian plane whose horizontal axis (abscissa) is the ensemble ℝ (real numbers) and whose vertical axis (ordinate)
+  is the ensemble I (pure imaginary numbers). This plane is called the complex plane.
+
+  Now imagine we plot z on this plane. It shows how any complex number can be regarded as a vector joining the origin of both axis and the
+  point with coordinates {x = Re (z) , y = Im (z)}.
+
+  This vector is the diagonal of a rectangle with two sides = Re (z) and two sides = Im (z).
+  The vector z splits this rectangle in two identical right triangles whose hypotenuse is the length of the vector.
+
+  This hypotenuse is called the absolute value of the complex number z and is notated |z|.
+
+  The theorem of Pythagoras gives:
+
+    |z|  =  √( Re (z)²  +  Im (z)² )
+
+  Let's call θ the angle formed by the vector z and the real (horizontal) axis. θ is the argument of the complex number z and is notated arg (z).
+  Since Re (z) is its adjacent side and since Im (z) is its opposite side:
+
+    tan (θ)  =  Im (z) / Re (z)
+
+  And thus:
+
+    arg  (z)  =  arctan ( Im (z) / Re (z) )
+
+  
+  We also know that  cos (θ)  =  adjacent / hypotenuse   and    sin (θ)   =  opposite / hypotenuse
+  which means:      adjacent  =  cos (θ) * hypotenuse    and    opposite  =  sin (θ) * hypotenuse
+
+  Remember that adjacent is Re (z), opposite is Im (z), hypotenuse is |z| and θ is arg (z).
+  Also that  z  =  Re (z)  +  √(-1) * Im (z).
+
+  Then:
+
+    Re (z)  =  |z| * cos ( arg (z) )
+    Im (z)  =  |z| * sin ( arg (z) )
+
+  Then:
+
+    z  =  |z| * [ cos ( arg (z) )  +  √(-1) * sin ( arg (z) ) ]
+
+    This expression is called the polar form of the complex number z.
+
+  The absolute value |z| of z is sometimes also called "modulus" or "magnitude".
+  The argument arg (z) of z is sometimes also called "phase".
+
+
+
+===============================================================================================
+#2  Euler's formula
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Exponential_function
+
+  Let  j = √(-1)  and  x  be a real number, then Euler's formula states that:
+
+    exp (j * x)  =  cos (x)  +  j * sin (x)                   //  https://en.wikipedia.org/wiki/Euler's_formula
+
+  By making use of the 2 following trigonometric identities:
+
+    cos (-x)  =  cos (x)    and    sin (-x)  =  -sin (x)      //  https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Reflections,_shifts,_and_periodicity
+
+  Euler's formula can be re-expressed as:
+
+    exp (j * -x)  =  cos (-x)  +  j * sin (-x)  =  cos (x)  -  j * sin (x)
+
+  Then [1]:
+
+    exp (j * x)  -  exp (-j * x)  =  cos (x)  +  j * sin (x)  -  ( cos (x)  -  j * sin (x) )  =  2 * j * sin (x)
+
+  And [2]:
+
+    exp (j * x)  +  exp (-j * x)  =  cos (x)  +  j * sin (x)  +  ( cos (x)  -  j * sin (x) )  =  2 * cos (x)
+
+
+  Solving [1] for sin (x) gives:
+
+                 exp (j * x)  -  exp (-j * x)
+    sin (x)  =  ------------------------------
+                            2 * j
+
+  Solving [2] for cos (x) gives:
+
+                 exp (j * x)  +  exp (-j * x)
+    cos (x)  =  ------------------------------    [3]
+                              2
+  
+  Considering the identity:
+
+    cos (θ)  =  sin (θ  +  π / 2)
+
+  Equation [3] shows that any real sinusoid can be expressed as half the sum of two complex exponentials.
+  This is interesting because the rules of exponentiation are a lot simpler than the rules of trigonometry.
+  For instance, exp (x) is its own derivative (and thus anti-derivative). This makes processes such as integration or differentiation become
+  very trivial, compared to the same processes applied to cos (x) or sin (x).
+
+  Let    z1  =  exp (j * x) / 2    ,    z2  =  exp (-j * x) / 2    , then:
+    
+    z1  =  cos (x) / 2  +  j * +sin (x) / 2
+    z2  =  cos (x) / 2  +  j * -sin (x) / 2
+
+  Their respective real (Re) and imaginary (Im) parts are thus:
+
+    Re (z1)  =  cos (x) / 2    ;    Im (z1)  =  +sin (x) / 2
+    Re (z2)  =  cos (x) / 2    ;    Im (z2)  =  -sin (x) / 2
+
+    =>  Re (z1)  =  Re (z2)    ;    Im (z1)  =  -Im (z2)
+
+  z1 and z2 form a complex conjugate pair.                          //  https://en.wikipedia.org/wiki/Complex_conjugate
+  So any real sinusoid can be expressed as the sum of two complex conjugates.       [a]
+
+
+  //	Euler's formula and the polar form
+
+    Let's consider a complex number z with argument arg (z) and absolute value |z|.
+
+    According to Euler's formula:
+
+      exp ( j * arg (z) )  =  cos ( arg (z) )  +  j * sin ( arg (z) )
+
+    Recalling the polar form expression:
+
+      z  =  |z| * [ cos ( arg (z) )  +  j * sin ( arg (z) ) ]
+
+    Combining these two expressions leads to:
+
+      z  =  |z| * exp ( j * arg (z) )
+
+    I haven't found any documentation on this form (perhaps from not digging deep enough...) so let's call it the exponential form of the
+    complex number z.
+
+    This means that any number in the form:
+
+      ζ  =  α * exp (j * θ)
+
+    has an absolute value    |ζ|  =  α    and an argument    arg (ζ)  =  θ
+
+    Then    Re (ζ)  =  α * cos (θ)    and    Im (ζ)  =  α * sin (θ)
+
+    Now in the special case:    θ  =  ω * t
+    where t is the time (in seconds) and ω is an angular frequency (in radians per second), the exponential form:
+
+      ζ  =  α * exp (j * ω * t)       [4]
+
+    is what is called a COMPLEX SINUSOID.
+    It is also called an analytic signal as it has optimal qualities in order to study a system's response to pure sinusoids.
+    Indeed comparing equations [3] and [4] reveals that if we express a real sinusoid in terms of complex exponentials, we end up with two
+    complex sinusoids, one of which has a negative frequency; while a pure complex sinusoid has its amplitude and phase embedded in its
+    constant factor and only involves positive frequencies.
+    More on that right away.
+
+
+
+===============================================================================================
+#3  Frequency, Amplitude and Phase
+===============================================================================================
+  
+  https://www.desmos.com/calculator/cxjrs1adv9
+
+  If t is the time (in seconds),  ƒ (t)  =  cos (t)  is a sinusoid of:
+
+    Amplitude	  α  =  1
+    Period 		  T  =  2 * π  seconds
+    Frequency	  f  =  1 / (2 * π)  Hz
+    Phase		    φ  =  0  rad.
+
+  That is,  ƒ (t)  oscillates from -1 to +1 through a repetitive pattern of length = 2 * π with an offset = 0.
+
+  Notice that  ƒ (t)  =  α * cos (2 * π * f * t  +  φ)
+  Or, after defining the angular frequency  ω  =  2 * π * f  (rad. / s.):      //  https://en.wikipedia.org/wiki/Angular_frequency
+
+    ƒ (t)  =  α * cos (ω * t  +  φ)     [5]
+
+  That is,  ƒ (t)  oscillates from -α to +α through a repetitive pattern of length = 1 / ω with an offset = φ.
+
+  Note that for φ to be expressed in radians (that is as a ratio of the period T), the offset t0 (seconds) must be be defined.
+  t0 is the time it takes for ƒ (t) to reach the begining of an oscillation cycle ( ƒ (t) = 1 ) for the first time.
+  (This implies  t0 < T)
+
+  Then:  ƒ (t)  =  α * cos (ω * (t - t0))
+  And:       φ  =  ω * -t0
+
+
+  Using equation [3] to express ƒ (t) in terms of complex exponentials instead of raw trigonometry:
+
+               α                                   α
+    ƒ (t)  =  --- * exp ( j * (ω * t  +  φ) )  +  --- * exp ( -j * (ω * t  +  φ) )
+               2                                   2
+
+
+               α * exp (j * φ)                            α * exp (j * -φ)        
+    ƒ (t)  =  -----------------  * exp (j * ω * t)   +   ------------------  * exp (j * -ω * t)       [6]
+                     2                                           2
+
+  Comparing this expression of ƒ (t) to equation [4] shows that a real sinusoid is the sum of two complex sinusoids, one of which
+  has a negative frequency.
+
+  Let's define:
+
+               α * exp (j * φ)
+    X (t)  =  ----------------    and    s  =  j * ω
+                     2
+
+  X (t) is a complex number in exponential form with absolute value  |X (t)|  =  α / 2    and argument  arg (X (t))  =  φ
+
+  Then any complex sinusoid in the form:
+
+    ƒ (t)  =  X (t) * exp (s * t)
+
+  can be considered the positive-frequency-component of a real sinusoid with:          [b]
+
+    Amplitude	  α  =  2 * |X (t)|
+    Phase		    φ  =  arg (X (t))
+    Frequency	  ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
+
+  And thus the two (positive and negative) complex sinusoids that form a real sinusoid have equal amplitude and opposite phase.
+
+  There is a process called Hilbert transform which applies a different phase shift (± π/2) depending on whether the frequency
+  is positive or negative. This ends up in doubling the amplitude of positive frequencies and cancelling out negative frequencies.
+  Then real sinusoids have become complex sinusoids.
+  (Not that simple if you stop sticking to cos, sin and exp.)
+
+  https://en.wikipedia.org/wiki/Hilbert_transform
+
+  A very convenient tool indeed. But I'd rather find a way to study signals without transforming them (even though it's easily reversible).
+  So I'll take a different route.
+
+
+
+===============================================================================================
+#4  Fourier integral
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Fourier_transform
+  https://fr.wikipedia.org/wiki/Joseph_Fourier
+
+  Joseph Fourier basically demonstrated that any signal can be decomposed into a sum of sinusoids of various amplitudes, frequencies and phases.
+  These sinusoids are called partials and their sum is called spectrum.
+  If all partials have their frequencies related by an integer factor, they are called harmonics. Then the one with the lowest
+  frequency is called fundamental and all the other ones are called overtones.
+  In such a case, the composite signal is periodic and its frequency is the fundamental's frequency thus called fundamental frequency.
+
+  In case of a periodic signal, the sum is discrete ( ω2 = 2 * ω , ω3 = 3 * ω , ... , ωn = n * ω  //  where ω is the fundamental frequency ) and can
+  therefore be effectively expressed as a litteral sum:
+
+                ∞
+    ƒ (t)  =    Σ   α[n] * cos (n * ω * t  +  φ[n])         [7]          //  https://www.desmos.com/calculator/rgix4pizjo
+              n = 0
+
+  Notice that ω is a constant.
+  α[n] means that each partial has its own amplitude whithout necessary being mathematically related to n.
+  (It's an index, not necessarily a function — although it could be. It could also be = 0)
+  Same goes for φ[n]. The partials don't have to be in phase for the signal to be periodic. (I thought so. I checked, I was wrong. If the partials
+  are not in phase, the period will have a random shape but it will be repeated at the fundamental frequency. Which is pretty obvious once you start
+  thinking about it... but first you have to start thinking about it!)       //  https://www.desmos.com/calculator/caofpdn4om
+
+  /*
+  	//	Digression: What happens when n = 0 ?
+  	////	D.C. offset
+
+  	  https://en.wikipedia.org/wiki/Alternating_current
+  	  https://en.wikipedia.org/wiki/Direct_current
+
+  	  In an analog circuit, the fact that    α * cos (ω * t  +  φ)    changes sign each half-period corresponds to the current changing direction,
+  	  as is normal with A.C. (alternating current).
+  	  A direct current (D.C.) can be either positive or negative but its sign (polarity) doesn't change.
+
+  	  When n = 0    α[n] * cos (n * ω * t  +  φ[n])  =  α[0] * cos (φ[0])
+
+  	  Which is a constant. It's called a D.C. offset.
+  	  D.C. because it doesn't alternate. Offset because if you plot ƒ (t) it will shift the curve of the whole spectrum up or down by its value.
+  	  In this regard it could be extracted from the sum:
+
+                           ∞
+        ƒ (t)  =  α[0]  +  Σ   α[n] * cos (n * ω * t  +  φ[n])        //  Why cos (φ[0]) disappeared gets answered right away.
+                         n = 1
+
+      I find this concept quite intuitive: the frequency is the speed of the oscillations. When the speed is zero, there are no oscillations.
+      If there are no oscillations, there is no period. If there is no period there is no phase.       [c]
+
+      A mathematical proof could be:  ω[n] = n * ω    then:
+
+        f[n] (t)  =  α[n] * cos (ω[n] * t  +  φ[n])     //  (equation [5])
+
+      Then since   φ[n]  =  ω[n] * -t0[n]  ,  if  ω[n] = 0   then   φ[n] = 0
+      And since    ω[n]  =  0   when   n = 0  ,  φ[0] = 0
+      Then   cos (φ[0])  =  1    ,    then:
+
+        f[0] (t)  =  α[0]       //  (The actual D.C. offset.)
+
+      In practice a D.C. offset, when played on a monitoring system, has the membrane stuck in a non-zero fixed position. This can kill the monitoring
+      system. My personal advice is to use visual tools and disable monitoring while testing DSP code (first at least).
+      One of my personal rules in life is to never follow anyone's advice. If you don't play with fire how will you ever know for sure that it burns?
+  */
+
+
+  Now let's assume ƒ (t) is not a periodic signal (e.g. white noise, a rocket launch or Beethoven's ninth symphony).
+
+  ( https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4 )
+
+  Any frequency at any phase and with any amplitude can be present in the spectrum.      //  https://www.desmos.com/calculator/b74sfhstoh
+
+  In other words: ω has become a variable which can take any real positive value (n has become meaningless).
+  In other words: the spectrum is no longer discrete, it's continuous. Which means that even if defined on a finite interval it will have infinite
+  partials.
+  Well that's pretty much the definition of integration!       //  https://en.wikipedia.org/wiki/Integral
+
+  One last thing: the angular frequency   ω  =  2 * π * f   is essentially a mathematical tool used to embed the natural period of sine and cosine
+  functions and the frequency in a single factor, a way to shorten expressions. In real life the time (t) is expressed in seconds and frequencies (f)
+  are expressed in Hertz (= seconds^-1). The factor 2 * π can be regarded as inherent to trigonometric functions, then the variable with respect to which
+  we integrate is actually f.
+
+  Then:
+
+               ∞
+              ⌠
+    ƒ (t)  =  |  α[ω] * cos (ω * t  +  φ[ω]) * df
+              ⌡
+               0
+  
+  Or, in a cleaner fashion (less variables):
+
+               ∞
+              ⌠                                    ω
+    ƒ (t)  =  |  α[ω] * cos (ω * t  +  φ[ω]) * d-------
+              ⌡                                  2 * π
+               0
+
+  Or, even cleaner (more straightforward differential):        //  https://en.wikipedia.org/wiki/Differential_(mathematics)
+
+                         ∞
+                 1      ⌠
+    ƒ (t)  =  ------- * |  α[ω] * cos (ω * t  +  φ[ω]) * dω        [8]
+               2 * π    ⌡
+                         0
+
+  Integration is a constant sum, so the rules of factorisation apply as usual. Since 1 / (2 * π) is a constant factor it can be extracted from the
+  integral (it really isn't anything more than a factorisation).
+
+  I'm not done tweaking this formula, but it's important that I stop here and analyse something that I had a hard time understanding.
+
+  I thought my formula was wrong so I've checked it against many sources and it's not: this is what is referred to as "inverse Fourier transform"
+  (actually not in this exact form but I'm not a spoiler so I won't further elaborate).
+  Then I had to understand why I wasn't wrong! I think I did, let me try to explain.
+
+  First, why I thought I was wrong: comparing the D.C. terms in equations [7] and [8] it seemed like:
+
+  [WARNING! What I'm about to write is NOT true.]
+
+               dω
+    α[0]  =  ------- * α[0]   which leads to whether:  dω  =  2 * π   or   α[0]  !=  α[0]   *none of which makes sense*...
+              2 * π
+
+  Two mistakes here: one arose from inattention (easy to debug, not a big deal), the other from the worst disease in the Cosmos: thinking you
+  know something when really you don't (catchy, I know).
+
+  /*
+		https://el.wikisource.org/wiki/Απολογία_Σωκράτους_(Πλάτων)
+		https://en.wikisource.org/wiki/Apology_(Jowett)
+	*/
+  
+  Ok so first mistake:  α[0]  in equation [7] is an amplitude. Its unit is implicit because there are several possibilities; but let's say it's
+  Volts (V). Then let's run a dimensional analysis.           //  https://en.wikipedia.org/wiki/Dimensional_analysis
+
+  The unit of ω is rad/s. Dividing rad/s by  2 * π  gives Hertz (Hz). Then  dω / (2 * π)  is in Hz and  (α[0] * dω) / (2 * π) is in Volts per second.
+  (The inattention was omitting dω.)
+  I chose Volts as an example but the same conclusion will apply to any amplitude unit: one is instantaneous, the other one applies to a frequency
+  band (with band-width = dω).
+  You cannot write an equality with terms of different dimensions (e.g. 1 hour = 7.5 € ... time is not money, by definition).
+
+  In a way,  α[0]  !=  α[0]  was the correct solution: logic only appears to be broken because I used one same symbol for two incommensurable
+  values. Easy fix, but first...
+
+  Second mistake: I stuck to brackets instead of moving to parenthesis. So what? It's just a convention.
+  Said convention is: brackets for indexes, parenthesis for functions.
+  That is I assumed α[ω] (and φ[ω] by the way) had to be an index and not a function.     //  https://en.wikipedia.org/wiki/Function_(mathematics)
+  Because I assumed a function, by definition, had input and output related by some mathematical formula (which can not be the case if I want
+  my integral to apply to random signals). Turns out I didn't know what a function is (even though I'm aware of the possible use of tabulation
+  as a waveshaper...). A mathematical relation is in fact facultative: a function assigns a unique output to any input from its ensemble of
+  definition, period.
+
+  So let's (temporarily) forget about the DC term and fix these two mistakes:
+
+                         ∞
+                 1      ⌠
+    ƒ (t)  =  ------- * |  A(ω) * cos ( ω * t  +  φ(ω) ) * dω     [9]
+               2 * π    ⌡
+                         0
+
+  Now that everything's in place, I can re-write the cosine function in terms of complex exponentials (using equation [3]):
+
+                         ∞
+                 1      ⌠   /  A(ω)                                      A(ω)                                  \
+    ƒ (t)  =  ------- * |  (  ------ * exp ( j * (ω * t  +  φ(ω)) )  +  ------ * exp ( -j * (ω * t  +  φ(ω)) )  ) * dω
+               2 * π    ⌡   \   2                                         2                                    /
+                         0
+
+  The formula inside the integration is the sum of two complex conjugates.
+  No surprise here, it's been demonstrated (statement [a]) that a real sinusoid can always be expressed this way. And this all started with a
+  discrete sum of real sinusoids.
+  But before modifying anything, I should point out that in signal processing sinusoids that are not purely real happen and this is a special case.
+  I chose it because a real sinusoid is a straightforward concept whose existence no one will doubt. So if the concept of analytic signal applies
+  to something commonly accepted as part of real life, then it would have proven more than a convenient mathematical tool. And we will know why
+  we're using it to study systems.
+
+  Now let's extract the phase to reach the form of equation [6]:
+
+                         ∞
+                 1      ⌠   /  A(ω) * exp (j * φ(ω))                         A(ω) * exp (j * -φ(ω))                     \
+    ƒ (t)  =  ------- * |  (  ----------------------- * exp (j * ω * t)  +  ------------------------ * exp (j * -ω * t)  ) * dω
+               2 * π    ⌡   \            2                                             2                                /
+                         0
+  
+  (I could have gone straight to this form by recalling equation [6] but the previous one makes the complex conjugates more obvious.)
+
+  ((Notice that, according to statement [b], the amplitude and phase of each infinitesimal partial are encoded in  A(ω) * exp (j * φ(ω)) as
+  the absolute value and the argument.))
+
+  Again: an integral is a sum, so if the rules of factorisation apply, so do the rules of distribution.
+  Then I can distribute dω:
+
+                          /  ∞                                                      ∞                                                 \
+                 1       /  ⌠  A(ω) * exp (j * φ(ω))                               ⌠  A(ω) * exp (j * -φ(ω))                           \
+    ƒ (t)  =  ------- * (   | ----------------------- * exp (j * ω * t) * dω   +   | ------------------------ * exp (j * -ω * t) * dω   )    [10]
+               2 * π     \  ⌡            2                                         ⌡            2                                      /
+                          \  0                                                      0                                                 /
+
+  Let's call "Ω+" the leftmost integral (the one involving +ω) ; and "Ω-" the rightmost integral (the one involving -ω).
+
+  Then let's focus on Ω-.
+  The continuous sum starts at  ω = 0  and ends at  ω = +∞.
+  Or, acknowledging the minus sign, it starts at  -ω = 0  and ends at  -ω = -∞.
+  This means that the integral (continuous sum) could go in the opposite direction if we'd simply remove the minus sign:
+
+     0
+    ⌠  A(ω) * exp (j * -φ(ω))
+    | ------------------------ * exp (j * ω * t) * dω      [11]
+    ⌡            2
+    -∞
+
+  A bit too easy, isn't it? Something is off indeed: I've allowed  A(ω) * exp (j * -φ(ω))  in equation [10] to silently become  A(-ω) * exp (j * -φ(-ω))
+  in variable [11].
+  Before addressing this issue let me introduce another issue.
+  If we ignore the integral's direction, variable [11] looks very much like Ω+ in equation [10]. The only difference is the minus sign before φ(ω).
+  There's no risk of writing something not true if no equality sign gets involved. Then:
+
+     0
+    ⌠  A(ω) * exp (j * φ(ω))
+    | ----------------------- * exp (j * ω * t) * dω       [12]
+    ⌡            2
+    -∞
+  
+  Now if I want  variable [12]  =  Ω-  what I really want is:
+  
+    A(-ω) = A(ω)  and  φ(-ω) = -φ(ω)          [13]
+  
+  This doesn't break any rule because A(ω) and φ(ω) didn't have any mathematical definition so far. Well now they do.
+  The restriction in equation [13] is the condition for the signal to be purely real when substituting variable [12] for Ω- in equation [10].
+  Then I can safely write:
+
+    if ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) )
+    {
+      
+                            / +∞                                                      0                                               \
+                   1       /  ⌠  A(ω) * exp (j * φ(ω))                               ⌠  A(ω) * exp (j * φ(ω))                          \
+      ƒ (t)  =  ------- * (   | ----------------------- * exp (j * ω * t) * dω   +   | ----------------------- * exp (j * ω * t) * dω   ) ;
+                 2 * π     \  ⌡            2                                         ⌡            2                                    /
+                            \  0                                                     -∞                                               /
+      
+    }   //  endif
+
+  Now of course I want to combine both integrals... But let's not be too rash, shall we?
+  The case ω = 0 is common to both so I need to check if it's equal for both.
+
+    A(-ω) = A(ω)  =>  A(0) = A(-0)  =>  0 = 0            //  check.
+    exp (j * 0 * t)  =  exp (j * -0 * t)  = 1            //  check.
+
+    What about   φ(0)  ==  -φ(-0) ?
+    Remember statement [c]? (Of course! Good, you won't have to scroll.) If the frequency is zero, there are no oscillations.
+    If there are no oscillations, there is no period. If there is no period, there is no phase.
+    (A mathematical proof would have been quicker but abstraction is not required here.)
+    Then:
+
+      ω = 0  =>  φ(ω) = -φ(-ω) = 0                       //  check.
+  
+  Then:
+
+     A(0) * exp (j * φ(0))                         A(0) * exp (j * -φ(0))                        A(0)
+    ----------------------- * exp (j * 0 * t)  =  ----------------------- * exp (j * 0 * t)  =  ------
+               2                                             2                                    2
+
+  Then it's safe to write:
+
+    if ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) )
+    {
+      
+                          +∞
+                   1      ⌠  A(ω) * exp (j * φ(ω))
+      ƒ (t)  =  ------- * | ----------------------- * exp (j * ω * t) * dω ;
+                 2 * π    ⌡            2
+                          -∞
+      
+    }   //  endif
+
+  Let's define:
+
+              A(ω) * exp (j * φ(ω))
+    X (ω)  = -----------------------
+                        2
+  Then:
+
+    if ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) )
+    {
+      
+                          +∞
+                   1      ⌠
+      ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω ;        //  And that's the academic
+                 2 * π    ⌡                                       //  expression of the inverse
+                          -∞                                      //  Fourier transform.
+      
+    }   //  endif
+
+  The amplitude of each infinitesimal partial being:  2 * |X (ω)|    and its phase being:  arg ( X(ω) ).
+
+  All you have to do for the integral to keep representing a real signal is explicitly stating:  A(-ω) = A(ω)  and  φ(-ω) = -φ(ω).
+  But if you don't, it's not a mistake per se: it just means that the signal is not purely real.
+
+  This might be clearer:
+
+    bool isReal     = ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) );
+    bool isComplex  = !isReal;
+
+
+
+===============================================================================================
+#5  Conclusion
+===============================================================================================
+
+  This'll be quick.
+  We've noticed that an analytical signal is a useful theoretical object for it simplifies maths.
+  We've proven that it can be used to represent real-life signals.
+
+  But you might want to do more than representing it. Processing it for instance...
