@@ -65,5 +65,7 @@ The .txt format and the pseudo-code syntax are deliberate.
 
 If you're too shy to pull a request, download a chapter, edit it locally, make it yours.\
 Do it with my blessing. It's kind of the whole point.
-<br/><br/><br/>
+>This is the opposite of a cookbook.
+
+<br/><br/>
 Antoine Portes (working-class filter designer).
