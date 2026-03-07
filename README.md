@@ -53,7 +53,7 @@ The only prior knowledge required from the reader are basic arithmetic rules.
 
 But I want to remain true to my extremism.\
 So even if you don't know how to factorise a sum or what a square root is,\
-just report to [coming right away].
+just report to the [Annexe](Z-Annexe).
 
 Now I can proudly claim: No prior knowledge required!
 
