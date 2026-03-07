@@ -1,0 +1,166 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                                          Annexe
+###############################################################################################
+
+===============================================================================================
+#1  Below the ground is the underground
+===============================================================================================
+
+  Time for Cartesian doubt: let's assume we know shit. (René's words, not mine.)
+
+//  Equation
+  As Etymology suggests an equation involves an equal sign "=".
+
+  When two propositions stand each on one side of an equal sign we have an equality, or equation.
+  An equation can be read in both directions:
+
+    A = B  means  B = A
+
+  So it's not a statement. It's two statements. We're defining A and B.
+  Then if we know A, we know B. If we know B we know A.
+  But that's assuming the expression is true. Which is assuming we know what true means.
+
+//  Truth
+  What's the definition of truth?
+
+  Easy: Truth is the adequation between a concept and its counterpart in reality.
+
+  Then how is abstract thinking ever able to provide truth?
+
+  This aporia is resolvable.
+  I've broken the first rule of science: even before defining terms (first rule of dialectics): define a referential.
+  My definition of truth is correct. It's also not correct.
+  Usually when logic seems broken, it's the speaker's fault.
+
+  The correct answer to "What is truth?" is:  "Which truth?"
+
+  Docile students answer questions. Free thinkers question questions.
+  Do NOT write that down (like I just did...).
+  The whole purpose of writing something down is to allow oblivion.
+  People used to know Homer by heart, then they wrote it down.
+
+  Which truth then?
+
+  The definition I gave quietly implies "transcendental" before "truth".
+  We're talking Maths, so we're talking Logic, so we want a definition of logical truth.
+
+  Logical truth, as the name suggests, applies to a statement that doesn't violate any logical rule.
+  
+  We've seen A = B  <=>  B = A. That's an example of logical truth.
+  A = B. Ok. Then refer to the definition of B:  B = A.
+  Substituting B with its definition in the expression of A, we get:
+
+    A  =  A
+
+  Nothing's truer than a tautology.         //  https://en.wikipedia.org/wiki/Tautology_(logic)
+  So it's true, right?
+  Ok, prove it.
+
+  *SPOILER ALERT* It's impossible.
+
+  Ok, then it's false.
+  Fine. Prove it.
+
+  *SPOILER ALERT* It's also impossible.
+
+//  Principles
+  A  =  A  is a principle of logic called the Law of identity.      //  https://en.wikipedia.org/wiki/Law_of_identity
+  A principle is a statement that can not be proven either right or wrong.
+  You can admit it or reject it.
+  Every field of science relies on principles. In that regard science is dogmatic.
+  In mathematics principles are called Axioms.
+  Why two words? Because two books:
+    ¤  Aristotle's Prior Analytics (ἀρχή)          //  https://en.wikipedia.org/wiki/Prior_Analytics
+    ¤  Euclid's Elements (ἀξίωμα).                 //  https://en.wikipedia.org/wiki/Euclid%27s_Elements
+
+  Logically true means "which does not contradict the chosen principles, directly or not".
+
+  Assuming you've admitted  A = A  is TRUE (again: you don't have to, you can chosoe to reject logic),
+  remembering that  B = A  by definition, and that this definition leads to  A = A, then, according to the law of identity, or,
+  in other words: according to the principle you willingly admitted (by hypothesis) we can safely say that  A = B  is TRUE.
+
+  Which proves that  A ≠ B  is not_TRUE.
+  Does it though?
+  Can you formulate the demonstration?
+
+  Looks like we've found another principle of logic.
+  This one's called the Principle of non-contradiction.        //  https://en.wikipedia.org/wiki/Law_of_noncontradiction
+  Same as before: you're free to reject it as long as you don't need logic.
+
+  Let me try to express it with a proper sentence.
+
+  If something is TRUE, it cannot be not_TRUE at the same time.
+  For instance if  "A ≠ B  is not_TRUE"  is TRUE,  "A ≠ B  is TRUE"  is necessary not_TRUE.
+
+  Obviously "FALSE" means "not_TRUE".
+  Are you sure of that?
+
+  Well you should be: "FALSE" means "not_TRUE" by definition.
+
+  So the Principle of non-contradiction can be re-phrased as: TRUE and FALSE cannot coexist.
+
+  Now what's the third option?
+
+  If you believe there's one, please name it. Otherwise you've just admitted another principle of logic called the Principle of
+  exluded middle.                                             //  https://en.wikipedia.org/wiki/Law_of_excluded_middle
+
+  It can be expressed as:  something  +  not_someting  =  everything
+
+  That is: a proposition, a variable, a concept, ... and its negation form a cosmic sum.
+  Nothing exists outside of a cosmic sum. Or in less Greek words: nothing exists outside of everything.
+
+//  Mathematical contraries
+  TRUE and FALSE are the archetypal form of what I personally call mathematical contraries.
+  Mathematical contraries are pairs of propositions (or variables, or concepts, ...) that share the same relations as TRUE and
+  FALSE. More precisely:
+
+    If A and B are mutually exclusive and form a cosmic sum, they are mathematical contraries.
+    If A and B are mathematical contraries, they are mutually exclusive and form a cosmic sum.
+
+  Examples:
+
+    - What is the mathematical contrary of Love?
+    - Easy: Hate!
+    - WRONG! Even if I admit that an infinitesimal amount of Love or Hate counts as Love or Hate, I forgot Indifference.
+      Loving and Hating can be grouped as Caring and Indifference is synonymous with not_Caring.
+      Ergo  ->  Love + Hate  =  COSMOS - Indifference
+      Ergo  ->  the mathematical contrary of Indifference is (Love + Hate)
+      Ergo  ->  the mathematical contrary of Love is (Hate + Indifference)
+
+    - What is the mathematical contrary of Poor?
+    - Rich, obviously...
+    - WRONG AGAIN! I forgot about tuna sandwich and alien spaceship...
+      The mathematical contrary of Poor is not_Poor.
+
+  Now let's play a game.
+
+  The mathematical contrary of:
+    [A]  "Everything happens with a cause"
+  is:
+    [B]  "Some thing(s) happen(s) without a cause".
+
+  1)  Pick one proposition.
+
+  2)  Define Free will.
+
+  3)  Confront steps 1 and 2.
+
+  If you've picked [B], you've rejected logic.
+  Indeed [A] is a principle of logic called the Principle of sufficient reason.        //  https://en.wikipedia.org/wiki/Principle_of_sufficient_reason#Formulation
+  If you'd rather not reject logic: replay the game.
+
+  cout << "Welcome to your new life."                                                  //  https://en.wikipedia.org/wiki/Input/output_%28C%2B%2B%29#Input/output_streams
+
+  First time hurts, I know. Been there.
+  Don't blame me, blame him:  https://en.wikipedia.org/wiki/Spinoza%27s_Ethics
+
+//  Muslims call him "The Master"
+  If you enjoy playing with such concepts as much as I do, I'd advise you to read Aristotle's Organon.    //  https://en.wikisource.org/wiki/Organon
+  The guy literally invented the concept of concept. It's worth attention at least.
+  In those days "Meta" was a prefix which meant "emancipated" not "incarnation of evil".
