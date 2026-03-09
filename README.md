@@ -41,7 +41,7 @@ So if I can explain everything well, I will know that I understood everything we
 The more useful I become to others the more Freedom I get. Everybody wins!\
 (Except maybe some greedy capitalists...)
 
-I've linked to Vadim's book in this header because I won't be doing it anymore.\
+I've linked to Vadim's book in this README because I won't be doing it anymore.\
 I've assigned myself a set of 3 tools:
 
   - Logic, Wikipedia and Desmos (free, free and free).
