@@ -384,7 +384,7 @@
   Two mistakes here: one arose from inattention (easy to debug, not a big deal), the other from the worst disease in the Cosmos: thinking you
   know something when really you don't (catchy, I know).
 
-  /*
+    /*
 		https://el.wikisource.org/wiki/Απολογία_Σωκράτους_(Πλάτων)
 		https://en.wikisource.org/wiki/Apology_(Jowett)
 	*/
@@ -587,13 +587,20 @@
   A sinusoid without a D.C. offset has period: a unique motif repeated identically ad infinitum.
   This period has a center of symmetry in its middle: when it crosses zero.
 
-  Which means that the integration of the sinusoid over one period gives zero: indeed, the two halves have equal energy and complementary
-  polarities -- therefore their sum cancels out.
+  Which means that the integration of the sinusoid over one period gives zero: indeed, the two halves have equal area under the curve
+  and complementary signs -- therefore their sum cancels out.
 
   So assuming that the D.C. offset is constant (that is X (ω = 0) is constant) the integration over time of the Inverse Fourier Transform gives
   the value of the D.C. offset, assuming this integration starts and stops when all partials are crossing zero.
   Of course, all partials crossing zero at once (all the more twice) is very unlikely (unless the spectrum is fully periodic).
   But a long enough integration will approximate the D.C. offset accurately enough. (Notice how enough relies on enough.)
+
+  /*
+    I don't like the word "approximation" either. But noise is a random and unstable phenomenon.
+    So we're making sense out of chaos (sounds better?).
+
+    For periodic signals we still get the exact value of the D.C. offset: α[0] (remember?).
+  */
 
   The integration over time of the Inverse Fourier Transform is called the Fourier Transform.
 
