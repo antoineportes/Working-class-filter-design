@@ -571,3 +571,32 @@
   We've proven that it can be used to represent real-life signals.
 
   But you might want to do more than representing it. Processing it for instance...
+
+
+
+===============================================================================================
+#6  Not so fast...
+===============================================================================================
+
+  D.C. offset needs closure.
+  Remember "if you plot ƒ (t) it will shift the curve of the whole spectrum up or down by its value"?
+
+  This statement contains the solution to the aporia: "How to deduce the D.C. offset from the Inverse Fourier Transform?".
+
+  A spectrum is a sum of sinusoids. So the vertical shift of of a spectrum is a vertical shift of sinusoid(s).
+  A sinusoid without a D.C. offset has period: a unique motif repeated identically ad infinitum.
+  This period has a center of symmetry in its middle: when it crosses zero.
+
+  Which means that the integration of the sinusoid over one period gives zero: indeed, the two halves have equal energy and complementary
+  polarities -- therefore their sum cancels out.
+
+  So assuming that the D.C. offset is constant (that is X (ω = 0) is constant) the integration over time of the Inverse Fourier Transform gives
+  the value of the D.C. offset, assuming this integration starts and stops when all partials are crossing zero.
+  Of course, all partials crossing zero at once (all the more twice) is very unlikely (unless the spectrum is fully periodic).
+  But a long enough integration will approximate the D.C. offset accurately enough. (Notice how enough relies on enough.)
+
+  The integration over time of the Inverse Fourier Transform is called the Fourier Transform.
+
+  https://en.wikipedia.org/wiki/Fourier_transform
+
+  How d'you like closure?
