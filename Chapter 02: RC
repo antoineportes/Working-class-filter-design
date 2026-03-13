@@ -1,0 +1,163 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                                     Chapter II:  RC
+###############################################################################################
+
+===============================================================================================
+#1  Do I know what a filter is?
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Separation_process
+
+  Being a caffeine addict, I should certainly hope so.
+  Some people enjoy Turkish coffee. Good for them. I don't.
+  I like the grains in my cup to be under a certain size. And I choose my coffee filters accordingly.
+  Fine grains go in my cup, gross grains go in the compost.
+  The sum of the fine grains in my cup and the gross grains in the compost is equal to the unfiltered coffee.
+
+  Maybe the coffee paradigm is not as irrelevant as it would seem (Turkish people might disagree...).
+  We've written chapter 01 together, we know what a spectrum and its partials are.
+  Let "unfiltered coffee" be the name of a spectrum and "grain" be an alias of "partial".
+  Now what could "gross" and "fine" possibly mean?
+
+  All partials can very well have amplitude = 1 and phase = 0, the spectrum remains a spectrum.
+  Their frequency is their identity. Their frequency is linked by definition to their period.
+  So gross could mean mean either "high frequency" or "long period".
+  And since we're free (aren't we?) we can assign the pointer to what feels the most intuitive.
+  Frequency is abstract (speed is not something you can see, it's the first derivative of something you can see);
+  while a period is very palpable on a plot.
+  I'll assign "gross" to "long period" and "fine" to "short period". Pull a request if you disagree.
+
+  It would mean that frequencies under a threshold set to my taste would end up in the compost.
+  And "the filter" would remain "the filter".
+
+  But how would such a filter work? How do we separate velocities?
+
+  I can think of a way, but if you don't like my paraboles... well bad news.
+
+  //    Second paradigm: Lost in the woods.
+
+  A group of people is *lost* in the woods. No known destination, just moving forward towards the unknown.
+  It's heavily raining and they're not dressed adequately.
+  They reach a crossroad.
+    # One path is not covered by trees, the rain falls upon it.
+    # One path has a gap over which you can jump on the condition that you're fast enough.
+
+  Everyone wants to take the path they consider the easiest.
+  For fast people it means "no rain". (:= group H)
+  For slow people it means "no gap".  (:= group L)
+
+  The group splits. I've filtered people based on their velocity.
+  Notice that group H + group L = initial group.
+
+  Now replace "people" with "electrical charges", "rainy path" with "Resistor" and "gaped path" with "Capacitor".
+  You get what is called an RC circuit.                //  https://en.wikipedia.org/wiki/RC_circuit
+
+  Which path leads to the ground (compost) and which to the output (coffee cup) depends on whether you want a filter
+  that discards low frequencies and let high frequencies pass (High-Pass filter); or one that discards high frequencies
+  and let low frequencies pass (Low-Pass filter).
+
+  An RC circuit is an electrical circuit. What is electricity?
+
+
+===============================================================================================
+#2  Electricity
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Conservation_of_energy             https://en.wikipedia.org/wiki/Entropy
+  https://en.wikipedia.org/wiki/First_law_of_thermodynamics        https://en.wikipedia.org/wiki/Second_law_of_thermodynamics
+  https://en.wikipedia.org/wiki/Proton                             https://en.wikipedia.org/wiki/Electron
+  https://en.wikipedia.org/wiki/Elementary_charge                  https://en.wikipedia.org/wiki/Neutron
+  https://en.wikipedia.org/wiki/Atom                               https://en.wikipedia.org/wiki/Ion
+  https://en.wikipedia.org/wiki/Electric_charge                    https://en.wikipedia.org/wiki/Electric_potential
+  https://en.wikipedia.org/wiki/Electrical_energy                  https://en.wikipedia.org/wiki/Electricity
+  
+  Equilibrium comes out of movement. Movement doesn't come out of equilibrium.
+  If the whole cosmos where to reach total equilibrium, movement would become unretrievable.
+  Everything would remain dead forever.
+
+  Luckily that's impossible.
+
+  Energy produces movement. Energy changes form but it's indestructible.
+  So movement is eternal in both temporal directions.
+
+  Matter is made of various particles, among which: atoms.
+  The structure of an atom is similar to the one of the solar system: items gravitate around a bigger item.
+  In an atom the planets are called electrons.
+  The sun is called the nucleus and is an aggregation of protons and neutrons.
+  Let's ignore neutrons.
+
+  Electrons repel electrons. Protons repel protons. Electrons and protons are attracted to each other.
+  The potential of attraction and repulsion of one proton is equal to the potential of attraction and repulsion of one electron.
+  This potential is called their electric charge. Since they attract and repel in opposite directions, their charge are said to
+  have opposite sign (polarity). By convention, electrons are said negatively charged and protons are said positively charged.
+  Neutrons have neutral charge (no attraction nor repulsion potential, that's why we're ignoring them).
+
+  Equilibrium for an atom means neutral charge. Since electrons and protons have electric charges with equal absolute values,
+  equilibrium for an atom means equal number of protons and electrons.
+  The atom is then said stable, otherwise it is said unstable.
+
+  An unstable atom has an electric charge. It's called an ion.
+  Its protons are at the nucleus, they cannot leave the atom without destroying it.
+  So the electric charge has to be due to a lack or an excess of electrons.
+  
+  A positively charged atom is lacking one or several electrons. It's called a cation.
+  A negatively charged atom is having one or several extra electrons. It's called an anion.
+
+  Cations attract electrons. Anions repel electrons.
+  This phenomenon can create movement.
+  The energy associated with this movement is called electrical energy.
+  The movement itself is called electricity.
+
+
+===============================================================================================
+#3  Ohm's law
+===============================================================================================
+
+  //  Conductance and its reciprocal
+  
+  Atoms having a natural tendency towards equilibrium, complementary ions can cause a flow of electrons through matter.
+  Or, if we focus on the charge and not the particle: a difference in electric potential tends towards a flow of negative charge
+  through matter.
+  How easily this flow happens depends on the composition of said matter.
+  That is: each material has the property of letting electrons flow. This property is called Conductance.
+  Its usual symbol is G.
+  (If you happen to know why, please let me know... perhaps C, D, E, F were already taken and Greeks have no 'C'?)
+
+  As its conductance decreases, a material is increasingly resisting the flow of electrons. This property is called Resistance.
+  Its usual symbol is R.
+  (This one's pretty obvious.)
+
+  Don't let the dichotomy fool you: nothing binary here.
+  Like autism or dissonance, Resistance is a spectrum.
+  Conductance and Resistance are both extremities of one same axis. Extreme cases are:
+    #  Conductance = infinity   &&    Resistance = zero
+    #   Resistance = infinity   &&   Conductance = zero
+
+  The arithmetical operation that opposes zero to infinity is the division:
+  divide by zero, you get infinity; divide by infinity, you get zero.
+  So they're not opposites, they're inverses:
+
+    R  =  1 / G    <=>    G  =  1 / R    <=>    R / G  =  G / R  =  1
+
+  A mass of water or a copper wire have a Resistance.
+  The air and your body have a Conductance.
+
+  Assuming adequate conditions, electrons can flow through the air: it's called lightning.
+  Your body is a dipole (go ask golfers).
+
+  #define adequate_conditions IN_PROGRESS
+  
+
+
+
+
+
+
+
+
