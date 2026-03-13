@@ -71,6 +71,6 @@ Do it with my blessing. It's kind of the whole point.
 ### Acknowledgements
 This book is dedicated to whoever will take time to read parts of it.\
 Don't let institutional elitism discourage you.\
-You are not a lost cause. Prove 'em wrong!\
+You are not a lost cause.\
 <br/><br/>
 *Antoine Portes (working-class filter designer).*
