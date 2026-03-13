@@ -67,5 +67,10 @@ If you're too shy to pull a request, download a chapter, edit it locally, make i
 Do it with my blessing. It's kind of the whole point.
 >This is the opposite of a cookbook.
 
+
+### Acknowledgements
+This book is dedicated to whoever will take time to read parts of it.\
+Don't let institutional elitism discourage you.\
+You are not a lost cause. Prove 'em wrong!\
 <br/><br/>
-Antoine Portes (working-class filter designer).
+*Antoine Portes (working-class filter designer).*
