@@ -499,7 +499,7 @@
       
     }   //  endif
 
-  Now of course I want to combine both integrals... But let's not be too rash, shall we?
+  Now of course I want to combine both integrals... But let's not be too rash, shalln't we?
   The case ω = 0 is common to both so I need to check if it's equal for both.
 
     A(-ω) = A(ω)  =>  A(0) = A(-0)  =>  0 = 0            //  check.
@@ -590,8 +590,8 @@
   Which means that the integration of the sinusoid over one period gives zero: indeed, the two halves have equal area under the curve
   and complementary signs -- therefore their sum cancels out.
 
-  So assuming that the D.C. offset is constant (that is X (ω = 0) is constant) the integration over time of the Inverse Fourier Transform
-  gives the value of the D.C. offset, assuming this integration starts and stops when all partials are crossing zero.
+  So assuming that the D.C. offset is constant the integration over time of the Inverse Fourier Transform gives the value of the D.C. offset,
+  assuming this integration starts and stops when all partials are crossing zero.
   Of course, all partials crossing zero at once (all the more twice) is very unlikely (unless the spectrum is fully periodic).
   But a long enough integration will approximate the D.C. offset accurately enough. (Notice how enough relies on enough.)
 
