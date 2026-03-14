@@ -271,7 +271,7 @@
   In such a case, the composite signal is periodic and its frequency is the fundamental's frequency thus called fundamental frequency.
 
   In case of a periodic signal, the sum is discrete ( ω2 = 2 * ω , ω3 = 3 * ω , ... , ωn = n * ω  //  where ω is the fundamental frequency ) and can
-  therefore be effectively expressed as a litteral sum:
+  therefore be effectively expressed as a literal sum:
 
                 ∞
     ƒ (t)  =    Σ   α[n] * cos (n * ω * t  +  φ[n])         [7]          //  https://www.desmos.com/calculator/rgix4pizjo
