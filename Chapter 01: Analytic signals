@@ -240,7 +240,7 @@
   can be considered the positive-frequency-component of a real sinusoid with:          [b]
 
     Amplitude	  α  =  2 * |X (t)|
-    Phase		    φ  =  arg (X (t))
+    Phase		  φ  =  arg (X (t))
     Frequency	  ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
 
   And thus the two (positive and negative) complex sinusoids that form a real sinusoid have equal amplitude and opposite phase.
