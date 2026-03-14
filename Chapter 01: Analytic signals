@@ -192,7 +192,7 @@
     Amplitude	  α  =  1
     Period 		  T  =  2 * π  seconds
     Frequency	  f  =  1 / (2 * π)  Hz
-    Phase		    φ  =  0  rad.
+    Phase		  φ  =  0  rad.
 
   That is,  ƒ (t)  oscillates from -1 to +1 through a repetitive pattern of length = 2 * π with an offset = 0.
 
