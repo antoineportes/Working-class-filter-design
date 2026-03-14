@@ -76,6 +76,7 @@
   https://en.wikipedia.org/wiki/Atom                               https://en.wikipedia.org/wiki/Ion
   https://en.wikipedia.org/wiki/Electric_charge                    https://en.wikipedia.org/wiki/Electric_potential
   https://en.wikipedia.org/wiki/Electrical_energy                  https://en.wikipedia.org/wiki/Electricity
+  https://en.wikipedia.org/wiki/Electric_potential
   
   Equilibrium comes out of movement. Movement doesn't come out of equilibrium.
   If the whole cosmos where to reach total equilibrium, movement would become unretrievable.
@@ -93,14 +94,16 @@
   Let's ignore neutrons.
 
   Electrons repel electrons. Protons repel protons. Electrons and protons are attracted to each other.
-  The potential of attraction and repulsion of one proton is equal to the potential of attraction and repulsion of one electron.
-  This potential is called their electric charge. Since they attract and repel in opposite directions, their charge are said to
-  have opposite sign (polarity). By convention, electrons are said negatively charged and protons are said positively charged.
-  Neutrons have neutral charge (no attraction nor repulsion potential, that's why we're ignoring them).
+  This tendency is called their electric charge. Assuming a one-dimension space (which is a valid assumption if we also assume
+  to charges in isolation), this reciprocal attraction could be represented with two vectors of opposite sign.
+  The sign of these vectors is called polarity. Which means: electrons and protons have charges with opposite polarities.
+  By convention, electrons get the minus sign and protons get the positive sign.
+  Neutrons have a neutral charge (no contribuion to attraction nor repulsion, that's why we're ignoring them).
 
-  Equilibrium for an atom means neutral charge. Since electrons and protons have electric charges with equal absolute values,
-  equilibrium for an atom means equal number of protons and electrons.
-  The atom is then said stable, otherwise it is said unstable.
+  The charge of one proton and the charge of one electron have an equal absolute value called elementary charge. Usual symbol: q.
+  From where:
+    Equilibrium for an atom means equal number of protons and electrons. (Neutral polarity, no urge to move.)
+    The atom is then said stable, otherwise it is said unstable.
 
   An unstable atom has an electric charge. It's called an ion.
   Its protons are at the nucleus, they cannot leave the atom without destroying it.
@@ -108,22 +111,52 @@
   
   A positively charged atom is lacking one or several electrons. It's called a cation.
   A negatively charged atom is having one or several extra electrons. It's called an anion.
-
   Cations attract electrons. Anions repel electrons.
-  This phenomenon can create movement.
-  The energy associated with this movement is called electrical energy.
-  The movement itself is called electricity.
+
+  If movement happens, its direction depends on polarity: always electrons to cations -- that is negative to positive.
+
+  The mutual attraction of charges with opposite polarities is a force associated with energy -- electrical energy, which is
+  whether potential energy (no movement) or a mixture of potential and kinetic energy (movement -- or urge to move + opportunity to move).
+  It's never purely kinetic -- this wasn't straightforwardly obvious to me, so let me explain why.
+  The mixture comes from energy converting its form: electrons are urged to move (potential) so if they can, they move (kinetic).
+  No potential energy means no urge to move, which means no cause for movement, which means no movement.
+  This can happen to electrons. But then the energy is no longer electrical. It can nevertheless have become purely kinetic:
+  e.g. an ideal motor with no load.
+
+  Notice that a charge in isolation doesn't store energy. You need two groups of charges with opposite polarities before you get
+  potential energy. Which means that the energy in one charge is dependant upon the other charges that surround it.
+  So the greater the difference in charge between the negatively charged group and the positively charged group, the greater the
+  energy per charge in each group.
+  The energy per charge in one group is called its electric potential.
+  Notice that the urge to move grows with the electric potential.
+
+  Furthermore, let's assume two groups of charges with same polarity but different absolute value.
+  The atoms are unstable. If they can reach equilibrium, they will.
+  So the electrons will have the urge to move towards the less negative group (even if both are positively charged).
+  From where:
+    A difference in electric potential is prone to a flow of electrons regardless of polarity.
+    (This one's not obvious -- at least to me it wasn't -- meditate it before you move on -- at least I did.)
+
+  We now know what electricity is.
+
+  Oh wait! No we don't...
+  Once electrons start moving through matter: this phenomenon is called electricity.
 
 
 ===============================================================================================
 #3  Ohm's law
 ===============================================================================================
 
+  https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance
+  https://en.wikipedia.org/wiki/Voltage
+  https://en.wikipedia.org/wiki/Electric_current
+  https://en.wikipedia.org/wiki/Ohm%27s_law
+
   //  Conductance and its reciprocal
   
   Atoms having a natural tendency towards equilibrium, complementary ions can cause a flow of electrons through matter.
-  Or, if we focus on the charge and not the particle: a difference in electric potential tends towards a flow of negative charge
-  through matter.
+  Or, if we focus on energy and charge instead of particles: a difference in electric potential tends towards a flow of
+  negative charge through matter.
   How easily this flow happens depends on the composition of said matter.
   That is: each material has the property of letting electrons flow. This property is called Conductance.
   Its usual symbol is G.
@@ -151,10 +184,73 @@
   Assuming adequate conditions, electrons can flow through the air: it's called lightning.
   Your body is a dipole (go ask golfers).
 
-  #define adequate_conditions IN_PROGRESS
+  #define adequate_conditions
+
+  Remember: the urge for a flow of electrons to happen grows with the difference in electric potential.
+  Ergo: greater difference  =>  greater charge flowing at once.
+  In time domain, this instantaneous phenomenon translates as: higher flow rate.
+  Whether this means electrons moving faster or more electrons moving is made irrelevant by the concepts of rate and charge.
+  Which is precisely why these concepts are useful.
+
+  Matter resists the flow. How much depends on its composition (Conductance / Resistance).
+  Ergo: greater Resistance  =>  lower flow rate.
+
+  This means:
+    #  Assuming constant Resistance: the rate of the flow grows with the difference in potential.
+    #  Assuming constant difference in potential: the rate of the flow decreases when the Resistance increases (and vice versa).
+    #  Assuming constant rate of the flow: if the Resistance increases, the difference in potential must compensate by increasing too
+         (and vice versa).
+
+  For R to remain constant if flow and difference grow together (which they do), some mathematical formula must compensate for it
+  in the definition of R.
+  The difference is energy per charge. The flow: charge per time. They're not commensurable, so addition and subtraction are excluded.
+  Exponentiation would require one of the variables to be dimension-less to make sense. No exponentiation excludes logarithms as well.
+  We're left with multiplication and division. Multiplication is also excluded because we know that the two variables grow together.
+  So if one increases so does the other, then so does the product, then R is not constant which is false by hypothesis.
+  Division it is then. But which one is the numerator, which the denominator?
+  We also know that for the flow to remain constant, the constraints that applied to it and the difference thus far now apply to R
+  and the difference.
+  If R is not the denominator it means that  R  =  flow * difference  --  which has been excluded (we don't know which ratio but we
+  know it's a ratio... well actually now we know).
+
+  If (R is not the denominator) is impossible, then it's false, then R is the denominator, then:
+
+           difference in electric potential
+    R  =  ----------------------------------
+            rate of the flow of electrons
   
+  The flow of electrons is called Current. Its rate is called Intensity (of the current). Its usual symbol is I.
+  The difference in potential is called Tension or Voltage. Its usual symbol is V in the English-speaking world, U otherwise.
+
+  /*
+    I personally tend to prefer U because V already stands for Volt, a common unit for Tension / Voltage.
+    So if we use V for Voltage then the unit of V is V... I say slippery slope. However, I've also said "go play with fire"...
+  */
+
+  Ok, now that I and U have been granted convenient symbols maybe we can build some nice-looking set of equations:
+
+           U                                         U             U * I
+    R  =  ---    <=>    U  =  R * I    <=>    I  =  ---    <=>    -------  =  1
+           I                                         R               R
+
+  This set of equations is called Ohm's law.
+  (You can check Wikipedia now.)
+
+  /*
+    More links (since you've asked):
+      https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb      https://en.wikipedia.org/wiki/Luigi_Galvani
+      https://en.wikipedia.org/wiki/Alessandro_Volta                 https://en.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re
+      https://en.wikipedia.org/wiki/Georg_Ohm                        https://en.wikipedia.org/wiki/Michael_Faraday
+      https://en.wikipedia.org/wiki/Gustav_Kirchhoff
+
+    (Try not to over-interpret the pair-grouping: I'm just saving lines. The list is ordered by ascending date of birth.)      
+  */
 
 
+===============================================================================================
+#4  Conductor vs. Isolator
+===============================================================================================
+  
 
 
 
