@@ -4,24 +4,19 @@
 ###############################################################################################
 ###############################################################################################
 
-  "Feed your head."  --  Grace Slick (White Rabbit)
-
 ###############################################################################################
                                Chapter I:  Analytic signals
 ###############################################################################################
-
+/*          "Feed your head."                                                                */
+/*                                                   --  Grace Slick (White Rabbit)          */
 ===============================================================================================
 #1  Complex numbers
 ===============================================================================================
 
-  https://en.wikipedia.org/wiki/Complex_number
-  https://en.wikipedia.org/wiki/Argument_(complex_analysis)
-  https://en.wikipedia.org/wiki/Cartesian_coordinate_system
-  https://en.wikipedia.org/wiki/Complex_plane
-  https://en.wikipedia.org/wiki/Pythagorean_theorem
-  https://en.wikipedia.org/wiki/Trigonometry
-  https://en.wikipedia.org/wiki/Trigonometric_functions
-  https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+  https://en.wikipedia.org/wiki/Complex_number					https://en.wikipedia.org/wiki/Argument_(complex_analysis)
+  https://en.wikipedia.org/wiki/Cartesian_coordinate_system		https://en.wikipedia.org/wiki/Complex_plane
+  https://en.wikipedia.org/wiki/Pythagorean_theorem				https://en.wikipedia.org/wiki/Trigonometry
+  https://en.wikipedia.org/wiki/Trigonometric_functions			https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
 
   A complex number is the sum of a real number and an imaginary number.
   It takes the form:
@@ -53,7 +48,7 @@
 
   And thus:
 
-    arg  (z)  =  arctan ( Im (z) / Re (z) )
+    arg  (z)  =  arctan ( Im (z) / Re (z) )    or    arctan2 ( Im (z), Re (z) )
 
   
   We also know that  cos (θ)  =  adjacent / hypotenuse   and    sin (θ)   =  opposite / hypotenuse
