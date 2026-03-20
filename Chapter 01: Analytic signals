@@ -547,7 +547,7 @@
       
     }   //  endif
 
-  The amplitude of each infinitesimal partial being:  2 * |X (ω)|    and its phase being:  arg ( X(ω) ).
+  The amplitude of each infinitesimal partial being:  2 * |X (ω)|    and its phase being:  arg ( X (ω) ).
 
   All you have to do for the integral to keep representing a real signal is explicitly stating:  A(-ω) = A(ω)  and  φ(-ω) = -φ(ω).
   But if you don't, it's not a mistake per se: it just means that the signal is not purely real.
