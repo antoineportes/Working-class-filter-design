@@ -187,8 +187,8 @@
                 ⌡  \  ⌡  ⌡  ⌡                     dt       /
                 -∞  \ -∞ -∞ -∞                            /
   
-    E (x, y, z) is the amount of energy of each point in space in Joules per cubic meter.
-    x, y and z are the three dimensions of space in meters (so their product is in cubic meters).
+    E (x, y, z) is the amount of energy of each point in space in Joules per cubic metre.
+    x, y and z are the three dimensions of space in metres (so their product is in cubic metres).
     t is time in seconds.
     The division by dt reflects Lavoisier's famous statement about everything changing form, neither ever getting created nor destructed.
     Dimensional analysis reveals that COSMOS is expressed in Joules.
