@@ -78,6 +78,7 @@
   https://en.wikipedia.org/wiki/Electric_charge                    https://en.wikipedia.org/wiki/Electric_potential
   https://en.wikipedia.org/wiki/Electrical_energy                  https://en.wikipedia.org/wiki/Electricity
   https://en.wikipedia.org/wiki/Electric_potential                 https://en.wikipedia.org/wiki/Coulomb%27s_law
+  https://en.wikipedia.org/wiki/Electric_field                     https://en.wikipedia.org/wiki/Drift_velocity
   
   Equilibrium comes out of movement. Movement doesn't come out of equilibrium.
   If the whole cosmos where to reach total equilibrium, movement would become unretrievable.
@@ -99,7 +100,7 @@
   this reciprocal attraction could be represented with two vectors of opposite sign.
   The sign of these vectors is called polarity. Which means: electrons and protons have opposite polarities.
   By convention, electrons get the minus sign and protons get the positive sign.
-  Neutrons have a neutral polarity (no contribuion to attraction nor repulsion, that's why we're ignoring them).
+  Neutrons have a neutral polarity (no contribution to attraction nor repulsion, that's why we're ignoring them).
 
   The amount of contribution to this attraction / repulsion phenomenon is a property of matter called electric charge.
   A charge with positive polarity is called a positive charge; a charge with negative polarity is called a negative charge.
@@ -171,6 +172,71 @@
   has one dimension: its direction is from the more negative point to the more positive point -- its magnitude is dependant upon said
   difference in electric potential.
 
+  Now suddenly our two points are no longer isolated from each other, the vacuum between them has become some ideal material where nothing
+  dissipates kinetic energy, that is no external nor internal perturbation opposes the movement of electrons (SPOILER: no lattice collision,
+  no electromagnetic field [apart from the one electric field we're considering], no Joule effect of any kind...).
+    (("SPOILER" doesn't mean "we'll study that later", just "I usually don't name undefined concepts". But my approach here is so unconventional
+    that it tends to disturb specialists. So I have to insist: this is an extreme idealisation, a mental abstraction performed in order to
+    isolate infinitesimal phenomena for didactic purposes -- if electricity is completely new to you, then you're fine, just try to ignore what's
+    between parenthesis in this paragraph.))
+
+  So we have point A with some electric charge, and point B with some more positive charge.
+  Different charges means different electric potentials -- B being more positively polarised means electrons urge to move from A to B.
+  The electric field is composed of two immobile vectors with identical directions: from A to B. Their sum is the strength / magnitude of the
+  electric field.
+  Then the piece of imaginary matter connects A and B.
+
+  The electric field moves from A to B. It has a speed: experiments have helped quantifying it "up to almost the speed of light in a vacuum (c)".
+  (Assuming it's exactly c in our imaginary matter is so tempting that I'm almost doing it right now.)
+
+  As the field travels, it redistributes the potential energy amongst electrons in the new form of kinetic energy.
+  Electrons start moving from A to B. They have a speed: it's called drift velocity. Which is proportional to the strength of the electric field
+  and *different* from the latter's speed. It's a lot slower: the order of magnitude of the drift velocity is millimetres per second.
+
+  Once the electric field has reached B, all the potential energy has been transformed in kinetic energy.
+  There is no longer any difference in electric potential, equilibrium has been reached.
+  Yet the electrons are still moving.
+
+  Electrical speed is an ambiguous term that can refer without distinction to either drift velocity or speed of the electric field.
+  My advice is: do not use it. It inherently creates a confusion about two concepts whose distinction is really not straightforward.
+  (If it's obvious for you, sorry for the noise. It wasn't for me.)
+
+  /*
+    Digression 1:
+      Imagine you push a ball on the ground. It will roll up to a certain point. How far depends on how hard you pushed. But not only.
+      Imagine the ground is sticky, or the wind is blowing in the direction opposed to the ball's movement.
+      This is surely going to have an impact on how far the ball goes.
+      Then does the ball roll with a constant speed and suddenly stops? No. Its speed progressively decays down to zero.
+      So how far is not really the question. Initial speed and deceleration are the meaningful parameters here.
+      Initial speed depends on the initial impulse (you pushing the ball), deceleration depends on the frictions encountered by the ball during
+      its movement (wind, sticky ground, hitting a wall...) -- the stronger the friction, the steeper the speed decay (hitting a wall stops the
+      movement pretty much instantaneously).
+
+      Now what if there's no friction at all?
+      Well it's called a vacuum (space is one for instance).
+      But I don't know, let's ask this guy:  https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#First_law
+
+      Ok so now a cosmonaut stole your ball and took it with them across the final frontier (where no ball has gone before): space.
+      The cosmonaut kicks the ball. No friction so no deceleration.
+      The ball will move forever with constant speed and constant direction both dependant on the initial impulse (the cosmonaut's foot).
+
+      In our piece of imaginary matter, there's no friction either. It's basically a one-dimension vacuum.
+      Once the electric field initiates the electrons' movement, they'll never stop moving (perpetuum mobile).
+
+      The reason why I insist so much? This is really NOT intuitive.
+  */
+  /*
+    Digression 2:
+      Before writing this section I thought that electric potential was a pure charge (expressed in Coulombs) and that the speed of electricity
+      was the speed of the electrons. Also that the difference in potential reached equilibrium once electrons had stop moving; and that they
+      only moved from negative charges to positive charges.
+      Now I know that electric potential is the energy per charge and that it's indifferent to polarity. I know that electrons flow towards the
+      relatively more negative charge (which can very well be positive). I know that what I used to call "speed of electricity" is the speed of
+      the electric field, that the speed of the electrons is actually called drift velocity. I know that equilibrium is reached long before the
+      electrons stop moving -- in fact they don't even have to stop ever.
+
+      If you already knew all that, well sorry for wasting your time.
+  */
 
   [[ REVISION IN PROGRESS ]]
 
