@@ -7,7 +7,8 @@
 ###############################################################################################
                                      Chapter II:  RC
 ###############################################################################################
-
+/*          "Scuse me while I kiss the sky."                                                 */
+/*                                                   --  Jimi Hendrix (Purple Haze)          */
 ===============================================================================================
 #1  Do I know what a filter is?
 ===============================================================================================
@@ -76,7 +77,7 @@
   https://en.wikipedia.org/wiki/Atom                               https://en.wikipedia.org/wiki/Ion
   https://en.wikipedia.org/wiki/Electric_charge                    https://en.wikipedia.org/wiki/Electric_potential
   https://en.wikipedia.org/wiki/Electrical_energy                  https://en.wikipedia.org/wiki/Electricity
-  https://en.wikipedia.org/wiki/Electric_potential
+  https://en.wikipedia.org/wiki/Electric_potential                 https://en.wikipedia.org/wiki/Coulomb%27s_law
   
   Equilibrium comes out of movement. Movement doesn't come out of equilibrium.
   If the whole cosmos where to reach total equilibrium, movement would become unretrievable.
@@ -94,201 +95,84 @@
   Let's ignore neutrons.
 
   Electrons repel electrons. Protons repel protons. Electrons and protons are attracted to each other.
-  This tendency is called their electric charge. Assuming a one-dimension space (which is a valid assumption if we also assume
-  to charges in isolation), this reciprocal attraction could be represented with two vectors of opposite sign.
-  The sign of these vectors is called polarity. Which means: electrons and protons have charges with opposite polarities.
+  Assuming a one-dimension space (which is a valid assumption if we also assume two particles in isolation),
+  this reciprocal attraction could be represented with two vectors of opposite sign.
+  The sign of these vectors is called polarity. Which means: electrons and protons have opposite polarities.
   By convention, electrons get the minus sign and protons get the positive sign.
-  Neutrons have a neutral charge (no contribuion to attraction nor repulsion, that's why we're ignoring them).
+  Neutrons have a neutral polarity (no contribuion to attraction nor repulsion, that's why we're ignoring them).
+
+  The amount of contribution to this attraction / repulsion phenomenon is a property of matter called electric charge.
+  A charge with positive polarity is called a positive charge; a charge with negative polarity is called a negative charge.
+  (Also:  neutral polarity -> neutral charge.)
 
   The charge of one proton and the charge of one electron have an equal absolute value called elementary charge. Usual symbol: q.
   From where:
     Equilibrium for an atom means equal number of protons and electrons. (Neutral polarity, no urge to move.)
     The atom is then said stable, otherwise it is said unstable.
-
+  Sometimes a particle carrying an elementary charge (charge carrier) is called a charge.
+  So the word charge can have two distinct meanings: a particle, or a property of matter (quantitative or qualitative).
+  Beware of context. (Here I'll try to stick with the qualitative meaning: the property of matter.)
+  
   An unstable atom has an electric charge. It's called an ion.
   Its protons are at the nucleus, they cannot leave the atom without destroying it.
   So the electric charge has to be due to a lack or an excess of electrons.
   
   A positively charged atom is lacking one or several electrons. It's called a cation.
-  A negatively charged atom is having one or several extra electrons. It's called an anion.
+  A negatively charged atom has one or several extra electrons. It's called an anion.
   Cations attract electrons. Anions repel electrons.
 
-  If movement happens, its direction depends on polarity: always electrons to cations -- that is negative to positive.
+  Let's consider two clusters of ions with different charges somehow isolated from everything, even each other (more on that later).
+  Equilibrium requires that the more negative cluster send electrons to the less negative one.
+  This results in an urge for electrons to move from the more negative point to the more positive point.
+  THIS IS IMPORTANT:
+    Both points can have the same polarity (+ & + || - & -) or not (+ & - || - & +), as long as their charge differ, electrons will
+    have an urge to move.
+    In fact one of the two could even have a neutral charge: if the other is positive it will attract electrons, if it's negative the
+    neutral point will attract electrons.
+  THIS IS ALSO IMPORTANT:
+    In case electrons somehow manage to move, the equilibrium they will eventually reach will be relative.
+    Meaning that they will not move until both points have reached a neutral charge: this can very well be impossible.
+    They will move until both points have the same charge (which could be positive or negative).
+    Indeed if their movement is from the more negative point to the more positive one, equal charge prevents movement.
 
-  The mutual attraction of charges with opposite polarities is a force associated with energy -- electrical energy, which is
-  whether potential energy (no movement) or a mixture of potential and kinetic energy (movement -- or urge to move + opportunity to move).
-  It's never purely kinetic -- this wasn't straightforwardly obvious to me, so let me explain why.
-  The mixture comes from energy converting its form: electrons are urged to move (potential) so if they can, they move (kinetic).
-  No potential energy means no urge to move, which means no cause for movement, which means no movement.
-  This can happen to electrons. But then the energy is no longer electrical. It can nevertheless have become purely kinetic:
-  e.g. an ideal motor with no load.
+  As long as our two clusters/points are isolated from each other there is an urge to move but no opportunity to move.
+  Aristotle would say there's movement in potency (δύναμις) but not in actuality (ἐντελέχεια).
+    //  https://en.wikipedia.org/wiki/Potentiality_and_actuality
+  Modern physics call this phenomenon potential energy.
 
-  Notice that a charge in isolation doesn't store energy. You need two groups of charges with opposite polarities before you get
-  potential energy. Which means that the energy in one charge is dependant upon the other charges that surround it.
-  So the greater the difference in charge between the negatively charged group and the positively charged group, the greater the
-  energy per charge in each group.
-  The energy per charge in one group is called its electric potential.
-  Notice that the urge to move grows with the electric potential.
+  (I had a hard time understanding what follows so I suggest you read it slowly.)
+  One charge carrier does not store potential energy on its own. It could very well be in a stable atom. And even that would in fact
+  be irrelevant.
+  Potential energy comes from the proximity of points in matter with different electric charges.
+  Which means that the energy in one charge carrier is dependant upon the other charge carriers that surround it.
+  So the greater the difference in charge between both points, the greater the energy per charge at each point.
+  The energy per charge at one point is called the electric potential (of said point).
+  Notice that the electrons' urge to move grows with the electric potential.
 
-  Furthermore, let's assume two groups of charges with same polarity but different absolute value.
-  The atoms are unstable. If they can reach equilibrium, they will.
-  So the electrons will have the urge to move towards the less negative group (even if both are positively charged).
-  From where:
-    A difference in electric potential is prone to a flow of electrons regardless of polarity.
-    (This one's not obvious -- at least to me it wasn't -- meditate it before you move on -- at least I did.)
+  (Coulomb's law adds: it also grows with the proximity of charges. Good to know but we won't be needing it.)
 
-  We now know what electricity is.
+  Now let's assume the urge to move is somehow suddenly satisfied (the charged points are now isolated from everything but each other).
+  If electrons can move, they will. Potential energy becomes kinetic energy...
+  This sounds very generic. We can go more microscopic than that.
 
-  Oh wait! No we don't...
-  Once electrons start moving through matter: this phenomenon is called electricity.
+  Electric potential is a scalar (i.e. not a vector). It has no direction. It says how much a particle is urged to move -- not whereto.
+  If I say "Socrates is 70 years old", you don't need more information to know Socrates' age. Age is a scalar.
+  If I say "Pheidippides ran about 240 km in two days", you might want to know from where to where. Distance is a scalar.
+  Sometimes a scalar lacks information, like for instance "from Athens to Sparta".
+  Now Pheidippides' performance has a magnitude (about 240 km) and a direction (from Athens to Sparta) -- it's a vector.
+  The vector associated with electric potential is called electric field.
+  It's called a field because it's actually several vectors across the three dimensions of space, originating from all points which
+  contribute by having an electric potential.
+  (Their sum is counter-intuitively discrete: remember elementary charge.)
+  Addition can be performed on vectors, so the electric field can be considered one vector per point in space.
+  Both conceptions peacefully co-exist mathematically.
 
-
-===============================================================================================
-#3  Ohm's law
-===============================================================================================
-
-  https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance
-  https://en.wikipedia.org/wiki/Voltage
-  https://en.wikipedia.org/wiki/Electric_current
-  https://en.wikipedia.org/wiki/Ohm%27s_law
-
-  //  Conductance and its reciprocal
-  
-  Atoms having a natural tendency towards equilibrium, complementary ions can cause a flow of electrons through matter.
-  Or, if we focus on energy and charge instead of particles: a difference in electric potential tends towards a flow of
-  negative charge through matter.
-  How easily this flow happens depends on the composition of said matter.
-  That is: each material has the property of letting electrons flow. This property is called Conductance.
-  Its usual symbol is G.
-  (If you happen to know why, please let me know... perhaps C, D, E, F were already taken and Greeks have no 'C'?)
-
-  As its conductance decreases, a material is increasingly resisting the flow of electrons. This property is called Resistance.
-  Its usual symbol is R.
-  (This one's pretty obvious.)
-
-  Don't let the dichotomy fool you: nothing binary here.
-  Like autism or dissonance, Resistance is a spectrum.
-  Conductance and Resistance are both extremities of one same axis. Extreme cases are:
-    #  Conductance = infinity   &&    Resistance = zero
-    #   Resistance = infinity   &&   Conductance = zero
-
-  The arithmetical operation that opposes zero to infinity is the division:
-  divide by zero, you get infinity; divide by infinity, you get zero.
-  So they're not opposites, they're inverses:
-
-    R  =  1 / G    <=>    G  =  1 / R    <=>    R / G  =  G / R  =  1
-
-  A mass of water or a copper wire have a Resistance.
-  The air and your body have a Conductance.
-
-  Assuming adequate conditions, electrons can flow through the air: it's called lightning.
-  Your body is a dipole (go ask golfers).
-
-  #define adequate_conditions
-
-  Remember: the urge for a flow of electrons to happen grows with the difference in electric potential.
-  Ergo: greater difference  =>  greater charge flowing at once.
-  In time domain, this instantaneous phenomenon translates as: higher flow rate.
-  Whether this means electrons moving faster or more electrons moving is made irrelevant by the concepts of rate and charge.
-  Which is precisely why these concepts are useful.
-
-  Matter resists the flow. How much depends on its composition (Conductance / Resistance).
-  Ergo: greater Resistance  =>  lower flow rate.
-
-  This means:
-    #  Assuming constant Resistance: the rate of the flow grows with the difference in potential.
-    #  Assuming constant difference in potential: the rate of the flow decreases when the Resistance increases (and vice versa).
-    #  Assuming constant rate of the flow: if the Resistance increases, the difference in potential must compensate by increasing too
-         (and vice versa).
-
-  For R to remain constant if flow and difference grow together (which they do), some mathematical formula must compensate for it
-  in the definition of R.
-  The difference is energy per charge. The flow: charge per time. They're not commensurable, so addition and subtraction are excluded.
-  Exponentiation would require one of the variables to be dimension-less to make sense. No exponentiation excludes logarithms as well.
-  We're left with multiplication and division. Multiplication is also excluded because we know that the two variables grow together.
-  So if one increases so does the other, then so does the product, then R is not constant which is false by hypothesis.
-  Division it is then. But which one is the numerator, which the denominator?
-  We also know that for the flow to remain constant, the constraints that applied to it and the difference thus far now apply to R
-  and the difference.
-  If R is not the denominator it means that  R  =  flow * difference  --  which has been excluded (we don't know which ratio but we
-  know it's a ratio... well actually now we know).
-
-  If (R is not the denominator) is impossible, then it's false, then R is the denominator, then:
-
-           difference in electric potential
-    R  =  ----------------------------------
-            rate of the flow of electrons
-  
-  The flow of electrons is called Current. Its rate is called Intensity (of the current). Its usual symbol is I.
-  The difference in potential is called Tension or Voltage. Its usual symbol is V in the English-speaking world, U otherwise.
-
-  /*
-    I personally tend to prefer U because V already stands for Volt, a common unit for Tension / Voltage.
-    So if we use V for Voltage then the unit of V is V... I say slippery slope. However, I've also said "go play with fire"...
-  */
-
-  Ok, now that I and U have been granted convenient symbols maybe we can build some nice-looking set of equations:
-
-           U                                         U             U * I
-    R  =  ---    <=>    U  =  R * I    <=>    I  =  ---    <=>    -------  =  1
-           I                                         R               R
-
-  This set of equations is called Ohm's law.
-  (You can check Wikipedia now.)
-
-  /*
-    More links (since you've asked):
-      https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb      https://en.wikipedia.org/wiki/Luigi_Galvani
-      https://en.wikipedia.org/wiki/Alessandro_Volta                 https://en.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re
-      https://en.wikipedia.org/wiki/Georg_Ohm                        https://en.wikipedia.org/wiki/Michael_Faraday
-      https://en.wikipedia.org/wiki/Gustav_Kirchhoff
-
-    (Try not to over-interpret the pair-grouping: I'm just saving lines. The list is ordered by ascending date of birth.)      
-  */
+  Since we're building a universe from scratch and so far only have two points with a difference in electric potential, our electric field
+  has one dimension: its direction is from the more negative point to the more positive point -- its magnitude is dependant upon said
+  difference in electric potential.
 
 
-===============================================================================================
-#4  Conductor vs. Isolator
-===============================================================================================
-
-  Attention required: easy confusion ahead.
-
-    - Does the Sun revolves around the Earth?
-    - No, of course.
-    - WRONG! In a geocentric referential it does.
-  /*
-    <off-topic>
-      The referential in which Earth is flat does NOT exist.
-      Just look at planispheres from different continents, you'll observe different deformations of the spheroid due to scalar projection.
-      (Assuming you're interested in the truth.)
-  */
-
-  Some materials are called conductors. If not, they are called isolators.
-  By definition:
-    #  a conductor allows current to flow through it;
-    #  an isolator doesn't.
-
-  What happened to "Conductance is a spectrum"?
-  Either every conductor is an isolator (and vice versa) or this quote is false.
-
-  I cannot argue with that.
-
-  //  Détour
-
-  Consider lightning.
-  Some electric potential in the sky. Some different electric potential on Earth (or in a golfer).
-  Except the circuit is open -- (more on that later).
-  Suddenly: lightning!  =>  the circuit is closed...
-  Did Thor, God of Thunder intervene?
-  Sorry if reality contradicts your beliefs, but no.
-
-  With Resistance comes a threshold.
-  The concept of Resistance is continuous. But the threshold is very much discrete.
-
-  [IN PROGRESS]
-
-
-
+  [[ REVISION IN PROGRESS ]]
 
 
 
