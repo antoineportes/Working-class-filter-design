@@ -200,13 +200,26 @@
 
   That is,  ƒ (t)  oscillates from -α to +α through a repetitive pattern of length = 1 / ω with an offset = φ.
 
-  Note that for φ to be expressed in radians (that is as a ratio of the period T), the offset t0 (seconds) must be be defined.
-  t0 is the time it takes for ƒ (t) to reach the begining of an oscillation cycle ( ƒ (t) = 1 ) for the first time.
+  Note that for φ to be expressed in radians (that is as a ratio of the period T), the offset t0 (seconds) must be defined.
+  t0 is the time it takes for ƒ (t) to reach the beginning of an oscillation cycle ( ƒ (t) = 1 ) for the first time.
   (This implies  t0 < T)
 
   Then:  ƒ (t)  =  α * cos (ω * (t - t0))
   And:       φ  =  ω * -t0
 
+  /*
+    Remember that  cos (θ)  =  sin (θ  +  π / 2).
+    Which means that the relation between sin and cos is simply a constant horizontal offset.
+    I chose  ƒ (t)  =  cos (t)  as the base sinusoid, but  ƒ (t)  =  sin (t)  would be just as valid.
+    In such a case  ƒ (t)  =  cos (t)  would have a phase  φ  =  π / 2  rad.
+
+    This is a pure matter of convention.
+    Since converting one convention into the other is as trivial as an addition, which one we choose has few consequences.
+    So if one convention simplifies the maths, why choose the other? Right?
+
+    We're just about to call back Euler's formula. Choosing cos avoids having j in the denominator.
+    I hope now it doesn't feel arbitrary anymore.
+  */
 
   Using equation [3] to express ƒ (t) in terms of complex exponentials instead of raw trigonometry:
 
@@ -228,11 +241,11 @@
     X (t)  =  ----------------    and    s  =  j * ω
                      2
 
-  X (t) is a complex number in exponential form with absolute value  |X (t)|  =  α / 2    and argument  arg (X (t))  =  φ
+  X (t) is a complex number in exponential form with absolute value  |X (t)|  =  α / 2  and argument  arg (X (t))  =  φ
 
   Then any complex sinusoid in the form:
 
-    ƒ (t)  =  X (t) * exp (s * t)
+    ƒ (t)  =  X (t) * exp (s * t)        //  where s is a *pure imaginary* number! (Re (s) = 0)
 
   can be considered the positive-frequency-component of a real sinusoid with:          [b]
 
@@ -566,9 +579,6 @@
   This'll be quick.
   We've noticed that an analytical signal is a useful theoretical object for it simplifies maths.
   We've proven that it can be used to represent real-life signals.
-
-  But you might want to do more than representing it. Processing it for instance...
-
 
 
 ===============================================================================================
