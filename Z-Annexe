@@ -158,7 +158,7 @@
   Indeed [A] is a principle of logic called the Principle of sufficient reason.        //  https://en.wikipedia.org/wiki/Principle_of_sufficient_reason#Formulation
   If you'd rather not reject logic: replay the game.
 
-  std::cout << "Welcome to your new life."                                             //  https://en.wikipedia.org/wiki/Input/output_%28C%2B%2B%29#Input/output_streams
+  std::cout << "Welcome to your new life.";                                            //  https://en.wikipedia.org/wiki/Input/output_%28C%2B%2B%29#Input/output_streams
 
   First time hurts, I know. Been there.
   Don't blame me, blame him:  https://en.wikipedia.org/wiki/Spinoza%27s_Ethics
