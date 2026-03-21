@@ -99,7 +99,7 @@
   Let me try to express it with a proper sentence.
 
   If something is TRUE, it cannot be not_TRUE at the same time.
-  For instance if  "A ≠ B  is not_TRUE"  is TRUE,  "A ≠ B  is TRUE"  is necessary not_TRUE.
+  For instance if  "A ≠ B  is not_TRUE"  is TRUE,  "A ≠ B  is TRUE"  is necessarily not_TRUE.
 
   Obviously "FALSE" means "not_TRUE".
   Are you sure of that?
