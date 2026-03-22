@@ -56,12 +56,12 @@
   The group splits. I've filtered people based on their velocity.
   Notice that group H + group L = initial group.
 
-  Now replace "people" with "electrical charges", "rainy path" with "Resistor" and "gaped path" with "Capacitor".
+  Now replace "people" with "electric potential", "rainy path" with "Resistor" and "gaped path" with "Capacitor".
   You get what is called an RC circuit.                //  https://en.wikipedia.org/wiki/RC_circuit
 
   Which path leads to the ground (compost) and which to the output (coffee cup) depends on whether you want a filter
-  that discards low frequencies and let high frequencies pass (High-Pass filter); or one that discards high frequencies
-  and let low frequencies pass (Low-Pass filter).
+  that discards low frequencies and lets high frequencies pass (High-Pass filter); or one that discards high frequencies
+  and lets low frequencies pass (Low-Pass filter).
 
   An RC circuit is an electrical circuit. What is electricity?
 
@@ -203,7 +203,7 @@
 
   /*
     Digression 1:
-      Imagine you push a ball on the ground. It will roll up to a certain point. How far depends on how hard you pushed. But not only.
+      Imagine you push a ball on the ground. It will roll up to a certain point. How far depends on how hard you pushed -- is that it?
       Imagine the ground is sticky, or the wind is blowing in the direction opposed to the ball's movement.
       This is surely going to have an impact on how far the ball goes.
       Then does the ball roll with a constant speed and suddenly stops? No. Its speed progressively decays down to zero.
@@ -228,7 +228,7 @@
   /*
     Digression 2:
       Before writing this section I thought that electric potential was a pure charge (expressed in Coulombs) and that the speed of electricity
-      was the speed of the electrons. Also that the difference in potential reached equilibrium once electrons had stop moving; and that they
+      was the speed of the electrons. Also that the difference in potential reached equilibrium once electrons had stopped moving; and that they
       only moved from negative charges to positive charges.
       Now I know that electric potential is the energy per charge and that it's indifferent to polarity. I know that electrons flow towards the
       relatively more negative charge (which can very well be positive). I know that what I used to call "speed of electricity" is the speed of
@@ -237,6 +237,30 @@
 
       If you already knew all that, well sorry for wasting your time.
   */
+  /*
+    Digression 3:
+      If you don't know what an electromagnetic wave is, you don't need this digression.
+      I've been considering the propagation of the electric field without ever mentioning electromagnetic waves, even though it's a rather
+      classical approach.
+      The reason is: waves oscillate, they have a frequency. The imaginary system we've just built purely involves direct (SPOILER) current.
+      Oscillations and frequency don't apply. Electric field is the general concept. Electromagnetic waves are a special case.
+      The fact that most real-life cases are special doesn't affect this truth.
+  */
+
+  Now take a deep breath and prepare for a harsh twist.
+  Our imaginary matter is not real.
+  Matter that behaves like a vacuum has contradictory terms in its very definition.
+  I'm allowed to say "four-angled triangle", but if I add "it exists" I'm either lying or mistaking.
+  We've put essence before existence ignoring Jean-Paul's warning.        //  https://en.wikipedia.org/wiki/Existence_precedes_essence
+
+  Let Materialism be the cure for Idealism.        //  https://en.wikipedia.org/wiki/The_System_of_Nature
+  Let there be no imaginary matter.
+
+
+===============================================================================================
+#3  Ohm's law
+===============================================================================================
+
 
   [[ REVISION IN PROGRESS ]]
 
