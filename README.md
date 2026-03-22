@@ -65,7 +65,7 @@ The extension-less files and the pseudo-code syntax are deliberate.
 
 If you're too shy to pull a request, download a chapter, edit it locally, make it yours.\
 Do it with my blessing. It's kind of the whole point.\
-(If some software requires an extension, .txt will do — but most text editors won't.)
+(If some software requires an extension — although most text editors won't — .txt will do.)
 >This is the opposite of a cookbook.
 
 
