@@ -61,10 +61,11 @@ So if all you want in life is designing filters: read this and skip elementary s
 (It's a joke, don't do this.)
 <br/><br/><br/>
 ### Editorial note (sounds fancy!)
-The .txt format and the pseudo-code syntax are deliberate.
+The extension-less files and the pseudo-code syntax are deliberate.
 
 If you're too shy to pull a request, download a chapter, edit it locally, make it yours.\
-Do it with my blessing. It's kind of the whole point.
+Do it with my blessing. It's kind of the whole point.\
+(If some software requires an extension, .txt will do — but most text editors won't.)
 >This is the opposite of a cookbook.
 
 
