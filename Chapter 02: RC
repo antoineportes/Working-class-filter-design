@@ -122,6 +122,13 @@
   A negatively charged atom has one or several extra electrons. It's called an anion.
   Cations attract electrons. Anions repel electrons.
 
+  /*
+    Disclaimer:
+      We're in the field of electronics. So in what follows, I'll ignore:
+            this:    https://en.wikipedia.org/wiki/Electrolyte
+        and this:    https://en.wikipedia.org/wiki/Plasma_(physics)
+  */
+
   Let's consider two clusters of ions with different charges somehow isolated from everything, even each other (more on that later).
   Equilibrium requires that the more negative cluster send electrons to the less negative one.
   This results in an urge for electrons to move from the more negative point to the more positive point.
@@ -261,6 +268,7 @@
 #3  Ohm's law
 ===============================================================================================
 
+  https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity  
   https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance
   https://en.wikipedia.org/wiki/Voltage
   https://en.wikipedia.org/wiki/Electric_current
@@ -270,15 +278,27 @@
 
   As promised, let's connect points A and B with a piece of extant matter.
   Let's temporarily assume that nothing prevents the electric field from traveling from A to B.    [a]
-  
+
+  /*
+    Important clarification:
+      As we connect A and B, the electric charge will travel from A to B -- not the electric charge carriers.
+      This is why we call their movement a drift. Electrons will slightly glide in the direction of B until their kinetic energy is
+      fully dissipated by the friction they encounter (more on that right away).
+
+      They don't travel in queue or fall sequentially like dominos. Imagine they're balls in a pipe.
+      You push the ball at one extremity, all balls move at once.
+      If one falls off of the tube, it will be the one on the opposite end of the tube.
+      Like the balls in the pipe, electrons all move at once.
+  */
+
   A difference in electric potential tends towards a flow of negative charge through matter.
   How easily this flow happens depends on the composition of said matter.
-  That is: each material has the property of letting electrons drift more or less easily. This property is called Conductance.
-  Its usual symbol is G.
+  That is: each material has the property of letting electrons drift more or less easily. This property is called its conductivity.
+  The physical quantity is the Conductance. Its usual symbol is G.
   (If you happen to know why, please let me know... perhaps C, D, E, F were already taken and Greeks have no 'C'?)
 
-  As its conductance decreases, a material is increasingly resisting the flow of electric charge. This property is called Resistance.
-  Its usual symbol is R.
+  As its conductance decreases, a material is increasingly resisting the flow of electric charge. This property is called its resistivity.
+  The physical quantity is the Resistance. Its usual symbol is R.
   (This one's pretty obvious.)
 
   Don't let the dichotomy fool you: nothing binary here.
@@ -349,7 +369,7 @@
     So if we use V for Voltage then the unit of V is V... I say slippery slope. However, I've also said "go play with fire"...
   */
 
-  Ok, now that I and U have been granted convenient symbols maybe we can build some nice-looking set of equations:
+  Ok, now that U and I have been granted convenient symbols maybe we can build some nice-looking set of equations:
 
            U                                         U             U * I
     R  =  ---    <=>    U  =  R * I    <=>    I  =  ---    <=>    -------  =  1
@@ -368,6 +388,10 @@
     (Try not to over-interpret the pair-grouping: I'm just saving lines. The list is ordered by ascending date of birth.)      
   */
 
+  Recalling the imaginary matter from the previous section, we had R = 0.
+  That is:  I = U / 0.
+  The undefined result makes sense of the unexpected behaviour (perpetuum mobile).
+
   Before we move on: using R in Ohm's law's definition is a convention. We could very well write:
 
            I                   I                                   G * I       G * U
@@ -381,7 +405,8 @@
   You'll often come across "I is the current expressed in Ampères".
   It's similar as if we were measuring "sound" in deciBels for lack of the word "amplitude".
 
-  In French the phenomenon is called "courant" and its measure "intensité" (which can be challenging translation-wise).
+  In French the physical quantity is called "courant" and its measure "intensité"
+  (which can be challenging translation-wise).
   I've reproduced this semantics. Be aware that most authors won't.
 
 
@@ -422,11 +447,89 @@
 
 
 ===============================================================================================
-#4  Conductor vs. Isolator
+#4  Electrical breakdown
 ===============================================================================================
 
+  https://en.wikipedia.org/wiki/Electrical_conductor        https://en.wikipedia.org/wiki/Insulator_(electricity)
+  https://en.wikipedia.org/wiki/Dielectric_strength         https://en.wikipedia.org/wiki/Breakdown_voltage
+  https://en.wikipedia.org/wiki/Electrical_breakdown
 
-  [[ REVISION IN PROGRESS ]]
+  Attention required: easy confusion ahead.
+
+    - Does the Sun revolve around the Earth?
+    - No, of course.
+    - WRONG! In a geocentric referential it does.
+  /*
+    <off-topic>
+      The referential in which Earth is flat does NOT exist.
+      Just look at planispheres from different continents, you'll observe different deformations of the spheroid due to scalar projection.
+      (Assuming you're interested in the truth.)
+  */
+
+  Remember [a]? Of course you don't.
+  "Let's temporarily assume that nothing prevents the electric field from traveling from A to B."
+  We're dropping this assumption right now.
+
+  Some materials are called conductors. If not, they are called insulators.
+  By definition:
+    #  a conductor allows current to flow through it;
+    #  an insulator doesn't.
+
+  What happened to "Conductance is a spectrum"?
+  Either every conductor is an insulator (and vice versa) or this quote is false.
+
+  I cannot argue with that.
+
+  //  Détour
+
+  Consider lightning.
+
+  EDIT: Thought I had an original idea... Turns out a Wikipedia contributor had the same one.
+
+  Never mind. Consider lightning.
+
+  Some electric potential in the sky. Some different electric potential on Earth (or in a golfer).
+  Air between. Air is an insulator.
+  Suddenly: lightning!  =>  air is a conductor...
+  Did Thor, God of Thunder intervene?
+  Sorry if reality contradicts your beliefs, but no.
+
+  With Resistance comes a threshold.
+  The concept of Resistance is continuous. But the threshold is very much discrete.
+  And which material you consider a conductor, which an insulator, depends on where you like your meta-threshold.
+  By which I mean the maximal negligible value of Resistance's threshold.
+  This property of matter is called its dielectric strength.
+  The threshold is called the breakdown voltage.
+  As the name suggests it's a voltage:
+    when matter is applied a voltage inferior to its breakdown voltage, it's an insulator;
+    when matter is applied a voltage superior to its breakdown voltage, it's a conductor.
+
+  Actually "matter" lacks precision: this also applies to vacuum.    //  https://en.wikipedia.org/wiki/Electric_arc
+
+  Back to lightning.
+
+  I  =  U / R
+
+  Tension between Heaven and Earth but still no current means I = 0.
+  Then either U = 0 which is false by hypothesis; or R = +∞.
+
+  But then, lightning strikes. So I = something.
+
+  Either:
+    (1) U has exceeded infinity... which is unlikely.
+  Or:
+    (2) R has dropped.
+  
+  It's 2 of course. The phenomenon is called electrical breakdown.    //  https://en.wikipedia.org/wiki/Electrical_breakdown
+
+  If you've ever experienced autistic breakdown, this will be easy to understand.
+  Instead of:
+    working, working, working  _BAM_  not working
+  Electrical breakdown goes:
+    not working, not working, not working  _BAM_  working
+
+
+  [[ IN PROGRESS ]]
 
 
 
