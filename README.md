@@ -7,8 +7,8 @@ First thing first, I don't want to be ungrateful so:
 
 Thank you Vadim!
 
-I've learnt how to design filters through experimentation and confronting lots of sources, but this book\
-is the turning point of my emancipation. So at the risk of repeating myself:
+I've learnt how to design digital filters through experimentation and confronting lots of sources, but this\
+book is the turning point of my emancipation. So at the risk of repeating myself:
 
 Thank you Vadim!
 
