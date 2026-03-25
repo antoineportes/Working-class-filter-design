@@ -173,7 +173,7 @@
   It's called a field because it's actually several vectors across the three dimensions of space, originating from all points which
   contribute by having an electric potential.
   (Their sum is counter-intuitively discrete: remember elementary charge.)
-  Addition can be performed on vectors, so the electric field can be considered one vector per point in space.
+  Addition can be performed on vectors, so the electric field can be considered one vector when focusing on one point in space.
   Both conceptions peacefully co-exist mathematically.
 
   Since we're building a universe from scratch and so far only have two points with a difference in electric potential, our electric field
