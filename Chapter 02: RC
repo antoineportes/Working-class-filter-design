@@ -454,7 +454,7 @@
 
   https://en.wikipedia.org/wiki/Electrical_conductor        https://en.wikipedia.org/wiki/Insulator_(electricity)
   https://en.wikipedia.org/wiki/Dielectric_strength         https://en.wikipedia.org/wiki/Breakdown_voltage
-  https://en.wikipedia.org/wiki/Electrical_breakdown
+  https://en.wikipedia.org/wiki/Electrical_breakdown        https://en.wikipedia.org/wiki/Nodal_analysis
 
   Attention required: easy confusion ahead.
 
@@ -611,8 +611,9 @@
   Second case:    U_B - U_A  <  U_bd
     In nodal analysis, an ideal cable is considered equivalent to a node (segment ≈ point), because the electric field is so fast that
     its displacement can be approximated as instantaneous for practical uses. Let's allow this assumption.
-    The potential *energy* of A is transferred to α as soon as we connect our tripartite anonymous toy.
-    But voltage is not energy, it's energy *per charge*. So U_A = U_α will take time.
+    As soon as we connect our tripartite anonymous toy, the electric field gets (temporarily) dissipated.
+    The potential energy of A is transferred to electrons across the ideal cable.
+    Voltage is not energy, it's energy *per charge*. So U_A = U_α will take time.
 
     In our current example this time is undefined because it relies on I (intensity of the current = charge per time) which is inversely
     proportional to R and therefore relies (here) on a division by zero (since R = 0).
@@ -661,10 +662,10 @@
     C  =  q / U
 
     where q is the absolute value of the charge of either of the plates and U is the voltage across the dielectric.
+    (An ideal capacitor has a constant capacitance.)
 
   https://en.wikipedia.org/wiki/Capacitor
   https://en.wikipedia.org/wiki/Capacitance
-  https://en.wikipedia.org/wiki/Nodal_analysis
 
 
 ===============================================================================================
