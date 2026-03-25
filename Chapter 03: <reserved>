@@ -1,0 +1,31 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                                     Chapter III:  ?
+###############################################################################################
+/*          <some off-topic quote>                                                           */
+/*                                           --  <some off-topic person> (<source>)          */
+===============================================================================================
+#1  Temporary section title
+===============================================================================================
+
+  This chapter will remain a placeholder for an undefined amount of time.
+  The RC circuit provides sufficient knowledge to understand what a filter is and start designing digital filters.
+
+  So I'm moving on for now.
+
+  But being able to translate electronical schematics into block diagrams and transfer functions is a non-negligible skill
+  for a filter designer.
+  And most analog filters involve more than resistors and capacitors.
+  You'll come across triodes, diodes, inductors and probably other components that don't come to my mind right now.
+
+  Maybe this will only be about RL, RLC and complex impedance.
+  Maybe this will be so broad that it could help analyse circuits that are not even filters (compressors, ring modulators,
+  transformers...).
+
+  My head is dumb so I follow my feet. We'll see where they take us when the time comes.
+  Amor fati.
