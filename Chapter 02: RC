@@ -195,6 +195,7 @@
 
   The electric field moves from A to B. It has a speed: experiments have helped quantifying it "up to almost the speed of light in a vacuum (c)".
   (Assuming it's exactly c in our imaginary matter is so tempting that I'm almost doing it right now.)
+  //  https://en.wikipedia.org/wiki/Speed_of_light
 
   As the field travels, it redistributes the potential energy amongst electrons in the new form of kinetic energy.
   Electrons start moving from A to B. They have a speed: it's called drift velocity. Which is proportional to the strength of the electric field
@@ -417,7 +418,7 @@
   I was tempted to use my own less confusing convention, but unfortunately this would only have been less confusing inside
   this book. If I give you tools that no one uses, you'll speak a language that no one understands. Not very helpful.
   What I did instead was allow current to make sense as long as I could.
-  So remember (even though it's impractical):
+  So remember (however impractical it is):
 
     Electric charge and Electric field  ->  minus to plus
                                Current  ->  plus to minus
@@ -528,11 +529,155 @@
   Electrical breakdown goes:
     not working, not working, not working  _BAM_  working
 
+  /*
+    Semantical break:
+      You might have noticed a lexical discontinuity here.
+      When talking physical quantities, Conductance is opposed to Resistance.
+      When talking electrical components, conductors are opposed to insulators -- even though resistors do exist.
+      In "Conductance" conductivity is meant as a relative. In "conductor" conductivity is meant as an absolute.
+      That's hardcore faulty logic: categorical mismatch -- Aristotle is yelling "SOPHISTS!".
+  */
+
+  // Why do we care?
+
+  Usually when we use electricity, it's safe to assume that we want current to flow (more on that at some point).
+  In this regard, resistivity and dielectric weakness (don't quote this one) should be regarded as flaws.
+  Yet we've seen at the end of the previous section that, once we allow ourselves to consider resistivity a feature, we're granted a
+  new toy called a resistor.
+
+  Though we haven't played with it yet... Perhaps it's not very fun on its own. Let's build a second toy!
+  This one will take advantage of its breakdown voltage.
+  So it's a fragile insulator, and if we put it between points A and B it will only allow any current to flow once their difference in
+  potential is high enough -- the more fragile the sooner.
+
+  Let's imagine the voltage between A and B is inferior to our new toy's breakdown voltage (we're below the threshold).
+  The system is composed of two points with different electric potentials and an insulator. Nothing moves, no fun.
+  Voltage increases enough and the toy becomes a conductor, current flows through it as if there was no toy.
+  We've basically built a voltage-controlled switch... (Such things exist and this is not how they operate, try to forget this.)
+
+  In its current state, it's not fun. But is it practical?
+  A and B are points in space. There's a distance between them. Does our fragile insulator have to span the whole distance?
+  Then its size would depend upon the distance between A and B. Wouldn't it affect its dielectric strength and make its behaviour
+  unpredictable? -- Dielectric strength's dimension is voltage per distance so yes it would.
+
+  Our insulator needs to span a fixed distance. It exists in a 3-dimensional space, so it's a volume.
+  The simplest volume there is (mathematically speaking) is the parallelepiped.
+  A parallelepiped is a stack of infinite rectangles (try to think "Calculus in god mode").
+  Once the current crosses the longing-for-a-decent-name-new-toy, the electric field will fill each rectangle one by one in the
+  direction of B.        //  https://en.wikipedia.org/wiki/Zeno%27s_paradoxes#Paradoxes_of_motion
+  
+  If we're aiming for predictability, an identical field over the whole individual rectangle seems necessary in order to prevent randomness.
+  So two faces of the fragile insulator must actually be conductors.
+  Then (practically) ideal conducting cables will deal with the distance between A and B.
+
+  Our new toy's been upgraded: it evolved from a fragile insulator to an insulator sandwich.
+  The external slices are made of a conductive material.
+  They're perfectly flat, parallel, and have the same shape as any section of the 3D solid.
+  They don't in fact have to be rectangles.
+  I'm clumsily trying to describe the shape for which I couldn't find any generic name.
+  I'll name it a pseudo-prism and define it as such:
+  
+    A solid built by the translation of a start base up to an identical end base along an axis perpendicular to both bases.
+
+  It could be a right prism of any base (trapezoidal, triangular, heptagonal, ...), a circular or oval cylinder, or its bases could be
+  heart-shaped or random -- as long as the solid is an infinite stack of this shape along an axis perpendicular to both bases.
+
+  Connecting our pseudo-prismatic sandwich to A and B would look like:
+
+  A o---------
+             |
+    [conductive_base_α]
+    [====insulator====]
+    [conductive_base_β]
+             |
+  B o---------
+
+  Let's define:
+    U_A the electric potential of A
+    U_B the electric potential of B
+    U_α the electric potential of base α
+    U_β the electric potential of base β
+    U_bd the breakdown voltage of the insulator.
+    Initial state -> U_α = U_β
+
+  First case:    U_B - U_A  ≥  U_bd
+    This is the easy one: an electrical breakdown will allow a current to flow through the insulator.
+    The previously infinite Resistance will be broken to some finite value (R) and the system drawn by the schematic would be equivalent
+    to a resistor between A and B. If we know R, Ohm's law gives us  I  =  (U_B - U_A) / R.
+    The electric field travels from A to B, crossing the insulator. Equilibrium is achieved (U_B = U_A), the electrical breakdown ends.
+    The total voltage is zero and the insulator is an insulator again.
+
+  Second case:    U_B - U_A  <  U_bd
+    In nodal analysis, an ideal cable is considered equivalent to a node (segment ≈ point), because the electric field is so fast that
+    its displacement can be approximated as instantaneous for practical uses. Let's allow this assumption.
+    The potential *energy* of A is transferred to α as soon as we connect our tripartite anonymous toy.
+    But voltage is not energy, it's energy *per charge*. So U_A = U_α will take time.
+
+    In our current example this time is undefined because it relies on I (intensity of the current = charge per time) which is inversely
+    proportional to R and therefore relies (here) on a division by zero (since R = 0).
+    Never mind, let's assume it's ok.
+
+    Remember: if electrons can move, they will. Between A and α they can, so they will.
+    The electric charge will accumulate on α. The initial potential energy at A is now kinetic energy in the ideal cable, progressively
+    converting back into potential energy at α.
+    U_α is increasing.
+
+    Now let's break on through to the other side.
+    Remember: the energy in one charge carrier is dependant upon the other charge carriers that surround it.
+    So α charging will affect β. There will be an electric field across the insulator whose strength is dependant upon α's and β's surface
+    and the distance between them: the more charge carriers are facing each other and the closer they are, the more energy per charge.
+    Or, thinking backwards: the charge required to reach a certain voltage across the insulator grows with the bases' surface and proximity.
+
+    So now there's a vector in α and an identical one in β.
+    "Electrons can move" means (1) they're urged to and (2) the path is clear.
+    The path between β and B satisfies both conditions.
+    Then whatever happens at α will be reflected at B.
+    Then α charging will result in β discharging in equal proportion: electrons will drift towards B.
+
+    Full picture:
+      # current between A and α
+      # no current between α and β
+      # current between β and B
+    Until the electric potential of A has been transferred to α and the electric potential of B has been transferred to β.
+    Which means that once the charge has finished drifting, the initial voltage between A and B is stored across the insulator.
+
+  The bases α and β are called plates. The insulator is called dielectric. All three together form a condenser (or, more commonly,
+  a capacitor).    //  "Condenser" is obsolete in English (except when talking microphones). "Condensateur" is still the French standard.
+
+  The dielectric has a breakdown voltage U_bd dependant on its composition and its geometry.
+  The plates have a maximum charge Q_max dependant on their geometry -- but also on the dielectric's breakdown voltage.
+    Indeed, imagine there's room for x Coulombs (charge) on each plate, depending on the overall geometry this means χ Volts (voltage).
+    If χ > U_bd it will never be reached: electrical breakdown will always happen first.
+  Q_max determines how many charge carriers face each other at once. So a higher Q_max means more potential energy per charge which means
+  more maximum voltage across the dielectric.  ->  Q_max  =  k * χ
+  But χ might very well be unreachable, so U_bd is a more useful constant. Lets re-define:
+    k  =  Q_max / U_bd
+
+  The constant k seems quite useful. What would its dimension be?  ->  Charge per voltage.
+  So "how much charge contributes to voltage" or "how much charge is needed to reach a certain voltage".
+  Its actual name is Capacitance and its usual symbol is C. Q_max and U_bd are extreme cases, the general one is:
+
+    C  =  q / U
+
+    where q is the absolute value of the charge of either of the plates and U is the voltage across the dielectric.
+
+  https://en.wikipedia.org/wiki/Capacitor
+  https://en.wikipedia.org/wiki/Capacitance
+  https://en.wikipedia.org/wiki/Nodal_analysis
+
+
+===============================================================================================
+#5  Analog signal
+===============================================================================================
+
+  All our examples so far have made use of a certain type of current called static current:
+    initial voltage -> current flow -> equilibrium
+  This is what happens when you want to pet your cat and it goes clac clac.
+
+  In electrical circuits there's usually a generator.
+  Generator because it generates a voltage which, under the right conditions, can cause a current.
+  Lithium batteries, nuclear power plants or dynamos are examples of generators.
+
+
 
   [[ IN PROGRESS ]]
-
-
-
-
-
-
