@@ -12,11 +12,20 @@
 ===============================================================================================
 #1  Complex numbers
 ===============================================================================================
+  /*
+    Pre-scriptum:
+      I use Greek letters.
+      When I'm not familiar with a symbol, I can't pronounce the sentence using it and tend not to understand what I read.
+      If you're not familiar with Greek letters, report to the last section of this chapter and come back when you're ready.
+      Just an advice. You'll do what you'll want to do of course.
+  */
 
-  https://en.wikipedia.org/wiki/Complex_number					https://en.wikipedia.org/wiki/Argument_(complex_analysis)
-  https://en.wikipedia.org/wiki/Cartesian_coordinate_system		https://en.wikipedia.org/wiki/Complex_plane
-  https://en.wikipedia.org/wiki/Pythagorean_theorem				https://en.wikipedia.org/wiki/Trigonometry
-  https://en.wikipedia.org/wiki/Trigonometric_functions			https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+  https://en.wikipedia.org/wiki/Complex_number					      https://en.wikipedia.org/wiki/Argument_(complex_analysis)
+  https://en.wikipedia.org/wiki/Cartesian_coordinate_system		      https://en.wikipedia.org/wiki/Complex_plane
+  https://en.wikipedia.org/wiki/Pythagorean_theorem				      https://en.wikipedia.org/wiki/Trigonometry
+  https://en.wikipedia.org/wiki/Trigonometric_functions			      https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+  https://en.wikipedia.org/wiki/Vector_%28mathematics_and_physics%29  https://en.wikipedia.org/wiki/Atan2
+
 
   A complex number is the sum of a real number and an imaginary number.
   It takes the form:
@@ -32,16 +41,23 @@
   Now imagine we plot z on this plane. It shows how any complex number can be regarded as a vector joining the origin of both axis and the
   point with coordinates {x = Re (z) , y = Im (z)}.
 
-  This vector is the diagonal of a rectangle with two sides = Re (z) and two sides = Im (z).
-  The vector z splits this rectangle in two identical right triangles whose hypotenuse is the length of the vector.
+  This vector traces the diagonal of a rectangle with two sides = Re (z) and two sides = Im (z).
+  The vector z splits this rectangle in two identical right triangles whose hypotenuse is the length (magnitude) of the vector.
 
-  This hypotenuse is called the absolute value of the complex number z and is notated |z|.
+  This hypotenuse is called the absolute value of the complex number z and is notated |z|  --  sometimes abs (z).
 
   The theorem of Pythagoras gives:
 
     |z|  =  √( Re (z)²  +  Im (z)² )
 
-  Let's call θ the angle formed by the vector z and the real (horizontal) axis. θ is the argument of the complex number z and is notated arg (z).
+  /*
+    Notice that if  Im (z) = 0  then  |z| = √(Re (z)²)  which results in ignoring z's sign. Which is often mistaken for the actual
+    definition of a number's absolute value (it stops being valid once said number has an imaginary part, while the definition given by
+    complex analysis applies to purely real numbers. This coincides with the fact that real numbers are a subset of complex numbers).
+  */
+
+  Let's call θ the angle formed by the vector z and the real (horizontal) axis.
+  θ is called the argument of the complex number z and is notated arg (z).
   Since Re (z) is its adjacent side and since Im (z) is its opposite side:
 
     tan (θ)  =  Im (z) / Re (z)
@@ -50,6 +66,17 @@
 
     arg  (z)  =  arctan ( Im (z) / Re (z) )    or    arctan2 ( Im (z), Re (z) )
 
+  /*
+    atan2:
+      Angles in radians are in the range [0 , 2π]. While arctan (x) produces values in the range [-π , π].
+      The modulus is the same: 2π. But arctan (x) has an offset of -π (clockwise flat angle).
+      When summing several complex numbers, this offset can make the maths needed to retrieve the modulus a bit tricky,
+      or at least not very elegant (unnecessarily crowded).
+      The function atan2 fixes this.
+
+      Also if Re (z) = 0 the regular arctan function (atan, tan^-1) faces a division by zero.
+      The function atan2 fixes this too.
+  */
   
   We also know that  cos (θ)  =  adjacent / hypotenuse   and    sin (θ)   =  opposite / hypotenuse
   which means:      adjacent  =  cos (θ) * hypotenuse    and    opposite  =  sin (θ) * hypotenuse
@@ -67,6 +94,13 @@
     z  =  |z| * [ cos ( arg (z) )  +  √(-1) * sin ( arg (z) ) ]
 
     This expression is called the polar form of the complex number z.
+
+  /*
+    Complex numbers can be regarded as vectors. Vectors also have a polar form.
+    The notation:  v  =  ( r , ∠θ )
+    means:  v is a vector of magnitude r and angle θ.
+    If v is represented with the complex number z, then:  |z| = r  and  arg (z) = θ.
+  */
 
   The absolute value |z| of z is sometimes also called "modulus" or "magnitude".
   The argument arg (z) of z is sometimes also called "phase".
@@ -134,7 +168,7 @@
     =>  Re (z1)  =  Re (z2)    ;    Im (z1)  =  -Im (z2)
 
   z1 and z2 form a complex conjugate pair.                          //  https://en.wikipedia.org/wiki/Complex_conjugate
-  So any real sinusoid can be expressed as the sum of two complex conjugates.       [a]
+  So any real sinusoid (equation [3]) can be expressed as the sum of two complex conjugates.       [a]
 
 
   //	Euler's formula and the polar form
@@ -237,21 +271,26 @@
 
   Let's define:
 
-               α * exp (j * φ)
-    X (t)  =  ----------------    and    s  =  j * ω
-                     2
+                                     α * exp (j * φ)
+    s  =  j * ω    and    X (s)  =  -----------------
+                                            2
 
-  X (t) is a complex number in exponential form with absolute value  |X (t)|  =  α / 2  and argument  arg (X (t))  =  φ
+  X (s) is a complex number in exponential form with absolute value  |X (s)|  =  α / 2  and argument  arg (X (s))  =  φ
 
   Then any complex sinusoid in the form:
 
-    ƒ (t)  =  X (t) * exp (s * t)        //  where s is a *pure imaginary* number! (Re (s) = 0)
+    ƒ (t)  =  X (s) * exp (s * t)        //  where s is a *pure imaginary* number! (Re (s) = 0)
 
   can be considered the positive-frequency-component of a real sinusoid with:          [b]
 
-    Amplitude	  α  =  2 * |X (t)|
-    Phase		  φ  =  arg (X (t))
+    Amplitude	  α  =  2 * |X (s)|
+    Phase		  φ  =  arg (X (s))
     Frequency	  ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
+
+  /*
+    X (s) is called the complex amplitude of ƒ (t). It embeds the actual amplitude and the phase.
+    X (s) is just a symbol. The complex sinusoid  A * exp (z * t)  has a complex amplitude = A as long as  Re (z) = 0.
+  */
 
   And thus the two (positive and negative) complex sinusoids that form a real sinusoid have equal amplitude and opposite phase.
 
@@ -288,7 +327,7 @@
               n = 0
 
   Notice that ω is a constant.
-  α[n] means that each partial has its own amplitude whithout necessary being mathematically related to n.
+  α[n] means that each partial has its own amplitude without necessary being mathematically related to n.
   (It's an index, not necessarily a function — although it could be. It could also be = 0)
   Same goes for φ[n]. The partials don't have to be in phase for the signal to be periodic. (I thought so. I checked, I was wrong. If the partials
   are not in phase, the period will have a random shape but it will be repeated at the fundamental frequency. Which is pretty obvious once you start
@@ -515,19 +554,19 @@
     A(-ω) = A(ω)  =>  A(0) = A(-0)  =>  0 = 0            //  check.
     exp (j * 0 * t)  =  exp (j * -0 * t)  = 1            //  check.
 
-    What about   φ(0)  ==  -φ(-0) ?
+    What about   φ(0)  ==  φ(-0) ?
     Remember statement [c]? (Of course! Good, you won't have to scroll.) If the frequency is zero, there are no oscillations.
     If there are no oscillations, there is no period. If there is no period, there is no phase.
     (A mathematical proof would have been quicker but abstraction is not required here.)
     Then:
 
-      ω = 0  =>  φ(ω) = -φ(-ω) = 0                       //  check.
+      ω = 0  =>  φ(ω) = φ(-ω) = 0                        //  check.
   
   Then:
 
-     A(0) * exp (j * φ(0))                         A(0) * exp (j * -φ(0))                        A(0)
-    ----------------------- * exp (j * 0 * t)  =  ----------------------- * exp (j * 0 * t)  =  ------
-               2                                             2                                    2
+     A(0) * exp (j * φ(0))                         A(-0) * exp (j * φ(-0))                          A(0)
+    ----------------------- * exp (j * 0 * t)  =  ------------------------- * exp (j * -0 * t)  =  ------
+               2                                              2                                      2
 
   Then it's safe to write:
 
@@ -581,6 +620,7 @@
   We've proven that it can be used to represent real-life signals.
 
 
+
 ===============================================================================================
 #6  Not so fast...
 ===============================================================================================
@@ -597,8 +637,8 @@
   Which means that the integration of the sinusoid over one period gives zero: indeed, the two halves have equal area under the curve
   and complementary signs -- therefore their sum cancels out.
 
-  So assuming that the D.C. offset is constant the integration over time of the Inverse Fourier Transform gives the value of the D.C. offset,
-  assuming this integration starts and stops when all partials are crossing zero.
+  So, assuming that the D.C. offset is constant, the integration over time of the Inverse Fourier Transform gives the value of the D.C. offset.
+  (Assuming this integration starts and stops when all partials are crossing zero.)
   Of course, all partials crossing zero at once (all the more twice) is very unlikely (unless the spectrum is fully periodic).
   But a long enough integration will approximate the D.C. offset accurately enough. (Notice how enough relies on enough.)
 
@@ -614,3 +654,260 @@
   https://en.wikipedia.org/wiki/Fourier_transform
 
   How d'you like closure?
+
+
+
+===============================================================================================
+#7  Don't stop me now ('cause I'm having a good time)
+===============================================================================================
+
+  Integral transforms are rather fun. How about another one?
+
+  First let's assume we don't care whether the sinusoids in our spectrum are purely real.
+  Then we can get rid of the "if" statement, and:
+
+                          +∞
+                   1      ⌠
+      ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω 
+                 2 * π    ⌡
+                          -∞
+
+  Ok, neat.
+  Now, the angular frequency ω is always multiplied by j. So varying the frequency (angular or not) is equivalent to traveling along the
+  imaginary axis.
+  We could decide to make it obvious by embedding j in the variable with respect to which we integrate.
+
+  Then the range of integration becomes [-j∞ , +j∞] and the differential becomes djω / j.
+  The rules of factorisation allow to extract 1 / j from the integral, which is then divided by 2πj instead of 2π.
+
+  Fourier now has a more straightforward meaning, but it's a bit messy: we still haven't defined the new variable (the one that embeds j).
+  This variable needs a name. If I don't call it "s", I'm exposing you to permanent confusion (assuming the transform we're building is new
+  to you).
+  Social constructs can feel arbitrary: why the letter s? -- "Spectrum"? "Sinusoid"? "Schwingung"? "Satan"? "So what"?
+
+  Anyway:  s = jω.
+
+  It's a complex number. So by definition it's the sum of a real part and an imaginary part. =>  Re (s) = 0  &&  Im (s) = jω.
+  For the sake of nit picking, let's make it explicit and re-define:
+
+    s  =  σ + jω    //  Then the inverse Fourier transform having σ = 0 becomes a special case of whatever we're building.
+
+  Ok so now that we have the variable s, ω is just adding confusion. So X (ω) should be replaced with a function of s. Say F (s).
+  Then Fourier needs X (ω) = F (s)  and  σ = 0.
+
+  Now we need to adjust the range of integration and the differentiator so that they account for σ.
+  But we don't know what σ means apart from mathematical rigour -- and that it's purely real since it's been defined as Re (s).
+  What we do know is that several members of Fourier's integral are only here to compensate for ω being the visible variable while really we
+  integrate with respect to f (the frequency in Hz).
+  We like this property. We should maintain it. So the dummy number σ shouldn't be allowed to get in our way. How?
+
+  Right now  ds  =  dσ + dj2πf  -- the division by 2πj makes it:
+
+      σ + j2πf         σ
+    d----------  =  d----- + df    //  We don't like d(σ / 2πj), do we?
+         2πj          2πj
+
+  If σ = 0 then problem solved. But it would be nice to allow it to be non-zero (just in case).
+  We can't touch 2πj, it's a constant.
+  And what does dσ even mean in the first place? -> The variation of σ by an infinitesimal amount.
+  Ha! So no variation of σ means dσ = 0, right? So we need it to be a constant. That's it.
+  And when setting it to zero (implicitly *always* zero) we were in fact already defining a constant.
+  Plus we've named it σ, not σ (ω) -- so, intuitively, we've always known what we were doing.
+  Great: it's always been a constant, no modification required.
+
+  ds  =  0 + djω    <=>    ds/2πj  =  df    =>    perfect.
+
+  Now the expression of s has 2 constants:  σ and j    and 1 variable:  ω.
+  We can keep letting ω take values from -∞ to +∞. It will result in s ranging from:  σ - j∞  to  σ + j∞.
+  Range of integration? -> Fixed.
+          Differential? -> Fixed.
+           Left to fix? -> Nothing.
+
+                    σ +j∞
+                  1   ⌠
+      ƒ (t)  =  ----- | F (s) * exp (st) ds 
+                 2πj  ⌡
+                    σ -j∞
+
+  Look at what we've just invented! Enjoy.
+  Now quit enjoying because we didn't invent shit.
+  What we've been building is the Mellin's Inversion formula. Or the Bromwich integral.
+  Or the bilateral inverse Laplace transform.
+  "Inverse" (Fourier / Laplace) doesn't make much sense from where we stand. But we need to know what people are referring to when they call
+  these integral transforms by their conventional names.
+
+  // Observations:
+    # Think graphical: σ is real and constant, so, in the complex plane, it corresponds to a horizontal shift of the range of integration.
+    # if ( X (ω) == F (s)  &&  σ == 0 ) { inverse_bilateral_Laplace  =  inverse_Fourier; } else ...
+
+  Now that σ is here, what happens if it's not equal to zero?
+
+  /*
+    Digression: Stupid questions.
+      - Are there stupid questions?    //  (Are there stupid meta-questions? -- sorry couldn't resist.)
+      - Don't know, maybe, don't care.
+
+    Let me ask a stupid question:
+
+      Assuming a question is dumb as fuck, what harm will it do to ask it anyway?
+
+    If you ask a stupid question, you risk looking stupid.
+    If you don't ask it, you risk BEING stupid. -- Your call.
+
+    Fake affirmations are epistemological pollution.
+    There's no affirmation in a question (pretty much by definition).
+
+    My partial biased subjective opinion: there are no stupid questions, but there are insecure people who thrive on demeaning others.
+  */
+
+  What was I saying (I mean  writing)?
+  Oh yes. What happens if  σ ≠ 0 ?
+
+  exp (st)  =  exp (σt + jωt)  =  exp (σt) * exp (jωt)
+
+  Notice that it's not only not called σ (ω) but also not σ (t).
+  So it remains constant for all values of t (constant across time).
+
+  Let's focus on one single value of ƒ (t), that is: we're inside the integral so until further notice, t is constant.
+  Then σt is constant. Then exp (σt) is constant.
+  Then according to the rules of factorisation, exp (σt) can be extracted from the integral.
+  We've re-split the variable s and made Laplace's representation impractical.
+  The range of integration can ignore σ and the differentiator was already ignoring it.
+  Then we integrate with respect to jω or if we want to retrieve a familiar expression: with respect to ω.
+  Then the division by j is no longer required:
+
+                           +∞
+                 exp (σt)  ⌠
+      ƒ (t)  =  ---------- | X (ω) * exp (jωt) dω    //  with X (ω) = F (s)
+                    2π     ⌡
+                           -∞
+
+  Let's define the spectrum:
+
+                +∞
+                ⌠                    dω
+      𝓕 (t)  =  | X (ω) * exp (jωt) ----
+                ⌡                    2π
+                -∞
+
+  Then:    ƒ (t)  =  exp (σt) * 𝓕 (t)
+
+  exp (jωt)  =  cos (ωt) + j sin (ωt)  so its real part is bounded in the range [-1 , +1] and its imaginary part is bounded
+  in the range [-j , j] -- or [-1 , +1] on the imaginary axis.
+  So if we ignore polarity and consider exp (jωt) a 2-dimension variable gain, it's technically always an attenuator, for boosting
+  requires gain factors greater than 1.
+  So exp (jωt) only contributes to the rate of the oscillations, not the amplitude of the oscillations.
+  (Ok, we knew that already but re-phrasing doesn't hurt.)
+
+  /*
+    By "amplitude" I mean "complex amplitude" which embeds both the actual amplitude and the phase.
+  */
+
+  So if we were to ignore the oscillations and focus on the amplitude, we could define:
+
+                 +∞
+                 ⌠         dω
+      𝓐 (t)  =  | X (ω)  -----    the amplitude of the spectrum 𝓕 (t).
+                 ⌡         2π
+                 -∞
+
+  And:  α (t)  =  exp (σt) * 𝓐 (t)  the amplitude of ƒ (t).
+
+  Notice that X (ω) is not a function of t. So, in Fourier's integral, the amplitude of each partial is constant over time.
+  So 𝓐 (t) is a sum of constants and therefore is itself constant over time.
+  Let's make it obvious by defining:  k  =  𝓐 (t).
+
+  Then:  α (t)  =  k * exp (σt)
+
+  t is linearly growing (it's the affine function  y = x  or  y = ax + b  with  a = 1  and  b = 0).
+  Since σ is constant, σt is also affine. So it's also linear. But whether it's growing, decaying or constant depends on the value of σ.
+
+    case 1:
+      σ = 0  ->  σt = 0  --  it's constant (more precisely: null)
+      then  exp (σt)  =  exp (0)  =  1    and    α (t)  =  𝓐 (t)    and    Laplace = Fourier  (grossly speaking... I mean writing)
+    case 2:
+      σ < 0  ->  σt inherits the sign inversion and becomes linearly decaying over time.
+      then  exp (σt) is exponentially decaying over time.
+      Since k is an absolute value, it's positive. So it's a positive constant.
+      Then:  α (t) is exponentially decaying over time.
+    case 3:
+      σ > 0  ->  σt keeps t's sign and remains linearly growing over time.
+      then  exp (σt) is exponentially growing over time.
+      Since k is an absolute value, it's positive. So it's a positive constant.
+      Then:  α (t) is exponentially growing over time.
+
+  We still don't know what σ exactly is. But we know that it makes the amplitude a signal grow exponentially, decay exponentially or
+  remain constant depending on whether it's positive, negative or zero.
+  And maybe that's all there is to know?
+
+  So if we reunite s this means that, in its Laplace representation, a signal has an exponentially growing amplitude when Re (s) > 0;
+  an exponentially decaying amplitude when Re (s) < 0; and a constant amplitude when Re (s) = 0.
+    
+  https://www.desmos.com/calculator/cknw6utsjy
+
+  Why did I ask?
+  Genuine curiosity unrelated to anything practical. (We'll see about that...)
+
+
+
+===============================================================================================
+#8  Appendix: Greek alphabet
+===============================================================================================
+/*          "Speak in secret alphabets."                                                     */
+/*                                                  --  Jim Morrison (Soul Kitchen)          */
+-----------------------------------------------------------------------------------------------
+
+  //  https://en.wikipedia.org/wiki/Greek_alphabet
+
+  /*
+    Table legend:
+      upper case    |    lower case    |    name (Latin alphabet)    |    name (Greek alphabet)
+  */
+
+  Α    |    α    |    alpha      |    άλφα
+  -----------------------------------------------
+  Β    |    β    |    beta       |    βήτα
+-----------------------------------------------
+  Γ    |    γ    |    gamma      |    γάμμα
+-----------------------------------------------
+  Δ    |    δ    |    delta      |    δέλτα
+-----------------------------------------------
+  Ε    |    ε    |    epsilon    |    έψιλον
+-----------------------------------------------
+  Ζ    |    ζ    |    zeta       |    ζήτα
+-----------------------------------------------
+  Η    |    η    |    eta        |    ήτα
+-----------------------------------------------
+  Θ    |    θ    |    theta      |    θήτα             //  looks like zero, beware of context
+-----------------------------------------------
+  Ι    |    ι    |    iota       |    ιώτα
+-----------------------------------------------
+  Κ    |    κ    |    kappa      |    κάππα
+-----------------------------------------------
+  Λ    |    λ    |    lambda     |    λάμβδα
+-----------------------------------------------
+  Μ    |    μ    |    mu         |    μυ
+-----------------------------------------------
+  Ν    |    ν    |    nu         |    νυ
+-----------------------------------------------
+  Ξ    |    ξ    |    xi         |    ξι
+-----------------------------------------------
+  Ο    |    ο    |    omicron    |    όμικρον
+-----------------------------------------------
+  Π    |    π    |    pi         |    πι
+-----------------------------------------------
+  Ρ    |    ρ    |    rho        |    ρο
+-----------------------------------------------
+  Σ    |    σ    |    sigma      |    σίγμα	           //  alternative:  ς  (lower case)
+-----------------------------------------------
+  Τ    |    τ    |    tau        |    ταυ
+-----------------------------------------------
+  Υ    |    υ    |    upsilon    |    ύψιλον
+-----------------------------------------------
+  Φ    |    φ    |    phi        |    φι
+-----------------------------------------------
+  Χ    |    χ    |    chi        |    χι
+-----------------------------------------------
+  Ψ    |    ψ    |    psi        |    ψι
+-----------------------------------------------
+  Ω    |    ω    |    omega      |    ωμέγα
