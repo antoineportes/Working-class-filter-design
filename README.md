@@ -74,4 +74,4 @@ This book is dedicated to whoever will take time to read parts of it.\
 Don't let institutional elitism discourage you.\
 You are not a lost cause.\
 <br/><br/>
-*Antoine Portes (working-class filter designer).*
+*Antoine Portes ( antoineportes@duck.com ).*
