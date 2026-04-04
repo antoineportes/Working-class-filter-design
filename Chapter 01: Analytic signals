@@ -342,7 +342,7 @@
               n = 0
 
   Notice that ω is a constant.
-  α[n] means that each partial has its own amplitude without necessary being mathematically related to n.
+  α[n] means that each partial has its own amplitude without necessarily being mathematically related to n.
   (It's an index, not necessarily a function — although it could be. It could also be = 0)
   Same goes for φ[n]. The partials don't have to be in phase for the signal to be periodic. (I thought so. I checked, I was wrong. If the partials
   are not in phase, the period will have a random shape but it will be repeated at the fundamental frequency. Which is pretty obvious once you start
@@ -854,7 +854,7 @@
 
     case 1:
       σ = 0  ->  σt = 0  --  it's constant (more precisely: null)
-      then  exp (σt)  =  exp (0)  =  1    and    α (t)  =  𝓐 (t)    and    Laplace = Fourier  (grossly speaking... I mean writing)
+      then  exp (σt)  =  exp (0)  =  1    and    α (t)  =  |𝓐 (t)|    and    Laplace = Fourier  (grossly speaking... I mean writing)
     case 2:
       σ < 0  ->  σt inherits the sign inversion and becomes linearly decaying over time.
       then  exp (σt) is exponentially decaying over time.
