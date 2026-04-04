@@ -210,6 +210,14 @@
     constant factor and only involves positive frequencies.
     More on that right away.
 
+  /*
+    Before we move on: what happens to ζ if α is a complex number?
+
+      α  =  |α| * exp ( j * arg (α) )
+      then:
+      ζ  =  |α| * exp ( j * arg (α) ) * exp (j * ω * t)  =  |α| * exp (  j * ( ω * t  +  arg (α) )  )    [4-bis]
+  */
+
 
 
 ===============================================================================================
@@ -293,6 +301,13 @@
   */
 
   And thus the two (positive and negative) complex sinusoids that form a real sinusoid have equal amplitude and opposite phase.
+  (Opposite phase because we measure it in radians, in fact they have the same t0.)
+
+  /*
+    Infinite feedback loop:
+      # A real sinusoid is a sum of complex sinusoids.
+      # A complex sinusoid is the sum of a real and an imaginary sinusoid.
+  */
 
   There is a process called Hilbert transform which applies a different phase shift (± π/2) depending on whether the frequency
   is positive or negative. This ends up in doubling the amplitude of positive frequencies and cancelling out negative frequencies.
@@ -599,7 +614,8 @@
       
     }   //  endif
 
-  The amplitude of each infinitesimal partial being:  2 * |X (ω)|    and its phase being:  arg ( X (ω) ).
+  The amplitude of each infinitesimal (real) partial being:  2 * |X (ω)|    and its phase being:  arg ( X (ω) ).
+  Considering complex partials (and recalling digression [4-bis]) the amplitude is simply |X (ω)| -- the phase remains arg ( X (ω) ).    [d]
 
   All you have to do for the integral to keep representing a real signal is explicitly stating:  A(-ω) = A(ω)  and  φ(-ω) = -φ(ω).
   But if you don't, it's not a mistake per se: it just means that the signal is not purely real.
@@ -760,7 +776,7 @@
     My partial biased subjective opinion: there are no stupid questions, but there are insecure people who thrive on demeaning others.
   */
 
-  What was I saying (I mean  writing)?
+  What was I saying (I mean writing)?
   Oh yes. What happens if  σ ≠ 0 ?
 
   exp (st)  =  exp (σt + jωt)  =  exp (σt) * exp (jωt)
@@ -807,15 +823,29 @@
 
                  +∞
                  ⌠         dω
-      𝓐 (t)  =  | X (ω)  -----    the amplitude of the spectrum 𝓕 (t).
+      𝓐 (t)  =  | X (ω)  -----    the complex amplitude of the spectrum 𝓕 (t).
                  ⌡         2π
                  -∞
 
-  And:  α (t)  =  exp (σt) * 𝓐 (t)  the amplitude of ƒ (t).
+  Then, recalling statement [d], the real amplitude of 𝓐 (t) is simply |𝓐 (t)|.
+  The phase of the spectrum would be arg ( 𝓐 (t) ) but since the phase (in radians) is dependant on the angular frequency, the phase
+  of a spectrum doesn't make much sense (pull a request if you disagree).
+  
+  We can thus define:  α (t)  =  exp (σt) * |𝓐 (t)|  the real amplitude of ƒ (t).
+
+  /*
+    Proof:
+      Let a, x and y be purely real numbers.
+      And  z  =  x + jy
+      Then:  |z|  =  √(x² + y²)
+      And:   az  =  ax + jay
+      Then:  |az|  =  √( (ax)² + (ay)² )  =  √( a²x² + a²y² )  =  √( a² * (x² + y²) )  =  √(a²) * √(x² + y²)  =  a * √(x² + y²)  =  a * |z|
+  */
 
   Notice that X (ω) is not a function of t. So, in Fourier's integral, the amplitude of each partial is constant over time.
   So 𝓐 (t) is a sum of constants and therefore is itself constant over time.
-  Let's make it obvious by defining:  k  =  𝓐 (t).
+  Therefore same goes for |𝓐 (t)|.
+  Let's make it obvious by defining:  k  =  |𝓐 (t)|.
 
   Then:  α (t)  =  k * exp (σt)
 
@@ -844,6 +874,16 @@
   an exponentially decaying amplitude when Re (s) < 0; and a constant amplitude when Re (s) = 0.
     
   https://www.desmos.com/calculator/cknw6utsjy
+
+  Another way to come to the same conclusion would have been to consider one (complex) partial in isolation:
+
+   F (s) * exp (st)       F (s)
+  ------------------  =  ------- * exp (σt) * exp (jωt)
+          2πj              2πj
+
+  exp (jωt) is a periodic attenuator, F (s) / 2πj is a constant, t is linearly growing, then case 1, case 2, case 3 etc.
+  Since σ is constant over time and across all partials, cases 1, 2 and 3 will apply to all partials.
+
 
   Why did I ask?
   Genuine curiosity unrelated to anything practical. (We'll see about that...)
