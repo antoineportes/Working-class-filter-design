@@ -70,7 +70,7 @@
     atan2:
       Angles in radians are in the range [0 , 2π]. While arctan (x) produces values in the range [-π , π].
       The modulus is the same: 2π. But arctan (x) has an offset of -π (clockwise flat angle).
-      When summing several complex numbers, this offset can make the maths needed to retrieve the modulus a bit tricky,
+      When summing several complex arguments, this offset can make the maths needed to retrieve the modulus a bit tricky,
       or at least not very elegant (unnecessarily crowded).
       The function atan2 fixes this.
 
