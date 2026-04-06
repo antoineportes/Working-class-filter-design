@@ -369,6 +369,9 @@
   /*
     I personally tend to prefer U because V already stands for Volt, a common unit for Tension | Voltage.
     So if we use V for Voltage then the unit of V is V... I say slippery slope. However, I've also said "go play with fire"...
+
+    About "tension" vs. "voltage" -- Bon Scott says "High-voltage Rock 'n' Roll" while Stiv Bators is a "high-tension wire"...
+    Whenever in doubt, Rock 'n' Roll is the answer.
   */
 
   Ok, now that U and I have been granted convenient symbols maybe we can build some nice-looking set of equations:
@@ -415,9 +418,9 @@
   //  Social norms are here to help
 
   By convention, for historical reasons, current flows from positive to negative.
-  Which is the opposite of what the electric field and electric charges actually do.
+  Which is the opposite of what the electric field and electric charge actually do.
   I was tempted to use my own less confusing convention, but unfortunately this would only have been less confusing inside
-  this book. If I give you tools that no one uses, you'll speak a language that no one understands. Not very helpful.
+  this book. If I give you tools that no one uses, you'll speak a language that no one understands (and vice versa). Not very helpful.
   What I did instead was allow current to make sense as long as I could.
   So remember (however impractical it is):
 
@@ -668,18 +671,47 @@
   https://en.wikipedia.org/wiki/Capacitance
 
 
+
+-----------------------------------------------------------------------------------------------
+/*          "It's a long way to the top if you wanna rock 'n' roll."                         */
+/*                                       --  Bon Scott (It's a long way to the top)          */
 ===============================================================================================
-#5  Analog signal
+#5  DC / AC  (not a typo.)
 ===============================================================================================
 
   All our examples so far have made use of a certain type of current called static current:
     initial voltage -> current flow -> equilibrium
-  This is what happens when you want to pet your cat and it goes clac clac.
+  This is what happens when you want to pet your cat and it goes clac clac. Nothing but a simple cosmic balance.
 
   In electrical circuits there's usually a generator.
   Generator because it generates a voltage which, under the right conditions, can cause a current.
   Lithium batteries, nuclear power plants or dynamos are examples of generators.
 
+  /*
+    Idealism strikes back:
+      So far we've used ideal cables -- that is: cables that are immune to external disturbances and have infinite conductance (R = 0).
+      Such cables don't seem to exist but they safely approximate "good" cables (i.e. most cables) and are therefore a convenient assumption
+      for circuit analysis.
+      This rigorously translates to generators: an ideal cable is equivalent to a point (node);
+      an ideal generator is a pair of nodes with different electric potentials.
+      (Real generators have a resistance, they get affected by external electromagnetic fields, etc.)
+      ((You might have guessed it but obvious doesn't hurt: same distinction applies to ideal vs. real capacitors.))
+
+      This explains what a high-quality component is and why people sometimes spend a considerable amount of money on them.
+      Circuits are designed with ideal components. What we call the quality of a component (what makes it "good") is how close it is to ideal.
+      So the higher the quality of the components, the closer the circuit is to its theoretical design --
+      -- and the more predictable its behaviour.
+      (Or: the poorer the quality of components, the more surprises -- note that surprises are not inherently bad.)
+      (Most synthesisers have noise oscillators and random LFOs -- we enjoy chaos!)
+  */
+
+  Nice guys finish last? -- Edison first it is.        //  https://en.wikipedia.org/wiki/War_of_the_currents
 
 
   [[ IN PROGRESS ]]
+
+
+
+===============================================================================================
+#6  Analog signals
+===============================================================================================
