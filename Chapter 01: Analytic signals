@@ -70,12 +70,19 @@
     atan2:
       Angles in radians are in the range [0 , 2π]. While arctan (x) produces values in the range [-π , π].
       The modulus is the same: 2π. But arctan (x) has an offset of -π (clockwise flat angle).
-      When summing several complex arguments, this offset can make the maths needed to retrieve the modulus a bit tricky,
-      or at least not very elegant (unnecessarily crowded).
+      So far this is expected behaviour. Except that if "x" is a ratio, arctan (x) will evaluate its sign rgardless of whether it's
+      inherited from the numerator or from the denominator.
+      While |arg (z)| should be in the range ]0 , π/2] when Re (z) is positive and ]π/2 , π] when it's negative.
+      And the sign of arg (z) should be inherited from Im (z).
       The function atan2 fixes this.
 
       Also if Re (z) = 0 the regular arctan function (atan, tan^-1) faces a division by zero.
       The function atan2 fixes this too.
+
+      Note that if Re (z) = 0, the vector is vertical and arg (z) = ± π/2 regardless of Im (z) (only its sign matters, unless it's zero too).
+      If Im (z) = 0, the vector is horizontal and arg (z) = 0 regardless of Re (z) (even if it is = 0).
+
+      Knowing all that, atan2 could easily (not elegantly) get worked around. Luckily this is usually not necessary.
   */
   
   We also know that  cos (θ)  =  adjacent / hypotenuse   and    sin (θ)   =  opposite / hypotenuse
@@ -834,7 +841,7 @@
   We can thus define:  α (t)  =  exp (σt) * |𝓐 (t)|  the real amplitude of ƒ (t).
 
   /*
-    Proof:
+    Proof:        //  See #9 Bonus for a generalisation.
       Let a, x and y be purely real numbers.
       And  z  =  x + jy
       Then:  |z|  =  √(x² + y²)
@@ -951,3 +958,38 @@
   Ψ    |    ψ    |    psi        |    ψι
 -----------------------------------------------
   Ω    |    ω    |    omega      |    ωμέγα
+
+
+
+===============================================================================================
+#9  Bonus: Complex arithmetics
+===============================================================================================
+
+  Let z1 and z2 be complex numbers such that:
+    z1  =  a + jb
+    z2  =  c + jd
+  or:
+    z1  =  |z1| * ( cos (θ1)  +  j sin (θ1) )    with  θ1  =  arg (z1)    //  θ ("theta"), not 0 ("zero")...
+    z2  =  |z2| * ( cos (θ2)  +  j sin (θ2) )    with  θ2  =  arg (z2)    //  idem
+
+  Product:
+    z1 * z2  =  (a + jb) * (c + jd)  =  ac + jad + jbc + j²bd  =  (ac - bd) + j(ad + bc)
+
+    |z1 * z2|  =  √( (ac - bd)² + (ad + bc)² )  =  √( a²b² - 2abcd + b²d² + a²d² + 2abcd + b²c² )  =  √( a²b² + b²d² + a²d² + b²c² )
+    |z1| * |z2| =  √(a² + b²) * √(c² + d²)  =  √( (a² + b²) * (c² + d²) )  =  √( a²c² + a²d² + b²c² + b²d² )
+    ergo:  |z1 * z2|  =  |z1| * |z2|
+
+    z1 * z2  =  |z1| * ( cos (θ1)  +  j sin (θ1) ) * |z2| * ( cos (θ2)  +  j sin (θ2) )
+             =  |z1 * z2| * ( cos (θ1)  +  j sin (θ1) ) * ( cos (θ2)  +  j sin (θ2) )
+             =  |z1 * z2| * [ cos (θ1) * cos (θ2)  +  j * cos (θ1) * sin (θ2)  +  j * sin (θ1) * cos (θ2)  +  j² * sin (θ1) * sin (θ2) ]
+             =  |z1 * z2| * [ cos (θ1) cos (θ2)  -  sin (θ1) sin (θ2)  +  j ( cos (θ1) sin (θ2)  +  sin (θ1) cos (θ2) ) ]
+
+    Using:  https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Angle_sum_and_difference_identities
+    z1 * z2  =  |z1 * z2| * [ cos (θ1 + θ2)  +  j sin (θ1 + θ2) ]
+    ergo:  arg (z1 * z2)  =  arg (z1) + arg (z2)
+
+
+
+
+
+
