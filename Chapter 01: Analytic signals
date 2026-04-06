@@ -972,12 +972,19 @@
     z1  =  |z1| * ( cos (θ1)  +  j sin (θ1) )    with  θ1  =  arg (z1)    //  θ ("theta"), not 0 ("zero")...
     z2  =  |z2| * ( cos (θ2)  +  j sin (θ2) )    with  θ2  =  arg (z2)    //  idem
 
-  Product:
+  Product & ratio:
     z1 * z2  =  (a + jb) * (c + jd)  =  ac + jad + jbc + j²bd  =  (ac - bd) + j(ad + bc)
 
     |z1 * z2|  =  √( (ac - bd)² + (ad + bc)² )  =  √( a²b² - 2abcd + b²d² + a²d² + 2abcd + b²c² )  =  √( a²b² + b²d² + a²d² + b²c² )
     |z1| * |z2| =  √(a² + b²) * √(c² + d²)  =  √( (a² + b²) * (c² + d²) )  =  √( a²c² + a²d² + b²c² + b²d² )
     ergo:  |z1 * z2|  =  |z1| * |z2|
+
+    If  z1 = z2  then  z1 * z2  =  z1²  then  |z1²|  =  |z1|²
+    Now let's assume there is one integer k such that:    |z^k|  =  |z|^k
+    Then:    |z^(k+1)|  =  |z^k * z|  =  |z^k| * |z|  =  |z|^k * |z|  =  |z|^(k+1)
+    The hypothesis that makes k possible is satisfied by the number 2.
+    So for every integer n ≥ 2  -->  |z^n|  =  |z|^n
+    The case n = 1 leads to a tautology (A = A). Whereas n = 0 leads to a tautology (1 = 1).
 
     z1 * z2  =  |z1| * ( cos (θ1)  +  j sin (θ1) ) * |z2| * ( cos (θ2)  +  j sin (θ2) )
              =  |z1 * z2| * ( cos (θ1)  +  j sin (θ1) ) * ( cos (θ2)  +  j sin (θ2) )
@@ -987,6 +994,30 @@
     Using:  https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Angle_sum_and_difference_identities
     z1 * z2  =  |z1 * z2| * [ cos (θ1 + θ2)  +  j sin (θ1 + θ2) ]
     ergo:  arg (z1 * z2)  =  arg (z1) + arg (z2)
+    What if  arg (z1) + arg (z2)  is not in the range [-π , +π]?        //  (Recall the "atan2" digression from section #1.)
+    Then:    arg (z1 * z2)  =  mod (  (arg (z1) + arg (z2) + π) , 2π  )  -  π
+
+    Now that we know how to fix the argument's modulus, we can safely write:  arg (z^n)  =  n * arg (z)  --  implying the modulus fix
+    and assuming n is a positive integer.
+
+     z1       |z1| * exp (j θ1)      |z1|
+    ----  =  ------------------  =  ------ * exp ( j * (θ1 - θ2) )
+     z2       |z2| * exp (j θ2)      |z2|
+
+    This is obviously a complex number in exponential form. So |z1 / z2|  =  |z1| / |z2|  and  arg (z1 / z2)  =  arg (z1) - arg (z2).
+    (Still implying modulus fix.)
+    This demonstration was suspiciously easy. I've tried to break it in many ways and had to surrender to this insufferable truth:
+    my maths are solid... The exponential form keeps its promises -- so much that it feels like cheating.
+
+    [coming soon: z^(1/n) and maybe fractional exponents? -- pull a request if you're more motivated than I am.]
+
+
+  Sum & difference:
+   This is boring, do it yourself. (Nothing's boring, I'm being dumb. Pull a request if you agree.)
+
+
+  Exponentiation
+    [coming soon]
 
 
 
