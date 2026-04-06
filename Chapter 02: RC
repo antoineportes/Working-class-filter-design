@@ -231,6 +231,7 @@
 
       In our piece of imaginary matter, there's no friction either. It's basically a one-dimension vacuum.
       Once the electric field initiates the electrons' movement, they'll never stop moving (perpetuum mobile).
+      (This is very very theoretical, we could also consider that the ball hits a wall once enough electrons have reached point B...)
 
       The reason why I insist so much? This is really NOT intuitive.
   */
@@ -251,7 +252,7 @@
       If you don't know what an electromagnetic wave is, you don't need this digression.
       I've been considering the propagation of the electric field without ever mentioning electromagnetic waves, even though it's a rather
       classical approach.
-      The reason is: waves oscillate, they have a frequency. The imaginary system we've just built purely involves direct (SPOILER) current.
+      The reason is: waves oscillate, they have a frequency. The imaginary system we've just built purely involves (SPOILER) static current.
       Oscillations and frequency don't apply. Electric field is the general concept. Electromagnetic waves are a special case.
       The fact that most real-life cases are special doesn't affect this truth.
   */
@@ -302,6 +303,9 @@
   As its conductance decreases, a material is increasingly resisting the flow of electric charge. This property is called its resistivity.
   The physical quantity is the Resistance. Its usual symbol is R.
   (This one's pretty obvious.)
+
+  By resisting the drift, the material dissipates kinetic energy. In this particular case, "dissipates" means "converts into heat".
+  This phenomenon is called the Joule effect.    //  https://en.wikipedia.org/wiki/Joule_heating
 
   Don't let the dichotomy fool you: nothing binary here.
   Like autism or dissonance, Resistance is a spectrum.
@@ -662,7 +666,7 @@
   So "how much charge contributes to voltage" or "how much charge is needed to reach a certain voltage".
   Its actual name is Capacitance and its usual symbol is C. Q_max and U_bd are extreme cases, the general one is:
 
-    C  =  q / U
+    C  =  q / U    ;    q  =  C * U    ;    U  =  q / C
 
     where q is the absolute value of the charge of either of the plates and U is the voltage across the dielectric.
     (An ideal capacitor has a constant capacitance.)
@@ -707,11 +711,54 @@
 
   Nice guys finish last? -- Edison first it is.        //  https://en.wikipedia.org/wiki/War_of_the_currents
 
+  //  D.C.
 
-  [[ IN PROGRESS ]]
+  A generator which maintains a constant voltage across itself, once connected to one (or several) conductor(s) becomes a direct current
+  (DC) source.
+  (Note that a capacitor is not a strict conductor. It would be tempting to refer to it as a semi-conductor, but this expression already refers
+  to something distinct. We'll have to accept not-a-conductor as the best label. Do we need labels though?)  
+  Assuming everything is constant in the series of conductors, a direct current will have a constant intensity (I = U/R and U and R are constant
+  by hypothesis).
+  A common example of such generators are lithium batteries.
+  Such generators are usually called DC generators even though they don't necessarily generate current (this could explain why brand new lithium
+  batteries are usually not empty).
 
+  /*
+    Amphibology alert:
+      Sometimes DC (direct current) has the looser meaning of "a current drawn by a voltage that is not necessarily constant but whose polarity
+      never gets inverted, such that said current never changes direction". (My definition is clumsy because it attempts to have no exception.)
 
+      This understanding of DC could apply, for instance, to a dynamo -- assuming Albert Hofmann somehow cannot focus on constant speed.
+      Here, I'll always mean "a current drawn by a constant voltage source".
+  */
 
-===============================================================================================
-#6  Analog signals
+  Let our points A and B from before become the connectors of a DC generator.
+  If we connect an almost ideal cable (R ≈ 0) between A and B, an infinity of electric fields will constantly move from A to B, transferring
+  an everlasting constant potential energy to the charge carriers across the cable, turning it into kinetic energy.
+  How fast will the charge carrier drift? Well I = U/R --> a constant almost divided by zero. So I is constant and ≈ ∞.
+  Easy home experiment: put scissors in the socket.
+
+  This is called a short-circuit.
+  We've mentionned the Joule effect earlier. Look at these formulae: https://en.wikipedia.org/wiki/Joule_heating#Direct_current
+  This should help admit the need for fuses (usually thin cables intended to melt when I is over a prescribed threshold in order to disconnect
+  A and B).
+
+  Ok now let's connect a resistor between A and B.
+  R is still constant but no longer negligible. U is still constant. I is still = U/R, that is still constant but no longer near infinite.
+  The higher R, the slower I, the more energy converted to heat through the Joule effect. (Variable R would mean variable heat.)
+  We've built a radiator!
+  This is how toasters operate for instance.
+
+  But we don't need a toaster, do we? Let's unplug the resistor and replace it with a capacitor.
+  Let U_gen be the voltage between A and B and U_bd the breakdown voltage of the capacitor.
+  If U_gen reaches or exceeds Ubd, the dielectric will become a resistor. It will warm-up and probably burn -- in fact capacitors sometimes
+  even explode.
+  Yay! We've built a bomb!
+
+  That's all folks. Thanks for reading, like and subscribe.
+
+========================================= END CREDITS =========================================
+       Writer:  Antoine Portes
+     Producer:  France Travail
+    Copyright:  No, thanks.
 ===============================================================================================
