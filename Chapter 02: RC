@@ -943,7 +943,56 @@
   Here, in order to be consistent with ourselves, we'll go with (1) (even though the verb "to alternate" points more easily at (2)...).
   (Notice how the looser meaning of DC leads to the stricter meaning of AC and vice-versa.)
 
+  Ok, so we want the voltage feeding RC to vary over time. This means that U_gen is no longer a constant.
+  We could vary U_A or U_B or both. Both would be messy, we would need a reference, this would call for a third point, a zero.
+  C is already the capacitor (both its name and its capacitance, I'll explain why in the next section), so D?
 
+  Instead let's define U_B as our reference potential, our zero. Oh and you know what? Let's call it "ground" from now on.
+  And let's abbreviate it "GND"... I know, so random!    //  https://en.wikipedia.org/wiki/Ground_(electricity)
+
+  Then U_B = U_GND = 0 (constant and null). So:  U_gen  =  U_A - U_B  =  U_A.
+  And U_A is a function of time whose instantaneous value is U_A (t).
+
+  We connect RC: α starts inheriting the potential from A and β the one from GND.
+  We know that it takes time, that R slows the charge; but also that:  q_C  =  C * U_C  (where q_C is the absolute value of each plate's
+  charge and U_C is the voltage across the capacitor, i.e. the difference in electric potential between α and β).
+  In terms of U_C that's:  U_C  =  q_C / C. So it's inversely proportional to the capacitor's capacitance.
+  Which means that a higher C will decrease U_C, or in time domain, it will slow down U_C (t).
+
+  But U_A (t) keeps changing, so U_C (t) will always be trying to equal it while reamaining late. And the delay grows with R and C.
+
+  That's how far I could go without maths, sorry I just can't hold it any longer:
+
+
+
+===============================================================================================
+#6  Differential equations
+===============================================================================================
+
+  We'll be using deal components, so:
+    #  our generator is a pure voltage source;
+    #  our resistor is a pure constant Resistance (R);
+    #  our capacitor is a pure constant Capacitance (C);
+    #  our cables are friction-less paths.
+
+   A  o--------o------o
+      ^        |      ^
+      |        |      |
+      |      [ R ]   U_R (t)
+      |        |      |
+      |        |      v
+   U_A (t)     o------o
+      |        |      ^
+      |     α  |      |
+      |      [ C ]   U_C (t)
+      |     β  |      |
+      v        |      v
+  GND o--------o------o
+
+  We're going to need Kirchhoff's voltage law:  https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_voltage_law
+  It basically states that  U_A (t)  =  U_R (t) + U_C (t)  -- which can be intuitive looking at the schematic.
+  I've already mentioned his current law which basically says that I (the intensity of the current) is the same in the whole circuit.
+  And Ohm's law gives:  I (t)  =  U_R (t) / R.
 
   
 
