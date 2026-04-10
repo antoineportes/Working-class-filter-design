@@ -103,7 +103,7 @@
   Neutrons have a neutral polarity (no contribution to attraction nor repulsion, that's why we're ignoring them).
 
   The amount of contribution to this attraction / repulsion phenomenon is a property of matter called electric charge.
-  Usual symbol: q.
+  Usual symbol: q (or Q).
   A charge with positive polarity is called a positive charge; a charge with negative polarity is called a negative charge.
   (Also:  neutral polarity -> neutral charge.)
 
@@ -128,6 +128,9 @@
       We're in the field of electronics. So in what follows, I'll ignore:
             this:    https://en.wikipedia.org/wiki/Electrolyte
         and this:    https://en.wikipedia.org/wiki/Plasma_(physics)
+
+    (I'm also ignoring Quantum physics when boldly declaring "matter is made of various particles, among which: atoms".
+    If you find it lame and would rather read a 4000-line chapter -- I guess pull a request.)
   */
 
   Let's consider two clusters of ions with different charges somehow isolated from everything, even each other (more on that later).
@@ -153,7 +156,7 @@
   One charge carrier does not store potential energy on its own. It could very well be in a stable atom. And even that would in fact
   be irrelevant.
   Potential energy comes from the proximity of points in matter with different electric charges.
-  Which means that the energy in one charge carrier is dependant upon the other charge carriers that surround it.
+  Which means that the energy in one charge carrier is dependent upon the other charge carriers that surround it.
   So the greater the difference in charge between both points, the greater the energy per charge at each point.
   The energy per charge at one point is called the electric potential (of said point).
   Notice that the electrons' urge to move grows with the electric potential.
@@ -177,24 +180,47 @@
   Both conceptions peacefully co-exist mathematically.
 
   Since we're building a universe from scratch and so far only have two points with a difference in electric potential, our electric field
-  has one dimension: its direction is from the more negative point to the more positive point -- its magnitude is dependant upon said
+  has one dimension: its direction is from the more negative point to the more positive point -- its magnitude is dependent upon said
   difference in electric potential.
+
+  /*
+    EDIT [a]: I got wrong about many things, let me clarify.
+      The electric field's direction is actually opposite to what I wrote: it goes from plus to minus. The reason is that in the theory of
+      electricity, the reference charge is positive. It's counter-intuitive in electronics where only negative charge carriers move but
+      electronics is not all (see links in last disclaimer for instance).
+      So a (relatively) negative electric potential will attract the reference (positive) charge (it's called a test charge) -- this attraction
+      is real even though the positive charge carriers that are attracted might not end up being the ones moving. (Imagine a very light magnet
+      and a very heavy piece of iron: the magnet is attracting the iron, yet it's the one moving -- or the iron is attracting the magnet...
+      both views are valid but we need to agree on a convention. The convention for electricity is: positive charges are attracted and repelled.)
+
+      And yes: I've just written "negative electric potential". I never made it explicit but "electric potential is a scalar" implied "it has no
+      sign" (or if it has one it's +). This is false. First of all a scalar can have a sign: Pheidippides ran about -240 km from Sparta to Athens
+      and Socrates could have -50 Drachmae on his bank account.
+
+      Charge in isolation has no energy. It's the surrounding of other charges that defines its energy.
+      Actually, even this is false: a particle has internal energy upon which its very structure relies.
+      Everything is dependent on everything --> we need a reference, a zero (think sea level).
+      In my following simplified examples this zero will implicitly be "stable isolated atoms", that is literally no (external) energy per charge.
+      Too abstract to be true, isn't it? Real life is different indeed, I'll probably elaborate on this matter at some point.
+      Anyway, once energy per charge has a zero-reference it can take both signs. A plus means positive charge is repelled, and a minus means
+      positive charge is attracted.
+  */
 
   Now suddenly our two points are no longer isolated from each other, the vacuum between them has become some ideal material where nothing
   dissipates kinetic energy, that is no external nor internal perturbation opposes the movement of electrons (SPOILER: no lattice collision,
   no electromagnetic field [apart from the one electric field we're considering], no Joule effect of any kind...).
-    (("SPOILER" doesn't mean "we'll study that later", just "I usually don't name undefined concepts". But my approach here is so unconventional
-    that it tends to disturb specialists. So I have to insist: this is an extreme idealisation, a mental abstraction performed in order to
-    isolate infinitesimal phenomena for didactic purposes -- if electricity is completely new to you, then you're fine, just try to ignore what's
-    between parenthesis in this paragraph.))
+    (("SPOILER" doesn't mean "we'll study that later", just "I usually don't name undefined concepts". But my approach here is as disturbing as it
+    is unconventional. So I have to insist: this is an extreme idealisation, a mental abstraction performed in order to isolate infinitesimal
+    phenomena for didactic purposes -- if electricity is completely new to you, then you're fine, just try to ignore what's between parenthesis in
+    this paragraph.))
 
   So we have point A with some electric charge, and point B with some more positive charge.
   Different charges means different electric potentials -- B being more positively polarised means electrons urge to move from A to B.
-  The electric field is composed of two immobile vectors with identical directions: from A to B. Their sum is the strength / magnitude of the
-  electric field.
+  The electric field is composed of two immobile vectors with identical directions: from B to A (remember the conventional positive testcharge).
+  Their sum is the strength / magnitude of the electric field.
   Then the piece of imaginary matter connects A and B.
 
-  The electric field moves from A to B. It has a speed: experiments have helped quantifying it "up to almost the speed of light in a vacuum (c)".
+  The electric field moves from B to A. It has a speed: experiments have helped quantifying it "up to almost the speed of light in a vacuum (c)".
   (Assuming it's exactly c in our imaginary matter is so tempting that I'm almost doing it right now.)
   //  https://en.wikipedia.org/wiki/Speed_of_light
 
@@ -202,7 +228,7 @@
   Electrons start moving from A to B. They have a speed: it's called drift velocity. Which is proportional to the strength of the electric field
   and *different* from the latter's speed. It's a lot slower: the order of magnitude of the drift velocity is millimetres per second.
 
-  Once the electric field has reached B, all the potential energy has been transformed in kinetic energy.
+  Once the electric field has reached A, all the potential energy has been transformed in kinetic energy.
   There is no longer any difference in electric potential, equilibrium has been reached.
   Yet the electrons are still moving.
 
@@ -216,18 +242,18 @@
       Imagine the ground is sticky, or the wind is blowing in the direction opposed to the ball's movement.
       This is surely going to have an impact on how far the ball goes.
       Then does the ball roll with a constant speed and suddenly stops? No. Its speed progressively decays down to zero.
-      So how far is not really the question. Initial speed and deceleration are the meaningful parameters here.
-      Initial speed depends on the initial impulse (you pushing the ball), deceleration depends on the frictions encountered by the ball during
+      So how far is not really the question. Initial speed and acceleration are the meaningful parameters here.
+      Initial speed depends on the initial impulse (you pushing the ball), acceleration depends on the frictions encountered by the ball during
       its movement (wind, sticky ground, hitting a wall...) -- the stronger the friction, the steeper the speed decay (hitting a wall stops the
       movement pretty much instantaneously).
 
       Now what if there's no friction at all?
       Well it's called a vacuum (space is one for instance).
-      But I don't know, let's ask this guy:  https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#First_law
+      But I don't know, let's ask this guy:  https://en.wikipedia.org/wiki/Newton's_laws_of_motion#First_law
 
       Ok so now a cosmonaut stole your ball and took it with them across the final frontier (where no ball has gone before): space.
-      The cosmonaut kicks the ball. No friction so no deceleration.
-      The ball will move forever with constant speed and constant direction both dependant on the initial impulse (the cosmonaut's foot).
+      The cosmonaut kicks the ball. No friction so no (negative nor positive) acceleration.
+      The ball will move forever with constant speed and constant direction both dependent on the initial impulse (the cosmonaut's foot).
 
       In our piece of imaginary matter, there's no friction either. It's basically a one-dimension vacuum.
       Once the electric field initiates the electrons' movement, they'll never stop moving (perpetuum mobile).
@@ -280,7 +306,7 @@
   //  Conductance and its reciprocal
 
   As promised, let's connect points A and B with a piece of extant matter.
-  Let's temporarily assume that nothing prevents the electric field from traveling from A to B.    [a]
+  Let's temporarily assume that nothing prevents the electric field from traveling from A to B.    [b]
 
   /*
     Important clarification:
@@ -390,7 +416,7 @@
   /*
     More links (since you've asked):
       https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb      https://en.wikipedia.org/wiki/Luigi_Galvani
-      https://en.wikipedia.org/wiki/Alessandro_Volta                 https://en.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re
+      https://en.wikipedia.org/wiki/Alessandro_Volta                 https://en.wikipedia.org/wiki/André-Marie_Ampère
       https://en.wikipedia.org/wiki/Georg_Ohm                        https://en.wikipedia.org/wiki/Michael_Faraday
       https://en.wikipedia.org/wiki/Gustav_Kirchhoff
 
@@ -422,14 +448,18 @@
   //  Social norms are here to help
 
   By convention, for historical reasons, current flows from positive to negative.
-  Which is the opposite of what the electric field and electric charge actually do.
+  Which is the opposite of what electrons actually do.
   I was tempted to use my own less confusing convention, but unfortunately this would only have been less confusing inside
   this book. If I give you tools that no one uses, you'll speak a language that no one understands (and vice versa). Not very helpful.
   What I did instead was allow current to make sense as long as I could.
   So remember (however impractical it is):
 
-    Electric charge and Electric field  ->  minus to plus
-                               Current  ->  plus to minus
+                     Electrons  ->  minus to plus
+    Current and electric field  ->  plus to minus
+
+  EDIT: This is actually not as arbitrary as it would first seem: this has been developed in EDIT [a]. In short electrons moving is one
+    possibility. Probably the most common one but what do I know? Protons are also urged to move, so are cations -- we're only focusing
+    on cases where it's easier for electrons.
 
   /*
     Digression:
@@ -475,7 +505,7 @@
       (Assuming you're interested in the truth.)
   */
 
-  Remember [a]? Of course you don't.
+  Remember [b]? Of course you don't.
   "Let's temporarily assume that nothing prevents the electric field from traveling from A to B."
   We're dropping this assumption right now.
 
@@ -557,6 +587,7 @@
   This one will take advantage of its breakdown voltage.
   So it's a fragile insulator, and if we put it between points A and B it will only allow any current to flow once their difference in
   potential is high enough -- the more fragile the sooner.
+  EDIT: There are false statement in what precedes, we'll fix them without even noticing. Think reductio ad absurdum.
 
   Let's imagine the voltage between A and B is inferior to our new toy's breakdown voltage (we're below the threshold).
   The system is composed of two points with different electric potentials and an insulator. Nothing moves, no fun.
@@ -572,7 +603,7 @@
   The simplest volume there is (mathematically speaking) is the parallelepiped.
   A parallelepiped is a stack of infinite rectangles (try to think "Calculus in god mode").
   Once the current crosses the longing-for-a-decent-name-new-toy, the electric field will fill each rectangle one by one in the
-  direction of B.        //  https://en.wikipedia.org/wiki/Zeno%27s_paradoxes#Paradoxes_of_motion
+  direction of B.        //  https://en.wikipedia.org/wiki/Zeno's_paradoxes#Paradoxes_of_motion
   
   If we're aiming for predictability, an identical field over the whole individual rectangle seems necessary in order to prevent randomness.
   So two faces of the fragile insulator must actually be conductors.
@@ -612,8 +643,8 @@
     This is the easy one: an electrical breakdown will allow a current to flow through the insulator.
     The previously infinite Resistance will be broken to some finite value (R) and the system drawn by the schematic would be equivalent
     to a resistor between A and B. If we know R, Ohm's law gives us  I  =  (U_B - U_A) / R.
-    The electric field travels from A to B, crossing the insulator. Equilibrium is achieved (U_B = U_A), the electrical breakdown ends.
-    The total voltage is zero and the insulator is an insulator again.
+    The electric field travels from B to A, crossing the insulator. Equilibrium is achieved (U_B = U_A), the electrical breakdown ends.
+    The total voltage is zero and the insulator is an insulator again (probably damaged though).
 
   Second case:    U_B - U_A  <  U_bd
     In nodal analysis, an ideal cable is considered equivalent to a node (segment ≈ point), because the electric field is so fast that
@@ -632,8 +663,8 @@
     U_α is increasing.
 
     Now let's break on through to the other side.
-    Remember: the energy in one charge carrier is dependant upon the other charge carriers that surround it.
-    So α charging will affect β. There will be an electric field across the insulator whose strength is dependant upon α's and β's surface
+    Remember: the energy in one charge carrier is dependent upon the other charge carriers that surround it.
+    So α charging will affect β. There will be an electric field across the insulator whose strength is dependent upon α's and β's surface
     and the distance between them: the more charge carriers are facing each other and the closer they are, the more energy per charge.
     Or, thinking backwards: the charge required to reach a certain voltage across the insulator grows with the bases' surface and proximity.
 
@@ -642,24 +673,64 @@
     The path between β and B satisfies both conditions.
     Then whatever happens at α will be reflected at B.
     Then α charging will result in β discharging in equal proportion: electrons will drift towards B.
+    (By "charging" I mean "negatively charging". I could mean "positively charging", then the words "charging" and "discharging" would have
+    to switch places. They're interchangeable concepts based on your test charge -- which I took negative, which is not what you're supposed
+    to do... Sorry, I'm bad at following rules.)
+
+  /*
+    Important clarification -- I had a really hard time solving this:
+    Aporia:
+      The description above makes it look like there is a linear causal chain from A to B where α charges ergo β discharges. Period.
+      Working on some later part of this chapter, I realised that this model isn't sufficient.
+      In short: what happens between β and B influences what happens between A and α.
+      It looked like causality went circular -- that is: breaking its own laws.
+      A consequence affecting its cause... Zero delay feedback loops -- in a filter? why not -- in my brain? no thanks.
+      It seemed unfair: I do my best to not mention anything that would distract us from the point and Quantum physics strikes unannouced?
+
+    Solution:
+      [spoiler] There is indeed a circularity, but it's not instantaneous; it just happens really fast.[/spolier]
+      The repartition of the charge inside matter is responsible for potential energy. Potential energy creates electric fields.
+      Electric fields make the charge move. REPEAT.
+
+      Also "electric fields" (plural) got me confused. An electric field is a vector. Addition can be performed on vectors.
+      So it would probably be more intuitive to consider the total electric field of the system.
+      Which both reacts to and generates movement, and has a magnitude and a direction but could have its origin anywhere between A and B.
+      Everything starts with particles attracting and repelling each other. Their repartition shapes electricity.
+      So when they move, electricity changes shape.
+
+      The tendency towards equilibrium is constant.
+      So α starts charging, then β starts discharging, this allows α to keep charging, which makes β keep discharging, etc.    [c]
+
+      The whole confusion came from a universal axiom: α and β always have the same absolute charge and opposite polarities.
+      This is false.
+      There is a back and forth causal alternance during the charge. The fact that it's close to the fastest speed we know doesn't make
+      it literally instantaneous.
+
+    If you're neurotypical, you must think I'm stupid right now.
+    The French call this "enculer des mouches", which literally translates to "fucking flies in the arse" -- classy, right?
+    It means nit picking for its own sake.
+    This "obvious" approximation took a full day of my life that I'm never recovering. Not a game here.
+  */
 
     Full picture:
       # current between A and α
       # no current between α and β
       # current between β and B
-    Until the electric potential of A has been transferred to α and the electric potential of B has been transferred to β.
-    Which means that once the charge has finished drifting, the initial voltage between A and B is stored across the insulator.
+    Until enough electric charge from A has drifted to α  so that U_A = U_α;
+    and enough electric charge from β has drifted to B so that U_B = U_β.
+    Which means that once the charge has finished drifting, U_B - U_A  =  U_β - U_α.
+    Or: the voltage between A and B has decreased, the one between α and β has increased; and now they're equal to one another.
 
   The bases α and β are called plates. The insulator is called dielectric. All three together form a condenser (or, more commonly,
   a capacitor).    //  "Condenser" is obsolete in English (except when talking microphones). "Condensateur" is still the French standard.
 
-  The dielectric has a breakdown voltage U_bd dependant on its composition and its geometry.
-  The plates have a maximum charge Q_max dependant on their geometry -- but also on the dielectric's breakdown voltage.
+  The dielectric has a breakdown voltage U_bd dependent on its composition and its geometry.
+  The plates have a maximum charge Q_max dependent on their geometry -- but also on the dielectric's breakdown voltage.
     Indeed, imagine there's room for x Coulombs (charge) on each plate, depending on the overall geometry this means χ Volts (voltage).
     If χ > U_bd it will never be reached: electrical breakdown will always happen first.
   Q_max determines how many charge carriers face each other at once. So a higher Q_max means more potential energy per charge which means
   more maximum voltage across the dielectric.  ->  Q_max  =  k * χ
-  But χ might very well be unreachable, so U_bd is a more useful constant. Lets re-define:
+  But χ might very well be unreachable, so U_bd is a more useful constant. Let's redefine:
     k  =  Q_max / U_bd
 
   The constant k seems quite useful. What would its dimension be?  ->  Charge per voltage.
@@ -670,6 +741,7 @@
 
     where q is the absolute value of the charge of either of the plates and U is the voltage across the dielectric.
     (An ideal capacitor has a constant capacitance.)
+    These parenthesis are doing harm, this is important:  C is a constant.
 
   https://en.wikipedia.org/wiki/Capacitor
   https://en.wikipedia.org/wiki/Capacitance
@@ -733,13 +805,13 @@
   */
 
   Let our points A and B from before become the connectors of a DC generator.
-  If we connect an almost ideal cable (R ≈ 0) between A and B, an infinity of electric fields will constantly move from A to B, transferring
+  If we connect an almost ideal cable (R ≈ 0) between A and B, an infinity of electric fields will constantly move from B to A, transferring
   an everlasting constant potential energy to the charge carriers across the cable, turning it into kinetic energy.
-  How fast will the charge carrier drift? Well I = U/R --> a constant almost divided by zero. So I is constant and ≈ ∞.
-  Easy home experiment: put scissors in the socket.
+  How fast will the charge flow? Well I = U/R --> a constant almost divided by zero. So I is constant and ≈ ∞.
+  Easy home experiment: put scissors in the socket (pull a request if you actually did and somehow survived).
 
   This is called a short-circuit.
-  We've mentionned the Joule effect earlier. Look at these formulae: https://en.wikipedia.org/wiki/Joule_heating#Direct_current
+  We've mentioned the Joule effect earlier. Look at these formulae: https://en.wikipedia.org/wiki/Joule_heating#Direct_current
   This should help admit the need for fuses (usually thin cables intended to melt when I is over a prescribed threshold in order to disconnect
   A and B).
 
@@ -751,7 +823,7 @@
 
   But we don't need a toaster, do we? Let's unplug the resistor and replace it with a capacitor.
   Let U_gen be the voltage between A and B and U_bd the breakdown voltage of the capacitor.
-  If U_gen reaches or exceeds Ubd, the dielectric will become a resistor. It will warm-up and probably burn -- in fact capacitors sometimes
+  If U_gen reaches or exceeds U_bd, the dielectric will become a resistor. It will warm-up and probably burn -- in fact capacitors sometimes
   even explode.
   Yay! We've built a bomb!
 
@@ -761,4 +833,122 @@
        Writer:  Antoine Portes
      Producer:  France Travail
     Copyright:  No, thanks.
+   Meta-jokes:  overrated...
 ===============================================================================================
+
+  Case 2:  0 < U_gen < U_bd.
+  Let's assume that our capacitor is initially discharged (U_α = U_β  ;  U_C  =  U_α - U_β  =  0).
+  The difference in potential between A and B will make an electric field try to travel from B to A.
+  Except it will get stuck at α and β. So two electric fields:  α -> A  and  B -> β.
+  At some point the charge will have drifted enough so that U_α = U_A and U_β = U_B.
+  There will still be potential energy (urge for negative charge carriers to move from α to β) but no connection (opportunity to move)
+  since U_C = U_gen < U_bd (the dielectric remains an insulator).
+  From the capacitor's perspective, this is identical to what happens with static current: the current flows during the charge and then stops
+  once U_C = U_gen.
+  The sole difference is that U_gen has not decreased (it couldn't: DC requires it constant).
+
+  What we've built here has a practical use: it's called a DC blocker (or DC filter) -- I suppose the name is self-explanatory enough.
+  When would we need such a tool? At some point this will no longer be off-topic.
+
+  Gimme an R! Gimme a C! What's that spell? -- I guess: this chapter's title.
+  Ok, so what if RC?
+  We know that R reduces intensity and that C charges up until its voltage equals the generator's voltage.
+  C charging means its charge varies over time. The variation of charge over time has been defined as "Intensity of the current".
+  Which is what R reduces. So R slows down C's charge.
+  So RC will have U_C increase until U_C = U_gen just like C alone; and R is just making it take longer. The higher R the slower C's charge.
+  Voltage is a consequence of the repartition of the electric charge inside matter. So slowing down C's charge is reducing the variation
+  of U_C over time.
+
+  Ok, great. And what about CR?
+  As in:
+
+  A o-------
+        α  |
+         [ C ]
+        β  |
+           |
+         [ R ]
+           |
+  B o-------
+
+  Remember how, if we approximate the speed of the electric field as instantaneous, U_α = U_β...
+  Oh, by the way, Intensity is the same everywhere in a closed loop.
+  It's Kirchhoff's current law and can be proven using Maxwell-Faraday's equation.
+  /*
+    https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_current_law
+    https://en.wikipedia.org/wiki/Faraday's_law_of_induction#Maxwell-Faraday_equation
+  */
+  But it's also quite intuitive once you recall statement [c] about the pseudo-circular causality (those flies didn't suffer in vain).
+  Or the "balls in a pipe" parable (electrons all move at once).
+
+  Paradigm:
+    Two people are playing ping-pong. Whoever sends the ball is cause, whoever receives it is consequence. Roles alternate constantly.
+    The charge of a capacitor is causal ping-pong at the speed of light.
+
+  So really the difference between RC and CR is as negligible as  τ0  =  L0 / c
+  where L0 is the Planck length (10^-20 times a proton's diameter), c is the speed of light, and therefore τ0 is the shortest time we know.
+  //  https://en.wikipedia.org/wiki/Planck_units#Planck_length
+
+  In fact, due to my incurable stubborn backwards-operating brain, I keep using negative test charges and building A -> B signal paths.
+  So RC in my book is CR pretty much everywhere else (and vice versa).
+
+  //  Analog signals
+
+  As far as I know, audio engineering is split in two branches: analog signal processing and DSP (digital signal processing).
+  Which is best is a sterile contest: they work very well as a team (sorry Youtube).
+  If you've ever listened to Rage against the machine, you've probably enjoyed the sound of a Whammy pedal through a tube amplifier.
+
+  So far we're concerned with analog signals.
+  We've seen that whenever something happens in a circuit, U and I vary over time. So tension and intensity of the current both seem to be
+  valid candidates in order to describe or interfere with what happens.
+  So we could play with current and let tension be a quiet consequence.
+  But we've seen already that the way we generate and manipulate current is by generating and modifying tension.
+  So from a practical perspective, current is the derivative. Plus it's hard to measure without negligible interferences.
+
+  Then an analog signal is:
+
+    the variation of voltage over time -- and its instantaneous value is just a voltage.
+
+  Voltage also has the advantage of existing without current (as potential energy) which is not reciprocal (intensity's a rate, how do you
+  crystallise a car's speed?).
+  (Also the variation of I over time would be the variation over time of the variation of the charge over time...
+  Don't forget that maths will be back at some point. Physicists have fun with second derivatives, engineers not so much.)
+  So voltage can be stored and <SPOILER> converted (to magnetism for instance) </SPOILER>.
+
+  What happens in analog circuits is that voltage gets copy/pasted and fed just the right amount of current when needed.
+  Almost as if we were just measuring it.
+
+  Now how do we do this? That's too far off-topic (for this chapter at least). But the concepts of Resistance and insulator might provide a hint.
+  If your curiosity is as insatiable as it should be, please accept these keywords:
+    #  buffer amplifier
+    #  input impedance
+    #  power supply
+    #  output transformer
+    #  voltage follower
+
+  //  A.C.
+
+  Now that we know what an analog signal is, it makes sense to feed our RC circuit with it.
+  And actually we've already been doing just that: our DC generator produced a DC offset and our RC circuit filtered it out.
+  That's signal processing already.
+  Allow me to desecrate my methodology and use undefined concepts for a couple lines.
+  A DC offset is useful before a waveshaper if you want even harmonics -- but it's also a membrane killer if you monitor it.
+  So generating it and filtering it out are both real life practical uses.
+  "I won't apologize for acting outta line."  --  Keith Morris (Nervous breakdown)
+
+  Depending on how you define DC (constant voltage source vs. constant direction) AC (alternating current) can be one of two things:
+    (1)  a current driven by a varying voltage source (not necessarily to the point of switching polarity);
+    (2)  a current driven by a voltage source of alternating polarity.
+
+  Here, in order to be consistent with ourselves, we'll go with (1) (even though the verb "to alternate" points more easily at (2)...).
+  (Notice how the looser meaning of DC leads to the stricter meaning of AC and vice-versa.)
+
+
+
+  
+
+
+
+
+
+
