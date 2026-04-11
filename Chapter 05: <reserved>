@@ -1,0 +1,23 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                                     Chapter V:  ?
+###############################################################################################
+/*          "No 9000 computer has ever made a mistake or distorted information."             */
+/*                                           --  HAL 9000 (2001: A Space Odyssey)            */
+===============================================================================================
+#1  Temporary section title
+===============================================================================================
+
+  This should be a rather short and pretty tough chapter (for me I mean, don't worry!).
+  Before discretising any filter, one should know how discretisation work.
+
+  I already know this chapter's name: "Sampling".
+  But I'm not writing it down before I start working on it.
+  Here's my secret to keep all my promises: I don't make any.
+
+  But I'm hoping to manage to explain (at least) the reason for the Nyquist frequency.
