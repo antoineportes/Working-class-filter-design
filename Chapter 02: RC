@@ -743,6 +743,10 @@
     (An ideal capacitor has a constant capacitance.)
     These parenthesis are doing harm, this is important:  C is a constant.
 
+    And it relies on the dielectric's dielectric strength, which relies on composition and geometry.
+    Composition can be paper, ceramic, air, vacuum... anything with a breakdown voltage (preferably not too low).
+    Geometry: C increases with the area of the plates and decreases with the thickness of the dielectric.
+
   https://en.wikipedia.org/wiki/Capacitor
   https://en.wikipedia.org/wiki/Capacitance
 
@@ -918,6 +922,8 @@
   What happens in analog circuits is that voltage gets copy/pasted and fed just the right amount of current when needed.
   Almost as if we were just measuring it.
 
+  Magnetic tape, vinyl, and digital data are stored voltage. Basically: live music would be all music if we were to measure current.
+
   Now how do we do this? That's too far off-topic (for this chapter at least). But the concepts of Resistance and insulator might provide a hint.
   If your curiosity is as insatiable as it should be, please accept these keywords:
     #  buffer amplifier
@@ -943,6 +949,9 @@
   Here, in order to be consistent with ourselves, we'll go with (1) (even though the verb "to alternate" points more easily at (2)...).
   (Notice how the looser meaning of DC leads to the stricter meaning of AC and vice-versa.)
 
+  The current from an AC generator can have pseudo-random variations (e.g. a guitar pickup) or it can be cyclic / periodic
+  (e.g. the electrical grid -- that's where the 50 Hz hum comes from).
+
   Ok, so we want the voltage feeding RC to vary over time. This means that U_gen is no longer a constant.
   We could vary U_A or U_B or both. Both would be messy, we would need a reference, this would call for a third point, a zero.
   C is already the capacitor (both its name and its capacitance, I'll explain why in the next section), so D?
@@ -959,7 +968,7 @@
   In terms of U_C that's:  U_C  =  q_C / C. So it's inversely proportional to the capacitor's capacitance.
   Which means that a higher C will decrease U_C, or in time domain, it will slow down U_C (t).
 
-  But U_A (t) keeps changing, so U_C (t) will always be trying to equal it while reamaining late. And the delay grows with R and C.
+  But U_A (t) keeps changing, so U_C (t) will always be trying to equal it while remaining late. And the delay grows with R and C.
 
   That's how far I could go without maths, sorry I just can't hold it any longer:
 
@@ -969,7 +978,7 @@
 #6  Differential equations
 ===============================================================================================
 
-  We'll be using deal components, so:
+  We'll be using ideal components, so:
     #  our generator is a pure voltage source;
     #  our resistor is a pure constant Resistance (R);
     #  our capacitor is a pure constant Capacitance (C);
@@ -989,13 +998,56 @@
       v        |      v
   GND o--------o------o
 
+  U_A (t) is our input analog signal so we'll assume it's known.
+  R and C are the components' specifications so we'll also assume they're known.
+  Then we'll be looking for U_R (t) and U_C (t).
+
   We're going to need Kirchhoff's voltage law:  https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_voltage_law
   It basically states that  U_A (t)  =  U_R (t) + U_C (t)  -- which can be intuitive looking at the schematic.
   I've already mentioned his current law which basically says that I (the intensity of the current) is the same in the whole circuit.
   And Ohm's law gives:  I (t)  =  U_R (t) / R.
+  We also remember:  U_C (t)  =  q_C (t) / C.
 
-  
+  Finally, we've first defined the intensity of the current as the rate of the charge's flow -- that is the variation of the charge over time.
+  In Leibnizian calculus syntax, it's spelled:  I  =  dq / dt.
+  (Where dt is the theoretical equivalent to our practical τ0 from before -- shortest time we know.) 
+  Newton just puts a dot over the symbol "q" (2 dots for "second derivative", n dots for "nth derivative").
 
+  My sympathy tends to lean towards Newton and against Leibniz. But Leibniz's notation is more monospace-friendly.
+  So I'll use it despite my bias -- or rather to spite it.
+  /*
+    That's Annexe material so I'll try to be quick.
+    Instead of "never meet your idols" I say "never have idols" -- or anti-idols.
+    Dichotomies are convenient for lazy brains. Allegiance is self-slavery.
+
+    Acknowledging Leibniz's genius is hard when you met him through his metaphysics.
+    Newton's dogmatism is hardly conceivable when you met him through his physics.
+
+    My bias is ideological and relying on ignorance.
+    I'll rather cure myself than contaminate you or succumb to polarisation and pollute our conversation.
+
+    So let it be said that the god-fearing clergy-friendly sycophantic Leibniz is also a genius;
+    and that Newton the genius Faust-like alchemist is also a spineless monotheist.
+    Proofs that they're subject to flaws only make their achievements more remarkable.
+  */
+
+  The intensity is the same across the whole circuit.
+  So  I (t)  =  dq_C (t) / dt  (across the capacitor) and  I (t)  =  U_R (t) / R  (across the resistor) are the same I (t).
+  We can express q_C (t) in terms of U_C (t):  q_C (t)  =  C * U_C (t).
+  C being a constant, this gives:  dq_C (t) / dt  =  C * dU_C (t) / dt  =  I (t).
+  By re-ordering the expression of I (t) across the resistor in terms of U_R (t), we get:  U_R (t)  =  R * I (t).
+  Now we can replace I (t) in this expression with its definition in terms of U_C (t) and C:  U_R (t)  =  R * C * dU_C (t) / dt.
+  Finally, replacing U_R (t) with this expression in the definition of U_A (t), we get:
+
+                    dU_C (t)
+    U_A (t)  =  RC ----------  +  U_C (t)
+                       dt
+
+  Then:
+
+                                dU_C (t)                                          d_UC (t)
+    U_C (t)  =  U_A (t)  -  RC ----------    which means that:    U_R (t)  =  RC ----------
+                                   dt                                                dt
 
 
 
