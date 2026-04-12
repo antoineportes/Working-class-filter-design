@@ -1045,9 +1045,70 @@
 
   Then:
 
-                                dU_C (t)                                          d_UC (t)
+                                dU_C (t)                                          dU_C (t)
     U_C (t)  =  U_A (t)  -  RC ----------    which means that:    U_R (t)  =  RC ----------
                                    dt                                                dt
+
+  so:  U_C (t)  -  U_A (t)  =  -RC * dU_C (t) / dt    <=>    U_A (t)  -  U_C (t)  =  RC * dU_C (t) / dt
+
+          dU_C (t)       U_A (t)  -  U_C (t)
+  <=>    ----------  =  ---------------------
+             dt                  R C
+
+  Tricky! We've got the first derivative of a function using said function in its definition...    //  https://en.wikipedia.org/wiki/Differential_equation
+  Knowing that exp (x) is its own derivative, we could intuitively think that a solution is buildable when U_A (t) is constant.
+  But it's one special case so I'll leave it for this chapter's Appendix.
+
+  Belts off, it's Calculus time!  --  Read this slowly (Molto adagio e leggiero) and several times if necessary.
+
+  What does d/dt actually mean? Well t is time here, so the question should really be: what does "d" mean? I don't know, you tell me.
+  Infinitesimal means "as small as you want" -- so "d" is literally what you want.
+  Think of it as the degree of precision you need.
+
+  Let's say D is a distance (in metres), and let's say I want to build 1 metre by summing small equal parts of it.
+  I start with D = 0 and end at D = δ. The slices are written dD and their sum is equal to δ.
+  The dimension of dD is metres and it's called a differential. Its minimal value is zero and its maximal one is δ.
+
+  Then:  δ  =  dD * δ / dD    and:    dD  =  δ * dD / δ.
+  The tautology can make it confusing, but really it only shows how straightforward it should be.
+
+  E.g.:  δ = 4 metres  and  dD = 1 millimetre.
+  Then:  δ / dD  =  4 / 0.001  =  4000       and    δ   =  dD * δ / dD  =  0.001 * 4000  =  4 metres.
+  Or:    dD / δ  =  0.001 / 4  =  0.00025    and    dD  =  δ * dD / δ   =  4 * 0.00025   =  0.001 metre.
+
+  The smaller dD, the more instances of it you need to build δ. Number compensates for size and vice versa, the end result is always δ.
+  Even the limit case dD = 0 means δ is an infinite sum. And that's precisely what "infinitesimal" approximates.
+  Actually this limit cannot be reached because as proven by Aristotle (Φυσικής ακροάσεως) an instant is not time; for time has a duration
+  by definition and an instant (d/dt = 0) has none.        //  https://archive.org/details/physica0000rpha/mode/2up
+
+  Now if a snail is moving along δ and we want to know its speed, its rate of change -- or variation of distance (D) over time (t).
+  We choose a value for dD and measure how much time the snail takes to travel it. This time is dt.
+  Speed is distance per time so in this case dD / dt.
+  Or we could choose a fixed measurement time and let δ be the unknown. Then dt would have a fixed value and measuring dD would
+  still give us the snail's speed.
+
+  Now let's say we know dD / dt (its speed) and we've been measuring time (t) since it started moving.
+  We can know δ (where it is when t = now) through a simple multiplication -- which is just a repeated sum.
+
+  E.g.:    dD / dt = 0.013 metres per second    and    t = 3 seconds.
+  Then:    δ  =  0.013 * 3  =  0.039 metres  =  39 millimetres.
+
+  If the snail's speed is not constant -- that is: the acceleration (variation of speed over time) ddD / dt² ≠ 0 -- we can no longer
+  rely on multiplication: indeed dt remains constant but dD is varying, then so is dD / dt.
+  That's where an infinitesimal dt gives us precision and where an integral shortens the sum's notation (taking the role multiplication
+  previously played).
+
+  In our RC differential equation, instead of distance per time, we're interested in voltage per time.
+  What precedes shows that for a differential to make sense, we need a start-point and an end-point.
+  Since voltage is the unknown, we need a range for time.
+  The obvious end-point is t = now, so let's go with that.
+  The origin could be t = -∞ (as in: since forever). But we know that nothing moved in our circuit before we connected RC to A and GND.
+  So it makes sense to call this moment t = 0 (I mean what is time without movement? -- I'm done quoting Aristotle for this chapter).
+
+
+  [IN PROGRESS]
+  
+
 
 
 
