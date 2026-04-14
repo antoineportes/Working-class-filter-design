@@ -1107,6 +1107,84 @@
 
 
   [IN PROGRESS]
+
+
+
+===============================================================================================
+#7  DC + RC
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Differentiation_rules
+  https://en.wikipedia.org/wiki/Chain_rule
+  https://en.wikipedia.org/wiki/Linearity_of_differentiation
+
+  Let's simplify the nomenclature of our equation by making the substitutions:
+    U_C (t)  -->  ƒ (x)
+    U_C (0)  -->  ƒ0
+    1 / RC   -->  k
+    U_A (t)  -->  a        //  Later: U_A (a constant over time doesn't need to be expressed as a function of time). 
+
+  Then:    dƒ / dx  =  k * (a - ƒ (x))
+
+  Let  g (x)  =  a  -  ƒ (x)
+  Then:  dg / dx  =  d(a - ƒ) / dx  =  (da - dƒ) / dx
+  a is a constant so da = 0.
+  Then:  dg / dx  =  -dƒ / dx    <=>    dƒ / dx  =  -dg / dx
+
+  So:  -dg / dx  =  k * g (x)    <=>    dg / dx  =  -k * g (x)
+
+  We know that exp (x) is its own derivative, then according to the chain rule:
+
+    d exp (-kx) / dx  =  -k * exp (-kx)
+
+  which is equivalent to:    dg / dx  =  -k * g (x)    if we let    g (x)  =  exp (-kx)
+
+  So:   a  -  ƒ (x)  =  exp (-kx)    <=>    ƒ (x)  =  a  -  exp (-kx)
+
+  Reversing the substitutions:    U_C (t)  =  U_A  -  exp (-t / RC)
+
+  This gives:  U_C (0)  =  U_A - 1    while it should be ƒ0 which should be independent from U_A.
+
+  Back to  "dg / dx  =  -k * g (x)    if we let    g (x)  =  exp (-kx)"...
+  We might have been a bit quick to conclude from "this is a solution" to "this is the only solution".
+
+  Indeed, according to the constant factor rule:
+
+    d C exp (-kx) / dx  =  -kC exp (-kx)
+
+  which also satisfies:    dg / dx  =  -k * g (x)
+
+  Then we need to give a known value to the constant C. Instead of hoping for it to provide ƒ0, let's make it a condition.
+
+  Then:    C exp (-k * 0)  =  a  -  ƒ0    <=>    C  =  a - ƒ0
+  Then:    g (x)  =  (a - ƒ0) exp (-kx)
+  Then:
+
+    a  -  ƒ (x)  =  (a - ƒ0) exp (-kx)    <=>    ƒ (x)  =  a  -  (a - ƒ0) exp (-kx)
+
+  Reversing the substitutions (again):
+
+    U_C (t)  =  U_A  -  (U_A  -  U_C (0)) exp (-t / RC)
+
+  and, according to the constant term rule, the constant factor rule, the chain rule and the fact that exp (x) is its own derivative:
+
+    d U_C (t) / dt  =  0  -  (U_A  -  U_C (0)) exp (-t / RC) / RC  =  (U_C (0) - U_A) exp (-t / RC) / RC
+  
+  then:    U_C (0)  =  U_C (0)    -->  check.
+  and:     U_C (∞)  =  U_A        -->  check.
+
+  Also, the limit of  d U_C / dt  when t tends to +∞ is:  (U_A  -  U_C (0)) exp (-∞ / RC)  =  0.
+
+  So we start at U_C (0) and end at U_A, at which point  q_C  =  C * U_A  --  it's constant so I (t)  =  dq_C / dt  =  0.
+
+  In plain English: a DC generator connected to an RC circuit will draw current until the voltage across the capacitor equals the voltage
+  across the generator. This never strictly happens: there's an asymptote in U_A ad infinitum and the curve is exponential.
+
+  Or maybe it's logarithmic... Hard -- pointless? -- to say with all the negative signs.
+  Better look at it (and play with the parameters):
+
+    https://www.desmos.com/calculator/k27fyrlh49
+
   
 
 
