@@ -911,7 +911,7 @@
 
   Then an analog signal is:
 
-    the variation of voltage over time -- and its instantaneous value is just a voltage.
+    a voltage varying over time -- and its instantaneous value is just a voltage.
 
   Voltage also has the advantage of existing without current (as potential energy) which is not reciprocal (intensity's a rate, how do you
   crystallise a car's speed?).
@@ -934,7 +934,7 @@
 
   //  A.C.
 
-  Now that we know what an analog signal is, it makes sense to feed our RC circuit with it.
+  Now that we know what an analog signal is, it makes sense to feed our RC circuit with one.
   And actually we've already been doing just that: our DC generator produced a DC offset and our RC circuit filtered it out.
   That's signal processing already.
   Allow me to desecrate my methodology and use undefined concepts for a couple lines.
@@ -978,6 +978,11 @@
 #6  Differential equations
 ===============================================================================================
 
+  https://en.wikipedia.org/wiki/Differential_equation            https://en.wikipedia.org/wiki/Calculus
+  https://en.wikipedia.org/wiki/Derivative                       https://en.wikipedia.org/wiki/Integral
+  https://en.wikipedia.org/wiki/Isaac_Newton                     https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz
+  https://en.wikipedia.org/wiki/Notation_for_differentiation     https://en.wikipedia.org/wiki/Leibniz's_notation
+
   We'll be using ideal components, so:
     #  our generator is a pure voltage source;
     #  our resistor is a pure constant Resistance (R);
@@ -1002,7 +1007,7 @@
   R and C are the components' specifications so we'll also assume they're known.
   Then we'll be looking for U_R (t) and U_C (t).
 
-  We're going to need Kirchhoff's voltage law:  https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_voltage_law
+  We're going to need Kirchhoff's voltage law:    https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_voltage_law
   It basically states that  U_A (t)  =  U_R (t) + U_C (t)  -- which can be intuitive looking at the schematic.
   I've already mentioned his current law which basically says that I (the intensity of the current) is the same in the whole circuit.
   And Ohm's law gives:  I (t)  =  U_R (t) / R.
@@ -1014,7 +1019,7 @@
   Newton just puts a dot over the symbol "q" (2 dots for "second derivative", n dots for "nth derivative").
 
   My sympathy tends to lean towards Newton and against Leibniz. But Leibniz's notation is more monospace-friendly.
-  So I'll use it despite my bias -- or rather to spite it.
+  So I'll use it in spite of my bias -- or rather to spite it.
   /*
     That's Annexe material so I'll try to be quick.
     Instead of "never meet your idols" I say "never have idols" -- or anti-idols.
@@ -1026,7 +1031,7 @@
     My bias is ideological and relying on ignorance.
     I'll rather cure myself than contaminate you or succumb to polarisation and pollute our conversation.
 
-    So let it be said that the god-fearing clergy-friendly sycophantic Leibniz is also a genius;
+    So let it be said that the god-fearing clergy-friendly sycophantic Leibniz is also a genius mathematician;
     and that Newton the genius Faust-like alchemist is also a spineless monotheist.
     Proofs that they're subject to flaws only make their achievements more remarkable.
   */
@@ -1055,7 +1060,7 @@
   <=>    ----------  =  ---------------------
              dt                  R C
 
-  Tricky! We've got the first derivative of a function using said function in its definition...    //  https://en.wikipedia.org/wiki/Differential_equation
+  Tricky! We've got the first derivative of a function using said function in its definition...
   Knowing that exp (x) is its own derivative, we could intuitively think that a solution is buildable when U_A (t) is constant.
   But it's one special case so I'll leave it for this chapter's Appendix.
 
@@ -1066,7 +1071,7 @@
   Think of it as the degree of precision you need.
 
   Let's say D is a distance (in metres), and let's say I want to build 1 metre by summing small equal parts of it.
-  I start with D = 0 and end at D = δ. The slices are written dD and their sum is equal to δ.
+  I start with D = 0 and end at D = δ = 1 metre. The slices are written dD and their sum is equal to δ.
   The dimension of dD is metres and it's called a differential. Its minimal value is zero and its maximal one is δ.
 
   Then:  δ  =  dD * δ / dD    and:    dD  =  δ * dD / δ.
@@ -1099,19 +1104,93 @@
   previously played).
 
   In our RC differential equation, instead of distance per time, we're interested in voltage per time.
+  dU / dt reads "the infinitesimal increase in voltage per infinitesimal increase in time".
+  So each time time increases by dt, voltage increases by dU.
   What precedes shows that for a differential to make sense, we need a start-point and an end-point.
   Since voltage is the unknown, we need a range for time.
   The obvious end-point is t = now, so let's go with that.
   The origin could be t = -∞ (as in: since forever). But we know that nothing moved in our circuit before we connected RC to A and GND.
   So it makes sense to call this moment t = 0 (I mean what is time without movement? -- I'm done quoting Aristotle for this chapter).
 
+  Ok, so we start at  t0 = 0  with  U_C  =  U_C (0)  -- the initial voltage across the capacitor.
+  We move one step forward:  t1 = dt  and  U_C (t1)  =  U_C (0)  +  dU_C  =  U_C (0)  +  ( U_A (t1)  -  U_C (t1) ) / RC
+  We move one step forward:  t2  =  2 * dt  and  U_C (t2)  =  U_C (0)  +  ( U_A (t1)  -  U_C (t1) ) / RC  +  ( U_A (t2)  -  U_C (t2) ) / RC
+  We keep moving forward:  tn  =  n * dt  and  U_C (tn)  =  U_C (0)  +  ( U_A (t1)  -  U_C (t1) ) / RC  +  [...]  +  ( U_A (tn)  -  U_C (tn) ) / RC
 
-  [IN PROGRESS]
+  So each U_C (t) is equal to U_C (0) plus the sum of all previous infinitesimal  ( U_A (t)  -  U_C (t) ) / RC.
+  Such an almost continuous sum of infinitesimal quantities is, by definition, an integral.
+  (Notice that I've refined my definition since Chapter I.)
+  In order to aggregate U_C (t) by small increments, we need to define "increment" -- or: our integral needs a differential.
+  Since we're solving the differential equation for voltage, it's the unknown. Therefore we have to integrate over time.
+  But each value "t" of time has its own integral. So we cannot integrate with respect to t, since it has to be a constant for each of its values.
+  Then "t" needs an alias, a variable which also means "time" (using the same unit) but with a different name so that we know which value of time is
+  constant and which varies inside the integral. Greeks to the rescue: let dτ be our differential.
+  Then for each value of t, U_C (t) is equal to U_C (0) plus the sum of all  ( U_A (τ)  -  U_C (τ) ) / RC  from  τ = 0  to  τ = t.
+
+  As Lemmy Kilmister would say: "shut up, you talk too much".
+
+                             t
+                            ⌠   U_A (τ)  -  U_C (τ)
+    U_C (t)  =  U_C (0)  +  |  --------------------- dτ
+                            ⌡           R C
+                             0
+
+  Ok. Beautiful. What to do with that? -- In the current chapter? Nothing.
+
+  Except maybe a tiny dimensional analysis. (By now you should know how much I enjoy those...)
+
+  What would 1 / RC 's dimension be?
+
+  I  =  q / t
+  R  =  U / I  =  U / (q / t)  =  (U * t) / q
+  C  =  q / U
+
+               U * t * q
+  So:  RC  =  -----------  =  t
+                 q * U
+
+  RC is time and 1 / RC is the inverse of time.
+  So it's a frequency.
+  But we know two units for frequency: radians per second and Hertz.
+  They're related by the factor 2π which is dimension-less.
+  So both units have the same dimension: s^-1 (assuming we measure time in seconds -- could be centuries^-1...).
+
+  How do we know if 1 / RC is angular or regular frequency?
+
+  What are Hertz? What are radians?
+
+  Quite counter-intuitively, Hertz are the secondary unit, radians per second are the primary one.
+  But it actually makes sense: radians are based on cosmic phenomena such as Geometry and the number π.
+  They notably measure the period of trigonometric functions: 2π rad.
+  ("Notably" because of circles circonference, disks area, spheres volume, etc.)
+
+  While seconds are a purely conventional unit for time.
+  So when we say "radians per second", we're actually mixing constants of the universe with artificial measuring tools.
+
+  Electricity is a natural phenomenon, it doesn't obey to the Système international d'unités.
+
+  Then Hertz are a normalisation that allows to count cycles (periods) by making them equal to 1.
+  Indeed: 2π/2π = 1.
+
+  /*
+    https://en.wikipedia.org/wiki/International_System_of_Units        https://en.wikipedia.org/wiki/Second
+    https://en.wikipedia.org/wiki/Radian_per_second                    https://en.wikipedia.org/wiki/Hertz
+  */
+
+  So 1 / RC is in radians per second -- and if we want to express it in Hz, it becomes 1 / 2πRC.
+
+  This frequency has a (likely familiar) name: cutoff frequency.
+  Its usual symbols are:    ωc (rad./s)  and  fc (Hz).
+
+  Why do we care?
+
+  If  1 / RC  is the inverse of time, then  dτ / RC  is dimension-less and the dimension of U_C (t) is voltage on both sides of the equation.
+  Which doesn't prove the formula is true -- but a wrong dimension would have proven it's not.
 
 
 
 ===============================================================================================
-#7  DC + RC
+#7  Appendix: DC + RC
 ===============================================================================================
 
   https://en.wikipedia.org/wiki/Differentiation_rules
@@ -1165,15 +1244,9 @@
   Reversing the substitutions (again):
 
     U_C (t)  =  U_A  -  (U_A  -  U_C (0)) exp (-t / RC)
-
-  and, according to the constant term rule, the constant factor rule, the chain rule and the fact that exp (x) is its own derivative:
-
-    d U_C (t) / dt  =  0  -  (U_A  -  U_C (0)) exp (-t / RC) / RC  =  (U_C (0) - U_A) exp (-t / RC) / RC
   
   then:    U_C (0)  =  U_C (0)    -->  check.
   and:     U_C (∞)  =  U_A        -->  check.
-
-  Also, the limit of  d U_C / dt  when t tends to +∞ is:  (U_A  -  U_C (0)) exp (-∞ / RC)  =  0.
 
   So we start at U_C (0) and end at U_A, at which point  q_C  =  C * U_A  --  it's constant so I (t)  =  dq_C / dt  =  0.
 
