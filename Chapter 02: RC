@@ -59,6 +59,9 @@
   Now replace "people" with "electric potential", "rainy path" with "Resistor" and "gaped path" with "Capacitor".
   You get what is called an RC circuit.                //  https://en.wikipedia.org/wiki/RC_circuit
 
+  EDIT: This is mainly bullshit, as the rest of the chapter will reveal.
+    We learn from our mistakes, don't we? Well I've learnt a lot here!
+
   Which path leads to the ground (compost) and which to the output (coffee cup) depends on whether you want a filter
   that discards low frequencies and lets high frequencies pass (High-Pass filter); or one that discards high frequencies
   and lets low frequencies pass (Low-Pass filter).
@@ -163,13 +166,13 @@
 
   Coulomb's law adds: it also grows with the proximity of charges. Good to know, we'll need it later.
 
-  Now let's assume the urge to move is somehow suddenly satisfied (the charged points are now isolated from everything but each other).
+  Now let's assume the urge to move is somehow suddenly satisfied (the charged points are now isolated from everything *but* each other).
   If electrons can move, they will. Potential energy becomes kinetic energy...
   This sounds very generic. We can go more microscopic than that.
 
   Electric potential is a scalar (i.e. not a vector). It has no direction. It says how much a particle is urged to move -- not whereto.
   If I say "Socrates is 70 years old", you don't need more information to know Socrates' age. Age is a scalar.
-  If I say "Pheidippides ran about 240 km in two days", you might want to know from where to where. Distance is a scalar.
+  If I say "Pheidippides ran about 240 km", you might want to know from where to where. Distance is a scalar.
   Sometimes a scalar lacks information, like for instance "from Athens to Sparta".
   Now Pheidippides' performance has a magnitude (about 240 km) and a direction (from Athens to Sparta) -- it's a vector.
   The vector associated with electric potential is called electric field.
@@ -279,7 +282,7 @@
       I've been considering the propagation of the electric field without ever mentioning electromagnetic waves, even though it's a rather
       classical approach.
       The reason is: waves oscillate, they have a frequency. The imaginary system we've just built purely involves (SPOILER) static current.
-      Oscillations and frequency don't apply. Electric field is the general concept. Electromagnetic waves are a special case.
+      Oscillations and frequency don't apply. Electromagnetic field is the general concept. Electromagnetic waves are a special case.
       The fact that most real-life cases are special doesn't affect this truth.
   */
 
@@ -306,7 +309,7 @@
   //  Conductance and its reciprocal
 
   As promised, let's connect points A and B with a piece of extant matter.
-  Let's temporarily assume that nothing prevents the electric field from traveling from A to B.    [b]
+  Let's temporarily assume that nothing prevents the electric field from traveling from B to A.    [b]
 
   /*
     Important clarification:
@@ -320,7 +323,7 @@
       Like the balls in the pipe, electrons all move at once.
   */
 
-  A difference in electric potential tends towards a flow of negative charge through matter.
+  A difference in electric potential tends towards a flow of charge through matter.
   How easily this flow happens depends on the composition of said matter.
   That is: each material has the property of letting electrons drift more or less easily. This property is called its conductivity.
   The physical quantity is the Conductance. Its usual symbol is G.
@@ -406,9 +409,9 @@
 
   Ok, now that U and I have been granted convenient symbols maybe we can build some nice-looking set of equations:
 
-           U                                         U             U * I
-    R  =  ---    <=>    U  =  R * I    <=>    I  =  ---    <=>    -------  =  1
-           I                                         R               R
+           U                                         U             U * I         R
+    R  =  ---    <=>    U  =  R * I    <=>    I  =  ---    <=>    -------  =  -------  =  1
+           I                                         R               R         U * I
 
   This set of equations is called Ohm's law.
   (You can check Wikipedia now.)
@@ -429,9 +432,9 @@
 
   Before we move on: using R in Ohm's law's definition is a convention. We could very well write:
 
-           I                   I                                   G * I       G * U
+           I                   I                                   G * U         I
     G  =  ---    <=>    U  =  ---    <=>    I  =  G * U    <=>    -------  =  -------  =  1
-           U                   G                                     U           I
+           U                   G                                     I         G * U
 
 
   //  Amphibology of the current's intensity
@@ -457,7 +460,7 @@
                      Electrons  ->  minus to plus
     Current and electric field  ->  plus to minus
 
-  EDIT: This is actually not as arbitrary as it would first seem: this has been developed in EDIT [a]. In short electrons moving is one
+  EDIT: This is actually not as arbitrary as it would first seem: this has been developed in EDIT [a]. In short, electrons moving is one
     possibility. Probably the most common one but what do I know? Protons are also urged to move, so are cations -- we're only focusing
     on cases where it's easier for electrons.
 
@@ -506,7 +509,7 @@
   */
 
   Remember [b]? Of course you don't.
-  "Let's temporarily assume that nothing prevents the electric field from traveling from A to B."
+  "Let's temporarily assume that nothing prevents the electric field from traveling from B to A."
   We're dropping this assumption right now.
 
   Some materials are called conductors. If not, they are called insulators.
@@ -587,7 +590,6 @@
   This one will take advantage of its breakdown voltage.
   So it's a fragile insulator, and if we put it between points A and B it will only allow any current to flow once their difference in
   potential is high enough -- the more fragile the sooner.
-  EDIT: There are false statement in what precedes, we'll fix them without even noticing. Think reductio ad absurdum.
 
   Let's imagine the voltage between A and B is inferior to our new toy's breakdown voltage (we're below the threshold).
   The system is composed of two points with different electric potentials and an insulator. Nothing moves, no fun.
@@ -603,7 +605,7 @@
   The simplest volume there is (mathematically speaking) is the parallelepiped.
   A parallelepiped is a stack of infinite rectangles (try to think "Calculus in god mode").
   Once the current crosses the longing-for-a-decent-name-new-toy, the electric field will fill each rectangle one by one in the
-  direction of B.        //  https://en.wikipedia.org/wiki/Zeno's_paradoxes#Paradoxes_of_motion
+  direction of A.        //  https://en.wikipedia.org/wiki/Zeno's_paradoxes#Paradoxes_of_motion
   
   If we're aiming for predictability, an identical field over the whole individual rectangle seems necessary in order to prevent randomness.
   So two faces of the fragile insulator must actually be conductors.
@@ -613,7 +615,7 @@
   The external slices are made of a conductive material.
   They're perfectly flat, parallel, and have the same shape as any section of the 3D solid.
   They don't in fact have to be rectangles.
-  I'm clumsily trying to describe the shape for which I couldn't find any generic name.
+  I'm clumsily trying to describe a shape for which I couldn't find any generic name.
   I'll name it a pseudo-prism and define it as such:
   
     A solid built by the translation of a start base up to an identical end base along an axis perpendicular to both bases.
@@ -716,7 +718,7 @@
       # current between A and α
       # no current between α and β
       # current between β and B
-    Until enough electric charge from A has drifted to α  so that U_A = U_α;
+    Until enough electric charge from A has drifted to α so that U_A = U_α;
     and enough electric charge from β has drifted to B so that U_B = U_β.
     Which means that once the charge has finished drifting, U_B - U_A  =  U_β - U_α.
     Or: the voltage between A and B has decreased, the one between α and β has increased; and now they're equal to one another.
@@ -913,8 +915,8 @@
 
     a voltage varying over time -- and its instantaneous value is just a voltage.
 
-  Voltage also has the advantage of existing without current (as potential energy) which is not reciprocal (intensity's a rate, how do you
-  crystallise a car's speed?).
+  Voltage also has the advantage of existing without current (as potential energy per charge) which is not reciprocal (intensity's a rate, 
+  how do you crystallise a car's speed?).
   (Also the variation of I over time would be the variation over time of the variation of the charge over time...
   Don't forget that maths will be back at some point. Physicists have fun with second derivatives, engineers not so much.)
   So voltage can be stored and <SPOILER> converted (to magnetism for instance) </SPOILER>.
@@ -1037,28 +1039,28 @@
   */
 
   The intensity is the same across the whole circuit.
-  So  I (t)  =  dq_C (t) / dt  (across the capacitor) and  I (t)  =  U_R (t) / R  (across the resistor) are the same I (t).
+  So  I (t)  =  dq_C / dt  (across the capacitor) and  I (t)  =  U_R (t) / R  (across the resistor) are the same I (t).
   We can express q_C (t) in terms of U_C (t):  q_C (t)  =  C * U_C (t).
-  C being a constant, this gives:  dq_C (t) / dt  =  C * dU_C (t) / dt  =  I (t).
+  C being a constant, this gives:  dq_C / dt  =  C * dU_C / dt  =  I (t).
   By re-ordering the expression of I (t) across the resistor in terms of U_R (t), we get:  U_R (t)  =  R * I (t).
-  Now we can replace I (t) in this expression with its definition in terms of U_C (t) and C:  U_R (t)  =  R * C * dU_C (t) / dt.
+  Now we can replace I (t) in this expression with its definition in terms of U_C (t) and C:  U_R (t)  =  R * C * dU_C / dt.
   Finally, replacing U_R (t) with this expression in the definition of U_A (t), we get:
 
-                    dU_C (t)
-    U_A (t)  =  RC ----------  +  U_C (t)
-                       dt
+                    dU_C
+    U_A (t)  =  RC ------  +  U_C (t)
+                     dt
 
   Then:
 
-                                dU_C (t)                                          dU_C (t)
-    U_C (t)  =  U_A (t)  -  RC ----------    which means that:    U_R (t)  =  RC ----------
-                                   dt                                                dt
+                                dU_C                                          dU_C
+    U_C (t)  =  U_A (t)  -  RC ------    which means that:    U_R (t)  =  RC ------
+                                 dt                                            dt
 
-  so:  U_C (t)  -  U_A (t)  =  -RC * dU_C (t) / dt    <=>    U_A (t)  -  U_C (t)  =  RC * dU_C (t) / dt
+  so:  U_C (t)  -  U_A (t)  =  -RC * dU_C / dt    <=>    U_A (t)  -  U_C (t)  =  RC * dU_C (t) / dt
 
-          dU_C (t)       U_A (t)  -  U_C (t)
-  <=>    ----------  =  ---------------------
-             dt                  R C
+          dU_C       U_A (t)  -  U_C (t)
+  <=>    ------  =  ---------------------
+           dt                R C
 
   Tricky! We've got the first derivative of a function using said function in its definition...
   Knowing that exp (x) is its own derivative, we could intuitively think that a solution is buildable when U_A (t) is constant.
@@ -1098,7 +1100,7 @@
   E.g.:    dD / dt = 0.013 metres per second    and    t = 3 seconds.
   Then:    δ  =  0.013 * 3  =  0.039 metres  =  39 millimetres.
 
-  If the snail's speed is not constant -- that is: the acceleration (variation of speed over time) ddD / dt² ≠ 0 -- we can no longer
+  If the snail's speed is not constant -- that is: the acceleration (variation of speed over time) dD / dt² ≠ 0 -- we can no longer
   rely on multiplication: indeed dt remains constant but dD is varying, then so is dD / dt.
   That's where an infinitesimal dt gives us precision and where an integral shortens the sum's notation (taking the role multiplication
   previously played).
@@ -1185,7 +1187,40 @@
   Why do we care?
 
   If  1 / RC  is the inverse of time, then  dτ / RC  is dimension-less and the dimension of U_C (t) is voltage on both sides of the equation.
-  Which doesn't prove the formula is true -- but a wrong dimension would have proven it's not.
+  Which doesn't prove the formula is true -- but a wrong dimension would have proven it wasn't.
+
+  //  Now what about U_R (t)?
+
+  It's been given by 2 equations:
+                                                                 t
+                                                                ⌠   U_A (τ)  -  U_C (τ)
+    U_R (t)  =  U_A (t)  -  U_C (t)  =  U_A (t)  -  U_C (0)  -  |  --------------------- dτ    (1)
+                                                                ⌡           R C
+                                                                 0
+  and:
+                    dU_C
+    U_R (t)  =  RC ------    (2)
+                     dt
+
+  Let's interpret (2).
+  It means: RC times the infinitesimal increase (or decrease) of U_C (t) (dU_C) per infinitesimal increase in time (dt).
+  What is dU_C?  -->  Exaxtly what we're stacking inside the integral in the formula for U_C (t).
+
+  So:  ωc ( U_A (t)  -  U_C (t) ) dτ    with:  ωc  =  1 / RC    and dτ being an alias for dt.
+  Then:
+                 RC                           dt
+    U_R (t)  =  ---- ( U_A (t)  -  U_C (t) ) ----  =  U_A (t)  -  U_C (t)
+                 RC                           dt
+
+  So (1) and (2) are equivalent; which, again, fails at disproving our results.
+  But also illustrates that integration is to differentiation what logarithm is to exponentiation, or division to multiplication,
+  or subtraction to multiplication, or the inverse function to itself: the reciprocal operation.
+
+  It's been in the fundamental theorem of calculus for centuries:    https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus
+  which doesn't come with an author, nor a date of publication, nor a definitive formula because, in a way the author and the date are
+  one and the same: le Siècle des Lumières.        //  https://en.wikipedia.org/wiki/Age_of_Enlightenment
+
+  So I could have taken a shortcut here. Except, if you want shortcuts, go read something else.
 
 
 
