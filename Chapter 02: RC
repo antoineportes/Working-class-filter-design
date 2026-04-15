@@ -1204,7 +1204,7 @@
 
   Let's interpret (2).
   It means: RC times the infinitesimal increase (or decrease) of U_C (t) (dU_C) per infinitesimal increase in time (dt).
-  What is dU_C?  -->  Exaxtly what we're stacking inside the integral in the formula for U_C (t).
+  What is dU_C?  -->  Exactly what we're stacking inside the integral in the formula for U_C (t).
 
   So:  ωc ( U_A (t)  -  U_C (t) ) dτ    with:  ωc  =  1 / RC    and dτ being an alias for dt.
   Then:
@@ -1214,13 +1214,16 @@
 
   So (1) and (2) are equivalent; which, again, fails at disproving our results.
   But also illustrates that integration is to differentiation what logarithm is to exponentiation, or division to multiplication,
-  or subtraction to multiplication, or the inverse function to itself: the reciprocal operation.
+  or subtraction to addition, or the inverse function to itself: the reciprocal operation.
 
   It's been in the fundamental theorem of calculus for centuries:    https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus
-  which doesn't come with an author, nor a date of publication, nor a definitive formula because, in a way the author and the date are
+  which doesn't come with an author, nor a date of publication, nor a definitive formula because, in a way, the author and the date are
   one and the same: le Siècle des Lumières.        //  https://en.wikipedia.org/wiki/Age_of_Enlightenment
 
-  So I could have taken a shortcut here. Except, if you want shortcuts, go read something else.
+  So I could have taken a shortcut here. Except: if you want shortcuts, go read something else.
+
+  Chapter I was about complex trigonometry and integral transforms. Chapter II has been about electronics and Calculus.
+  Chapter III is going to be the Great Melting-Pot that makes sense out of all this nonsense.
 
 
 
