@@ -1294,6 +1294,8 @@
 
   So we start at U_C (0) and end at U_A, at which point  q_C  =  C * U_A  --  it's constant so I (t)  =  dq_C / dt  =  0.
 
+  If  U_C (0)  =  0    then:    U_C (t)  =  U_A ( 1  -  exp (-t / RC) )
+
   In plain English: a DC generator connected to an RC circuit will draw current until the voltage across the capacitor equals the voltage
   across the generator. This never strictly happens: there's an asymptote in U_A ad infinitum and the curve is exponential.
 
