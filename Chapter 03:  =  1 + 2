@@ -1,0 +1,207 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                                    Chapter III:  =  I + II
+###############################################################################################
+/*          "So schreitet in dem engen Breterhaus                                            */
+/*           Den ganzen Kreis der Schöpfung aus                                              */
+/*           Und wandelt, mit bedächtger Schnelle,                                           */
+/*           Vom Himmel, durch die Welt, zur Hölle."                                         */
+/*                                                             --  Goethe (Faust I)          */
+===============================================================================================
+#1  More Calculus (yay!)
+===============================================================================================
+
+  Let's say:  y  =  f (x)
+
+  Then let's say we increase x by an infinitesimal amount dx -- y will receive a corresponding variation dy (increase or decrease,
+  depending on f).
+
+  Then:  f (x + dx)  =  y + dy  =  f (x)  +  dy    <=>    dy  =  f (x + dx)  -  f (x)
+
+  Let's call back our snail from Chapter II.
+  If x is time and y is distance, then dy is: how much distance the snail has covered during the time dx.
+  So dy is a distance. Its value is dependant upon the duration of dx.
+  So if we want the rate of change of y (the speed of the snail), we need to normalise dy relatively to dx.
+  That is: we don't want dy, we want dy per dx -- whose shortened notation is:  dy / dx.
+  The differential operator "d" is both in the numerator and the denominator, so it cancels out. Which is why we're allowed to define
+  speed as "distance over time" without mention of infinitesimal increase (don't quote this one).
+
+                                                  dy       f (x + dx)  -  f (x)
+  If:    dy  =  f (x + dx)  -  f (x)    then:    ----  =  ----------------------
+                                                  dx                dx
+
+  Now let's define g (x) so that  f (x)  =  α g (x)  --  α being a constant.
+  Let's also define  df = dy so that we can distinguish it from dg (the variation of g (x) corresponding to an increase of x by dx).
+
+  Then:  dy  =  df  =  α g (x + dx)  -  α g (x)  =  α ( g (x + dx)  -  g (x) )  =  α dg
+
+  In what precedes, I've been taking for granted that f (x) and g (x) have no discontinuity and share the same range of definition
+  (domain). It's actually not necessarily granted. If it's not true, this will break our equations. Which is another way of saying
+  that continuity and equal domain of definition are the conditions for our equations to be true. These equations prove the constant
+  factor rule. This paragraph proves the conditions under which said rule is valid.
+
+
+  Ok, let's start over and have:  h (x)  =  f ( g (x) )
+
+  Then:  dh  =  h (x + dx)  -  h (x)
+             =  f ( g (x)  +  dg )  -  f ( g (x) )
+             =  f ( g (x)  +  g (x + dx)  -  g (x) )  -  f ( g (x) )
+             =  f ( g (x + dx) )  -  f ( g (x) )
+
+  Yeah... not helping. Dimensional analysis?
+  Maybe stick to the speed example. Let's name stuff: t is time, D is distance and v is speed (dD / dt).
+  Or: t is the input variable, D is the output and v is the rate of change.
+  Then:
+
+    v  =  D / t    <=>    D  =  v * t    <=>    t  =  D / v
+
+  Rate of change is output over input (1). Output is rate of change times input (2). Input is output over rate of change (3).
+  /*
+    EDIT: This is only true for linear functions, but if dx is small enough, the curve can be considered linear between any 2
+      consecutive points. This condition is implied in what follows; this is equivalent to the limit notation: dx -> 0.
+  */
+
+  So:  h (x)  =  f ( g (x) )  =  g (x) * df / dg    //  (2)
+
+                    dg     f ( g (x) )
+              =  x ---- * -------------             //  (2) & (1)
+                    dx        g (x)
+
+                    dg                     dx
+              =  x ---- * f ( g (x) ) * --------    //  (2)
+                    dx                   dg * x
+
+                  dg     f ( g (x) )
+              =  ---- * ------------- * dx          //  x / x  cancels out
+                  dx         d g
+
+  This is getting messy. Let's introduce Lagrange's notation:
+  https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange's_notation_for_antidifferentiation
+
+  Basically:  g' (x)  =  dg / dx    and    f' ( g (x) )  =  df / dg    and    h' (x)  =  dh / dx
+
+
+                 dg     f ( g (x) + dg )  -  f ( g (x) )
+                ---- * ---------------------------------- * dx
+                 dx                    dg
+    h' (x)  =  ------------------------------------------------  =  g' (x) * f' ( g (x) )
+                                      dx
+
+  Wikipedia gives 3 proofs:    //  https://en.wikipedia.org/wiki/Chain_rule#Proofs
+  This is NOT one of them.
+  Yep, I'm proud of myself. Wouldn't you be?
+
+  How about an example?
+  Ok, let    f (x)  =  exp (x)    and    g (x)  =  k * x    k being constant.
+  Then:
+
+    h (x)  =  f ( g (x) )  =  exp (kx)
+
+  Let's find g' (x) first:
+
+                k * (x + dx)  -  k * x
+    g' (x)  =  ------------------------  =  k * (x + dx - x) / dx  =  k * dx / dx  =  k
+                          dx
+
+  Then, exp (x) being its own derivative (by definition), f' (x)  =  f (x).
+  So:
+
+    h' (x)  =  g' (x) * f' ( g (x) )  =  k exp (kx)
+
+  Let's imagine we want to build h (x) 's curve by successively aggregating each of its values corresponding to
+  an infinitesimal successive increase in its input, from  x = a  to  x = b.
+  Hope it's clear. Basically, each x is the previous one plus dx, then each h (x) is the previous one plus dh.
+  We'd get a pseudo-continuous sum starting at h (a) and adding dh up to h (b).
+  I'm obviously describing an integral.
+  But what is dh?
+
+    -->  dh  =  (dh / dx) * dx  =  h' (x) * dx
+
+    So in our example:  dh  =  k exp (kx) dx
+
+  Then the integral form of h (x) in the range [a , b] would be:
+
+                              b                                                  b
+                             ⌠                                                  ⌠
+    h (b)  =  h (a - dx)  +  | k exp (kx) dx    <=>    h (b)  -  h (a - dx)  =  | k exp (kx) dx
+                             ⌡                                                  ⌡
+                              a                                                  a
+
+                                                b
+            exp (kb)  -  exp (k (a - dx))      ⌠
+    <=>    -------------------------------  =  | exp (kx) dx
+                          k                    ⌡
+                                                a
+  /*
+    Textbooks usually have h (a) where I put h (a - dx). But by doing like everyone does, you compute h (a) twice:
+    outside of the integral and first thing inside the integral.
+    The impact of this redundancy is as negligible as dx is infinitesimal, so my extremism might very well be laughable.
+    But I like my equal signs to mean "is equal to".
+  */
+
+  Now let's be ridiculously random and suppose we were to meet an integral in the form:
+
+     t
+    ⌠                                                 exp (st)  -  exp (s (t0 - dτ))
+    | exp (sτ) dτ    we would know it's equal to:    --------------------------------    [1]
+    ⌡                                                               s
+     t0
+
+  Why do we care? Perhaps we don't.
+
+
+
+===============================================================================================
+#2  What is sound?
+===============================================================================================
+
+  Sound is a variation of pressure propagating through matter.
+  When this matter is in contact with our ears (usually air or water) and our brain notices it, it's called hearing.
+
+  We've seen, with Fourier, that this phenomenon is always decomposable in an infinite sum of partials, called "spectrum".
+  Each partial is a sinusoid. So everytime a variation of pressure propagates through matter, the phenomenon can be expressed as
+  periodic oscillations -- infinite sum means all frequencies are always present if we admit that their amplitude can be zero.
+
+  We don't necessary hear identical repeated patterns and yet that's all we ever hear. Unless their frequency is too low (infrasonic)
+  or too high (ultrasonic).
+  Random sounds are deterministic: digital white noise is generated by randomising each sample and yet it produces all frequencies,
+  that is: oscillations of fixed period.
+  Spinoza wrote (Ethics) that everything has a cause and that "random" only means "of ignored cause".
+  Reject this principle and no science is left.
+
+  If there's movement, there's energy. Energy takes many forms and is always convertible (although modern physics is currently stuck
+  with entropy).
+  Taking advantage of this convertibility is what analog circuits do: variations of pressure become variations of voltage.
+  But the movement is reproduced, hence the name "analog" meaning equivalent in a different form.
+
+  Therefore Fourier's decomposition applies to analog signals. Any voltage is a spectrum. If it's a pure DC offset (constant voltage),
+  then all partials have an amplitude of zero except the one whose frequency is zero.
+  But the integral is valid.
+  We've seen (Chapter I) that the inverse Fourier transform is a special case of the inverse Laplace transform -- so not all Laplace is
+  Fourier, but all Fourier is Laplace.
+  Then the inverse Laplace transform can describe any analog signal.
+  Whatever we feed our circuit, and whatever comes out, will oscillate at all frequencies (remember zero is a number).
+
+  So if we focus on one isolated partial at the input, we know it will be present at the output. Phase and amplitude might not be the
+  same (amplitude might be zero) but all frequencies are always everywhere.
+  Even absolute silence is just all amplitudes equal to zero.
+  That's right, silence is sound -- sometimes music even: ever listened to Franz Schubert?
+  (In French, a crotchet rest is called a "soupir". It means "whisper".)
+  A black picture is a picture. Silence is black sound.
+  
+  
+
+
+
+
+
+
+
+
+
+
