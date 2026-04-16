@@ -1042,6 +1042,9 @@
   So  I (t)  =  dq_C / dt  (across the capacitor) and  I (t)  =  U_R (t) / R  (across the resistor) are the same I (t).
   We can express q_C (t) in terms of U_C (t):  q_C (t)  =  C * U_C (t).
   C being a constant, this gives:  dq_C / dt  =  C * dU_C / dt  =  I (t).
+
+    //  EDIT: Constant factor rule. More on that in this chapter's Appendix, even more (including proofs) next chapter.
+
   By re-ordering the expression of I (t) across the resistor in terms of U_R (t), we get:  U_R (t)  =  R * I (t).
   Now we can replace I (t) in this expression with its definition in terms of U_C (t) and C:  U_R (t)  =  R * C * dU_C / dt.
   Finally, replacing U_R (t) with this expression in the definition of U_A (t), we get:
@@ -1164,7 +1167,7 @@
   Quite counter-intuitively, Hertz are the secondary unit, radians per second are the primary one.
   But it actually makes sense: radians are based on cosmic phenomena such as Geometry and the number π.
   They notably measure the period of trigonometric functions: 2π rad.
-  ("Notably" because of circles circonference, disks area, spheres volume, etc.)
+  ("Notably" because of circles circumference, disks area, spheres volume, etc.)
 
   While seconds are a purely conventional unit for time.
   So when we say "radians per second", we're actually mixing constants of the universe with artificial measuring tools.
@@ -1234,6 +1237,9 @@
   https://en.wikipedia.org/wiki/Differentiation_rules
   https://en.wikipedia.org/wiki/Chain_rule
   https://en.wikipedia.org/wiki/Linearity_of_differentiation
+
+  EDIT: In what follows we'll be using some of the rules of differentiation.
+    If you want proofs that they're valid, hold your breath until next chapter.
 
   Let's simplify the nomenclature of our equation by making the substitutions:
     U_C (t)  -->  ƒ (x)
