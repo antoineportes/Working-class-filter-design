@@ -856,6 +856,8 @@
   What we've built here has a practical use: it's called a DC blocker (or DC filter) -- I suppose the name is self-explanatory enough.
   When would we need such a tool? At some point this will no longer be off-topic.
 
+  EDIT: not entirely wrong but needs precision, see Appendix.
+
   Gimme an R! Gimme a C! What's that spell? -- I guess: this chapter's title.
   Ok, so what if RC?
   We know that R reduces intensity and that C charges up until its voltage equals the generator's voltage.
@@ -938,6 +940,7 @@
 
   Now that we know what an analog signal is, it makes sense to feed our RC circuit with one.
   And actually we've already been doing just that: our DC generator produced a DC offset and our RC circuit filtered it out.
+  (EDIT: again, see Appendix.)
   That's signal processing already.
   Allow me to desecrate my methodology and use undefined concepts for a couple lines.
   A DC offset is useful before a waveshaper if you want even harmonics -- but it's also a membrane killer if you monitor it.
@@ -1059,7 +1062,7 @@
     U_C (t)  =  U_A (t)  -  RC ------    which means that:    U_R (t)  =  RC ------
                                  dt                                            dt
 
-  so:  U_C (t)  -  U_A (t)  =  -RC * dU_C / dt    <=>    U_A (t)  -  U_C (t)  =  RC * dU_C (t) / dt
+  so:  U_C (t)  -  U_A (t)  =  -RC * dU_C / dt    <=>    U_A (t)  -  U_C (t)  =  RC * dU_C / dt
 
           dU_C       U_A (t)  -  U_C (t)
   <=>    ------  =  ---------------------
@@ -1181,11 +1184,11 @@
     https://en.wikipedia.org/wiki/International_System_of_Units        https://en.wikipedia.org/wiki/Second
     https://en.wikipedia.org/wiki/Radian_per_second                    https://en.wikipedia.org/wiki/Hertz
   */
-
-  So 1 / RC is in radians per second -- and if we want to express it in Hz, it becomes 1 / 2πRC.
-
+                                                                                            1
+  So 1 / RC is in radians per second -- and if we want to express it in Hz, it becomes:  ------- .
+                                                                                          2π RC
   This frequency has a (likely familiar) name: cutoff frequency.
-  Its usual symbols are:    ωc (rad./s)  and  fc (Hz).
+  Its usual symbols are:    ωc (rad./s)  and  fc (Hz).  [where "c" stands for "cutoff" I guess?]
 
   Why do we care?
 
@@ -1303,6 +1306,35 @@
   Better look at it (and play with the parameters):
 
     https://www.desmos.com/calculator/k27fyrlh49
+
+  What does this mean in terms of analog signal?
+  First of all, we've silenced U_R (t) -- but  U_A (t)  =  U_C (t)  +  U_R (t)  means  U_R (t)  =  (U_A  -  U_C (0)) exp (-t / RC).
+  At t = ∞ this gives zero. Which makes sense:  U_R (t)  =  RC dU_C / dt  (remember?), so once U_C (t) equals U_A and becomes constant, its
+  rate of change becomes  dU_C / dt  =  0 , so  U_R (t)  =  RC times zero... so zero.
+  Another way to get this result was:  U_C (∞)  =  U_A  and  U_R (t)  =  U_A  -  U_C (t)  so  U_R (∞)  =  U_A - U_A  =  0.
+
+  Ok. Now an analog signal being a voltage measure, if our output signal is U_C (the voltage across the capacitor), it will converge very fast
+  to our constant input signal (U_A). The greater the value of RC, the slower the convergence. Indeed:  -t / RC  is inversely proportional to RC.
+  A constant voltage is a DC offset. U_C (t) will not block DC: it will progressively rebuild it: a fade-in with an exponential curve.
+
+  Next: what if we take the output across the capacitor?
+  U_R (t)  =  (U_A  -  U_C (0)) exp (-t / RC)
+  -t / RC  =  -ωc t  and  U_A  -  U_C (0)  is constant, so the chain rule and the constant factor rule give:
+
+    dU_R / dt  =  -ωc (U_A  -  U_C (0)) exp (-ωc t)  =  (U_C (0)  -  U_A) ωc exp (-ωc t)
+
+  The rate of change is exponentially decaying. Not a crucial information but I guess I like Calculus now.
+
+  What actually matters:  U_R (0)  =  (U_A  -  U_C (0)) exp (-0 / RC)  =  U_A  -  U_C (0)    (or  U_A  if  U_C (0)  =  0).
+  We already know that  U_R (∞)  =  0.
+  So we start with an initial voltage  U_A  -  U_C (0)  and converge very fast to zero. Again: how fast grows with ωc (same reason as before).
+
+    https://www.desmos.com/calculator/oepftdic37
+
+  We've filtered out DC: a fade-out with an exponential curve.
+
+  So earlier, when I wrote (section #5): "What we've built here has a practical use: it's called a DC blocker (or DC filter)", it was true.
+  But only on the condition that we measure our output signal across the resistor.
 
 
 
