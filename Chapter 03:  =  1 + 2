@@ -45,6 +45,7 @@
   that continuity and equal domain of definition are the conditions for our equations to be true. These equations prove the constant
   factor rule. This paragraph proves the conditions under which said rule is valid.
 
+//  Chain rule
 
   Ok, let's start over and have:  h (x)  =  f ( g (x) )
 
@@ -113,8 +114,8 @@
 
     h' (x)  =  g' (x) * f' ( g (x) )  =  k exp (kx)
 
-  Let's imagine we want to build h (x) 's curve by successively aggregating each of its values corresponding to
-  an infinitesimal successive increase in its input, from  x = a  to  x = b.
+  Let's imagine we want to build h (x) 's curve by successively aggregating each of its values corresponding to an infinitesimal
+  successive increase in its input, from  x = a  to  x = b.
   Hope it's clear. Basically, each x is the previous one plus dx, then each h (x) is the previous one plus dh.
   We'd get a pseudo-continuous sum starting at h (a) and adding dh up to h (b).
   I'm obviously describing an integral.
@@ -126,30 +127,29 @@
 
   Then the integral form of h (x) in the range [a , b] would be:
 
-                              b                                                  b
-                             ⌠                                                  ⌠
-    h (b)  =  h (a - dx)  +  | k exp (kx) dx    <=>    h (b)  -  h (a - dx)  =  | k exp (kx) dx
-                             ⌡                                                  ⌡
-                              a                                                  a
+                         b                                             b
+                        ⌠                                             ⌠
+    h (b)  =  h (a)  +  | k exp (kx) dx    <=>    h (b)  -  h (a)  =  | k exp (kx) dx
+                        ⌡                                             ⌡
+                         a                                             a
 
-                                                b
-            exp (kb)  -  exp (k (a - dx))      ⌠
-    <=>    -------------------------------  =  | exp (kx) dx
-                          k                    ⌡
-                                                a
+                                        b
+            exp (kb)  -  exp (ka)      ⌠
+    <=>    -----------------------  =  | exp (kx) dx
+                      k                ⌡
+                                        a
   /*
-    Textbooks usually have h (a) where I put h (a - dx). But by doing like everyone does, you compute h (a) twice:
-    outside of the integral and first thing inside the integral.
-    The impact of this redundancy is as negligible as dx is infinitesimal, so my extremism might very well be laughable.
-    But I like my equal signs to mean "is equal to".
+    Theoretically, the integration should start at  a + dx, otherwise h (a) gets added twice. But dx is infinitesimal.
+    The function is assumed linear between two steps. Except some functions are never linear. So for the integral to be accurate,
+    it has to be a limit with dx -> 0 (tending to zero). Then  a + dx  =  a.
   */
 
   Now let's be ridiculously random and suppose we were to meet an integral in the form:
 
      t
-    ⌠                                                 exp (st)  -  exp (s (t0 - dτ))
-    | exp (sτ) dτ    we would know it's equal to:    --------------------------------    [1]
-    ⌡                                                               s
+    ⌠                                                 exp (st)  -  exp (s t0)
+    | exp (sτ) dτ    we would know it's equal to:    -------------------------    [1]
+    ⌡                                                            s
      t0
 
   Why do we care? Perhaps we don't.
@@ -193,8 +193,478 @@
   That's right, silence is sound -- sometimes music even: ever listened to Franz Schubert?
   (In French, a crotchet rest is called a "soupir". It means "whisper".)
   A black picture is a picture. Silence is black sound.
+
+
+
+===============================================================================================
+#3  Where were we?
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/If_and_only_if        https://en.wikipedia.org/wiki/Logical_conjunction
+
+  So!
+  At the end of Chapter I, we had a magical formula that represents pretty much any spectrum, i.e. any audio signal.
+  It's called the inverse Laplace transform and looks like this:
+
+                  σ +j∞
+                1   ⌠
+    ƒ (t)  =  ----- | F (s) exp (st) ds        //  Ain't it beautiful? Just pause, watch and enjoy.
+               2πj  ⌡
+                  σ -j∞
+
+  where:    s  =  σ + jω    and    σ and ω are purely real numbers    and    σ is constant for all values of s AND over time.
+  If (1) σ = 0, then s = jω and  F (s) exp (st)  is a complex sinusoid whose complex amplitude is F (s).
+  If (2) σ = anything else then the real amplitude is exponentially growing or decaying.
+
+  We want an analytic signal. So we want (1).
+  We want AN analytic signal -- not an infinity of them. So the full spectrum, however beautiful, is not practical.
+  The clever move here is to test our circuit with one steady partial and deal with the rest of the spectrum later.
+  Plus if we leave s = jω undefined, ω can be anything. So if we're lucky, the results of the test might hold for any frequency...
+
+  Oh yeah I forgot to mention: we're testing RC now.
+
+//  Across the capacitor
+
+  At the end of Chapter II, we had a schematic and a half-solved differential equation.
+  The voltage across the resistor had two distinct equations but both relied on the voltage across the capacitor.
+  So it seems we're bound to solve the latter first. Then the voltage across the capacitor will be our output signal until further
+  notice.
+  The voltage across the generator remains the input.
+  We'll be very original and name the input x (t) [formerly U_A (t)] and the output y (t) [formerly U_C (t)].
+
+  Then the schematic becomes:
+
+    x (t)  o---[ R ]---o---o  y (t)
+                       |
+                     [ C ]
+                       |
+                       o
+                      GND
+
+  And the differential equation:
+
+                         t
+                        ⌠                                              1
+    y (t)  =  y (0)  +  | ωc ( x (τ)  -  y (τ) ) dτ    where:  ωc  = -----
+                        ⌡                                             R C
+                         0
   
+  Now if we feed the circuit with an analytic signal (i.e. a complex sinusoid), we want:
+
+    x (t)  =  X (s) exp (st)
+
+  where:
+    X (s) is the *constant* complex amplitude ("constant" meaning "not a function of time (t)"),
+    s = jω    (σ + jω  with  σ = 0),
+    j = √(-1)    (another constant then),
+    ω is a constant frequency in rad./s),
+    t is time (the only variable in the expression).
+
+  Nice. But first thing in the equation is:  x (τ)  -  y (τ) ... so:  X (s) exp (st)  -  ???
+  We know that y (t) is an analog audio signal. So a spectrum. So a sum of partials.
+  So Y (s) exp (st) exists in the output. But is it y (t) from the differential equation?
+  RC could very well shift x (t)'s frequency (ω) or generate new partials with non-zero real amplitude.
+  So the best we can affirm is that y (t) is a Laplace integral -- which, again, is beautiful -- but a bit overwhelming.
+  Since Y (s) exp (st) exists, if we go back to the original differential equation (before the integral came in), and assume it's the
+  only partial in y (t)'s spectrum, then, according to the chain rule, we get:
+
+  dy / dt  =  ωc ( x (t)  -  y (t) )    <=>    s Y (s) exp (st)  =  ωc ( x (t)  -  Y (s) exp (st) )
   
+          s Y (s) exp (st)                                                    / s        \
+  <=>    ------------------  +  Y (s) exp (st)  =  x (t)    <=>    x (t)  =  ( ----  +  1 ) Y (s) exp (st)
+                 ωc                                                           \ ωc       / 
+  
+                    s + ωc                               ωc
+  <=>    x (t)  =  -------- y (t)    <=>    y (t)  =  -------- x (t)
+                      ωc                               s + ωc
+
+  Ok, let's decrypt this. First of all, notice the equivalence signs "<=>". Everything here reads in both directions.
+  Let's define:
+
+                 ωc
+    H (s)  =  --------    then:    y (t)  =  H (s) x (t)    (assuming y (t) is one exponential sinusoid)
+               s + ωc
+
+  Then notice that H (s) is a function of s, but not of time (t). So for a fixed frequency, H (s) is constant.
+  All the above is just different arrangement of one equality. Another arrangement could be:
+
+                                                  Y (s)
+    y (t)  =  Y (s) exp (st)    <=>    x (t)  =  ------- exp (st)
+                                                  H (s)
+
+  If we define:  X (s)  =  Y (s) / H (s)
+  then we've proven that  x (t)  =  X (s) exp (st)  is equivalent to  y (t)  =  Y (s) exp (st)
+  So in short: one partial in, one partial out. Only with different complex amplitude.
+  The complex amplitude embeds the real amplitude and the phase (Chapter I).
+
+  Now let's say ψ is a frequency in rad./s defined by:  ψ ≠ ω. And  ζ = jψ.
+  Then  X (ζ) exp (ζt) is a complex sinusoid and it's distinct from X (s) exp (st).
+  If  x (t)  =  X (s) exp (st)  +  X (ζ) exp (ζt)    -- a spectrum of two partials,
+  we're allowed to hope that  y (t)  =  Y (s) exp (st)  +  Y (ζ) exp (ζt), aren't we?
+
+  Hoping? Yes. Assuming? No. Some intermodulation could happen.    //  https://en.wikipedia.org/wiki/Intermodulation
+  Let's run that reductio ad absurdum noch ein Mal (come on, it was fun).
+  (I'll be skipping steps because the following demonstration is very similar to the previous one.)
+
+  I'm about to use the sum rule (Calculus). It's easy to demonstrate and I suggest you try.
+  But I'll do it in some appendix at the end of the current chapter.
+  Let  y (t)  =  Y (s) exp (st)  +  Y (ζ) exp (ζt).
+  Then:
+    
+    dy / dt  =  s Y (s) exp (st)  +  ζ Y (ζ) exp (ζt)        //  That's the sum rule.
+
+  Then according to the differential equation:
+
+    s Y (s) exp (st)  +  ζ Y (ζ) exp (ζt)  =  ωc ( x (t)  -  Y (s) exp (st)  -  Y (ζ) exp (ζt) )
+
+                      s                                          ζ
+    <=>    x (t)  =  ---- Y (s) exp (st)  +  Y (s) exp (st)  +  ---- Y (ζ) exp (ζt)  +  Y (ζ) exp (ζt)
+                      ωc                                         ωc
+
+                      / s        \                      / ζ        \
+    <=>    x (t)  =  ( ----  +  1 ) Y (s) exp (st)  +  ( ----  +  1 ) Y (ζ) exp (ζt)
+                      \ ωc       /                      \ ωc       /
+    
+                      Y (s) exp (st)       Y (ζ) exp (ζt)
+    <=>    x (t)  =  ----------------  +  ----------------  =  X (s) exp (st)  +  X (ζ) exp (ζt)
+                           H (s)                H (ζ)
+
+  Ok, great. Any two partials enter DC, they come out with different amplitude and phase.
+  What if there are more than two? Maybe there's a maximum number of partials, an intermodulation threshold?
+  Right! Let's test more partials. How about 3? How about ∞? How about twice that?
+  Let:
+
+                    +j∞
+                1   ⌠
+    y (t)  =  ----- | Y (s) exp (st) ds        //  Don't act surprised: you knew it was coming.
+               2πj  ⌡                          //  By the way, σ is gone because σ = 0 by hypothesis.
+                    -j∞
+
+  Remember: an integral is just a (pseudo-continuous) sum.
+  So, according to the sum rule (again), and assuming Y (s) is constant over time for all s, we get:
+
+                +j∞
+                ⌠                                                 s
+    dy / dt  =  | s Y (s) exp (st) df        //  with:  df  =  d-----  (just saving space, hope it's not confusing)
+                ⌡                                                2πj
+                -j∞
+
+  Then:
+
+    +j∞                                       +j∞                           +j∞                                    +j∞
+    ⌠                                         ⌠                             ⌠  s                                   ⌠
+    | s Y (s) exp (st) df  =  ωc x (t)  -  ωc | Y (s) exp (st) df    <=>    | ---- Y (s) exp (st) df  =  x (t)  -  | Y (s) exp (st) df
+    ⌡                                         ⌡                             ⌡  ωc                                  ⌡
+    -j∞                                       -j∞                           -j∞                                    -j∞
+
+                     +j∞                          +j∞
+                     ⌠  s                         ⌠
+    <=>    x (t)  =  | ---- Y (s) exp (st) df  +  | Y (s) exp (st) df
+                     ⌡  ωc                        ⌡
+                     -j∞                          -j∞
+
+  Before moving on: (a + b) + (c + d)  =  (d + b + c + a). With sums, order doesn't matter and two sums are just a bigger sum.
+  It's called (respectively) commutativity and associativity.        //  https://en.wikipedia.org/wiki/Addition#Properties
+  So we could combine both integrals.
+  But only if they're commensurable (we can multiply resistance and intensity but R + I makes no sense).
+  Also an integral has a range of integration. How would we express an integral with two distinct ranges of integration?
+  Answer: we would write two integrals.
+  Same goes with the differential: its possible values are the range of integration, therefore one range means one differential.
+  So we can combine them if and only if they have the same dimension, the same differential and the same range of integration.
+  Differential and range are the same (respectively df and [-j∞ , +j∞]).
+  About the dimension: s is an imaginary angular frequency, ωc is a real angular frequency.
+  So s / ωc is purely imaginary and dimension-less (j being dimension-less as well). Then s being the inverse of time, st is
+  dimension-less, then exp (st) is valid (about time to check!) and it's just a 2-dimension (real + imaginary) oscillating gain.
+  Y (s) is the amplitude and the phase. The phase has been defined (Chapter I) as  φ  =  ω t0  -->  time multiplied by the inverse
+  of time -- also dimension-less. It's embedded as exp (jφ) so it could be combined with exp (st) and give exp (j (ωt + φ) ).
+  Ok, everything is dimension-less except the real amplitude: voltage in, voltage out. Perfect.
+
+              +j∞                                                   +j∞
+              ⌠  /  s                                     \         ⌠  / s        \
+    x (t)  =  | (  ---- Y (s) exp (st)  +  Y (s) exp (st)  ) df  =  | ( ----  +  1 ) Y (s) exp (st) df
+              ⌡  \  ωc                                    /         ⌡  \ ωc       /
+              -j∞                                                   -j∞
+
+              +j∞                              +j∞                             +j∞
+              ⌠  s + ωc                        ⌠  Y (s)                    1   ⌠
+           =  | -------- Y (s) exp (st) df  =  | ------- exp (st) df  =  ----- | X (s) exp (st) ds
+              ⌡    ωc                          ⌡  H (s)                   2πj  ⌡
+              -j∞                              -j∞                             -j∞
+
+  Or, if we reverse the equivalence:
+
+                    +j∞                                           +j∞
+                1   ⌠                                         1   ⌠
+    x (t)  =  ----- | X (s) exp (st) ds    <=>    y (t)  =  ----- | Y (s) exp (st) ds    &&    Y (s)  =  H (s) X (s)    [2]
+               2πj  ⌡                                        2πj  ⌡
+                    -j∞                                           -j∞
+
+  Ok, so no matter how many partials we feed RC, they come out across the capacitor with only their complex ampliude modified.
+  So frequency doesn't get shifted and no new partials get generated -- only the phase and (real) amplitude are affected.
+  Plus if X (s) is constant over time, so is Y (s)... Wait! What if not?
+  What good is a circuit that only deals with constant amplitude and phase on the whole spectrum? Does it even happen in real life?
+  What if our input is Aristotle's farting turtle dove (History of animals, Book IX 633b) or Anton Webern's Passacaglia?
+
+  In such a case, X (s) becomes X (s, t) -- i.e. a function of frequency and time.
+  Or, if we focus on one partial, there's only one value of s, so X (t) would temporarily do.
+  So we want:  y (t)  =  Y (t) exp (st).
+
+  /*
+    DIGRESSION: The Product rule
+
+      Let's define:  h (x)  =  f (x) g (x).
+    
+                          h (x + dx)  -  h (x)       f (x + dx) g (x + dx)  -  f (x) g (x)
+      Then:  dh / dx  =  ----------------------  =  ---------------------------------------
+                                   dx                                 dx
+    
+      Looks stuck... We're going to need to cheat a little.
+      The subtraction in the numerator is begging for a factorisation -- but there is no common factor.
+      We could introduce one. But how do we do this without breaking the equality?
+      The obvious solution is to compensate any modification we make. The reciprocal to addition is subtraction.
+      Indeed:  a + b - b  =  a. So we can add anything we'd like as long as we also remove it.
+      Ok. So, in order to mix the terms of the subtraction and manufacture a common factor -- two possibilities:
+        (1) f (x + dx) g (x)
+        (2) f (x) g (x + dx)
+      Going with (2) would be plagiarising Wikipedia: [SPOILER] https://en.wikipedia.org/wiki/Product_rule#Proofs [/SPOILER]
+      So let's go with (1):
+    
+                     f (x + dx) g (x + dx)  -  f (x) g (x)  +  f (x + dx) g (x)  -  f (x + dx) g (x)
+        dh / dx  =  ---------------------------------------------------------------------------------
+                                                            dx
+    
+                     ( f (x + dx)  -  f (x) ) g (x)  +  ( g (x + dx)  -  g (x) ) f (x + dx)
+                 =  ------------------------------------------------------------------------
+                                                       dx
+                 
+                     f (x + dx)  -  f (x)             g (x + dx)  -  g (x)                  df             dg
+                 =  ---------------------- g (x)  +  ---------------------- f (x + dx)  =  ---- g (x)  +  ---- f (x + dx)
+                              dx                               dx                           dx             dx
+    
+      Now is probably the best time to recall a detail from section #1: these are not actual equalities.
+      I'm using a shortened notation to facilitate focusing on arithmetic (and because monospace + lazy).
+      This lack of rigour would probably have me fail at a math exam. But I trust your critical judgment.
+      I'm implying that the right side of the equation (that is everything except dh / dx) is in fact the limit of the expression
+      when dx tends to zero.
+      And when dx tends to zero, the limit of x + dx is x. Then the limit of f (x + dx) is f (x).
+      Then if  h (x)  =  f (x) * g (x):
+    
+         dh       df             dg           // In this case no limit is necessarily implied. Although dx is still infinitesimal...
+        ----  =  ---- g (x)  +  ---- f (x)    // To be rigorous for once: dh / dx is not constant for non-linear h (x),
+         dx       dx             dx           // so theoretically this is only true as a limit -- but dx divides both sides so...
+    
+      WARNING:
+        This is valid if h (x) is continuous.
+        I.e. if  f (x)  =  4x + 2  and  g (x)  =  1 / x
+        then  h (x)  =  (4x + 2) / x  and it has a discontinuity at x = 0.
+    
+        https://www.desmos.com/calculator/uqreqq7tu9
+    
+        Then if  x  =  -dx / 2,  zero is right between  x  and  x + dx.
+        And if dx tends to 0, then h (x) tends to -∞ while h (x + dx) tends to +∞.
+        So in that case dh / dx is infinite -- twice.
+        Then the proof is not valid for all x if h (x) is not continuous.
+        Or: the proof is valid as long as h (x) is continuous.
+      
+        Note that f (x) or g (x) could have a discontinuity.
+        E.g.  -->   f (x)  =  x²    and    g (x)  =  1 / x    =>    h (x)  =  x
+  */
+
+                                       dy       dY
+    y (t)  =  Y (t) exp (st)    =>    ----  =  ---- exp (st)  +  Y (t) s exp (st)
+                                       dt       dt
+
+  PAUSE: dimensional analysis: dy / dt is voltage per time; dY / dt is voltage per time;
+  s is a frequency, so the inverse of time, so Y (t) s is voltage per time. Ok, perfect.
+
+            dy       / dY             \
+    <=>    ----  =  ( ----  +  Y (t) s ) exp (st)  =  ωc ( x (t)  -  Y (t) exp (st) )
+            dt       \ dt             /
+
+             dY
+            ----  +  Y (t) s
+             dt
+    <=>    ------------------ exp (st)  +  Y (t) exp (st)  =  x (t)
+                  ωc
+
+             x (t)            Y         s + ωc
+    <=>    ----------  =  d-------  +  -------- Y (t)
+            exp (st)        ωc dt         ωc
+
+  We don't know how much (dY / dt) / ωc is. But it's voltage over time, over the inverse of time -- so voltage.
+  Frequency untouched as before, and sum rule generalises to the full spectrum, so we can move on.
+  But it's actually quite an interesting result (didn't expect that):
+
+                  Y (s, t)          dY             dY          /              Y (s, t) \
+    X (s, t)  =  ----------  +  RC ----    <=>    ----  =  ωc ( X (s, t)  -  ---------- )
+                    H (s)           dt             dt          \                H (s)  /
+
+  This looks suspiciously close to the original differential equation.
+  Almost as if we could ignore the frequency and only consider amplitude and phase (complex amplitude).
+  Except there's H (s). Which is dependant upon s and ωc. Which are constant for each partial.
+  But s is different across all partials.
+  So in a way, each partial has its own differential equation that only affects its complex amplitude (i.e. not the frequency).
+
+  I kept talking about a potential frequency shift (or pitch shift), but actually it doesn't make sense in Fourier or Laplace
+  representation: there are always infinite partials of constant frequencies. A pitch shift would be one partial having its
+  amplitude downed to zero, and another one inheriting (part of) it.
+  So, instead of a partial moving in the spectrum, a partial affecting another partial.
+  In Laplace and Fourier representation, pitch shift is equivalent to overtone(s) generation.
+  And a frequency sweep is an infinity of seccessive crossfades.
+
+  Anyway, here each partial is independent from every other and, knowing that, we can finally try to solve the differential
+  equation in its integral form (Chapter II, #6) for one partial -- or rather, for any partial (analytic signal).
+  We'll assume that the complex amplitudes X (s) and Y (s) are constant over time again.
+
+                          t
+                         ⌠     /                                 \
+    y (t)  =  y (t0)  +  | ωc ( X (s) exp (sτ)  -  Y (s) exp (sτ) ) dτ
+                         ⌡     \                                 /
+                          t0
+
+  I've replaced t0 = 0 with t0 = undefined because we're not solving for special cases.
+  There's one partial with a constant s and t0 is constant -- so is y (t0). Y (s) is also constant (by hypothesis).
+  Of course ωc (1 / RC) is still constant as well, so:
+
+                                   t                          t
+                                  ⌠                          ⌠
+    y (t)  =  y (t0)  +  ωc X (s) | exp (sτ) dτ  -  ωc Y (s) | exp (sτ) dτ
+                                  ⌡                          ⌡
+                                   t0                         t0
+    
+  Remembering equation [1] from #1:
+
+                                   exp (st)  -  exp (s t0)                exp (st)  -  exp (s t0)
+    y (t)  =  y (t0)  +  ωc X (s) -------------------------  -  ωc Y (s) -------------------------
+                                              s                                      s
+
+                          ωc X (s)                ωc X (s)                  ωc Y (s)                ωc Y (s)
+           =  y (t0)  +  ---------- exp (st)  -  ---------- exp (s t0)  -  ---------- exp (st)  +  ---------- exp (s t0)
+                             s                       s                         s                       s
+
+                             X (s)  -  Y (s)                   Y (s)  -  X (s)
+           =  y (t0)  +  ωc ----------------- exp (st)  +  ωc ----------------- exp (s t0)
+                                    s                                 s
+  
+  Something's off. There is a constant term -- i.e. a DC offset -- i.e. a second partial with s = 0:
+
+                          Y (s)  -  X (s)
+    DC  =  y (t0)  +  ωc ----------------- exp (s t0)
+                                 s
+  
+  Let's pause and notice this: any partial contributes to the DC offset. Quite counter-intuitive...
+  Luckily enough, in Chapter I, #6, we've solved this aporia by not giving up on DC in the inverse Laplace transform.
+  Stubbornness => luck.
+  The DC offset is the result of the integration over a long enough time of all partials -- the average voltage.
+  So they all contribute indeed. Ok. Makes sense.
+
+  We've already solved the DC case (Chapter II, #7): Y (0) converges exponentially to X (0).
+  If  X (0)  =  0  then Y (0) becomes negligible very fast.
+
+  Knowing that y (t) has two partials (one being the DC offset), we can define it:  y (t)  =  Y (s) exp (st)  +  DC
+  Then:
+
+                           X (s)  -  Y (s)
+    Y (s) exp (st)  =  ωc ----------------- exp (st)
+                                  s
+
+  With exp (st) on both sides of the equation, of course we want to remove it.
+  But hurry not: this implies a division (well two actually). We wouldn't want to divide by zero, would we?
+  Ok ∞ = ∞ is true, but is it useful?
+  Let's solve  exp (st)  =  0. It requires  st = -∞  --  jωt = -∞ ;
+  j is constant and purely imaginary so we can do -j∞ but not -∞. Let's test  ωt = -∞  anyway:
+
+    exp (-j∞)  =  cos (-∞)  +  j sin (-∞)  =  cos (∞)  -  j sin (∞)
+
+  Looks undefined... It's aporia time again.
+  How about this: for this expression to be zero, we need both cos and sin to be zero at the same time, otherwise the result will
+  have at least a real part or an imaginary part.
+  So if there's no solution to:  cos (x)  =  sin (x)  =  0  we're good.
+  And if there's no solution to:  cos (x)  =  sin (x)  we're even better.
+  Well:
+
+    cos (x)  -  sin (x)  =  cos (x)  -  cos (x - π/2)    so:    cos (x)  -  sin (x)  =  0    means    x  =  x - π/2
+
+  Ok, we're good.
+  Except: σ = 0 right now but what if not?
+  Well when calling it "constant" we quietly implied "finite",
+  so σ ∈ ]-∞ , +∞[ then exp (σt) ∈ ]0 , +∞[.
+  And since exp (x) is continuous and strictly increasing, we're still good.
+
+                  X (s)  -  Y (s)             s Y (s)                                 s Y (s)
+    Y (s)  =  ωc -----------------    <=>    ---------  =  X (s)  -  Y (s)    <=>    ---------  +  Y (s)  =  X (s)
+                         s                      ωc                                      ωc
+    
+
+            s Y (s)  +  ωc Y (s)                       s + ωc                                         ωc
+    <=>    ----------------------  =  X (s)    <=>    -------- Y (s)  =  X (s)    <=>    Y (s)  =  -------- X (s)
+                     ωc                                  ωc                                         s + ωc
+
+  Once again:    Y (s)  =  H (s) X (s).
+
+  This H (s) keeps popping up. It's likely important. I'll deal with it at some point.
+  But first let's re-define everything.
+
+//  Across the resistor
+
+  We've found (Chapter II, #5) that the difference between RC and CR is a matter of Quantum physics -- not electronics.
+  That is, this won't break our equations:
+
+    x (t) o---[ C ]---o---o y (t)
+                      |
+                    [ R ]
+                      |
+                      o
+                     GND
+
+  other than redefining y (t) as the output of the resistor (instead of the capacitor).
+  But we now know how to express U_C (t) easily in terms of the input signal -- thanks to Pierre-Simon Laplace.
+  We'll keep trusting him and assuming  x (t)  =  X (s) exp (st). With X (s) constant over time.
+  Two equations define y (t) (the voltage across the resistor):
+                                                                                           ωc
+                                                                                        -------- X (s) exp (st)
+                                                                                         s + ωc
+                                                                                     d -------------------------
+                                         ωc                                                      dt
+    (1)  y (t)  =  X (s) exp (st)  -  -------- X (s) exp (st)    and (2)  y (t)  =  -----------------------------
+                                       s + ωc                                                    ωc
+
+  Of course we'll solve both. Let's start with (2) -- looks really fun.
+  The top-most factor (ωc) and the bottom-most denominator (ωc) cancel out, let's save some space.
+
+                X (s)     d exp (st)         s
+    y (t)  =  -------- * ------------  =  -------- X (s) exp (st)    //  (constant factor rule, then chain rule)
+               s + ωc         dt           s + ωc
+
+  Since we're re-defining everything, let's re-define:
+
+               s
+    H (s) = --------    ;  and:  Y (s)  =  H (s) X (s)    ;  then:  y (t)  =  Y (s) exp (st)
+             s + ωc
+
+  Frequency untouched, H (s) altering complex amplitude. Pretty familiar by now. Plus it was to be expected:
+  U_C + U_R = input. So any extra partial across the resistor would have had to be compensated across the capacitor, which we've proven
+  almost not true. Almost because DC offset. But we already know that measuring U_R is how we block DC, so unless we got wrong somewhere
+  I can predict that U_C alone carries any constant term and that therefore we won't find any in the second solution (1) either.
+  Let's find out:
+
+               /         ωc   \                      (s + ωc) - ωc                        s
+    y (t)  =  ( 1  -  -------- ) X (s) exp (st)  =  --------------- X (s) exp (st)  =  -------- X (s) exp (st)
+               \       s + ωc /                         s + ωc                          s + ωc
+
+  And thus the prophecy came to be.
+  Different H (s) -- but still popping up. It's definitively important. We really should deal with it at some point.
+  But first let me introduce an alternative path to reach it.
+
+
+
+-----------------------------------------------------------------------------------------------
+/*          "Look out honey 'cause I'm using technology."                                    */
+/*                                                --  Iggy Pop (Search and Destroy)          */
+===============================================================================================
+#4  Pasghetti
+===============================================================================================
+
 
 
 
