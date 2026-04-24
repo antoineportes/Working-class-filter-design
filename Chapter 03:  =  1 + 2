@@ -345,8 +345,8 @@
 
                 +j∞
                 ⌠                                                 s
-    dy / dt  =  | s Y (s) exp (st) df        //  with:  df  =  d-----  (just saving space, hope it's not confusing)
-                ⌡                                                2πj
+    dy / dt  =  | s Y (s) exp (st) df        //  with:  df  =  d-----    (Chapter I)
+                ⌡                                                2πj     ((just saving space, hope it's not confusing))
                 -j∞
 
   Then:
@@ -523,7 +523,8 @@
                           t0
 
   I've replaced t0 = 0 with t0 = undefined because we're not solving for special cases.
-  There's one partial with a constant s and t0 is constant -- so is y (t0). Y (s) is also constant (by hypothesis).
+  There's one partial with a constant s and t0 is constant -- so is y (t0).
+  Y (s) is also constant (by hypothesis) --  we've already proven (several times) that X (s) is then constant too.
   Of course ωc (1 / RC) is still constant as well, so:
 
                                    t                          t
@@ -555,13 +556,19 @@
   Let's pause and notice this: any partial contributes to the DC offset. Quite counter-intuitive...
   Luckily enough, in Chapter I, #6, we've solved this aporia by not giving up on DC in the inverse Laplace transform.
   Stubbornness => luck.
-  The DC offset is the result of the integration over a long enough time of all partials -- the average voltage.
+  The DC offset is found by integrating all partials over a long enough time  -- the average voltage.
   So they all contribute indeed. Ok. Makes sense.
+  What remains a bit disturbing is that our DC term is complex. What could it mean?
+  Remember Chapter I: an analytic signal (complex sinusoid) is half a real sinusoid. The other half is its complex conjugate.
+  So their sum doubles the real part and cancels the imaginary one.
+  We can feed our equations complex sinusoids, not our circuit.
+  So a complex DC means nothing empirical: it's a reminder that we're using simplifying tools (namely the Laplace integral).
 
   We've already solved the DC case (Chapter II, #7): Y (0) converges exponentially to X (0).
   If  X (0)  =  0  then Y (0) becomes negligible very fast.
 
   Knowing that y (t) has two partials (one being the DC offset), we can define it:  y (t)  =  Y (s) exp (st)  +  DC
+  (Implied here:  ω = 0  =>  jω = 0  =>  s = 0  =>  st = 0  =>  exp (st)  =  1)
   Then:
 
                            X (s)  -  Y (s)
@@ -576,7 +583,7 @@
 
     exp (-j∞)  =  cos (-∞)  +  j sin (-∞)  =  cos (∞)  -  j sin (∞)
 
-  Looks undefined... It's aporia time again.
+  Failure: undefined... It's aporia time again.
   How about this: for this expression to be zero, we need both cos and sin to be zero at the same time, otherwise the result will
   have at least a real part or an imaginary part.
   So if there's no solution to:  cos (x)  =  sin (x)  =  0  we're good.
@@ -656,6 +663,25 @@
   Different H (s) -- but still popping up. It's definitively important. We really should deal with it at some point.
   But first let me introduce an alternative path to reach it.
 
+  /*
+    Actually there's a digression I shouldn't delay any longer.
+    All our demonstrations are valid because the factor H (s) is not a function of time.
+    
+    We used its symbol to solve the equations -- its formula could have been anything.
+    As long as it remains time-invariant and a factor (or a sum of factors), our demonstrations can be generalised.
+
+    A function only defined by additions and/or multiplications is called "linear".
+    (Subtractions are additions. Divisions are multiplications)
+
+    So we've shown that any linear time-invariant circuit doesn't generate partials (apart from contingent DC offset)
+    nor does it shift the frequency of extant ones -- which, inside a spectral integral, is equivalent to generating new partial(s).
+    It only affects their complex amplitude (real amplitude and phase).
+    I didn't just coin the term "linear time-invariant": it's usually abbreviated "LTI" and is defined by what we've been demonstrating.
+    //  https://en.wikipedia.org/wiki/Linear_time-invariant_system
+
+    Notice that if the cutoff frequency (ωc, fc) or any parameter varies over time, LTI no longer applies.
+  */
+
 
 
 -----------------------------------------------------------------------------------------------
@@ -664,14 +690,3 @@
 ===============================================================================================
 #4  Pasghetti
 ===============================================================================================
-
-
-
-
-
-
-
-
-
-
-
