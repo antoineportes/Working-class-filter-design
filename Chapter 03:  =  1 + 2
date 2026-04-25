@@ -690,3 +690,507 @@
 ===============================================================================================
 #4  Pasghetti
 ===============================================================================================
+
+  Some silly people do not enjoy hardcore mathematics.
+  If you're one of them, you can breathe now: we're about to doodle our path around.
+
+  Back to the capacitor.
+  Let's simplify the notation:
+
+    #  x  =  X (s) exp (st)    [input]
+    #  y  =  Y (s) exp (st)    [output: voltage across C]
+
+  Then:
+
+          ⌠
+    y  =  | ωc (x - y)
+          ⌡
+  
+  where we got rid of the terms which contributed to DC (t0 and y (t0)).
+  The integration starts whenever and always ends right now. The differential is time (dt or dτ) but now it's implied.
+  THIS IS NOT A VALID EXPRESSION.
+  But it helps reducing the signal path to its core elements.
+
+  Let's decompose the formula:
+
+    #  α  =  x - y
+    #  β  =  ωc α
+    #  γ  =  ∫ β
+
+  Almost there. But ∫ ?
+  Chain rule and the fact that exp (x) is its own derivative give:  d exp (st) / dt  =  s exp (st).
+  So if our input is a Laplace partial (complex sinusoid), multiplying by s is differentiating -- or: s is a differentiator.
+  (Didn't just coin the term:  https://en.wikipedia.org/wiki/Differentiator )
+
+  Then dividing by s (or multiplying by 1/s) is the reciprocal to differentiation.
+
+  You might have not noticed but in section #1 of this very chapter (while looking for something else),
+  we've proven that this reciprocal is integration.
+  /*
+    Short recap:
+      df is how much f (x) varies when dx is added to x,
+      so if you stack all df from the beginning of f (x)'s domain up to x = a, you get f (a),
+      and since df = df/dx * dx, stacking means integrating df/dx with respect to x.
+  */
+  So 1/s is an integrator.
+  (Again: didn't just coin the term:  https://en.wikipedia.org/wiki/Integrator )
+  Then, assuming input is a Laplace spectrum and the circuit is LTI,
+  we can safely substitute integrals with divisions by s.
+
+  That's right: our friend Laplace turned Calculus into basic arithmetic.
+  Guess his integral is not just beautiful.
+
+  Wait! What if s is zero?
+  Then we cannot divide by it, true (good catch).
+  But s being zero means the frequency is zero, so DC voltage.
+  We've solved this case last chapter: RC + DC.
+
+  Ok, let's start over:
+
+    #  α  =  x - y
+    #  β  =  ωc α
+    #  γ  =  β / s
+
+  Now let's draw our signal path in an even more symbolic fashion. Starting with α:
+
+    x --->(+)---> α        //  I.e.: x travels forward minding its own business, at some point y joins the party,
+           ^ -             //  only traveling backward. (+) means "it joins" and the "-" sign means "backward".
+           |               //  Ok, it's a weird way to write a subtraction. But  A - B  =  A + (-B), so subtraction is addition.
+           y               //  This notation generalises cases to reduce the number of symbols involved.
+                           //  You could directly use (-). I won't. But you could. But I won't.
+
+  Moving on to β:
+
+    α --->[ ωc ]---> β                   //  I use square brackets for gains because monospace + lazy.
+                                         //  Embedding the gain factor inside a triangle pointing in the same direction as the arrows
+  or, if we combine both doodles:        //  would be more conventional.
+                                         //  In fact, in that case, usually, you don't see the arrow before the gain block.
+             (α)                         //  Would be redundant.
+    x -->(+)----->[ ωc ]--> β            //  Hope it helps showing that convention is here to reduce noise and simplify the message
+          ^ -                            //  without losing data.
+          |                              //  Use the custom convention you like (make your own by all means).
+          y                              //  But if it's redundant in some way, you can probably do better.
+
+  Step 3: γ.
+
+    β --->[ 1/s ]---> γ        //  You often see the integral symbol (∫) instead of 1/s. I prefer this way, you'll see why right away.
+
+  Full path:
+
+             (α)         (β)
+    x -->(+)----->[ ωc ]----->[ 1/s ]--> γ
+          ^ -
+          |
+          y
+
+  Nit pick: γ looks too much like y. That's poor editor design.
+  Is it?
+
+                             ⌠
+    γ  =  ∫ β  =  ∫ ωc α  =  | ωc (x - y)  =  y
+                             ⌡
+
+  Poor design indeed: they should look infinitely more alike: they're one and the same.
+  Literal closure:
+
+             (α)         (β)
+    x -->(+)----->[ ωc ]----->[ 1/s ]-->o--> y
+          ^ -                           |
+          |                             |
+          -------------------------------
+
+  Before moving on any further: could we do the same for the voltage across the resistor?
+  Let's call it y2. Then the differential equation gives:
+
+    y2  =  x - y    -- hey, wait... that's α!
+
+  Full RC circuit:
+
+               y2  (U_R (t))
+               ^
+               |
+    x -->(+)-->o-->[ ωc ]-->[ 1/s ]-->o--> y  (U_C (t))
+          ^ -                         |
+          |                           |
+          -----------------------------
+
+  Amazing. What is it good for?
+  Well first of all, next time you hear someone say "RC circuit has a negative feedback loop",
+  you get to answer "I know, I've seen it".
+
+  Anything actually useful?
+  Imagine this is Chapter I, section #1. Let's assume we started with this:
+
+    x -->(+)-------------------->o--> y        //  U_R first for a change.
+          ^ -                    |             //  It's not upside-down: you are.
+          |                      |
+          ---[ 1/s ]<---[ ωc ]<---
+           C          B         A
+  
+  Just follow the signal path. I guess you could go from input (x), but I usually go the other way around.
+  So:
+
+    y  =  x - C
+    C  =  B / s    so    y  =  x  -  B / s                //  And that's why I prefer 1/s over ∫.
+    B  =  A ωc     so    y  =  x  -  A ωc / s             //  That's just me though, do as you like.
+    A  =  y        so    y  =  x  -  y ωc / s
+
+    <=>    y  +  y ωc / s  =  x    <=>    y (1  +  ωc / s)  =  x    <=>    y (s / s  +  ωc / s)  =  x
+
+              s + ωc                            s
+    <=>    y --------  =  x    <=>    y  =   -------- x  =  H (s) x
+                s                             s + ωc
+
+  /*
+    I personally always start with y if I can, I find it less error-prone.
+    But it's a loop, choose any point and complete the loop.
+    Adding upper-case Latin letters or lower-case Greek letters (depends on the mood) is my thing too.
+    I'd advise doing so because it helps splitting the problem and forces to write every step down (less error-prone).
+    I didn't always proceed as such though. I had to play with fire first. That's my thing, do yours.
+  */
+
+  Et voilà, ganz einfach, isn't it? U_C?
+
+             A         B          
+    x -->(+)--->[ ωc ]--->[ 1/s ]-->o--> y
+          ^ -                       |
+          |                         |
+          ---------------------------
+
+    y  =  B / s   |                                                                        s + ωc
+    B  =  ωc A    |==>    y  =  ωc (x - y) / s    <=>    y s / ωc  +  y  =  x    <=>    y --------  =  x
+    A  =  x - y   |                                                                          ωc
+
+                    ωc
+    <=>    y  =  -------- x  =  H (s) x
+                  s + ωc
+  
+  Wonderful. Cute little trick. Decent time saver. Was it worth interrupting the differential equation?
+  Well first: this got us to the same place as Calculus did. Only quickly and easily.
+  And now that we have it, and that we know how easily solvable it is...
+  What's preventing us from modifying it?
+
+  That's right: meet our very first design tool.
+  It's called a Block Diagram -- and it's a lot more fundamental than it appears.
+  You know what? Let me prove it.
+  Yep: we're designing a filter.
+  
+  Allegro con brio.
+
+  We still don't know what H (s) exactly does to amplitude and phase, so it'll have to stand by for a while.
+  But the book has "filter design" in its title and it's Chapter III already...
+  Oh so we're 2 designs late. Let's design 3 filters then. They'll need names in case we call them back later.
+
+    #  (1) "Holbach"     will be 2 U_C (t) in series;
+    #  (2) "La Mettrie"  will be 2 U_R (t) in series;
+    #  (3) "Diderot"     will be U_R (t) followed by U_C (t)
+
+  //  HOLBACH:
+
+             A         B            C       D         E
+    x -->(+)--->[ ωc ]--->[ 1/s ]-->o-->(+)--->[ ωc ]--->[ 1/s ]-->o--> y
+          ^ -                       |    ^ -                       |
+          |                         |    |                         |
+          ---------------------------    ---------------------------
+
+    y  =  E / s    ;    E  =  ωc D    ;    D  =  C - y
+  
+              C - y                                                                       s + ωc
+    y  =  ωc -------    <=>    y s/ωc  =  C - y    <=>    y (s/ωc + 1)  =  C    <=>    y --------  =  C
+                s                                                                           ωc
+    
+    C  =  B / s    ;    B  =  ωc A    ;    A  =  x - C
+  
+              x - C                                                                             ωc
+    C  =  ωc -------    <=>    C s/ωc  =  x - C    <=>    C (s/ωc + 1)  =  x    <=>    C  =  -------- x
+                s                                                                             s + ωc
+  
+       s + ωc         ωc                        ωc          ωc                                ωc²
+    y --------  =  -------- x    <=>    y  =  -------- * -------- x    <=>    y  =  ----------------------- x
+         ωc         s + ωc                     s + ωc     s + ωc                     s²  +  2 ωc s  +  ωc²
+
+  Ok. Let's re-arrange that:
+
+    s² y  +  2 ωc s y  +  ωc² y  =  ωc² x
+
+  now let's divide both sides by ωc²:
+
+    (s²/ωc²) y  +  2 (s/ωc) y  +  y  =  x    <=>    y  =  x  -  ( (s²/ωc²) y  +  2 (s/ωc) y )
+
+  Let's define:    α  =  (s/ωc) y    and:    β  =  (s²/ωc²) y
+
+  Then:  y  =  x  -  (β + 2α)
+  And:
+
+           ωc α
+    y  =  ------    so:    α -->[ ωc ]-->[ 1/s ]--> y
+            s
+  
+  and:
+            ωc β                                        α
+           ------ ωc                                    ^
+             s                                          |
+    y  =  -----------    so:    β -->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]--> y
+               s
+
+  The loop is open... We need to know more about β:
+
+    β  =  x  -  (2α + y)
+
+  Ok, so:
+                            α
+    β -->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]-->o--> y        //  Loop still open...
+                            |                      |             //  but there are two instances of β.
+                            v                      |             //  Let's merge them.
+                          [ 2 ]                    |
+             β              |                      |
+             ^              | (2α)                 |
+             |    (2α + y)  v                      |
+       x -->(+)<-----------(+)<---------------------
+                -
+  Then:
+
+    x -->(+)-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]-->o--> y
+          ^ -                     |                      |
+          |                       v                      |
+          |                     [ 2 ]                    |
+          |                       |                      |
+          |                       v                      |
+          -----------------------(+)<---------------------
+
+  Now would be a good time to pause and analyse Holbach. But we won't. We'll move on.
+  "I don't teach, I learn and document along the way." -- Not so much right now. Guilty of charge.
+  I know exactly where we're heading -- and I'm eager to get there. Please follow me.
+  If you feel like I'm rushing, don't worry: we'll go back to these designs with more tools to deal with them.
+  For the moment my point is: the apparent triviality of block diagrams is the opposite of a weakness.
+
+  //  LA METTRIE
+
+             A
+    x -->(+)-------------------->o-->(+)-------------------->o--> y
+          ^ -                    |    ^ -                    |
+          | C          B         |    | E          D         |
+          ----[ 1/s ]<---[ ωc ]<--    ----[ 1/s ]<---[ ωc ]<--
+
+
+    y  =  A - E    ;    E  =  D / s    ;    D  =  ωc y
+
+                 ωc y                   ωc y                                                  s + ωc
+    y  =  A  -  ------    <=>    y  +  ------  =  A    <=>    y (1 + ωc/s)  =  A    <=>    y --------  =  A
+                  s                      s                                                      s
+    
+    A  =  x - C    ;    C  =  B / s    ;    B  =  ωc A
+
+                 ωc A                   ωc A                                                        s
+    A  =  x  -  ------    <=>    A  +  ------  =  x    <=>    A (1 + ωc/s)  =  x    <=>    A  =  -------- x
+                  s                      s                                                        s + ωc
+
+       s + ωc         s                          s          s                                 s²
+    y --------  =  -------- x    <=>    y  =  -------- * -------- x    <=>    y  =  ----------------------- x
+         s          s + ωc                     s + ωc     s + ωc                     s²  +  2 ωc s  +  ωc²
+
+  Denominator looks familiar... Who cares? Let's re-arrange that:
+
+    s² y  +  2 ωc s y  +  ωc² y  =  s² x
+
+  now let's divide both sides by s²:
+
+    y  +  2 (ωc/s) y  +  (ωc²/s²) y  =  x    <=>    y  =  x  -  ( 2(ωc/s) y  +  (ωc²/s²) y )
+
+  Let's define:    α  =  (ωc/s) y    and:    β  =  (ωc²/s²) y
+
+  Then:  y  =  x  -  (2α + β)
+  And:
+
+           ωc y
+    α  =  ------    so:    y -->[ ωc ]-->[ 1/s ]--> α
+            s
+  
+  and:
+            ωc y                                        α
+           ------ ωc                                    ^
+             s                                          |
+    β  =  -----------    so:    y -->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]--> β
+               s
+
+  The loop is open... But we have α and β. Double α, add β to it, subtract this to x, get y:
+
+                            α                    β
+    y -->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]---
+                            |                     |
+                            v                     |
+                          [ 2 ]                   |
+             y              |                     |
+             ^              | (2α)                |
+             |    (2α + β)  v                     |
+       x -->(+)<-----------(+)<--------------------
+                -
+
+  Or, if we close the loop:
+
+               y
+               ^
+               |
+    x -->(+)-->o-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s]---
+          ^ -                         |                    |
+          |                           v                    |
+          |                         [ 2 ]                  |
+          |                           |                    |
+          |                           v                    |
+          ---------------------------(+)<-------------------
+
+  Block diagram looks familiar... Shut up!
+
+  // DIDEROT
+
+             A                           D         E
+    x -->(+)-------------------->o-->(+)--->[ ωc ]--->[ 1/s ]-->o--> y
+          ^ -                    |    ^ -                      |
+          | C          B         |    |                        |
+          ----[ 1/s ]<---[ ωc ]<--    --------------------------
+
+    y  =  E / s    ;    E  =  ωc D    ;    D  =  A - y
+
+
+              A - y                                                                       s + ωc
+    y  =  ωc -------    <=>    y s/ωc  =  A - y    <=>    y (s/ωc + 1)  =  A    <=>    y --------  =  A
+                s                                                                           ωc
+
+    A  =  x - C    ;    C  =  B / s    ;    B  =  ωc A
+
+                 ωc A                   ωc A                                                        s
+    A  =  x  -  ------    <=>    A  +  ------  =  x    <=>    A (1 + ωc/s)  =  x    <=>    A  =  -------- x
+                  s                      s                                                        s + ωc
+
+       s + ωc         s                          ωc         s                                ωc s
+    y --------  =  -------- x    <=>    y  =  -------- * -------- x    <=>    y  =  ----------------------- x
+         ωc         s + ωc                     s + ωc     s + ωc                     s²  +  2 ωc s  +  ωc²
+
+  Denominator loo--SHHH!
+
+  Re-arrange etc.:
+
+    s² y  +  2 ωc s y  +  ωc² y  =  ωc s x
+
+  now let's divide both sides by ωc s:
+
+    (s/ωc) y  +  2 y  +  (ωc/s) y  =  x    <=>    2 y  =  x  -  ( (s/ωc) y  +  (ωc/s) y )
+
+  Let's define:    α  =  (s/ωc) y    and:    β  =  (ωc/s) y
+  Then:  2 y  =  x  -  (α + β)
+  And:
+
+           ωc α
+    y  =  ------    so:    α -->[ ωc ]-->[ 1/s ]--> y
+            s
+
+  and:
+                       ωc α                                        y
+                      ------ ωc                                    ^
+           ωc y         s                                          |
+    β  =  ------  =  -----------    so:    α -->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]--> β
+            s             s
+
+  The loop is open... We need to know more about α:
+
+    α  =  x  -  (2 y + β)
+
+  Ok, so:
+                            y
+                            ^
+                            |                    β
+    α -->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]---
+                            |                     |
+                            v                     |
+                          [ 2 ]                   |
+            α               |                     |
+            ^               | (2 y)               |
+            |    (2 y + β)  v                     |
+      x -->(+)<------------(+)<--------------------
+               -
+
+  Shall we close the loop?
+                                  y
+                                  ^
+                                  |
+    x -->(+)-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]---
+          ^ -                     |                     |
+          |                       v                     |
+          |                     [ 2 ]                   |
+          |                       |                     |
+          |                       v                     |
+          -----------------------(+)<--------------------
+
+  // BLOCK DIAGRAM LOOKS FAMILIAR
+
+  Ok, so Holbach, La Mettrie and Diderot are three outputs in the same loop.
+  And their y / x factors have thrice the same denominator, only different numerators.
+
+  Crap. More is less: attempt 3, get 1... Or 4?
+  Success beyond expectations. Or epic fail. Both views are valid.
+  In any case this "one filter to rule them all" needs a name too.
+
+  Obviously: Ἐπίκουρος [Epikouros]        //  https://en.wikisource.org/wiki/Letter_to_Menoeceus
+
+          La Mettrie               Diderot
+               ^                      ^
+               |                      |
+    x -->(+)-->o-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]-->o--> Hobach
+          ^ -                         |                      |
+          |                           v                      |
+          |                         [ 2 ]                    |
+          |                           |                      |
+          |                           v                      |
+          ---------------------------(+)<---------------------
+
+  Wait.
+  We were supposed to modify a block diagram.
+  This is not Epikouros. This is Working-class filter Frankenstein. Refund!
+
+  How about: the [ 2 ] gain element is a bit static, is it not?
+  We could replace it with a variable. Or add a second gain before or after it.
+  Or something half-way: let's say D is a variable gain that multiplies 2.
+  This way Epikouros gets an extra parameter without forgetting that it came out of 2 RC circuit in series.
+  Why "D"? Because it's my book and it's Ahuda abu Tayi's pleasure -- I mean this section is called "Pasghetti"...
+  Serious answer will come with serious analysis.
+
+  Instead of 3 switchable outputs, we could have a variable gain for each and make our mixture.
+  How about "m" as in "mixture"?
+
+          La Mettrie               Diderot
+               ^                      ^
+               |                      |
+            [ m_0 ]                [ m_1 ]
+               ^                      ^
+               |                      |
+    x -->(+)-->o-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]-->o-->[ m_2 ]--> Holbach
+          ^ -                         |                      |
+          |                           v                      |
+          |                        [ 2 D ]                   |
+          |                           |                      |
+          |                           v                      |
+          ---------------------------(+)<---------------------
+  
+  Now that's Epikouros. Five parameters:
+
+    (1)  ωc
+    (2)  D
+    (3)  m_0
+    (4)  m_1
+    (5)  m_2
+
+  Amazing. How does it sound? -- How would we know?
+  Better moving on then. Let's forget about Epikouros until further notice.
+
+
+
+-----------------------------------------------------------------------------------------------
+/*          "Toto, I'm afraid we're not in Kansas anymore."                                  */
+/*                                                                  --  Pink Floyd?          */
+===============================================================================================
+#5  H (s)
+===============================================================================================
+
+  Andante moderato.
+
+  [[IN PROGRESS]]
