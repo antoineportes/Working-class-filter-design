@@ -5,7 +5,7 @@
 ###############################################################################################
 
 ###############################################################################################
-                                     Chapter V:  ?
+                                     Chapter ??:  ?
 ###############################################################################################
 /*          "No 9000 computer has ever made a mistake or distorted information."             */
 /*                                           --  HAL 9000 (2001: A Space Odyssey)            */
@@ -21,3 +21,13 @@
   Here's my secret to keep all my promises: I don't make any.
 
   But I'm hoping to manage to explain (at least) the reason for the Nyquist frequency.
+
+
+  EDIT:  I've looked at how to derive the inverse z-transform from the inverse Laplace transform -- should be quick.
+  Maybe just one chapter for general discrete-signal concepts.
+
+  Really depends on how I'll manage to cover BLT.
+
+  Not sure about "Sampling" anymore.
+
+  https://www.desmos.com/calculator/kgtpjqpzuc
