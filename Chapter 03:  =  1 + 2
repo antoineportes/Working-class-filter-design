@@ -597,7 +597,7 @@
   EDIT: Dumb me.
     Cosine and sine are periodic and simply looking at their superposed curves shows that  cos = sin  has two solutions per period:
     ± 1 / √(2)  or  ± 2^(-1/2)  ≈  ± 0.707107... -- you'll get used to this number.
-    Wel'll even make use of this in a distant chapter entitled "Stephen Butterworth".
+    Wel'll even take advantage of this in a distant chapter entitled "Stephen Butterworth".
     This demonstration is not valid so we're not "even better" but we're still good because  ± 1 / √(2)  ≠  0.
 
   Except: σ = 0 right now but what if not?
