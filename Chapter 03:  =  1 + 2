@@ -329,7 +329,7 @@
     <=>    x (t)  =  ----------------  +  ----------------  =  X (s) exp (st)  +  X (ζ) exp (ζt)
                            H (s)                H (ζ)
 
-  Ok, great. Any two partials enter DC, they come out with different amplitude and phase.
+  Ok, great. Any two partials enter RC, they come out with different amplitude and phase.
   What if there are more than two? Maybe there's a maximum number of partials, an intermodulation threshold?
   Right! Let's test more partials. How about 3? How about ∞? How about twice that?
   Let:
@@ -594,11 +594,26 @@
 
   Ok, we're good.
 
-  EDIT: Dumb me.
-    Cosine and sine are periodic and simply looking at their superposed curves shows that  cos = sin  has two solutions per period:
-    ± 1 / √(2)  or  ± 2^(-1/2)  ≈  ± 0.707107... -- you'll get used to this number.
-    Wel'll even take advantage of this in a distant chapter entitled "Stephen Butterworth".
-    This demonstration is not valid so we're not "even better" but we're still good because  ± 1 / √(2)  ≠  0.
+  /*
+    EDIT: Dumb me.
+      Cosine and sine are periodic and simply looking at their superposed curves shows that  cos = sin  has two solutions per period.
+
+      Some Old Hippy Caught Another Hippy Tripping On Acid:
+        Sin  =  Opposite / Hypotenuse    ;    Cos  =  Adjacent / Hypotenuse    ;    Tan  =  Opposite / Adjacent
+      Or, if hypotenuse is 1:
+        sin  =  opposite    ;    cos  =  adjacent    ;    tan  =  sin / cos
+
+      So  cos (x) = sin (x)  means right isoceles triangle (and tan (x) = 1). So 1 right angle (π/2) + 2 equal angles = π. Then:
+               π - π/2
+        x  =  ---------  mod 2π  =  π/4  mod 2π    and    sin² (x)  +  cos² (x)  =  1²    //  (Pythagoras' theorem)
+                  2
+        =>    sin² (π/4 mod 2π)  =  cos² (π/4 mod 2π)  =  1/2    <=>    sin (π/4 mod 2π)  =  cos (π/4 mod 2π)  =  ± √(1/2)
+
+        =  ± 1/√(2)  =  ± 2^(-1/2)  =  ± √(2)/2  ≈  ± 0.707107...  --  you'll get used to this number.
+
+      Therefore the penultimate demonstration ( sin (x)  ≠  cos (x)  ∀ x ) is not valid.
+      So we're not "even better" but we're still good because  ± 1/√(2)  ≠  0. And furthermore:  ± 1/√(2)  ≠  ± j/√(2).
+  */
 
   Except: σ = 0 right now but what if not?
   Well when calling it "constant" we quietly implied "finite",
@@ -631,7 +646,7 @@
                       o
                      GND
 
-  other than redefining y (t) as the output of the resistor (instead of the capacitor).
+  other than redefining y (t) as the voltage across the resistor (instead of the capacitor).
   But we now know how to express U_C (t) easily in terms of the input signal -- thanks to Pierre-Simon Laplace.
   We'll keep trusting him and assuming  x (t)  =  X (s) exp (st). With X (s) constant over time.
   Two equations define y (t) (the voltage across the resistor):
@@ -781,7 +796,7 @@
   Step 3: γ.
 
     β --->[ 1/s ]---> γ        //  You often see the integral symbol (∫) instead of 1/s. I prefer this way, you'll see why right away.
-
+                               //  There's also a good reason not to imitate me, you'll see why in a future chapter.
   Full path:
 
              (α)         (β)
@@ -928,11 +943,10 @@
 
   Then:  y  =  x  -  (β + 2α)
   And:
-
            ωc α
     y  =  ------    so:    α -->[ ωc ]-->[ 1/s ]--> y
             s
-  
+
   and:
             ωc β                                        α
            ------ ωc                                    ^
@@ -1008,11 +1022,10 @@
 
   Then:  y  =  x  -  (2α + β)
   And:
-
            ωc y
     α  =  ------    so:    y -->[ ωc ]-->[ 1/s ]--> α
             s
-  
+
   and:
             ωc y                                        α
            ------ ωc                                    ^
@@ -1069,11 +1082,16 @@
     A  =  x  -  ------    <=>    A  +  ------  =  x    <=>    A (1 + ωc/s)  =  x    <=>    A  =  -------- x
                   s                      s                                                        s + ωc
 
-       s + ωc         s                          ωc         s                                ωc s
-    y --------  =  -------- x    <=>    y  =  -------- * -------- x    <=>    y  =  ----------------------- x
-         ωc         s + ωc                     s + ωc     s + ωc                     s²  +  2 ωc s  +  ωc²
+       s + ωc         s                          ωc         s                                     ωc s
+    y --------  =  -------- x    <=>    y  =  -------- * -------- x  [!]    <=>    y  =  ----------------------- x
+         ωc         s + ωc                     s + ωc     s + ωc                          s²  +  2 ωc s  +  ωc²
 
   Denominator loo--SHHH!
+
+  /*
+    Step [!] shows that U_R first or U_C first is equivalent:
+    H_C (s) H_R (s) x  =  H_R (s) H_C (s) x.
+  */
 
   Re-arrange etc.:
 
@@ -1157,7 +1175,7 @@
   How about: the [ 2 ] gain element is a bit static, is it not?
   We could replace it with a variable. Or add a second gain before or after it.
   Or something half-way: let's say D is a variable gain that multiplies 2.
-  This way Epikouros gets an extra parameter without forgetting that it came out of 2 RC circuit in series.
+  This way Epikouros gets an extra parameter without forgetting that it came out of 2 RC circuits in series.
   Why "D"? Because it's my book and it's Ahuda abu Tayi's pleasure -- I mean this section is called "Pasghetti"...
   Serious answer will come with serious analysis.
 
@@ -1199,5 +1217,130 @@
 ===============================================================================================
 
   Andante moderato.
+
+  H (s) is the standard notation for what is called a TRANSFER FUNCTION. Sometimes G (s).
+  Why H? Or G? Couldn't find any serious explanation.
+  /*
+    My undocumented gratuitous unnecessary uncalled for off-topic hypothesis:
+      F is sometimes used for Laplace. It's also the initial of Fourier. Could be messy.
+      Next in the Latin alphabet: G. But it's the initial of "gain". Ok, next: H.
+  */
+  Sometimes the variable is not s.
+  Also it's often called H (jω) to make explicit that σ = 0.
+
+  The transfer function of a system is a mathematical expression which binds any input to a deterministic output.
+  
+  https://en.wikipedia.org/wiki/Transfer_function        https://en.wikipedia.org/wiki/Determinism
+
+  As we've shown: for LTI filters its value depends on the frequency.
+  But for each partial it's a complex factor, constant over time, and equal to the ratio of the output over the input:
+
+    Y (s) exp (st) / X (s) exp (st)  =  H (s)
+
+  Back in Chapter I (#3), using Euler's formula, we've demonstrated that:
+  "
+    [...] any complex sinusoid in the form:
+
+      ƒ (t)  =  X (s) exp (st)
+
+    can be considered the positive-frequency-component of a real sinusoid with:
+
+      Amplitude    α  =  2 |X (s)|
+
+      Phase        φ  =  arg (X (s))  rad.
+                                                        s
+      Frequency    ω  =  s / j  rad./s    or    f  =  -----  Hz
+                                                       2πj
+  "
+
+  Except it could be the negative component, depending on the value of s -- in which case  φ  =  -arg (X (s))  rad.
+  It's ok, we were young and stupid back then.
+
+  Also this was before we knew Laplace. So  s = jω  or  σ = 0.
+  But this is also our hypothesis when feeding our RC filter with analytic signals.
+  So what precedes stands.
+  And the transfer function H (s) describes the system's response to signals of constant real amplitude and phase.
+  Which explains why the equation involving a time-varying complex amplitude never provided a fully satisfying result.
+
+  /*
+    Actually let's try again.
+
+      Y (s) exp (st)  =  H (s) X (s) exp (st)
+      H (s) is a function of s = jω and ωc -- both constant over time for each partial.
+      So if X (s) varies over time, H (s) is still a constant factor.
+
+      Then (according to the chain rule):
+
+          Y (s, t) exp (st)       dY
+        d-------------------  =  ---- exp (st)  +  Y (s, t) s exp (st)
+                 dt               dt
+
+      and (according to the constant factor rule, then the chain rule):
+
+          H (s) X (s, t) exp (st)              X (s, t) exp (st)             dX
+        d-------------------------  =  H (s) d-------------------  =  H (s) ---- exp (st)  +  H (s) X (s, t) s exp (st)
+                    dt                                dt                     dt
+      
+                                              dX
+                                    =  H (s) ---- exp (st)  +  Y (s, t) s exp (st)
+                                              dt
+      So:
+
+         dY                                              dX
+        ---- exp (st)  +  Y (s, t) s exp (st)  =  H (s) ---- exp (st)  +  Y (s, t) s exp (st)
+         dt                                              dt
+
+      Dividing both sides by exp (st):
+
+        dY/dt  +  Y (s, t) s  =  H (s) dX/dt  +  Y (s, t) s
+
+      Subtracting  Y (s, t) s  from both sides:
+
+        dY/dt  =  H (s) dX/dt
+
+      The output's rate of change is proportional to the input's rate of change, by a factor which happens to be the transfer function.
+      Simpler proof:
+
+        Y (s)  =  H (s) X (s), so by the constant factor rule:  dY/dt  =  H (s) dX/dt
+
+      but where's the fun in simple?
+  */
+
+  Ok back to business.
+  So: real amplitude is twice the absolute value of the complex amplitude and phase is the argument of the complex amplitude.
+  So if  y  =  Y (s) exp (st)  =  H (s) X (s) exp (st),
+  its real amplitude is (Chapter I, #9):
+
+    2 |Y (s)|  =  2 |H (s) X (s)|  =  |H (s)| * 2 |X (s)|
+
+  In plain English -- and THIS IS FUNDAMENTAL -- the real amplitude of the output is the real amplitude of the input multiplied by the
+  absolute value of the transfer function (|H (s)| or |H (jω)|).
+
+  //  Example:
+
+  ωc = 1  rad/s
+  ω  = 2  rad/s
+               ωc
+  H (s)  =  --------
+             s + ωc
+
+  Then:                                                               ___________
+                 |     ωc    |        |ωc|            √(ωc²)         ⎟    ωc²
+    |H (jω)|  =  | --------- |  =  -----------  =  -------------  =  ⎟ ---------
+                 |  jω + ωc  |      |jω + ωc|       √(ω² + ωc²)      ⎷  ω² + ωc²
+
+  Some steps are useless right now. Except this shows that |H (jω)| is the square root of a ratio.
+  Hence the notation:
+
+    |H (jω)|²    which just means: "let's temporarily ignore the square root".
+
+  Don't get confused if you stumble upon it: it's precisely meant to reduce distraction.
+
+  So:  |H (jω|  =  √(ωc²) / √(ω² + ωc²)  =  ωc  /  √(ω² + ωc²)
+
+  With  ωc = 1  and  ω = 2, that's:    |H (2j)|  =  1 / √(2² + 1²)  =  1 / √(4 + 1)  =  1 / √(5)
+
+  So if    x  =  5 cos (2t)    then    y  =  5 cos (2t ± φ) / √(5)  =  √(5) cos (2t ± φ)
+
 
   [[IN PROGRESS]]
