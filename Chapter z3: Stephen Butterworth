@@ -1,0 +1,137 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                              Chapter VII:  Stephen Butterworth
+###############################################################################################
+/*          "Whatever happened to                                                            */
+/*           All the heroes?                                                                 */
+/*           All the Shakespearoes?                                                          */
+/*           They watched their Rome burn."                                                  */
+/*                                               --  Hugh Cornwell (No more heroes)          */
+===============================================================================================
+#1  Meet Stephen
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Stephen_Butterworth
+
+  In 1930, Stephen Butterworth asked himself a naïve question: what would the simplest low-pass filter be?
+  He didn't know yet that "simple" would mean "perfect".
+  Nor could he know that his name was to become at least one mandatory chapter in every filter theory.
+
+  Source: I travelled through time and read his mind.
+  I'm trying to be poetic. Would you rather have me quote Aristotle again?
+
+  Actual source:
+    "On the Theory of Filter Amplifiers", S. Butterworth
+    (in "Experimental Wireless & the Wireless Engineer" n° 85, October 1930)
+
+  Stephen was so badass that he didn't even use the Laplace transform.
+  This wasn't necessarily an act of rebellion: there was no standard method yet.
+  No social norm in filter design. Complete creative Freedom.
+
+  There were no digital filters in the late 1920's. Back then this was pure electronics.
+  The problem was to be understood as "design a circuit".
+  The 6-page article is pretty short if you reduce it to its math part.
+
+  I don't know that he used the term "transfer function" -- but he wrote "ratio of the output [...] to the input [...]".
+  Nevertheless his method suggests that he knew that the amplitude response of a filter of order N is the absolute value
+  of a ratio complex polynomials whose denominator is of order N.
+
+  He defined f0 the cutoff frequency and any frequency f as f = x f0.
+  So  x  =  f / f0. That's our ω / ωc, so we're in unit-cutoff notation. So our numerator is 1 (LP, remember?).
+
+  Then he defines F the "filter factor". He's focusing on amplitudes so that's our |H (jω)|.
+  (Or H (jω') if you accept my rejection of standard unit-cutoff notation.)
+
+  So our denominator is the square root of a polynomial of order 2N (he used m for N).
+
+  What's the simplest polynomial of order μ? I'd say:  x^μ.
+
+  Ok, so the simplest amplitude response for a LP filter of order N is:
+     _______
+    ⎟    1   
+    ⎟ ------
+   ⎷  x^2N
+  
+  Except this is not a LP... We want the amplitude to be 1 when x = 0, and 0 when x = ∞.
+  We already have the second condition.
+  Now:  1  =  √(1)  =  √(1 / 1)  =  √( 1 / (1 + 0) )  =  √( 1 / (1 + 0^2N) )
+
+  Ok so just add 1 to the numerator and we're good.
+
+  Stephen writes:
+
+    F  =  (1 + x^2m) ^ (1/2)
+
+  which translates as:                                              _________________       ___________________
+                                                                   ⎟       ωc^2N            ⎟         1
+    |H (jω)|^-2  =  1 + (ω/ωc)^2N    which means:    |H (jω)|  =   ⎟ ----------------   =   ⎟ -----------------  =  F
+                                                                  ⎷  ωc^2N  +  ω^2N       ⎷   1  +  (ω/ωc)^2N
+
+  /*
+    Notice that:
+
+      #  If N = 1, we retrieve the amplitude response of a 1-pole RC low-pass. We already have one solution.
+
+      #  If x = 1 (that is ω = ωc),  F  =  (1 + 1)^(1/2)  =  1 / √(2)
+           so any order will have the same amplitude at the cutoff frequency as a 1-pole RC low-pass.
+
+      #  If x < 1 (that is ω < ωc), x^2N tends to zero when N tends to infinity. Then 1 + x^2N tends to 1,
+           and F tends to  1 / √(1)  =  1.
+           I.e. the pass-band tends to ideal. Indeed, any frequency under the cutoff has a gain of 1, so its amplitude is untouched.
+
+      #  If x > 1 (that is ω > ωc), x^2N tends to infinity when N tends to infinity. Then 1 + x^2N tends to infinity,
+           and F tends to  1 / √(∞)  =  0.
+           I.e. the stop-band tends to ideal. Indeed, any frequency over the cutoff has a gain of 0, so its attenuation is total.
+
+      #  Infinite N means ideal pass-band, ideal stop-band and no transition-band.
+           This looks like the formula for the engineer's ideal filter.
+
+           //  https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters
+
+           Although it's a bit paradoxical since it means a gain at cutoff of  1 / √(2)  and yet no transition-band...
+           But paradoxes tend to show up when you use infinity as a number.
+
+           Still: the transition-band is as infinitesimal, the pass-band is as immaculate, the stop-band is as steep --
+           -- as the order is high.
+  */
+
+  Remember:  |z| = 0    <=>   z = 0    so the poles of the transfer function are poles of the amplitude response.
+  Ok but the only solution to  √(x) = 0  is  x = 0.
+  So the poles of |H (jω)| are the roots of |H (jω)|^-2 which, if we keep Stephen's  x = ω/ωc  gives  |H (jω)|^-2  =  1 + x^2N.
+  Indeed the exponent -2 is 2 times -1, where "2" means "square" or "ignore the square root",
+  and "-1" means "inverse" or "ignore the numerator".
+
+  So we want the solutions to  ƒ (x)  =  1 + x^2N  =  0.
+  But wait. That's a 2Nth-order polynomial: it has 2N roots. Our filter is of order N: it has N poles.
+  We'll get twice too many solutions... Right. Good.
+
+  When studying polynomials, we've seen that:
+
+    (1)  any polynomial can be expressed in terms of its roots;
+    (2)  any polynomial of order N is a product of N polynomials of order 1 (affine).    //  (where N is a positive integer)
+  
+  Which means that any set of half the roots of ƒ (x) can be used to build the denominator of an N-pole filter's transfer function.
+  So if we don't like some root, good news: we need to drop half of them anyway.
+  E.g. if we want a stable filter we'll drop any r_n with  Re (r_n) > 0.
+  Just hope at least half of the roots have a negative real part then.
+  /*
+    Of course if we want the ultimate unstable filter we could do the opposite.
+    Dark-energy filter: "Oh, so you have a stop-band? Cute. I have a black hole."
+    Too late, I've just coined the name.
+    What's the book's license again?
+  */
+
+  Ok so:  ƒ (x)  =  1 + x^2N  =  0.
+
+  Butterworth didn't solve the equation himself: he writes "see Todhunter's Trigonometry, p. 307".
+  The only work by Isaac Todhunter I could access online is called "Spherical Trigonometry (for the Use of Colleges and Schools)".
+  It has 171 pages.
+  I guess we're on our own now.
+
+  [[IN PROGRESS]]
+
