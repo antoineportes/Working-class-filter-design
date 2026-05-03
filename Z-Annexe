@@ -182,16 +182,18 @@
   (assuming τ is now and future is not real, which is a bold assumption... if you don't like it just replace [-∞ , τ] with [-∞ , +∞]).
   Whether "infinitesimal" means "approximation of continuous" or what it actually means... go ask Planck.
 
-                 τ  / +∞ +∞ +∞                            \
-                ⌠  /  ⌠  ⌠  ⌠                dx * dy * dz  \
-    COSMOS  =   | (   |  |  | E (x, y, z) * --------------  ) * dt
-                ⌡  \  ⌡  ⌡  ⌡                     dt       /
-                -∞  \ -∞ -∞ -∞                            /
+                 τ +∞ +∞ +∞
+                ⌠  ⌠  ⌠  ⌠        d E
+    COSMOS  =   |  |  |  | ------------------ dx dy dz dt
+                ⌡  ⌡  ⌡  ⌡     dx dy dz dt
+                -∞ -∞ -∞ -∞
   
-    E (x, y, z) is the amount of energy of each point in space in Joules per cubic metre.
+    E (x, y, z, t) is the amount of energy of each point in the space-time continuum in Joules per cubic metre per second.
+    d E / (dx dy dz dt) is its rate of change.
     x, y and z are the three dimensions of space in metres (so their product is in cubic metres).
     t is time in seconds.
-    The division by dt reflects Lavoisier's famous statement about everything changing form, neither ever getting created nor destructed.
+    If Lavoisier's famous statement -- about everything changing form, neither ever getting created nor destructed -- is true,
+    then COSMOS is a constant.
     Dimensional analysis reveals that COSMOS is expressed in Joules.
 
   Matter = energy  is my personal theory. It's based upon an intuition.
@@ -216,7 +218,64 @@
   Anyway, let's pretend dogmatism is ok.
   I've given you the formula of Reality. Do you know it any better though?
 
-  [[ IN PROGRESS ]]
+  Is it true? Probably not.
+  Is it valid? Yes. Why?
+
+  Addition is valid if used on commensurable variables.
+  
+    1 apple + 1 apple  makes 2 apples.
+    1 apple + 1 orange makes no sense... Or 2 fruits.
+  
+  What makes 2 variables commensurable is the amount of data we choose to ignore:
+  
+    1 red apple of variety "Altländer Pfannkuchenapfel" and radius 2.76 centimeters
+      +
+    1 yellow apple of variety "Winter Banana" and radius 3.01 centimeters
+      =  ???
+  
+  "Two apples, you pedantic dumbass." -- Exactly, thank you very much.
+  
+  As well as:
+  
+    1 human race  +  1 big pile of shite  =  2 things (unless they're the same thing...)
+
+  OBJECTION:
+  
+  If I have three apples that's 3 * 1 apple.
+  The dimension of 1 apple is "apple", the dimension of 3 is "none".
+  So incommensurability does not always forbid mathematical operations.
+  
+  Good point, thank you.
+  How much is  1 apple + 3 seconds  ?
+  The commensurability rule only stands for additions. But what is a multiplication?
+  Isn't 3 * 1 apple a short way of writing 1 apple + 1 apple + 1 apple?
+  Isn't  pow (x, n)  just:
+  
+    for (int i = 1; i < n; i++;)
+    {
+      for (int j = 1; j < x; j++;)
+      {
+        x += x;
+      }
+    }
+  
+  ?
+  
+  Εxample:  3^5  =  3 * 3 * 3 * 3 * 3  =  3 * (3 * (3 * (3 * 3)))
+
+       3  / 3  / 3  / 3   \\\
+    =  Σ (  Σ (  Σ (  Σ 3  )))
+       1  \ 1  \ 1  \ 1   ///
+
+
+  (Let's save subtration, division and logarithm for later.)
+  
+  My point is made: addition is only valid once you ignore a sufficient amount of data.
+  
+  This ignorance of data is called a concept.
+
+
+  [[ STILL IN PROGRESS ]]
 
 
 
@@ -240,7 +299,7 @@
 /*                                             --  your neighbour? (anonymous post)          */
 /*                                                                                           */
 /*          "A meta-quote is better than a quote by definition."                             */
-/*                    --  Antoine Portes (Working-class filter design, Annexe, #03)          */
+/*                                    --  Working-class filter design (Annexe, #03)          */
 ===============================================================================================
 #03  A good law is a broken law
 ===============================================================================================
@@ -261,6 +320,12 @@
   Lucky any question is allowed in mathematics and physics don't have to ask them first and wait for centuries.
   If mathematics were forced to have a point, they would have no point.
   Expecting maths to be immediately useful is asking physics to know the unknown.
+
+  Humanity following rules is imitation running in circle.
+  The system would die of starvation if everyone just obeyed.
+
+  Anyone can answer a question. It takes Freedom to ask it.
+  The powers in place hate Freedom as much as they need it.
 
   During a storm there's a voltage across the air between the sky and the earth. Sometimes lightning strikes.
   But before it happens we have U ≠ 0 and I = 0.
@@ -317,7 +382,7 @@
         Dear Anselm, thank you for exposing the limits of your understanding with such humility. You must be a true Christian.
         Whatever subjective meaning you associate with "great", you're describing something that cannot not exist because of how you conceive it.
         So... a concept that exists by definition.
-        You're obviously begging for a beginner-level Logic tutorial. Your almighty Lord answered your prayers many centuries before your birth
+        You're obviously begging for a beginner-level logic tutorial. Your almighty Lord answered your prayers many centuries before your birth
         (It obviously loves you back).
 
       https://en.wikisource.org/wiki/Posterior_Analytics_(Bouchier)/Book_II/Chapter_VII
@@ -334,24 +399,27 @@
         Interchangeable use of homonyms is a logical fallacy (when done on purpose it's an example of what is called a sophism).
         "What is it?" and "is it?" are distinct questions. First is about essence, second is about existence.
         Essence relies on definition. Existence relies on demonstration.
-        E.G.:
+        E.g.:
           "I think therefore I am"                                -> demonstration (existence)
           "A triangle with four angles"                           -> definition (essence)
           "A four-angled triangle which thinks and therefore is"  -> ontological nonsense
 
-      https://en.wikipedia.org/wiki/Ontological_argument#Kurt_G%C3%B6del
+      https://en.wikipedia.org/wiki/Ontological_argument#Kurt_Gödel
         "Axiom 3: The property of being God-like is positive"
 
         Ain't that cheating, Kurt?
         I must agknowledge your unique gift: your parody of Spinoza is hilarious.
-        (Petition of principle, et caetera. Everyone should read the Organon blah blah blah...)
+        (Petitio principii, et caetera. Everyone should read the Organon blah blah blah...)
 
       We wouldn't be having this boring debate if believers just understood the difference between believing and knowing.
       Also the difference between "not proven to exist" and "proven not to exist".
       Your faith was never in danger, dummy.
 
-      But since we seem to be playing the definition game, please explain how something both infinitely powerful AND infinitely good can create injustice.
-      ( https://en.wikipedia.org/wiki/Giordano_Bruno#Imprisonment,_trial_and_execution,_1593–1600 )
+      But since we seem to be playing the definition game, please explain how something both infinitely powerful AND infinitely good
+      creates injustice.
+
+      https://en.wikipedia.org/wiki/Giordano_Bruno#Imprisonment,_trial_and_execution,_1593–1600
+
       You might argue that there is no objective good...
       But do you really want to go *beyond Good and Evil*? (Gimme a high five Friedrich.)
   */
@@ -368,6 +436,7 @@
   Empty section. So what?
 
 
+
 -----------------------------------------------------------------------------------------------
 /*          "Ce qu'il y a de certain c'est que moi, je ne suis pas Marxiste."                */
 /*                                                            --  Karl Marx (1882)           */
@@ -375,6 +444,101 @@
 #05  No epigone is a free thinker
 ===============================================================================================
 
+  In a very messy progress. But drafts do exist.
+
+  (As if anyone cared about my therapy of an annexe.)
 
 
+
+-----------------------------------------------------------------------------------------------
+/*          "[The inquisitors] had the desire to serve freedom                               */
+ /*           and promote the common good                                                    */
+ /*           and did everything possible to save [Giordano Bruno's] life."                  */
+ /*                                 -- Cardinal Angelo Sodano (17th February 2000)           */
+===============================================================================================
+#06  The R word
+===============================================================================================
+
+  History is written by winners... That's partially true.
+  History is written by everybody in real time. It's called lying.
+  If you happen to win, your lies become official truth.
+
+  Then what is revisionism? Lying about History?
+  Or contradicting the current local official truth?
+  Was Giordano Bruno a revisionist? Was Charles Darwin? Was Ernest Renan?
+  Isn't every historian a revisionist at first?
+
+  And what about Jacques Chirac?
+
+  https://fr.wikipedia.org/wiki/Loi_portant_reconnaissance_de_la_Nation_et_contribution_nationale_en_faveur_des_Français_rapatriés
+
+  Ho no! He was president, this cannot be revisionism... Got my answer it seems.
+
+  Plato (and everybody after him): Sophists are evil, they twist language to make you agree to faulty logic.
+  Quietly burry Protagoras in the infamous common grave and start pretending Idealism came before Empiricism.
+  That's proper obscurantism -- proper revisionism -- from the guy credited for inventing Philosophy...
+
+  Losers write History as much as winners do. If you don't read them, it's on you.
+
+  History is just story with a pretentious prefix.
+  If someone powerful enough lied in the past, History is a fiction.
+  A whole system of values could very well rely on a 2000-year-old lie.
+  
+  Asking questions is therefore legitimate. And it never hurts anyone fully honest.
+  
+  Revisionism is not asking questions. It's a dogmatic affirmation.
+  
+  The most vicious kind of lie: instead of saying something while knowing it's false,
+  you say something without caring whether it's true.
+  You discard truth.
+  
+  Here's the fundamental difference between:
+  
+    "Do we know for sure that Judas Iscariot actually existed?"
+  
+  and:
+  
+    "Gas chambers never happened."
+  
+  First asks for proofs and refuses dogmatism.
+  Second neglects the very concept of proof and tries to impose dogmatism. Probably for disgusting reasons in this very case.
+  
+  Same difference between "I believe god exists" and "god definitely exists, you ignorant Babylonian prostitute".
+  
+  You've read Immanuel Kant of course.
+  So you know that's one of his four unanswerable questions in Amphibology of the pure Reason...
+  "I know the Universe is infinite". No you don't. Because you can't.
+  
+  And that's good news for believers:
+  no matter how far Science pushes the frontiers of knowledge, there will always be room left for faith.
+  Because Physics is not Metaphysics. By definition.
+  
+  I like knowing too much and I'm comfortable with ignorance. So I believe in shit.
+  But being comfortable with ignorance, I can accept what I don't understand.
+  Your faith for instance.
+  You need to believe? Please believe!
+  But don't try to convince me that your beliefs are factual truths.
+  There's no metaphysical fact -- by both definitions.
+
+  Another kind of vicious lie -- that also applies to revisionism -- is stating subjective judgments as objective truths.
+
+  For instance "Spinoza was a misogynist". It's neither true or false. (i.e. outside the scope of logic: excluded middle)
+  Spinoza tried to prove that women should not vote in his Political treatise. That's a fact.
+
+  But if he tried to answer the question, it means he first asked it -- mid 17th century...
+  The word "feminist" has no meaning in such context.
+
+  But Spinoza probably comes close to what it could have been by not systematically accepting the common dogma --
+  -- or at least questioning it.
+
+  Of course his answer was biased and he could have done better.
+  But better by today's standard.
+  Despite the appearances, he was ahead of his time.
+
+  I'm not saying his arguments are worth anything -- but I respect questions more than answers:
+  answers quickly become obsolete, some questions are eternal.
+
+  Newton's answers became obsolete because Einstein asked Newton's questions.
+  Einstein's answers will be made obsolete by someone asking Einstein's questions.
+  Which are still Anaxagoras', or even Thales' questions.
 
