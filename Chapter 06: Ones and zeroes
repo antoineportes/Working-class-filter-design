@@ -10,17 +10,17 @@
 /*          "No 9000 computer has ever made a mistake or distorted information."             */
 /*                                           --  HAL 9000 (2001: A Space Odyssey)            */
 ===============================================================================================
-#1  Nyquist & Shannon
+#1  Half-life
 ===============================================================================================
 
-  COMING SOME DAY.
+  IN PROGRESS
 
-  This section asks a lot of knowledge that I don't currently have.
-  But I've started reading about the Nyquist frequency, and it seems like it shouldn't need a full chapter.
-  I won't go insanely deep in the theory of sampling but the z-transform's range [-π fs , +π fs] needs an explanation.
+  This section will demonstrate that a discrete signal needs to be sampled at at least twice the highest
+  frequency of its spectrum.
+  This minimal sampling frequency / rate is called the Nyquist rate.
 
-  In the mean time we will have to admit that a discrete signal has a maximal frequency equal to half the sampling rate.
-  The range [-π fs , +π fs] means -fs/2 * 2π and +fs/2 * 2π. Ergo: half the sampling rate in radians.
+  Or, addressing the problem from the other end, for a given sampling rate, the maximal frequency achievable
+  is half the sampling frequency, and it's called the Nyquist frequency.
 
 
 
@@ -31,3 +31,283 @@
   https://www.desmos.com/calculator/kgtpjqpzuc
 
   COMING SOON.
+
+  Hint: starts with a z.
+
+  It's assumed dealt with in what's next. So basically:
+  Take Laplace and replace  exp (st)  with  exp (s T n)  then define  z  =  exp (s T)  then:  exp (s T n)  =  z^n.
+
+  f_s is the sampling rate    ;    T  =  1 / f_s  is the sampling period    ;    n is an integer (the number of samples)
+
+  Should suffice in the meantime.
+
+
+
+===============================================================================================
+#3  The beginning of the end of the beginning
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Trapezoidal_rule
+  
+  We now have a discrete input signal. We want to apply a filter to it.
+  We have block diagrams to help us see equations as signal paths.
+  Additions and multiplications are pretty straightforward.
+  But there are integrators sometimes.
+
+  We've seen (Chapter III, #1) that integrating a function's rate of change rebuilds the function.
+  But if we integrate the function itself, we get something else.
+  (Antiderivative obviously, but that's not my target here.)
+
+  /*
+    In what follows I loosely use "function" to mean "function's output value".
+    It's not semantically rigorous but it avoids the confusion between function output and output signal.
+    I.e.: if we integrate our input signal over time, the function's input is time and its output is the input signal...
+  */
+
+  Think graphical.
+  At each infinitesimal step, we multiply the function by a small increment in its variable (differential).
+  On a graph, the differential is a horizontal (infinitesimal) segment; the function's value is a vertical segment.
+  This figure is called a rectangle.
+  And multiplying one side by the other is how we measure the area of a rectangle.
+
+  So each step of an integral is the area of a rectangle.
+  And the integration itself is the sum of all the rectangles.
+
+  This produces an approximation of the area under the curve.
+  And it's as precise as the differential is small.
+
+  Except here our variable is time and our differential is T (the sampling period, the length of a sample).
+  It's measurable and therefore not really infinitesimal.
+
+  So the rectangle is a nice start, but it could easily benefit from some optimisation.
+  
+  What follows is very simple, on the sine qua non condition that you think graphical.
+  Did I mention THINK GRAPHICAL?
+
+  https://www.desmos.com/calculator/g6ozuv0whk
+
+  Between samples, information is lost.
+  But we can do better than hard-stepped jumps: the shortest way between two points is a straight line.
+  And two points are all a straight line requires to be defined.
+
+  So, knowing the previous amplitude (which we do), we would better approximate the lost curve by drawing a straight line
+  to the current amplitude.
+
+  The figure that previously was a rectangle is now a right triangle on top of a rectangle.
+  (If you cannot picture it, open the last Desmos link.)
+  This figure is called a TRAPEZOID.
+  The method of integration we're using is called the trapezoidal rule.
+  The integrator we're building is called a TRAPEZOIDAL INTEGRATOR.
+
+  A right triangle is half a rectangle. Second easiest area to calculate: (opposite + adjacent) / 2.
+  We don't need the hypotenuse. So we already have all the sides we need. Sorry Pythagoras, maybe next time.
+
+  Let's name stuff:
+
+    #  T is the sampling period (1 / f_s)
+    #  x [n] is our current amplitude
+    #  x [n - 1] is our previous amplitude
+
+  The rectangle's horizontal side is T, its vertical side is x [n - 1].
+  The triangle's adjacent and opposite sides are interchangeable depending on which angle we consider.
+  Let's be arbitrary for the sake of simplicity: adjacent is T, opposite is  x [n]  -  x [n - 1].
+
+  So the area of the rectangle is:
+
+    T * x [n - 1]
+
+  and the area of the right triangle is:
+
+     T * ( x [n]  -  x [n - 1] )
+    -----------------------------
+                 2
+  
+  then the area of the trapezoid is:
+
+                         x [n]  -  x [n - 1]         2 x [n]  -  x [n]  +  x [n - 1]       T             T
+    A  =  T x [n]  +  T ---------------------  =  T ---------------------------------  =  --- x [n]  +  --- x [n - 1]
+                                 2                                 2                       2             2
+
+  If the signal has decreased,  x [n]  -  x [n - 1]  will be negative, so will the area of the triangle.
+  Then the triangle will be subtracted from the rectangle. Still a trapezoid, just expressed weirdly.
+  Increase works, decrease works, no third option: alles gut.
+
+  Ok. That's the ƒ (x) dx part.
+  Mathematically, it's very similar to an arithmetic mean: the one you use to calculate your average score in school.
+  (Sum all items, divide the sum by the number of items.)
+
+  //  https://en.wikipedia.org/wiki/Pythagorean_means
+
+  But integration is a permanent sum.
+  The area of the trapezoid (A) is what happens inside the integral, it must be added to what happened previously.
+
+  Let's name stuff:
+
+    #  y [n] is the current output of the integrator
+    #  y [n - 1] is the previous output of the integrator
+
+  Then:
+                             T             T
+    y [n]  =  y [n - 1]  +  --- x [n]  +  --- x [n - 1]
+                             2             2
+  
+  We're almost ready to turn this into a block diagram. Except we need 1-sample delays.
+
+  Let's say:
+
+    x [n]  =  exp (s T n)  =  z^n
+
+  then:
+
+    x [n - δ]  =  exp (s T (n - δ))  =  exp (s T n  -  s T δ)  =  exp (s T n) / exp (s T δ)  =  x [n] / z^δ
+
+  /*
+    That's right, just like Laplace turns integration in division by s and differentiation in multiplication by s,
+    the inverse z-transform turns a delay of n samples into a division by z^n.
+    
+    A multiplication by z^n would be a jump in the future.
+    This is not currently technologically possible. But we can work around it using latency.
+    Delay everything except one thing, and the one thing is in the future of its own referential.
+    In such a case, jumps in the future would be a considerable simplification of notation, so why not?
+    We won't need this digression. But anywhere else, it would have been even more off-topic.
+
+    Due to the fact that delays are more frequent than jumps in the future, z traditionally receives negative exponents.
+    I'm using 1/z for now.
+    Don't be surprised if it becomes z^-1 at some point if it becomes more convenient.
+  */
+
+  Now, is y [n - 1] also a complex sinusoid?
+  Re-read Chapter III if you crave insane nit picking. In short:
+  Any sinusoid can be expressed using the sine function. Integrating a function's first derivative gives the initial function.
+  Sine's first derivative is cosine.
+  That'll do.
+
+  Let's drop the brackets:
+
+    x [n]      -->  x
+    x [n - 1]  -->  x / z
+    y [n]      -->  y
+    y [n - 1]  -->  y / z
+
+  then:                       T                 T
+                             --- x       y  +  --- x
+           y       T          2                 2          T
+    y  =  ---  +  --- x  +  -------  =  -------------  +  --- x
+           z       2           z              z            2
+
+  Let's define:
+
+    α  =  x T/2    ;    β  =  y + α    ;    δ  =  β / z        //  I've skipped γ because it looks like y.
+
+  then:    y  =  α + δ
+
+                                                                                          α
+  or:        α -->(+)--> y        or:        α -->(+)--> y        or:        x -->[ T/2 ]--->(+)---> y
+                   ^ +                             ^ +                                        ^ +
+                   |                             δ |                                        δ |
+                   δ                               |                                          |
+                                                [ 1/z ]                                    [ 1/z ]
+                                                   ^                                          ^
+                                                   |                                        β |
+                                                   β                                          |
+                                                                                       α --->(+)<--- y
+                                                                                           +     +
+  Looks like we can close the loop:
+
+    x -->[ T/2 ]-->o---->(+)---->o---> y                                                          
+                   |      ^ +    |                  //  Note that δ needs an initial value.
+                   |      |      |                  //  Some programming languages have zero by default.
+                   |   [ 1/z ]   |                  //  (EEL2 / JSFX for instance)
+                   |      ^      |                  //  Most will require an explicit δ = 0 during initialisation.
+                   |      |      |                  //  (Of course anything will do. Zero is safe.
+                   ----->(+)<-----                  //  But where's the fun in safe?)
+                       +     +
+  
+  This is a trapezoidal integrator. Probably not the last one you'll see.
+  I suck at small talk. But I'm trying to force a pause here.
+  Because this is fundamental.
+
+  There are basically two schools of digital filter design. More on that later.
+  This humble piece of block diagram is the core element of one of them.
+  (It's notably on the front page of Vadim Zavalishin's "The Art of V.A. Filter Design".)
+
+  It comes in (at least?) 4 different forms. This is Transposed Direct Form II (TDF2).
+
+  https://en.wikipedia.org/wiki/Digital_biquad_filter#Transposed_direct_form_2
+
+  The name suggests that it's the less straightforward form...
+  I must be wired in opposite polarity because the formula always leads me to this form.
+  I easily get to Direct Form I (DF1) by not simplifying the equation at all (but why would you do that?).
+  But Direct Form II (DF2) and Transposed Direct Form I (DF1) are mysteries to me: show me the solution, I get the math.
+  But how to seek this solution in the first place? Either I'm twisted or everyone else is.
+
+  So I'll stick to TDF2 because for knowledge to be shared, it has to be knowledge.
+  Look at Wikipedia and make your own choice. DF1 and DF2 have two [ 1/z ] elements. TDF1 and TDF2 factorise them out.
+
+  We could already replace [ 1/s ] elements in our block diagrams and obtain digital filters. But I've already done the end credits joke.
+
+  Trapezoidal integrator has an input. Trapezoidal integrator has an output. Trapezoidal integrator has a transfer function!
+
+                   α
+    x -->[ T/2 ]-->o---->(+)---->o---> y        //    y  =  α + δ    ;    δ  =  β / z    ;    β  =  α + y    ;    α  =  x T/2
+                   |      ^ +    |              //    
+                   |    δ |      |              //    β / z  =  y - α    <=>    (α + y) / z  =  y - α    <=>    α/z + y/z  =  y - α
+                   |      |      |              //
+                   |   [ 1/z ]   |              //    <=>    α/z + α  =  y - y/z    <=>    y (1 - z^-1)  =  α (z^-1 + 1)
+                   |      ^      |              //
+                   |    β |      |              //                    1 + z^-1         T     1 + z^-1                       T     1 + z^-1
+                   |      |      |              //    <=>    y  =  α ----------  =  x --- * ----------    <=>    H (z)  =  --- * ----------
+                   ----->(+)<-----              //                    1 - z^-1         2     1 - z^-1                       2     1 - z^-1
+                       +     +
+  /*
+    Equations involving feedback can loop in your brain up to self-oscillation.
+    There's no magic trick around this risk. Be sharp, hurry not.
+    One tip though: when several paths lead to a single node, said single node has several expressions.
+    In this example: α, β and y are such nodes. So ignore x until you absolutely need it and get rid of δ as soon as you can.
+    Then get rid of all non x or y terms one by one. Here α is just x with a constant factor, so I got rid of β first.
+  */
+
+  //  Trapezoidal differentiator
+
+  This piece of block diagram can be injected in bigger block diagrams by replacing [ 1/s ] elements. Fine.
+  But what if we want to directly discretise a filter's transfer function? We need to replace s.
+
+  Differentiation is the reciprocal to integration.
+  So we need the reciprocal to a trapezoidal integrator.
+  A function maps x to y. Its reciprocal maps y to x.
+  So we need to treat x as the unknown and express it in terms of y.
+
+  I chose this method because I find it easier. But reading the block diagram backwards is as valid a solution.
+
+              T     1 + z^-1                     T     1 + z^-1             2         1 + z^-1                     2     1 - z^-1
+    H (z)  = --- * ----------    <=>    y  =  x --- * ----------  <=>    y ---  =  x ----------    <=>    x  =  y --- * ----------
+              2     1 - z^-1                     2     1 - z^-1             T         1 - z^-1                     T     1 + z^-1
+
+  Ok, so the reciprocal is the inverse. Laplace's magic is still operating. Good.
+
+  Then, if H_a (s) is an analog filter's transfer function, and H_d (z) is its trapezoidal discretised counterpart,
+  the substitution:    H_a (s)  <--  H_d (z)    requires the substitution:
+
+             2     1 - z^-1
+    s  <--  --- * ----------
+             T     1 + z^-1
+
+[[ IN PROGRESS ]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
