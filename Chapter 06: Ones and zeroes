@@ -292,6 +292,80 @@
     s  <--  --- * ----------
              T     1 + z^-1
 
+  Our trapezoidal differentiator is a ratio:
+
+     2     1 - z^-1       2  -  2 z^-1       2 z  -  2
+    --- * ----------  =  --------------  =  -----------
+     T     1 + z^-1       T  +  T z^-1       T z  +  T
+
+  The numerator is:    2 z  -  2
+  The denominator is:  T z  +  T
+
+  They're both affine functions of z. Affine functions are linear.
+  So a trapezoidal differentiator is a ratio of linear functions of z.
+
+  Hence this transformation being commonly called BILINEAR TRANSFORM (BLT).
+
+  /*
+    Beware of confusion.
+      This is our fourth transform now. But this one is not inverse.
+      Inverse Fourier transform, inverse Laplace transform and inverse z-transform modify the variable to simplify the equation.
+      But equality persists.
+      The bilinear transform is a substitution, not an equation.
+
+      Of course there's an inverse bilinear transform, which is simply the reciprocal substitution,
+      and therefore restitutes the original equality.
+
+    Also:
+      A ratio is as linear as an affine function. So why not simply "Linear transform" (LT)?
+      Too generic? Already taken? Not catchy enough?
+      Never mind. When people talk of Bilinear transform or BLT, depending on context,
+      they're talking about our trapezoidal differentiator or about our trapezoidal integrator.
+      Assuming they know what they're talking about...
+
+      For reasons that I'll probably never figure out, some people like using words bigger than themselves.
+      Maybe they believe talking nonsense mekes them look clever. Maybe looking clever matters more than being clever.
+      Maybe looking matters more than being.
+      Maybe they seek authority and don't mind cheating. Maybe they believe everybody cheats anyway -- and somehow it's not a problem.
+      Maybe they're easily impressed. Maybe they feel dominated when they're impressed. Maybe they want to dominate.
+      Maybe their lazy brain cannot conceive social interactions outside of the dominant / dominee dichotomy.
+      Maybe they don't mind if truth becomes an infinitesimal datum buried amidst noise pollution.
+      Maybe I'm asking offensive questions.
+      Maybe questioning social performance is a hate crime against ordinary denial.
+      Maybe all of the above...
+
+    Definitions:
+      Bilinear transform is a variable substitution which makes use of the trapezoidal rule to approximate Calculus in discrete time domain.
+      It relies on (inverse) z-transform.
+      It provides trapezoidal integrators AND trapezoidal differentiators.
+      It can be injected in a block diagram AS WELL AS in a transfer function.
+
+      Biquad is short for Biquadratic.
+      Just like bilinear means linear over linear, biquadratic means quadratic over quadratic.
+      That is: a ratio of second-order polynomials.
+      That is: a mathematical formula.
+
+      Biquad filter refers to a filter whose transfer function is biquadratic.
+      Except no.
+      The term actually gets applied as soon as the denominator is quadratic.
+      Therefore it's just another alias for 2-pole or second-order filter.
+      It's not inherently digital. And if it is, it's not stuck with one method over an other.
+
+      SVF means State-Variable Filter.
+      It's an analog prototype: a multimode 2-pole (biquad) filter.
+      It can be discretised.
+
+      ZDF means Zero Delay Feedback.
+      A ZDF filter has (an) instantaneous feedback loop(s).
+      As long as you don't introduce [ z^-1 ] elements in your feedback loops: you're doing ZDF.
+
+      TPT means Topology-Preserving transform.
+      It's a design philosophy which promotes the primary use of block diagrams in filter design.
+      This is meant to remain as true as possible to the analog prototype's signal path.
+      It relies on injecting BLT in block diagrams rather than in transfer functions.
+      It relies on trapezoidal integrators rather than trapezoidal differentiators.
+  */
+
 [[ IN PROGRESS ]]
 
 
