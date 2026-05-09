@@ -721,7 +721,7 @@
     Like when we say e.g. "one fifth of the population of [whatever]": it's clearer than absolute millions and gives meaning to data.
     The difference here is that our referential is not constant: it's oscillating in two dimensions (real and imaginary),
     for each of the infinite partials -- which makes the process tricky to visualise by pure abstraction or even on a graph.
-    Still, we're looking for a complex ampliude -- that is: we're trying to extract a constant out of oscillations.
+    Still, we're looking for a complex amplitude -- that is: we're trying to extract a constant out of oscillations.
     So normalising with oscillations at the same rate is unsettling but not totally counter-intuitive.
 
     The actual issue is that ƒ (t) is instantaneous.
@@ -805,7 +805,7 @@
     Now do these integral describe transcendental reality?
     So far we still haven't performed an integration over the biderectional infinity of time, so... yes, no, maybe, I don't know.
     But do they work?
-    I've called the first set the engineer's favourite because integrating over time is the most coomon way to perform spectral analysis.
+    I've called the first set the engineer's favourite because integrating over time is the most common way to perform spectral analysis.
     So in signal processing, the Fourier transform does work. Assuming this is new to you, you still may have encountered the acronym "FFT"?
     It means "Fast Fourier Transform". (If you haven't and yet you're reading this, I bet you will at some point.)
     The integration is not infinite of course. It usually happens over a periodic time window (although you could very well design an algorithm
@@ -944,7 +944,7 @@
 
                            +∞
                  exp (σt)  ⌠
-      ƒ (t)  =  ---------- | F (ω) * exp (jωt) dω
+      ƒ (t)  =  ---------- | χ (ω) * exp (jωt) dω
                     2π     ⌡
                            -∞
 
@@ -952,7 +952,7 @@
 
                 +∞
                 ⌠                    dω
-      𝓕 (t)  =  | F (ω) * exp (jωt) ----
+      𝓕 (t)  =  | χ (ω) * exp (jωt) ----
                 ⌡                    2π
                 -∞
 
@@ -973,7 +973,7 @@
 
                  +∞
                  ⌠         dω
-      𝓐 (t)  =  | F (ω)  -----    the complex amplitude of the spectrum 𝓕 (t).
+      𝓐 (t)  =  | χ (ω)  -----    the complex amplitude of the spectrum 𝓕 (t).
                  ⌡         2π
                  -∞
 
