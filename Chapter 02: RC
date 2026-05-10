@@ -80,7 +80,7 @@
   https://en.wikipedia.org/wiki/Atom                               https://en.wikipedia.org/wiki/Ion
   https://en.wikipedia.org/wiki/Electric_charge                    https://en.wikipedia.org/wiki/Electric_potential
   https://en.wikipedia.org/wiki/Electrical_energy                  https://en.wikipedia.org/wiki/Electricity
-  https://en.wikipedia.org/wiki/Electric_potential                 https://en.wikipedia.org/wiki/Coulomb%27s_law
+  https://en.wikipedia.org/wiki/Electric_potential                 https://en.wikipedia.org/wiki/Coulomb's_law
   https://en.wikipedia.org/wiki/Electric_field                     https://en.wikipedia.org/wiki/Drift_velocity
   
   Equilibrium comes out of movement. Movement doesn't come out of equilibrium.
@@ -304,7 +304,7 @@
   https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance
   https://en.wikipedia.org/wiki/Voltage
   https://en.wikipedia.org/wiki/Electric_current
-  https://en.wikipedia.org/wiki/Ohm%27s_law
+  https://en.wikipedia.org/wiki/Ohm's_law
 
   //  Conductance and its reciprocal
 
@@ -884,7 +884,7 @@
   It's Kirchhoff's current law and can be proven using Maxwell-Faraday's equation.
   /*
     https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_current_law
-    https://en.wikipedia.org/wiki/Faraday's_law_of_induction#Maxwell-Faraday_equation
+    https://en.wikipedia.org/wiki/Faraday's_law_of_induction#Maxwell–Faraday_equation
   */
   But it's also quite intuitive once you recall statement [c] about the pseudo-circular causality (those flies didn't suffer in vain).
   Or the "balls in a pipe" parable (electrons all move at once).
