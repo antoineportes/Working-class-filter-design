@@ -18,21 +18,21 @@
   Being a caffeine addict, I should certainly hope so.
   Some people enjoy Turkish coffee. Good for them. I don't.
   I like the grains in my cup to be under a certain size. And I choose my coffee filters accordingly.
-  Fine grains go in my cup, gross grains go in the compost.
-  The sum of the fine grains in my cup and the gross grains in the compost is equal to the unfiltered coffee.
+  Fine grains go in my cup, coarse grains go in the compost.
+  The sum of the fine grains in my cup and the coarse grains in the compost is equal to the unfiltered coffee.
 
   Maybe the coffee paradigm is not as irrelevant as it would seem (Turkish people might disagree...).
   We've written chapter 01 together, we know what a spectrum and its partials are.
   Let "unfiltered coffee" be the name of a spectrum and "grain" be an alias of "partial".
-  Now what could "gross" and "fine" possibly mean?
+  Now what could "coarse" and "fine" possibly mean?
 
   All partials can very well have amplitude = 1 and phase = 0, the spectrum remains a spectrum.
   Their frequency is their identity. Their frequency is linked by definition to their period.
-  So gross could mean mean either "high frequency" or "long period".
+  So coarse could mean either "high frequency" or "long period".
   And since we're free (aren't we?) we can assign the pointer to what feels the most intuitive.
   Frequency is abstract (speed is not something you can see, it's the first derivative of something you can see);
   while a period is very palpable on a plot.
-  I'll assign "gross" to "long period" and "fine" to "short period". Pull a request if you disagree.
+  I'll assign "coarse" to "long period" and "fine" to "short period". Pull a request if you disagree.
 
   It would mean that frequencies under a threshold set to my taste would end up in the compost.
   And "the filter" would remain "the filter".
@@ -84,7 +84,7 @@
   https://en.wikipedia.org/wiki/Electric_field                     https://en.wikipedia.org/wiki/Drift_velocity
   
   Equilibrium comes out of movement. Movement doesn't come out of equilibrium.
-  If the whole cosmos where to reach total equilibrium, movement would become unretrievable.
+  If the whole cosmos were to reach total equilibrium, movement would become unretrievable.
   Everything would remain dead forever.
 
   Luckily that's impossible.
@@ -113,7 +113,7 @@
   The charge of one proton and the charge of one electron have an equal absolute value called elementary charge.
   From where:
     Equilibrium for an atom means equal number of protons and electrons. (Neutral polarity, no urge to move.)
-    The atom is then said stable, otherwise it is said unstable.
+    The atom is then said to be stable, otherwise it is said to be unstable.
   Sometimes a particle carrying an elementary charge (charge carrier) is called a charge.
   So the word charge can have two distinct meanings: a particle, or a property of matter (quantitative or qualitative).
   Beware of context. (Here I'll try to stick with the qualitative meaning: the property of matter.)
@@ -133,14 +133,14 @@
         and this:    https://en.wikipedia.org/wiki/Plasma_(physics)
 
     (I'm also ignoring Quantum physics when boldly declaring "matter is made of various particles, among which: atoms".
-    If you find it lame and would rather read a 4000-line chapter -- I guess pull a request.)
+    If you find it lame and would rather read a 4000-line chapter -- I guess pull a request?)
   */
 
   Let's consider two clusters of ions with different charges somehow isolated from everything, even each other (more on that later).
   Equilibrium requires that the more negative cluster send electrons to the less negative one.
   This results in an urge for electrons to move from the more negative point to the more positive point.
   THIS IS IMPORTANT:
-    Both points can have the same polarity (+ & + || - & -) or not (+ & - || - & +), as long as their charge differ, electrons will
+    Both points can have the same polarity (+ & + || - & -) or not (+ & - || - & +), as long as their charges differ, electrons will
     have an urge to move.
     In fact one of the two could even have a neutral charge: if the other is positive it will attract electrons, if it's negative the
     neutral point will attract electrons.
@@ -219,11 +219,11 @@
 
   So we have point A with some electric charge, and point B with some more positive charge.
   Different charges means different electric potentials -- B being more positively polarised means electrons urge to move from A to B.
-  The electric field is composed of two immobile vectors with identical directions: from B to A (remember the conventional positive testcharge).
+  The electric field is composed of two immobile vectors with identical directions: from B to A (remember the conventional positive test charge).
   Their sum is the strength / magnitude of the electric field.
   Then the piece of imaginary matter connects A and B.
 
-  The electric field moves from B to A. It has a speed: experiments have helped quantifying it "up to almost the speed of light in a vacuum (c)".
+  The electric field moves from B to A. It has a speed: experiments have helped quantify it "up to almost the speed of light in a vacuum (c)".
   (Assuming it's exactly c in our imaginary matter is so tempting that I'm almost doing it right now.)
   //  https://en.wikipedia.org/wiki/Speed_of_light
 
@@ -231,7 +231,7 @@
   Electrons start moving from A to B. They have a speed: it's called drift velocity. Which is proportional to the strength of the electric field
   and *different* from the latter's speed. It's a lot slower: the order of magnitude of the drift velocity is millimetres per second.
 
-  Once the electric field has reached A, all the potential energy has been transformed in kinetic energy.
+  Once the electric field has reached A, all the potential energy has been transformed into kinetic energy.
   There is no longer any difference in electric potential, equilibrium has been reached.
   Yet the electrons are still moving.
 
@@ -289,8 +289,8 @@
   Now take a deep breath and prepare for a harsh twist.
   Our imaginary matter is not real.
   Matter that behaves like a vacuum has contradictory terms in its very definition.
-  I'm allowed to say "four-angled triangle", but if I add "it exists" I'm either lying or mistaking.
-  We've put essence before existence ignoring Jean-Paul's warning.        //  https://en.wikipedia.org/wiki/Existence_precedes_essence
+  I'm allowed to say "four-angled triangle", but if I add "it exists" I'm either lying or mistaken.
+  We've put essence before existence, ignoring Jean-Paul's warning.        //  https://en.wikipedia.org/wiki/Existence_precedes_essence
 
   Let Materialism be the cure for Idealism.        //  https://en.wikipedia.org/wiki/The_System_of_Nature
   Let there be no imaginary matter.
@@ -309,7 +309,7 @@
   //  Conductance and its reciprocal
 
   As promised, let's connect points A and B with a piece of extant matter.
-  Let's temporarily assume that nothing prevents the electric field from traveling from B to A.    [b]
+  Let's temporarily assume that nothing prevents the electric field from travelling from B to A.    [b]
 
   /*
     Important clarification:
@@ -317,7 +317,7 @@
       This is why we call their movement a drift. Electrons will slightly glide in the direction of B until their kinetic energy is
       fully dissipated by the friction they encounter (more on that right away).
 
-      They don't travel in queue or fall sequentially like dominos. Imagine they're balls in a pipe.
+      They don't travel in a queue or fall sequentially like dominos. Imagine they're balls in a pipe.
       You push the ball at one extremity, all balls move at once.
       If one falls off of the tube, it will be the one on the opposite end of the tube.
       Like the balls in the pipe, electrons all move at once.
@@ -400,7 +400,7 @@
   The difference in potential is called Tension or Voltage. Its usual symbol is V in the English-speaking world, U otherwise.
 
   /*
-    I personally tend to prefer U because V already stands for Volt, a common unit for Tension | Voltage.
+    I personally tend to prefer U because V already stands for Volt, a common unit for Tension / Voltage.
     So if we use V for Voltage then the unit of V is V... I say slippery slope. However, I've also said "go play with fire"...
 
     About "tension" vs. "voltage" -- Bon Scott says "High-voltage Rock 'n' Roll" while Stiv Bators is a "high-tension wire"...
@@ -509,7 +509,7 @@
   */
 
   Remember [b]? Of course you don't.
-  "Let's temporarily assume that nothing prevents the electric field from traveling from B to A."
+  "Let's temporarily assume that nothing prevents the electric field from travelling from B to A."
   We're dropping this assumption right now.
 
   Some materials are called conductors. If not, they are called insulators.
@@ -562,9 +562,9 @@
   Or:
     (2) R has dropped.
   
-  It's 2 of course. The phenomenon is called electrical breakdown.    //  https://en.wikipedia.org/wiki/Electrical_breakdown
+  It's (2) of course. The phenomenon is called electrical breakdown.    //  https://en.wikipedia.org/wiki/Electrical_breakdown
 
-  If you've ever experienced autistic breakdown, this will be easy to understand.
+  If you've ever experienced an autistic breakdown, this will be easy to understand.
   Instead of:
     working, working, working  _BAM_  not working
   Electrical breakdown goes:
@@ -687,7 +687,7 @@
       In short: what happens between β and B influences what happens between A and α.
       It looked like causality went circular -- that is: breaking its own laws.
       A consequence affecting its cause... Zero delay feedback loops -- in a filter? why not -- in my brain? no thanks.
-      It seemed unfair: I do my best to not mention anything that would distract us from the point and Quantum physics strikes unannouced?
+      It seemed unfair: I do my best to not mention anything that would distract us from the point and Quantum physics strikes unannounced?
 
     Solution:
       [spoiler] There is indeed a circularity, but it's not instantaneous; it just happens really fast.[/spolier]
@@ -705,7 +705,7 @@
 
       The whole confusion came from a universal axiom: α and β always have the same absolute charge and opposite polarities.
       This is false.
-      There is a back and forth causal alternance during the charge. The fact that it's close to the fastest speed we know doesn't make
+      There is a back-and-forth causal alternance during the charge. The fact that it's close to the fastest speed we know doesn't make
       it literally instantaneous.
 
     If you're neurotypical, you must think I'm stupid right now.
@@ -723,7 +723,7 @@
     Which means that once the charge has finished drifting, U_B - U_A  =  U_β - U_α.
     Or: the voltage between A and B has decreased, the one between α and β has increased; and now they're equal to one another.
 
-  The bases α and β are called plates. The insulator is called dielectric. All three together form a condenser (or, more commonly,
+  The bases α and β are called plates. The insulator is called the dielectric. All three together form a condenser (or, more commonly,
   a capacitor).    //  "Condenser" is obsolete in English (except when talking microphones). "Condensateur" is still the French standard.
 
   The dielectric has a breakdown voltage U_bd dependent on its composition and its geometry.
@@ -829,7 +829,7 @@
 
   But we don't need a toaster, do we? Let's unplug the resistor and replace it with a capacitor.
   Let U_gen be the voltage between A and B and U_bd the breakdown voltage of the capacitor.
-  If U_gen reaches or exceeds U_bd, the dielectric will become a resistor. It will warm-up and probably burn -- in fact capacitors sometimes
+  If U_gen reaches or exceeds U_bd, the dielectric will become a resistor. It will warm up and probably burn -- in fact capacitors sometimes
   even explode.
   Yay! We've built a bomb!
 
@@ -952,7 +952,7 @@
     (2)  a current driven by a voltage source of alternating polarity.
 
   Here, in order to be consistent with ourselves, we'll go with (1) (even though the verb "to alternate" points more easily at (2)...).
-  (Notice how the looser meaning of DC leads to the stricter meaning of AC and vice-versa.)
+  (Notice how the looser meaning of DC leads to the stricter meaning of AC and vice versa.)
 
   The current from an AC generator can have pseudo-random variations (e.g. a guitar pickup) or it can be cyclic / periodic
   (e.g. the electrical grid -- that's where the 50 Hz hum comes from).
@@ -1170,12 +1170,12 @@
   Quite counter-intuitively, Hertz are the secondary unit, radians per second are the primary one.
   But it actually makes sense: radians are based on cosmic phenomena such as Geometry and the number π.
   They notably measure the period of trigonometric functions: 2π rad.
-  ("Notably" because of circles circumference, disks area, spheres volume, etc.)
+  ("Notably" because of circle circumferences, disk areas, sphere volumes, etc.)
 
   While seconds are a purely conventional unit for time.
   So when we say "radians per second", we're actually mixing constants of the universe with artificial measuring tools.
 
-  Electricity is a natural phenomenon, it doesn't obey to the Système international d'unités.
+  Electricity is a natural phenomenon, it doesn't obey the Système international d'unités.
 
   Then Hertz are a normalisation that allows to count cycles (periods) by making them equal to 1.
   Indeed: 2π/2π = 1.
