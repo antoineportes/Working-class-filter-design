@@ -181,3 +181,5 @@
 ### Desmos
 
 ### Other
++ [\[ archive.org \] Experimental Wireless and The Wireless Engineer, Oct. 1930 — *On the Theory of Filter Amplifiers* \(**S. Butterworth**\)](https://archive.org/details/sim_electronic-technology_experimental-wireless-and-the-wireless-engineer_1930-10_7_85/page/536/mode/2up)
+
