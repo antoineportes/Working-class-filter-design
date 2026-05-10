@@ -902,6 +902,8 @@
   "Inverse" (Fourier / Laplace) doesn't make much sense from where we stand. But we need to know what people are referring to when they call
   these integral transforms by their conventional names.
 
+  https://en.wikipedia.org/wiki/Inverse_Laplace_transform
+
   // Observations:
     # Think graphical: σ is real and constant, so, in the complex plane, it corresponds to a horizontal shift of the range of integration.
     # if ( X (ω) == F (s)  &&  σ == 0 ) { inverse_bilateral_Laplace  =  inverse_Fourier; } else ...
