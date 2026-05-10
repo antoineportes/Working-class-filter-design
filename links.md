@@ -177,9 +177,19 @@
 
 ## Chapter VII\:  Stephen Butterworth
 ### Wiki
-
++ [Stephen Butterworth](https://en.wikipedia.org/wiki/Stephen_Butterworth)
++ [Isaac Todhunter](https://en.wikipedia.org/wiki/Isaac_Todhunter)
++ [Modulo](https://en.wikipedia.org/wiki/Modulo)
++ [Floor and ceiling functions](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions)
++ [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter)
++ [State variable filter](https://en.wikipedia.org/wiki/State_variable_filter)
 ### Desmos
-
++ [Working-class ButterPoles](https://www.desmos.com/calculator/cukzft6ntq)
++ [Quintessential trigonometry](https://www.desmos.com/calculator/fbsuiq7kgg)
 ### Other
 + [\[ archive.org \] Experimental Wireless and The Wireless Engineer, Oct. 1930 — *On the Theory of Filter Amplifiers* \(**S. Butterworth**\)](https://archive.org/details/sim_electronic-technology_experimental-wireless-and-the-wireless-engineer_1930-10_7_85/page/536/mode/2up)
++ [\[ github.com\] 0im\: *Damping factors in Butterworth cascades*](https://github.com/antoineportes/DSP/blob/main/filters/Damping%20factors%20in%20Butterworth%20cascades)
++ [\[ cppreference.com \] std::min](https://en.cppreference.com/cpp/algorithm/min)
++ [\[ github.com \] 0im\: *Stupid note on nomenclature*](https://github.com/antoineportes/DSP/blob/main/filters/Stupid%20note%20on%20nomenclature)
++ [\[ airwindows.com \] Suzan](https://www.airwindows.com/suzan/)
 
