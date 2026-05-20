@@ -83,7 +83,7 @@ Chapter IV:  Jargon
   #  Regions
      -->  Pass-band
      -->  Transition-band, gain at cutoff
-     -->  Stop-band, slope (stop-band attenuation)
+     -->  Stop-band: slope / stop-band attenuation / roll-off
 
   #  Unit-cutoff
 
@@ -111,9 +111,16 @@ Chapter VI:  Ones and zeroes
   #  Bilinear transform (BLT)
      -->  Trapezoidal integrator
      -->  Trapezoidal differentiator
+     -->  Frequency warping  +  pre-warping
      -->  Trapezoidal integration (block diagram: TPT/ZDF)
      -->  Trapezoidal differentiation ("traditional" BLT)
-     -->  Frequency warping
+     -->  Stability preservation
+
+  #  TDF2, DF1, DF2, TDF1
+
+  #  RBJ's cookbook demystified
+
+  #  Binary algebra
 
 
 Chapter VII:  Stephen Butterworth
@@ -132,7 +139,7 @@ Chapter VII:  Stephen Butterworth
   #  Trigonometry
 
 
-Chapter VIII:  Butterworth +  [temporary title]
+Chapter VIII:  Butterworth +  [temporary (shitty) title]
 
   #  Gain at cutoff = Q = 1/2D
 
@@ -145,38 +152,53 @@ Chapter VIII:  Butterworth +  [temporary title]
   #  Special case: Linkwitz-Riley
 
 
-Chapter IX:  Butterworth ++  [temporary title]
+Chapter IX:  Butterworth ++  [temporary (shitty shitty) title]  [[maybe "parametric something"]]
 
-  #  Parallel filters
+  #  Parallel filters (1)
      -->  High-shelf
      -->  Low-shelf
      -->  Tilt
-     -->  Band-shelf / Peak / Bell
      -->  N = whatever
 
+  #  Band-pass
 
-Chapter X:  Fractional order  [temporary title]
+  #  Parallel filters (2)
+     -->  Band-shelf / Peak / Bell
 
-  #  Butterworth 1 < N < 2
 
-  #  Butterworth 0 < N < 1  //  Not solved yet
+Chapter X:  Fractional I:  T n  [temporary title]
+
+  #  Delay / comb filter
+
+  #  Linear interpolation
+
+  #  Linear interpolation frequency response fix
+
+  #  Feedback
+
+
+Chapter XI:  Fractional II:  N  [temporary title]
+
+  #  Butterworth, order = 1 < N < 2
+
+  #  Butterworth, order = 0 < N < 1  //  Not solved yet
 
   #  Generalisation  //  relies on 0 < N < 1 so not solved either
      -->  N = whatever
      -->  Q = whatever
 
 
-Chapter XI:  Decramping  [temporary title]
+Chapter XII:  Decramping  [temporary title]
 
   #  Not yet even attempted...
 
 
-Chapter XII:  Dark side of the semi-plane "Break on through to the other side"
+Chapter XIII:  Dark side of the semi-plane "Break on through to the other side"
 
   #  Watch me explode...
 
 
-Chapter XIII:  Interstellar overdrive  [temporary title... but, come on, it's cool!]
+Chapter XIV:  Interstellar overdrive  [temporary title... but, come on, it's cool!]
 
   #  "I am the god of Hell fire and I bring you [sigmoids]"  --  Athur [nerd] Brown
 
