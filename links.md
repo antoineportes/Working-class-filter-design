@@ -1,5 +1,5 @@
 # Working-class filter design\: links
-## Chapter I\:  Analytic signals
+## [<ins>Chapter I\:</ins>  Analytic signals](Chapter%2001%3A%20Analytic%20signals)
 ### Wiki
 + [Complex number](https://en.wikipedia.org/wiki/Complex_number)
 + [Argument \(complex analysis\)](https://en.wikipedia.org/wiki/Argument_(complex_analysis))
@@ -43,7 +43,7 @@
 + [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
 + [\[ youtube.com \] L. v. Beethoven — *9th Symphony \(Op. 125\)\: IV. "An die Freude"* \(Bach Collegium Japan, M. Suzuki\)](https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4)
 
-## Chapter II\:  RC
+## [<ins>Chapter II\:</ins>  RC](Chapter%2002%3A%20RC)
 ### Wiki
 + [Separation process](https://en.wikipedia.org/wiki/Separation_process)
 + [RC circuit](https://en.wikipedia.org/wiki/RC_circuit)
@@ -123,7 +123,7 @@
 ### Other
 + [\[ archive.org \] Aristotle\: *Physica* \(translation\: R.P. Hardie & R.K. Gaye\)](https://archive.org/details/physica0000rpha/mode/2up)
 
-## Chapter III\:  =  1 + 2
+## [<ins>Chapter III\:</ins>  =  1 + 2](Chapter%2003%3A%20%20%3D%20%201%20%2B%202)
 ### Wiki
 + [Notation for differentiation\: *Lagrange\'s notation for antidifferentiation*](https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange's_notation_for_antidifferentiation)
 + [Chain rule\: *Proofs*](https://en.wikipedia.org/wiki/Chain_rule#Proofs)
@@ -141,7 +141,7 @@
 ### Desmos
 + [Discontinuity](https://www.desmos.com/calculator/uqreqq7tu9)
 
-## Chapter IV\:  Jargon
+## [<ins>Chapter IV\:</ins>  Jargon](Chapter%2004%3A%20Jargon)
 ### Wiki
 
 ### Desmos
@@ -149,7 +149,7 @@
 ### Other
 
 
-## Chapter V\:  Poles and zeroes
+## [<ins>Chapter V\:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
 ### Wiki
 + [Polynomial](https://en.wikipedia.org/wiki/Polynomial)
 + [Elementary arithmetic](https://en.wikipedia.org/wiki/Elementary_arithmetic)
@@ -167,7 +167,7 @@
 ### Other
 
 
-## Chapter VI\:  Ones and zeroes
+## [<ins>Chapter VI\:</ins>  Ones and zeroes](Chapter%2006%3A%20Ones%20and%20zeroes)
 ### Wiki
 
 ### Desmos
@@ -176,7 +176,7 @@
 ### Other
 
 
-## Chapter VII\:  Stephen Butterworth
+## [<ins>Chapter VII\:</ins>  Stephen Butterworth](Chapter%2007%3A%20Stephen%20Butterworth)
 ### Wiki
 + [Stephen Butterworth](https://en.wikipedia.org/wiki/Stephen_Butterworth)
 + [Isaac Todhunter](https://en.wikipedia.org/wiki/Isaac_Todhunter)
