@@ -171,6 +171,7 @@
 ### Wiki
 
 ### Desmos
++ [aliasing \(time domain\)](https://www.desmos.com/calculator/oz8zur70sz)
 
 ### Other
 
