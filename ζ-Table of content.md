@@ -9,9 +9,10 @@ ___
 + (Greek alphabet)
 + Complex basics
   + Cartesian form \(real part, imaginary part\)
+  + Conjugates
   + Polar form \(absolute value, argument\)
   + Complex plane
-  + Complex arithmetics
+  + Complex arithmetic
 + Euler's formula
   + Complex trigonometry  /  complex sinusoids
 + Inverse Fourier transform
@@ -54,17 +55,16 @@ ___
   +  Pass-band
   +  Transition-band, gain at cutoff
   +  Stop-band: slope / stop-band attenuation / roll-off
-+ Unit-cutoff
 ___
 ### [<ins>Chapter V:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
 + Polynomials
 + Poles and zeroes
-  + Definition
-  + Plot
++ Unit-cutoff
+  + Pole-zero plot
 + Stability
   + Impulse response
-  +  Left semi-plane
-  +  Time-varying cutoff \(?\)
+  + Left semi-plane
+  + Time-varying cutoff \(?\)
 ___
 ### [<ins>Chapter VI:</ins>  Ones and zeroes](Chapter%2006%3A%20Ones%20and%20zeroes)
 + Nyquist frequency
@@ -97,8 +97,9 @@ ___
   + Gain at cutoff
   + Resonance peak
 + Special case: Linkwitz-Riley
+  + IIR oversampling? (Butterworth up + down = LR => don't cascade cascades, split them)
 ___
-### <ins>Chapter IX:</ins>  Butterworth ++  \[temporary \(**shitty shitty**\) title\]  \[\[maybe "parametric something"\]\]
+### <ins>Chapter IX:</ins>  Butterworth ++  \[temporary \(*shitty shitty*\) title\]  \[\[maybe "parametric something"\]\]
 + Parallel filters \(1\)
   + High-shelf
   + Low-shelf
