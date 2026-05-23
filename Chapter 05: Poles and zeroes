@@ -13,9 +13,383 @@
 #1  Polynomials
 ===============================================================================================
 
-  COMING SOON.
+  https://en.wikipedia.org/wiki/Polynomial                   https://en.wikipedia.org/wiki/Elementary_arithmetic
+  https://en.wikipedia.org/wiki/Associative_property         https://en.wikipedia.org/wiki/Commutative_property
+  https://en.wikipedia.org/wiki/Distributive_property
 
-  The introduction is abrupt and needs some re-working.
-  But the Polynomial section is pretty much written, then poles and zeroes should be trivial.
+  A polynomial is an exhaustive set of equivalent polynomial expressions.
+  A polynomial expression is an arithmetical expression involving two types of terms: constants and variables.
+  An arithmetical expression is a mathematical expression involving only addition and multiplication (sums and products).
+  An addition is sometimes called a subtraction (difference) -- usually when involving one or several negative numbers.
+  A multiplication is sometimes called a division (ratio) -- usually when involving one or several rational numbers.
+  The notation of a repeated multiplication of the same term by itself can be simplified with exponentiation of said term
+  to an integer power.
+  
+  Because of this property, classical definitions often present exponentiation as a third type of operation
+  and exponents as a third type of term.
+  This is valid for polynomials as long as the exponents are integers.
+  That is: a polynomial can feature exponentiation if and only if said exponentiation is in fact a product.
+  
+  Choose the less confusing formulation of the definition.
+  I like mine better hopefully, but perhaps I'm weird.
 
-  Then Dirac delta function, transient response, stability, left semi-plane etc. might be more challenging.
+  A polynomial can be defined by several distinct (but equal) expressions.
+  One of them is called canonical.
+  It's obtained by making use of commutativity, associativity and distributivity so that each instance of a variable
+  (or product of variables if more than one variable) with the same exponent(s) appears only once, therefore having a
+  single constant factor.
+  E.g.:    ax² + bx²  =  (a + b) x²
+  This single constant factor is called a coefficient.
+  The highest integer exponent -- whose corresponding coefficient is *non-zero* -- is called degree of the polynomial.
+  The coefficient associated to this exponent is called the leading coefficient.
+
+    For instance,  y = x  is a special case of the affine function  y  =  a1 * x^1  +  a0 * x^0
+    which is a polynomial of order 1 with coefficients  a1 = 1  and  a0 = 0.
+  
+    Or:  y = 1.33  is equivalent to  y  =  1.33 * x^0
+    which is a polynomial of order 0 whose unique coefficient is a0 = 1.33.
+  
+    And of course:  y  =  a2 * x^2  +  a1 * x  +  a0  is a polynomial of order 2 -- as long as a2 is non-zero.
+
+  A polynomial with strictly real coefficients *in canonical form* is called a real polynomial.
+  If it has complex coefficients, it's a complex polynomial.
+  If it has complex coefficient but is not in canonical form, we cannot say whether it's complex or real.
+  Important distinction: "real" in "real polynomial" only concerns the coefficients -- the variable can still be complex.
+  
+  A polynomial of negative order is called a Laurent polynomial, after Pierre Alphonse Laurent.
+  
+  https://en.wikipedia.org/wiki/Laurent_polynomial
+  https://en.wikipedia.org/wiki/Pierre_Alphonse_Laurent
+  
+  Since  x^-n  =  1 / x^n  a Laurent polynomial is not defined at x = 0.
+  We won't be needing Laurent polynomials here. You'll see why later during this chapter.
+
+  We have a definition. Let's build stuff.
+
+  //  Order 0 "constant"
+
+  https://en.wikipedia.org/wiki/Constant_function
+
+  ƒ (x)  =  a0
+
+  Then  ƒ (x)  =  0  means  a0 = 0  which has 1 solution for a0 but none for x.
+  Therefore a polynomial of the zeroth order has zero root.
+
+  //  Order 1 "affine" or "linear"
+
+  https://en.wikipedia.org/wiki/Linearity#Linear_polynomials
+  
+  ƒ (x)  =  a1 x  +  a0
+  
+  ƒ (x)  =  0    <=>    a1 x  +  a0    <=>    a1 (x  +  a0/a1)  =  0    <=>    x  =  -a0/a1
+
+  /*
+    This factorisation is possible because a1 is non-zero by definition of a polynomial.
+  */
+
+  Therefore a polynomial of the first order has one root  r1 = -a0/a1.
+  And:
+
+    a1 (x  +  a0/a1)  =  a1 (x - r1)
+
+  shows that it can be expressed in terms of this root.
+
+
+  //  Order 2 "quadratic"
+
+  a2 x²  +  a1 x  +  a0  =  0    <=>    a2 (x²  +  (a1/a2) x  +  a0/a2)  =  0
+
+  /*
+    This factorisation is possible because a2 is non-zero by definition of a polynomial.
+  */
+
+  <=>    x²  +  (a1/a2) x  +  a0/a2  =  0    <=>    x²  +  (a1/a2) x  =  -a0/a2
+
+  Pause. Let's consider the general case:
+
+    (α + β)²  =  (α + β)(α + β)  =  αα +  αβ + βα + ββ  =  α² + 2αβ + β²
+
+  Now  x²  +  (a1/a2) x  has the form:  α² + 2αβ  where:
+
+    α = x    and    a1/a2  =  2β    so    β  =  a1 / (2 a2)
+
+  Then  β²  =  a1² / (2 a2)²
+
+  We can add any term we want to the equation, as long as it happens on both sides, so:
+
+    x²  +  (a1/a2) x  +  a1² / (2 a2)²  =  a1² / (2 a2)²  -  a0/a2
+
+    <=>
+                                                            a1²  -  2² a2 a0
+    ( x  +  a1 / (2 a2) )²  =  a1² / (2 a2)²  -  a0/a2  =  ------------------
+                                                                 (2 a2)²
+    <=>                      ___________________
+                            ⎟  a1²  -  4 a2 a0         √( a1²  -  4 a2 a0 )
+    x  +  a1 / (2 a2)  =  ± ⎟ -----------------  =  ± ----------------------
+                            ⎷      (2 a2)²                    2 a2
+    
+    <=>
+             √( a1²  -  4 a2 a0 )        a1        -a1  ±  √( a1²  -  4 a2 a0 )
+    x  =  ± ----------------------  -  ------  =  ------------------------------
+                     2 a2               2 a2                   2 a2
+
+  a1²  -  4 a2 a0  is called the polynomial's discriminant. (Hence "discriminating" meaning "finding the roots".)
+  It's usually notated Δ (upper-case delta).
+
+  /*
+    My notation is not standard (well it both is and is not, but you'll see that I'm not the inconsistent one here).
+    Expressing polynomials' coefficients with indexes of "a" or "b" is standard (the latter usually reserved for denominators).
+
+    But when dealing with the special cases of affine or quadratic, the classical notation is (respectively):
+
+      ax + b  and  ax² + bx + c
+
+    I don't like this. You get a1 = a, then a1 = b, etc. It's confusing for no reason.
+    Plus it complies poorly with generalisation: if you keep raising the order you'll get a0 = d (as in df/dx...),
+    then a0 = e (as in exp (1)...), then a0 = f (as in ƒ (x)...); orders 8 and 9 will give i and j (as in √(-1)...);
+    order 23 gives a0 = x...
+    Order 26 starts using Greek letters. At some point you'll run out of alphabets. You'll never run out of numbers.
+    So pick one letter, give it indexes and stick with it. Or, as usual, go play with fire.
+
+    Anyway, don't be surprised if you come across:  Δ = b² - 4ac.
+
+    https://en.wikipedia.org/wiki/Quadratic_formula
+  */
+
+  Therefore a polynomial of the second order has two roots:
+
+            -a1  +  √(Δ)                    -a1  -  √(Δ)
+    r1  =  --------------    and    r2  =  --------------
+                2 a2                            2 a2
+
+  Before moving further: we're still talking about filters -- even though from a distance.
+  We might play around with complex numbers on our notebooks and GitHub repositories, but an analog voltage, or its digital counterpart,
+  need to remain purely real.
+  So I'm assuming real polynomials, starting now.
+  What comes next might apply to complex polynomials, but I haven't checked.
+  And I don't want to write something false because of too general phrasing.
+  In short: from now on:    Im (a2)  =  Im (a1)  =  Im (a0)  =  0
+
+  Notice that if Δ is real and negative, √(Δ) is imaginary.
+  Then r1 and r2 are complex numbers and:
+
+    Re (r1)  =  Re (r2)  =  -a1 / (2 a2)
+    Im (r1)  =  √(Δ) / (2 a2)
+    Im (r2)  = -√(Δ) / (2 a2)  =  -Im (r1)
+
+  Then r1 and r2 are complex conjugates.
+  If Δ is real and positive, √(Δ) is real and so are r1 and r2.
+
+  So the roots of a real quadratic polynomial are either both real or complex conjugates.
+
+  Now if x = r1,  x - r1  =  0  and if x = r2,  x - r2  =  0.
+  So if x equals r1 OR r2:
+
+    (x - r1)(x - r2)  =  0    since one of the factor is necessarily zero.
+
+  Then the roots of (x - r1)(x - r2) are r1 and r2.
+  Same as  x²  +  (a1/a2) x  +  a0/a2.
+
+  So, intuitively, they're likely equal or proportional. Easy to find out:
+
+                          /       -a1 + √(Δ) \   /       -a1 - √(Δ)  \
+    (x - r1)(x - r2)  =  ( x  -  ------------ ) ( x  -  ------------- )
+                          \          2 a2    /   \          2 a2     /
+
+                                   -a1 - √(Δ)       -a1 + √(Δ)         ( -a1 + √(Δ) ) ( -a1 - √(Δ) )
+                      =  x²  -  x ------------  -  ------------ x  +  -------------------------------
+                                      2 a2             2 a2                      (2 a2)²
+
+                                 -a1 - √(Δ) - a1 + √(Δ)         a1²  +  a1 √(Δ)  -  a1 √(Δ)  -  √(Δ)²
+                      =  x²  -  ------------------------ x  +  ---------------------------------------
+                                          2 a2                                 4 a2²
+
+                                 -2 a1         a1² - Δ
+                      =  x²  -  ------- x  +  ---------
+                                  2 a2          4 a2²
+
+                                               a1²  -  a1²  +  4 a2 a0         //  a1² - a1² cancels out,
+                      =  x²  +  (a1/a2) x  +  -------------------------        //  then  4 a2  becomes a common factor
+                                                      4 a2 a2                  //  to both the numerator and the denominator.
+
+                      =  x²  +  (a1/a2) x  +  a0/a2
+
+  Nice. Then  a2 (x²  +  (a1/a2) x  +  a0/a2)  =  a2 (x - r1)(x - r2).
+  Therefore any second order (or quadratic) real polynomial can be expressed in terms of its roots and leading coefficient.
+
+  Notice that:
+
+    a2 (x - r1)(x - r2)  =  √(a2) (x - r1) * √(a2) (x - r2)
+
+  and that  √(a2) (x - r1)  and  √(a2) (x - r2)  are two first-order polynomials whose respective roots are r1 and r2.
+
+  /*  WARNING: FUNDAMENTAL CONCEPT AHEAD  */
+
+  Therefore any second-order polynomial is the product of two first-order polynomials, whose respective roots are also
+  the roots of said second-order polynomial.
+  /*
+    Fun example:
+
+      x² - 1  =  0    <=>    x²  =  1    <=>    x  =  ± √(1)  =  ± 1
+
+    So:
+
+      x² - 1  =  (x + 1) (x - 1)
+
+    You can check:
+
+      3² - 1  =  9 - 1  =  8  =  4 * 2  =  (3 + 1) (3 - 1)
+      7² - 1  =  49 - 1  =  48  =  8 * 6  =  (7 + 1) (7 - 1)
+      10² - 1  =  100 - 1  =  99  =  11 * 9  =  (10 + 1) (10 - 1)
+      0.5² - 1  =  0.25 - 1  =  -0.75  =  1.5 * -0.5  =  (0.5 + 1) (0.5 - 1)
+      φ² - 1  =  φ ( φ  -  1 / φ)  =  φ ( φ  -  (φ - 1) )  =  φ (φ - φ + 1)  =  φ * 1  =  φ  =  φ² / φ  =  ( φ² ) ( 1 / φ)  =  (φ + 1) (φ - 1)
+
+      https://en.wikipedia.org/wiki/Golden_ratio
+
+    Cool. Cool cool cool.
+  */
+
+  Let's assume that r1 and r2 are complex and define:
+
+    P1 (x)  =  √(a2) (x - r1)  =  √(a2) ( x  -  Re (r1)  -  j Im (r1) )  =  √(a2) x  -  √(a2) Re (r1)  -  j √(a2) Im (r1)
+
+    P2 (x)  =  √(a2) (x - r2)  =  √(a2) ( x  -  Re (r2)  -  j Im (r2) )  =  √(a2) x  -  √(a2) Re (r2)  -  j √(a2) Im (r2)
+
+  Then:
+
+    P1 (x) P2 (x)  =  [ √(a2) x  -  √(a2) Re (r1)  -  j √(a2) Im (r1) ] * [ √(a2) x  -  √(a2) Re (r2)  -  j √(a2) Im (r2) ]
+
+                   =  a2 x²  -  a2 Re (r2) x  -  j a2 Im (r2) x  -  a2 Re (r1) x  +  a2 Re (r1) Re (r2)  +  j a2 Re (r1) Im (r2)
+                     -  j a2 Im (r1) x  +  j a2 Im (r1) Re (r2)  -  a2 Im (r1) Im (r2)
+    α2  =  a2
+
+    α1  =  -a2 ( Re (r2)  +  j Im (r2)  +  Re (r1)  +  j Im (r1) )
+
+    α0  =  a2 ( Re (r1) Re (r2)  +  j Re (r1) Im (r2)  +  j Im (r1) Re (r2)  -  Im (r1) Im (r2) )
+
+    Im (α1)  =  -a2 ( Im (r2)  +  Im (r1) )
+
+    Im (α0)  =  a2 ( Re (r1) Im (r2)  +  Im (r1) Re (r2) )
+
+  For  P1 (x) P2 (x)  to be a real polynomial, we need all three coefficients to be purely real.
+  That is:
+
+    Im (α1)  =  0    <=>    Im (r2)  +  Im (r1)  =  0    <=>    Im (r2)  =  - Im (r1)
+
+    Im (α0)  =  0    <=>    Re (r1) Im (r2)  +  Im (r1) Re (r2)  =  0    <=>    Re (r1) Im (r2)  =  - Im (r1) Re (r2)    <=>    Re (r1) Im (r2)  =  Re (r2) Im (r2)
+
+    <=>    Re (r1)  =  Re (r2)        //    We got this result after dividing both sides by Im (r2), so it is only valid for non-zero imaginary parts for r1 and r2.
+
+  What if  Im (r2)  =  0  then?
+
+    P1 * P2  =  a2 ( x²  -  Re (r2) x  -  Re (r1) x  +  Re (r1) Re (r2)  -  j Im (r1) x  +  j Im (r1) Re (r2) )
+
+    Im ( P1 * P2 )  =  a2 ( Im (r1) Re (r2)  -  Im (r1) x )
+
+    Im ( P1 * P2 )  =  0    <=>    Im (r1) Re (r2)  -  Im (r1) x  =  0  ∀ x    <=>    Im (r1) Re (r2)  =  Im (r1) x  ∀ x
+
+  Re (r2) is a constant, x is a variable. So the only solution for all x is  Im (r1)  =  0.
+
+  Ok! We now have an "if and only if" (or "iff" for friends and family).
+  So, any real second-orer polynomial can be expressed as a product of first-order polynomials, either purely real or complex conjugates.
+  AND, any product of two complex conjugate, or purely real, first-order polynomials is a real second-order polynomial.
+  There wouldn't be a chapter VII if not for this tiny little "and only if".
+  /*
+    What if...
+
+      r1 = r2 = 0 ?
+
+    Then:    P1 (x) P2 (x)  =  a2 (x - 0) (x - 0)  =  a2 x²
+
+    Since  +0 = -0, any purely real number is its own complex conjugate.
+    So this example satisfies the case  r2  =  conj (r1).
+    But it's also a special case of r1 = r2. Let's generalise that:
+
+      P1 (x) P2 (x)  =  a2 (x - r1) (x - r1)  =  a2 ( x²  -  2 r1 x  +  r1² )  =  a2 x²  +  2 a2 r1 x  +  a2 r1²
+
+    which is a valid second-order polynomial.
+    So when we say that order 2 => 2 roots, we do carefully not say "distinct" roots...
+
+    Also: 1st-order polynomials which are not exactly conjugates just because of their leading coefficients can be re-arranged in proper conjugates.
+    E.g.:
+
+      8 (x - 11 + 6j) 2 (x - 11 - 6j)  =  16 (x - 11 + 6j) (x - 11 - 6j)  =  4 (x - 11 + 6j) 4 (x - 11 - 6j)
+
+    More generally:
+
+      a1 ( x  -  Re (r)  -  j Im (r) ) b1 ( x  -  Re (r)  +  j Im (r) )  =  √(a1 b1) ( x  -  Re (r)  -  j Im (r) ) √(a1 b1) ( x  -  Re (r)  +  j Im (r) )
+  */
+
+  //  Order N
+
+  Cubic, quartic, quintic, sextic, heptic, octic, nonic, decic, hendecic, duodecic, tridecic... name your price.
+
+  https://en.wikipedia.org/wiki/Degree_of_a_polynomial#Names_of_polynomials_by_degree
+
+  [needs transition]
+
+    P1 (x)  =  a1 (x - r1)        P2 (x)  =  a2 (x - r2) (x - r3)
+
+    Π (x)  =  P1 * P2  =  a1 a2 (x - r1) (x - r2) (x - r3)    //  This expression clearly has three roots:  r1, r2 and r3.
+
+    Π (x)  =  a1 a2 ( x²  -  r2 x  -  r1 x  +  r1 r2 ) (x - r3)  =  a1 a2 ( x³  -  r3 x²  -  r2 x²  +  r2 r3 x  -  r1 x²  +  r1 r3 x  + r1 r2 x  -  r1 r2 r3 )
+
+           =  a1 a2 ( x³  -  (r3 + r2 + r1) x²  +  (r2 r3  +  r1 r3  +  r1 r2) x  -  r1 r2 r3 )
+
+           =  a1 a2 x³  -  a1 a2 (r3 + r2 + r1) x²  +  a1 a2 (r2 r3  +  r1 r3  +  r1 r2) x  -  a1 a2 r1 r2 r3
+
+    α3  =  a1 a2    &&    α2  =  - a1 a2 (r3 + r2 + r1)    &&    α1  =  a1 a2 (r2 r3  +  r1 r3  +  r1 r2)    &&    α0  =  - a1 a2 r1 r2 r3
+
+    =>    Π (x)  =  α3 x³  +  α2 x²  +  α1 x  +  α0
+
+  So  Π (x)  is a third-order polynomial.
+  Is it real? -- Two cases:
+    (1) r2 and r3 are real, then yes it is: the only way to get an imaginary number from a real one is with a negative sign and a fractional exponent.
+    (2) r2 and r3 are complex conjugates...
+
+  Let's try (2):
+
+    α2  =  - a1 a2 ( Re (r2)  -  j Im (r2)  +  Re (r2)  +  j Im (r2)  +  r1 )  =  - a1 a2 ( 2 Re (r2)  +  r1 )    //  ok.
+
+    α1  =  a1 a2 [ ( Re (r2)  +  j Im (r2) ) ( Re (r2)  -  j Im (r2) )  +  r1 Re (r2)  -  j r1 Im (r2)  +  r1 Re (r2)  +  j r1 Im (r2) ]
+
+        =  a1 a2 [ Re (r2)²  -  j Re (r2) Im (r2)  +  j Re (r2) Im (r2)  +  Im (r2)²  +  2 r1 Re (r2) ]
+
+        =  a1 a2 [ Re (r2)²  +  Im (r2)²  +  2 r1 Re (r2) ]    //  ok.
+
+    α0  =  - a1 a2 [ r1 ( Re (r2)  +  j Im (r2) ) ( Re (r2)  -  j Im (r2) ) ]  =  - a1 a2 r1 ( Re (r2)²  -  j Re (r2) Im (r2)  +  j Im (r2) Re (r2)  +  Im (r2)² )
+
+        =  - a1 a2 r1 [ Re (r2)²  +  Im (r2)² ]    //  ok.
+
+  Not bad, we have "if" -- but not "iff".
+  In syllogistical prose:
+
+    The product of any real 1st-order polynomial with any real 2nd-order polynomial is a real 3rd-order polynomial. (universal affirmative)
+
+  Which converts to:
+
+    A real 3rd-order polynomial CAN be the product of a real 1st-order and a real 2dn-order polynomial. (particular affirmative)
+
+  Not satisfying. We need grown-up maths.
+
+
+
+[[ IN PROGRESS ]]
+
+
+[[
+
+Notes for myself:
+
+#  Remainder theorem
+#  Factor theorem
+#  Complex conjugate roots theorem
+
+]]
+
+
+
+
+
+
+
