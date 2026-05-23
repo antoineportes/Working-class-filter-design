@@ -181,6 +181,14 @@
 
   z1 and z2 form a complex conjugate pair.                          //  https://en.wikipedia.org/wiki/Complex_conjugate
   So any real sinusoid (equation [3]) can be expressed as the sum of two complex conjugates.       [a]
+  /*                                                                                             __
+    Complex xonjugates are usually denoted by a horizontal bar over the number's symbol:  z2  =  z1  means that z2 and z1 are conjugates.
+    Sometimes also with an asterisk:  z2  =  z1*.
+    First option is really not convenient because monospace.
+    Second option looks like multiplication in most programming languages.
+    So I'll use  z2  =  conj (z1)  -- the Desmos way, for practical reasons.
+    But know that this is not standard and be ready to encounter other conventions.
+  */
 
 
   //	Euler's formula and the polar form
