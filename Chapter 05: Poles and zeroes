@@ -10,7 +10,7 @@
 /*          "You're the opposite of Batman."                                                 */
 /*                                                      --  Troy Barnes (Community)          */
 ===============================================================================================
-#1  Polynomials
+#1  Polynomials I:  for fun
 ===============================================================================================
 
   https://en.wikipedia.org/wiki/Polynomial                   https://en.wikipedia.org/wiki/Elementary_arithmetic
@@ -291,7 +291,7 @@
   Re (r2) is a constant, x is a variable. So the only solution for all x is  Im (r1)  =  0.
 
   Ok! We now have an "if and only if" (or "iff" for friends and family).
-  So, any real second-orer polynomial can be expressed as a product of first-order polynomials, either purely real or complex conjugates.
+  So, any real second-order polynomial can be expressed as a product of first-order polynomials, either purely real or complex conjugates.
   AND, any product of two complex conjugate, or purely real, first-order polynomials is a real second-order polynomial.
   There wouldn't be a chapter VII if not for this tiny little "and only if".
   /*
@@ -368,11 +368,85 @@
 
   Which converts to:
 
-    A real 3rd-order polynomial CAN be the product of a real 1st-order and a real 2dn-order polynomial. (particular affirmative)
+    A real 3rd-order polynomial CAN be the product of a real 1st-order and a real 2nd-order polynomial. (particular affirmative)
 
   Not satisfying. We need grown-up maths.
 
 
+
+-----------------------------------------------------------------------------------------------
+/*          "If the kids are united, they will never be divided."                            */
+/*                                           --  Sham 69 (If the kids are united)            */
+===============================================================================================
+#2  διαίρει καὶ βασίλευε   --   divide & impera
+===============================================================================================
+
+  There's this thing I keep hearing about: long division -- like it's a shared memory from elementary school...
+  Except said memory seems to only speak English.
+  French public schools teach (or taught perhaps...) something they called "Euclidean division".
+  Which, according to Wikipedia:  https://en.wikipedia.org/wiki/Euclidean_division
+  applies to any division with a remainder.
+  So "I don't know long divisions, only Euclidean ones" -- is a category slip similar to "It's not a Telecaster, it's a guitar".
+  Turns out, after reading this:  https://en.wikipedia.org/wiki/Long_division
+  that French division is a long division, except it has "fuck you I'm French" written all over it:  https://fr.wikipedia.org/wiki/Division_posée
+  Pardon my French, we're the worst! Listen to Claude Debussy and try not to hate us too much.
+
+  After more research:
+    https://ar.wikipedia.org/wiki/قسمة_مطولة
+    https://es.wikipedia.org/wiki/División_larga
+    https://nl.wikipedia.org/wiki/Staartdeling#België
+    https://zh.wikipedia.org/wiki/長除法
+    https://el.wikipedia.org/wiki/Κάθετη_διαίρεση
+    https://vi.wikipedia.org/wiki/Phép_chia_số_lớn
+    https://fa.wikipedia.org/wiki/تقسیم_طولانی
+    https://ru.wikipedia.org/wiki/Деление столбиком
+
+  The "French" long division is not French and not a long division -- it's called "gallows method".
+  There's the German / Austrian algorithm, and the actual long division.
+  Russians seem to know them all:  https://ru.wikipedia.org/wiki/Деление столбиком
+
+  Let's divide 6711 by 19.
+
+    6711    | 19           //
+   -57      |------        //
+    10      | 353          //    This method (gallows method) seems to be the most widespread:
+    101     |              //    pretty much all Latin countries except Mexico (basically South-western Europe and South America + Quebec)
+   - 95     |              //    most Arabic-speaking countries (in Middle-East and North Africa), plus Iran, Turkey, Armenia...
+      6     |              //    Palestine, Israel...
+      61    |              //    Russia, Ukraine, all 3 Baltic states, Romania, Greece, Kazakhstan, Mongolia, Vietnam...
+   -  57    |              //    Belgium and Republic of Congo fell on the Latin side of the equation,
+       4    |              //    Mali, Senegal, Ivory Coast, Liberia, Nigeria, Chad, Gabon, Cameroon, Somalia... the former France-Afrique...
+   
+
+    6711  :  19  =  353    //
+   -57                     //
+    10                     //    This method (German / Austrian) is (very basically) used in Germanic-languages speaking countries:
+    101                    //    Germany, Austria, Switzerland, Norway, Sweden, Denmark...
+   - 95                    //    and former neighbours of the Austro-Hungarian empire:
+      6                    //    Hungary, Slovenia, Croatia, Poland, Bulgaria, Czech Republic...
+      61                   //    Also Finland.
+   -  57                   //    In Netherlands, the ":" sign becomes "/" and the "=" sign becomes "\".
+       4                   //
+
+
+          353              //
+       ________            //
+    19 ) 6711              //    This method (long division) is standard in former members of the British colonial empire:
+        -57                //    India, Pakistan, South Africa, Australia, non-Francophone Canada, USA, UK, New Zealand...
+         10                //    also Mexico for some reason,
+         101               //    Japan, North Korea, South Korea,
+        - 95               //    China, Thailand...
+           6               //
+           61              //
+        -  57              //
+            4              //
+
+  There are almost 200 countries on Earth -- pull a request if I didn't mention yours.
+
+  Quotient is 353, remainder is 4.
+  Three notational conventions -- one algorithm.
+  Planet Earth is a Greek colony. Well done Euclid.
+  United by division, haha.
 
 [[ IN PROGRESS ]]
 
