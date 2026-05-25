@@ -1084,10 +1084,10 @@ _I_N_ _P_R_O_G_R_E_S_S_
           |                        ζ     |             //    y [n]  =  β [n]  +  ζ [n-1]  =  α [n] ωc T/2  + ζ [n-1]
           --------------------------------             //           =  ( x [n]  -  y [n] ) ωc T/2  +  ζ [n-1]
 
-  Apparently, we can drop the discrete-time indexes on the condition that we update δ after y.
+  Apparently, we can drop the discrete-time indexes on the condition that we update ζ after y.
   Go:
 
-    y  =  (x - y) ωc T/2  +  δ  =  x ωc T/2  -  y ωc T/2  +  ζ    <=>    y  +  y ωc T/2  =  x ωc T/2  +  ζ
+    y  =  (x - y) ωc T/2  +  ζ  =  x ωc T/2  -  y ωc T/2  +  ζ    <=>    y  +  y ωc T/2  =  x ωc T/2  +  ζ
 
                                                                   x ωc T/2  +  ζ         //    knowing y, we can update ζ:
     <=>    y ( 1  +  ωc T/2 )  =  x ωc T/2  +  ζ    <=>    y  =  ----------------        //    
