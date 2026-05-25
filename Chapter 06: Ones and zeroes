@@ -14,7 +14,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
          -->  Frenchisms
          -->  Typos
 
-    #  Global math check
+    #  Global math check: about that! I had pre-warping in reverse, every formula using atan2 was false... sorry -- fixed.
 
     #  Update links.md
 
@@ -124,7 +124,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
   then:    y x  =  x    <=>    z y x  =  z x    <=>    z x  =  0  therefore no Z is X.
 
   Ignore my comments, just apply traditional arithmetic rules, you'll get the same conclusion.
-  In Aristotelician plain-word syntax:
+  In Aristotelian plain-word syntax:
                                                                                    //  Lacedemonian is X, man is Y,
     Lacedemonians are men. No god is a man. Therefore no god is a Lacedemonian.    //  god is Z.
 
@@ -132,7 +132,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
   plus, minus, times, equals, zero, one -- and arbitrary symbols for subjects and predicates.
 
   The same week, Augustus De Morgan published "Formal logic". It shares Boole's attempt: turn logic into algebra.
-  Boole's elegant radicalism prevailed, but De Morgan, thanks to the De Morgan's law, helped turning the Boolean domain into modern Boolean algebra.
+  Boole's elegant radicalism prevailed, but De Morgan, thanks to the De Morgan's law, still contributed to modern Boolean algebra.
   /*
     https://en.wikipedia.org/wiki/Augustus_De_Morgan        https://archive.org/details/formallogic18470000demo/page/n5/mode/2up
     https://en.wikipedia.org/wiki/Boolean_domain
@@ -158,9 +158,11 @@ _I_N_ _P_R_O_G_R_E_S_S_
   Now (1 - y) (1 - x) is the intersection of these two sets, so it can be anything as long as it's neither Farfisa Compact nor Vox Continental nor both.
   So W is not (neither Farfisa Compact nor Vox Continental nor both). Negation of negation is affirmation, so not neither = either and not nor = or.
   So W is either Farfisa Compact or Vox Continental or both.
-
+                                                                                                               //  This reads: all X plus all Y
+    w  =  1  -  (1 - y)(1 - x)  =  1  -  (1 - x - y + xy)  =  1  -  1  +  x  +  y  -  xy  =  x  +  y  -  xy    //  minus all X that are Y (or Y that are X),
+                                                                                                               //  xy is part of x and y -->  remove it once or get it twice.
   Powerful, no doubt. But a bit convoluted.
-  Modern Boolean algebra kept 0 and 1, but instead of everything and nothing, they now typically mean (respectively) false and true.
+  Modern Boolean algebra kept 0 and 1, but instead of everything and nothing, they now typically mean (respectively) false and true (although not necessarily).
   And the operators AND, NOT and OR are used explicitely or with the symbols:  ∧ (AND)  ¬ (NOT)  ∨ (OR).
   These operators can be combined to obtain new ones like XOR, NOR, etc.
 
@@ -242,7 +244,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
      ln (10)                                         //    As HD as makes sense...
 
   Back on topic.
-  We now have a discrete approximation of our aplitude. But, as we've seen, computing data takes time.
+  We now have a discrete approximation of our amplitude. But, as we've seen, computing data takes time.
   So our signal cannot be continuous (time-wise I mean).
   A voltage comes in, its value gets discretised, and once the discretisation is complete, a new voltage gets discretised.
   Each steps builds what is called a sample. The process is called sampling. Between samples, information is lost.
@@ -252,7 +254,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
   If the time is fixed, the interval constant, then we don't need to measure it, we just store it once.
   The sampling becomes periodic. Its rate is called sampling rate, or sample rate, or sampling frequency.
 
-  It acts on the analog signal as a frequency modulator whose waveform is an impulse, a periodic trigger.
+  It acts on the analog signal as an amplitude modulator whose waveform is an impulse, a periodic trigger.
 
   Digital time is discrete and periodic.
   This is the information we needed.
@@ -291,7 +293,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
 
   So:    exp (st)  becomes  exp (s T n)
 
-  Apperently, this shouldn't hurt Laplace: the variable is still s, the differential remains:  ds/2πj  and the range of integration...
+  Apparently, this shouldn't hurt Laplace: the variable is still s, the differential remains:  ds/2πj  and the range of integration......
   How could we sample oscillations at a higher rate than the sampling frequency?
   Intuitively, this sounds impossible.  --  It's been a while since reductio ad absurdum!
   Let's define:
@@ -302,18 +304,55 @@ _I_N_ _P_R_O_G_R_E_S_S_
 
   Then:
 
-    sin (ω T n)  =  sin ( (ω_s + χ) T n )  =  sin ( (2π f_s  +  χ) T n )  =  sin ( 2π f_s T n  +  χ T n )
+    x (t)  =  sin (ω t)    =>    y [n]  =  sin ( (ω_s + χ) T n )  =  sin ( (2π f_s  +  χ) T n )  =  sin ( 2π f_s T n  +  χ T n )
 
     T  =  1 / f_s    <=>    f_s T  =  1
 
-    =>    sin (ω T n)  =  sin ( χ T n  +  2π n )  =  
-  
+    =>    y [n]  =  sin ( χ T n  +  2π n )  =  sin ( χ T n  mod 2π )  =  sin (χ T n)  ≠  x (t)
+
+  Ok, so as expected, exceeding f_s is not an option. Anything above it is all that remains.
+  Or from χ's perspective: adding f_s virtually does nothing. The sampling rate is basically a second modulus.
+  If  ω  =  ω_s  the discrete modulus makes it impossible to distinguish from zero.
+  The partial's amplitude becomes a DC offset -- or rather: it blends with the potential pre-existing DC offset.
+
+  But sinusoids are not just periodic: they also have a center of symmetry.
+  If you integrate a sinusoid over one period, you get zero.
+  This is because a sinusoid has two halves with equal area under the curve.
+  This is because the curve has two halves with the same shape mirrored around zero.
+
+  Anything you do while travelling along the first half, you undo in the second.
+  You're Penelope at night, unweaving her shroud.
+  There is no way to tell whether you're moving forward from the middle or backward from the origin.
+  Antimatter says you're antimatter.
+
+  This also apply to complex sinusoids:  exp (jω)  has a constant magnitude of 1; and ω is the argument.
+  So you move on a circle of radius 1. And when ω reaches π, you've run the first half of the circle.
+  Second half is symmetrical of course -- a circle has an infinity of symmetry axis.
+
+  So each time you jump half a period, you land in the opposite half.
+  Arithmetically, that's a multiplication by -1.
+  So each jump multiplies by -1.
+  So n jumps multiply n times by -1.
+  Arithmetically, that's a multiplication by (-1)^n
+  Two jumps mean ± 2π  --  or (-1)^2n = 1  --  which agrees with mod 2π.
+
+  Much ado about everything. Anyway:  sin (ω + π)  =  - sin (ω)
+
+  So if    sin (ω_s T n)  =  sin (0)    then    sin (ω_s T n  +  π n)  =  (-1)^n * sin (0)
+  The infinity of partials contributing to DC just got twice bigger.
+  Let's find the other half. We're looking for  ω  such that  ω T n  =  π n
+
+    ω T n  =  π n    <=>    ω T  =  π    <=>    ω  =  π/T  rad/s
+
+  in Hertz:    f  =  ω / 2π  =  π / (2π T)  =  1 / 2T  =  (1/T) / 2  =  f_s / 2  Hz
 
 
   [...]        ↑ ↓ ?
 
 
     ± ω_s / 2  =  ± 2π f_s / 2  =  ± π f_s  =  ± π / T
+
+  https://www.desmos.com/calculator/oz8zur70sz
 
   [...]        ↑ ↓ ?
 
@@ -351,7 +390,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
     #  Harry Nyquist's "Certain Topics in Telegraph Transmission Theory" (April 1928)
   as sources -- along with Ralph Hartley's "Transmission of Information" (July 1928).
   Harry Nyquist and Claude Shannon were contemporary, they were both employees at Bell Telephone Laboratories (now Nokia Bell Labs) --
-  -- yep "Bell" as in deci"bel", same company -- but I couldn't find evidences that they've ever met or exchanged letters.
+  -- yep "Bell" as in deci"bel", same company -- but I couldn't find evidence that they've ever met or exchanged letters.
   My point? Do I need one? Ok: primary sources have a soul that academic summaries cannot catch.
   You don't need primary sources to understand a theorem. Only to be passionate about it.
   /*
@@ -890,36 +929,37 @@ _I_N_ _P_R_O_G_R_E_S_S_
   block diagrams and transfer functions is the cutoff, so it would have to be re-expressed according to our transformation.
   This suggests that for the special case where the pre-warping point is the cutoff, the formula should become simpler. We'll see.
 
-  Let's name stuff:
+  If our digital filter receives a partial  0 < ω_ref < Nyquist.
+  It will give it the frequency response the analog prototype would give to:
+  
+    0  <  W  =  2 tan ( ω_ref T/2 ) / T  <  +∞.
 
-    #  ω_0 is the analog prototype's cutoff
-    #  ω_α is the pre-warping point (the frequency whose response we want to match)
-    #  ω_β is the frequency inheriting ω_α's response after the bilinear transform
-    #  ωc is the cutoff we will use in our digital implementation
+  Compared to the analog prototype, the digital implementation interprets frequency as being too high --
+  -- so its frequency response is (non-linearly) shifted towards the low-end.
+  
+  We know that varying the cutoff shifts the curve horizontally.
+  A higher cutoff shifts it towards the high-end -- that's what we want.
 
-  First let's find ω_β:
-                                             T                                     T                  / T     \
-    ω_α  =  2 tan ( ω_β T/2 ) / T    <=>    --- ω_α  =  tan ( ω_β T/2 )    <=>    --- ω_β  =  arctan ( --- ω_α )
-                                             2                                     2                  \ 2     /
-                    2          / T     \
-    <=>    ω_β  =  --- arctan ( --- ω_α )
-                    T          \ 2     /
+  So we want a higher digital cutoff. Let's call it Wc.
 
-  If we want to pre-wrap at cutoff:  ωc = ω_β  and  ω_0 = ω_α. Simplest case, as expected.
-  Now what if not?
+  We also know (from the concept of unit-cutoff normalisation) that every frequency's response is dictated by its distance to the cutoff.
 
-  A transfer function can use the unit-cutoff notation.
-  In that case the variable becomes j times the ratio of the input frequency over the cutoff. But the equality still stands.
+  So what we want is to preserve a proportionality.
   So we want:
+                                                                2       /       T \    ωc
+      ω_ref / ωc  =  W / Wc    <=>    Wc  =   W ωc / ω_ref  =  --- tan ( ω_ref --- ) -------
+                                                                T       \       2 /   ω_ref
+                                                          
+  If we use Wc instead of ωc as our cutoff, ω will preserve its frequency response despite the bilinear transform's frequency warping.
+  If ω_ref = ωc, then:  ω_ref / ωc  =  1  -- then:
 
-     j ω_β       j ω_α                    ω_β ω_0       2 ω_0          / T     \
-    -------  =  -------    <=>    ωc  =  ---------  =  ------- arctan ( --- ω_α )
-       ωc         ω_0                       ω_α         ω_α T          \ 2     /
+            2       /    T \
+    Wc  =  --- tan ( ωc --- )
+            T       \    2 /
 
-  That's our general formula. And it's actually rather clean.
-  To pre-wrap at cutoff: use the inverse mapping on the analog cutoff.
-  To pre-warp anywhere: use the inverse mapping on the analog pre-warping point and multiply by the ratio of the analog cutoff over the analog
-  pre-warping point.
+  That's our general formula -- and it's actually rather clean:
+    #  to pre-wrap at cutoff: anticipate the mapping on the analog cutoff.
+    #  to pre-warp at <whatever>: anticipate the mapping on <whatever>, and multiply by the ratio of the analog cutoff over <whatever>.
   In both cases you get your digital cutoff.
 
   Jolly good. Let's make a digital High-pass filter.
@@ -932,32 +972,32 @@ _I_N_ _P_R_O_G_R_E_S_S_
                                       //                                               //
   //  Transfer function:              //          //  Bilinear transform               //          //  Cutoff pre-warping
                                       //                                               //
-                     s                //                     2     1 - 1/z             //                      2          / T    \
-    H_aHp (s)  =  --------            //            s  <--  --- * ---------            //            ωc  <--  --- arctan ( --- ωc ) 
-                   s + ωc             //                     T     1 + 1/z             //                      T          \ 2    /
+                     s                //                     2     1 - 1/z             //                      2       /    T \
+    H_aHp (s)  =  --------            //            s  <--  --- * ---------            //            ωc  <--  --- tan ( ωc --- ) 
+                   s + ωc             //                     T     1 + 1/z             //                      T       \    2 /
                                       //                                               //
 
-                                2     1 - 1/z                                       1 - 1/z
-                               --- * ---------                                     ---------
-                                T     1 + 1/z                                       1 + 1/z
-    H_hp (z)  =  -------------------------------------------  =  ---------------------------------------------
-                   2     1 - 1/z       2          / T    \         1 - 1/z       arctan (ωc T/2) (1 + 1/z)
-                  --- * ---------  +  --- arctan ( --- ωc )       ---------  +  ---------------------------
-                   T     1 + 1/z       T          \ 2    /         1 + 1/z                1 + 1/z
+                                2     1 - 1/z                                 1 - 1/z
+                               --- * ---------                               ---------
+                                T     1 + 1/z                                 1 + 1/z
+    H_hp (z)  =  ----------------------------------------  =  ----------------------------------------
+                   2     1 - 1/z       2       /    T \         1 - 1/z       tan (ωc T/2) (1 + 1/z)
+                  --- * ---------  +  --- tan ( ωc --- )       ---------  +  ------------------------
+                   T     1 + 1/z       T       \    2 /         1 + 1/z              1 + 1/z
 
-                                1  -  1/z
-              =  -----------------------------------------
-                  1  -  1/z  +  arctan (ωc T/2) (1 + 1/z)
+                               1  -  1/z
+              =  --------------------------------------
+                  1  -  1/z  +  tan (ωc T/2) (1 + 1/z)
 
-  //  Let's clean up  arctan (ωc T/2)
-                                                             2π fc        π             fc
-  ωc  =  2π fc    &&    T  =  1 / f_s    =>    ωc T / 2  =  -------  =  ----- fc  =  ---------
-                                                             2 f_s       f_s          f_s / π
+  //  Let's clean up  tan (ωc T/2)
+                                                           2π fc        π             fc
+  ωc  =  2π fc    &&    T  =  1 / f_s    =>    ωc T/2  =  -------  =  ----- fc  =  ---------
+                                                           2 f_s       f_s          f_s / π
 
-  Let's define:  SRATE_PI  =  f_s / π    and:  Ω  =  arctan (ωc T/2)
+  Let's define:  SRATE_PI  =  f_s / π    and:  Ω  =  tan (ωc T/2)
   then:
 
-    arctan (ωc T/2)  =  arctan (fc / SRATE_PI)  =  atan2 (fc, SRATE_PI)  =  Ω
+    tan (ωc T/2)  =  tan (fc / SRATE_PI)  =  Ω
 
   //  ok then.
                           1  -  1/z                      1  -  1/z                     1  -  1/z
@@ -992,7 +1032,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
   zeta      =  0;                       //  $PI is π.
 
 @slider
-  tmp  =  atan2 (Hz , SRATE_PI);        //  Hz is the fc (the cutoff in Hertz).
+  tmp  =  tan (Hz / SRATE_PI);          //  Hz is the fc (the cutoff in Hertz).
   g1   =  tmp - 1;                      //  "g" as in "g"ain.
   g2   =  1 / (tmp + 1);
 
@@ -1057,14 +1097,14 @@ _I_N_ _P_R_O_G_R_E_S_S_
   Let's not innovate and pre-warp at cutoff.
   Let's define ω0 the analog cutoff; ωc will be the pre-warped cutoff. Then (using the results from #04):
 
-            2                         //  f_s  =  1 / T  is the sampling rate.
-    ωc  =  --- arctan (ω0 T/2)        //  fc   =  2π ω0  is the analog cutoff in Hertz.
+            2                      //  f_s  =  1 / T  is the sampling rate.
+    ωc  =  --- tan (ω0 T/2)        //  fc   =  2π ω0  is the analog cutoff in Hertz.
             T
   Then:
 
-        T       2          / 2π fc \   T              /     π  \              /    fc   \
-    ωc ---  =  --- arctan ( ------- ) ---  =  arctan ( fc ----- )  =  arctan ( --------- )  =  atan2 ( fc , f_s/π ).
-        2       T          \ 2 f_s /   2              \    f_s /              \ f_s / π /
+        T       2       / 2π fc \   T           /     π  \           /    fc   \
+    ωc ---  =  --- tan ( ------- ) ---  =  tan ( fc ----- )  =  tan ( --------- )
+        2       T       \ 2 f_s /   2           \    f_s /           \ f_s / π /
 
   //  Copy/paste this...
 
@@ -1073,7 +1113,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
   zeta      =  0;                           //  $PI is π.
 
 @slider
-  g1  =  atan2 (Hz , SRATE_PI);             //  Hz is fc (the cutoff in Hertz).
+  g1  =  tan (Hz / SRATE_PI);               //  Hz is fc (the cutoff in Hertz).
   g2  =  1 / (1 + g1);                      //  "g" as in "g"ain...
 
 @sample
@@ -1328,11 +1368,18 @@ _I_N_ _P_R_O_G_R_E_S_S_
     Remarks:
       #  The above algorithm is theoretically valid for first-order filters: you'll have  β2 = α2 = ζ2 = 0 ...
       #  The variables ζ1 and ζ2 are typically named s1 and s2 (probably for "s"tate). But I tend to reject this convention.
-         Because s is the variable in the Laplace domain, and I use it for integrators in analog prototypes' block diagrams.
-         I use ζ because it's the Greek equivalent to the Latin z, which we associate with sample(s) delay.
-         That's just me though. I'm happy to use a consensual convention when there's one, and even happier to use a custom one when not.
-         Beware that ζ is sometimes used for the parameter that I called "D" in the filter "Epikouros" (Chapter III).
-         Try not relying too much on nomenclature: it's unstable. In my biased opinion, memorising patterns is safer.
+           Because s is the variable in the Laplace domain, and I use it for integrators in analog prototypes' block diagrams.
+           I use ζ because it's the Greek equivalent to the Latin z, which we associate with sample(s) delay.
+           That's just me though. I'm happy to use a consensual convention when there's one, and even happier to use a custom one when not.
+           Beware that ζ is sometimes used for the parameter that I called "D" in the filter "Epikouros" (Chapter III).
+           Try not relying too much on nomenclature: it's unstable. In my biased opinion, memorising patterns is safer.
+      #  Last chapter mentioned Laurent polynomials.
+           You might have noticed that we've started using them: our polynomials in z have negative exponents.
+           Laurent polynomials are not defined when the variable is zero.
+           So theoretically, we should specify  z ≠ 0  for our transfer functions in z.
+           but  exp (s T)  ≠  0  is tautological enough so that we don't.
+           Just because we don't mention the rules we're not breaking, doesn't mean we break them.
+           This might be obvious to some -- but obvious doesn't hurt.
   */
 
 
@@ -1545,9 +1592,9 @@ _I_N_ _P_R_O_G_R_E_S_S_
   We might come back at this equation and finish the job once we have resonating filters and parallel processing.
   In the mean time, the following cheat sheet extends RBJ's topology to any 2-pole prototype:
 
-                                 fc                                                           //    This can look messy at first sight.
-    ωc T  =  2π fc / f_s  =  ----------  =  Hz / SRATE_PI        //  (see #05 and #06)        //    But many recurring terms can be pre-computed.
-                              f_s / 2π                                                        //    
+                                 fc               Hz                                          //    This can look messy at first sight.
+    ωc T  =  2π fc / f_s  =  ----------  =  2 ----------        //  (see #05 and #06)         //    But many recurring terms can be pre-computed.
+                              f_s / 2π         SRATE_PI                                       //    
                                                                                               //    Cosine and sine can be set first.
             b0 ( 1  -  cos (ωc T) )  +  b1 sin (ωc T)  +  b2 ( 1  +  cos (ωc T) )             //    Then  1 - cos  and  1 + cos.
     β0  =  -----------------------------------------------------------------------            //    
@@ -1958,7 +2005,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
   SRATE_PI  =  srate / $pi;
 
 @slider
-  g1  =  atan2 (Hz , SRATE_PI);          //  Hz is the cutoff in Hertz.
+  g1  =  tan (Hz / SRATE_PI);            //  Hz is the cutoff in Hertz.
   g2  =  1 / (1 + g1);
 
 @sample
