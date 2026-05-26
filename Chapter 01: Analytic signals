@@ -1194,7 +1194,7 @@
 
       |z|  =  √(a² + b²)    ;    arg (z)  =  atan2 (b, a)
 
-      z  =  |z| * exp (j * arg (z))    =>    z^x  =  |a|^x * exp (j * arg (z) * x)  =  |z|^x * [ cos (arg (z) *x )  +  j * sin (arg (z) * x) ]
+      z  =  |z| * exp (j * arg (z))    =>    z^x  =  |a|^x * exp (j * arg (z) * x)  =  |z|^x * [ cos (arg (z) * x )  +  j * sin (arg (z) * x) ]
       |z^x|  =  |z|^x
       arg (z^x)  =  arg (z) * x
       Re (z^x)  =  |z|^x * cos (arg (z) * x)
