@@ -7,8 +7,8 @@ First thing first, I don't want to be ungrateful so:
 
 Thank you Vadim!
 
-I've learnt how to design digital filters through experimentation and confronting lots of sources, but this\
-book is the turning point of my emancipation. So at the risk of repeating myself:
+I've learnt how to design digital filters through experimentation and confronting lots of sources,\
+but this book is the turning point of my emancipation. So at the risk of repeating myself:
 
 Thank you Vadim!
 
@@ -65,13 +65,22 @@ The extension-less files and the pseudo-code syntax are deliberate.
 
 If you're too shy to pull a request, download a chapter, edit it locally, make it yours.\
 Do it with my blessing. It's kind of the whole point.\
-(If some software requires an extension — although most text editors won't — .txt will do.)
+(If some software requires an extension — although most text editors won't — .txt will do.)\
+((monospace font required))
 >This is the opposite of a cookbook.
 
 
 ### Acknowledgements
+#### <ins>v1 (sycophantic populism)</ins>:
 This book is dedicated to whoever will take time to read parts of it.\
 Don't let institutional elitism discourage you.\
 You are not a lost cause.\
-<br/><br/>
+<br/>
 *antoineportes@duck.com*
+<br/>
+#### <ins>v2 (pompous idolatry)</ins>:
+Isabelle Faust.\
+Goethe in your name — Méphistophélès in your fingers.\
+Giuseppe Tartini once had a dream of you.\
+If, by some perilous acrobatic fortune, you happen to be reading these lines,\
+this book is yours.
