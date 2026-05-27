@@ -71,16 +71,8 @@ Do it with my blessing. It's kind of the whole point.\
 
 
 ### Acknowledgements
-#### <ins>v1 (sycophantic populism)</ins>:
 This book is dedicated to whoever will take time to read parts of it.\
 Don't let institutional elitism discourage you.\
 You are not a lost cause.\
 <br/>
 *antoineportes@duck.com*
-<br/>
-#### <ins>v2 (pompous idolatry)</ins>:
-Isabelle Faust.\
-Goethe in your name — Méphistophélès in your fingers.\
-Giuseppe Tartini once had a dream of you.\
-If, by some perilous acrobatic fortune, you happen to be reading these lines,\
-this book is yours.
