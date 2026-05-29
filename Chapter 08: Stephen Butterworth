@@ -945,8 +945,38 @@
   Bode plot (1):  [coming soon]
   Bode plot (2):  [coming soon]
 
-  [[TO BE CONTINUED]
+  /*
+    //  Confessions
+    Why was I geeking on Desmos?
+    These two sets of formulae are equivalent for LP and HP:
+    for LP, all the numerators multiplied give 1 in both cases, as we've just proven;
+    for HP, s times each numerator gives s^N in both cases.
+    But I wanted a general formula for BP, notch and AP.
+    I found BP intuitively: √(s) in each denominator.
+    Notch was a bit trickier -- so I thought: maybe the numerator is wrong.
+    So I came back here and we fixed it.
+    Turns out it wasn't how to solve the notch. I won't elaborate in this chapter.
+    (Notch and BP get a dedicated chapter.)
+    But then came AP's turn. And it confirmed that the general working set of formulae is the second one (with the poles in the numerator).
+  */
+
+  //  Fun fact
+  Formula (1) starts with negative angles and moves upward.
+  Formula (2) starts with positive angles and moves downward.
+  Then we flip the signs, so North-East goes South-West and South-East goes North-West.
+  So formula (1) starts in the top-left quadrant and goes downward:
+  and formula (2) starts in the bottom-left quadrant and goes upward.
+  This means that at each equal value of n, method (1) and method (2) compute a conjugate pair.
+  If N is odd they end up joining at the real pole.
+  Which means that  p (n)  and  p (N - 1 - n)  are always a conjugate pair with both formulae.
+  ( E.g.:  N = 5    =>    arg (p (2))  =  π (1 - 5 + 4)/10  =  0        &&        arg (p (5 - 1 - 2))  =  π (1 - 5 + 10 - 2 - 4)/10  =  0 )
+
+  "Fun fact" and not "useful fact" because using two formulae in parallel is indeed fun, but not optimal as an algorithm.
+  A better algorithm would be: choose one formula, then either (a) run the full loop, or (b) stop half-way and reverse all imaginary parts.
+  I like (a) better, but to be very practical, the dev's formula is probably the most useful.
+  Formulae (1) and (2) serve mathematical elegance -- not necessarily the engineer's first choice.
+  Still, their simplicity makes them safe. And having them available could help fix buggy designs.
 
 
-
+  [[ TO BE CONTINUED ]]
 
