@@ -5,7 +5,7 @@ So this is mainly a guideline for myself.<br/>
 But maybe publicly pushing it can help you make sense of all the parallel chapters full of "coming soon" and "in progress".<br/><br/>
 As long as a chapter id in progress, it's name or, especially, its number might change.\
 So if you like this book so much that you sometimes read it, and want to save a link to it, try to avoid saving links to chapters that are in progress.\
-Right now you're safe up to:  **<ins>Chapter III:  RC</ins>**  (included).<br/><br/>
+Right now you're safe up to:  **<ins>Chapter III:  = 1 + 2</ins>**  (included).<br/><br/>
 <sup><sub>Attempting to read this is very bad for your eyes.</sub></sup>
 ___
 ### [<ins>Chapter I:</ins>  Analytic signals](Chapter%2001%3A%20Analytic%20signals)
