@@ -1,0 +1,952 @@
+###############################################################################################
+###############################################################################################
+                               WORKING CLASS FILTER DESIGN
+###############################################################################################
+###############################################################################################
+
+###############################################################################################
+                            Chapter VIII:  Stephen Butterworth
+###############################################################################################
+/*          "Whatever happened to                                                            */
+/*           All the heroes?                                                                 */
+/*           All the Shakespearoes?                                                          */
+/*           They watched their Rome burn."                                                  */
+/*                                               --  Hugh Cornwell (No more heroes)          */
+===============================================================================================
+#01  Meet Stephen
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Stephen_Butterworth
+
+  In 1930, Stephen Butterworth asked himself a naïve question: what would the simplest low-pass filter be?
+  He didn't know yet that "simple" would mean "perfect".
+  Nor could he know that his name was to become at least one mandatory chapter in every filter theory.
+
+  Source: I travelled through time and read his mind.
+  I'm trying to be poetic. Would you rather have me quote Aristotle again?
+
+  Actual source:
+    "On the Theory of Filter Amplifiers", S. Butterworth
+    (in "Experimental Wireless & the Wireless Engineer" n° 85, October 1930)
+    https://archive.org/details/sim_electronic-technology_experimental-wireless-and-the-wireless-engineer_1930-10_7_85/page/536/mode/2up
+
+  Stephen was so badass that he didn't even use the Laplace transform.
+  This wasn't necessarily an act of rebellion: there was no standard method yet.
+  No social norm in filter design. Complete creative Freedom.
+
+  There were no digital filters in the late 1920's. Back then this was pure electronics.
+  The problem was to be understood as "design a circuit".
+  The 6-page article is pretty short if you reduce it to its math part.
+
+  I don't know that he used the term "transfer function" -- but he wrote "ratio of the output [...] to the input [...]".
+  Nevertheless his method suggests that he knew that the amplitude response of a filter of order N is the absolute value
+  of a ratio complex polynomials whose denominator is of order N.
+
+  He defined f0 the cutoff frequency and any frequency f as f = x f0.
+  So  x  =  f / f0. That's our ω / ωc, so we're in unit-cutoff notation. So our numerator is 1 (LP, remember?).
+
+  Then he defines F the "filter factor". He's focusing on amplitudes so that's our |H (jω)|.
+  (Or H (jω') if you accept my rejection of standard unit-cutoff notation.)
+
+  So our denominator is the square root of a polynomial of order 2N (he used m for N).
+
+  What's the simplest polynomial of order μ? I'd say:  x^μ.
+
+  Ok, so the simplest amplitude response for a LP filter of order N is:
+     _______
+    ⎟    1   
+    ⎟ ------
+    ⎷  x^2N
+  
+  Except this is not a LP... We want the amplitude to be 1 when x = 0, and 0 when x = ∞.
+  We already have the second condition.
+  Now:  1  =  √(1)  =  √(1 / 1)  =  √( 1 / (1 + 0) )  =  √( 1 / (1 + 0^2N) )
+
+  Ok so just add 1 to the numerator and we're good.
+
+  Stephen writes:
+
+    F  =  (1 + x^2m) ^ (1/2)
+
+  which translates as:                                              _________________         ___________________
+                                                                   ⎟       ωc^2N            ⎟          1
+    |H (jω)|^-2  =  1 + (ω/ωc)^2N    which means:    |H (jω)|  =   ⎟ ----------------   =   ⎟ ------------------  =  F
+                                                                   ⎷  ωc^2N  +  ω^2N        ⎷   1  +  (ω/ωc)^2N
+
+  /*
+    Notice that (assuming x is never negative):
+
+      #  If N = 1, we retrieve the amplitude response of a 1-pole RC low-pass. We already have one solution.
+
+      #  If x = 1 (that is ω = ωc),  F  =  (1 + 1)^(1/2)  =  1 / √(2)
+           so any order will have the same amplitude at the cutoff frequency as a 1-pole RC low-pass.
+
+      #  If x < 1 (that is ω < ωc), x^2N tends to zero when N tends to infinity. Then 1 + x^2N tends to 1,
+           and F tends to  1 / √(1)  =  1.
+           I.e. the pass-band tends to ideal. Indeed, any frequency under the cutoff has a gain of 1, so its amplitude is untouched.
+
+      #  If x > 1 (that is ω > ωc), x^2N tends to infinity when N tends to infinity. Then 1 + x^2N tends to infinity,
+           and F tends to  1 / √(∞)  =  0.
+           I.e. the stop-band tends to ideal. Indeed, any frequency over the cutoff has a gain of 0, so its attenuation is total.
+
+      #  Infinite N means ideal pass-band, ideal stop-band and no transition-band.
+           This looks like the formula for the engineer's ideal filter.
+
+           //  https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters
+
+           Although it's a bit paradoxical since it means a gain at cutoff of  1 / √(2)  and yet no transition-band...
+           But paradoxes tend to show up when you use infinity as a number.
+
+           Still: the transition-band is as infinitesimal, the pass-band is as immaculate, the stop-band is as steep --
+           -- as the order is high.
+  */
+
+  Remember:  |z| = 0    <=>   z = 0    so the poles of the transfer function are poles of the amplitude response.
+  Ok but the only solution to  √(x) = 0  is  x = 0.
+  So the poles of |H (jω)| are the roots of |H (jω)|^-2 which, if we keep Stephen's  x = ω/ωc  gives  |H (jω)|^-2  =  1 + x^2N.
+  Indeed the exponent -2 is 2 times -1, where "2" means "square" or "ignore the square root",
+  and "-1" means "inverse" or "ignore the numerator".
+
+  So we want the solutions to  ƒ (x)  =  1 + x^2N  =  0.
+  But wait. That's a 2Nth-order polynomial: it has 2N roots. Our filter is of order N: it has N poles.
+  We'll get twice too many solutions... Right. Good.
+
+  When studying polynomials, we've seen that:
+
+    (1)  any polynomial can be expressed in terms of its roots;
+    (2)  any polynomial of order N is a product of N polynomials of order 1 (affine).    //  (where N is a positive integer)
+  
+  Which means that any set of half the roots of ƒ (x) can be used to build the denominator of an N-pole filter's transfer function.
+  So if we don't like some root, good news: we need to drop half of them anyway.
+  E.g. if we want a stable filter we'll drop any r_n with  Re (r_n) > 0.
+  Just hope at least half of the roots have a negative real part then.
+  /*
+    Of course if we want the ultimate unstable filter we could do the opposite.
+    Dark-energy filter: "Oh, so you have a stop-band? Cute. I have a black hole."
+    Too late, I've just coined the name.
+    What's the book's license again?
+  */
+
+  Ok so:  ƒ (x)  =  1 + x^2N  =  0.
+
+  Butterworth didn't solve the equation himself: he writes "see Todhunter's Trigonometry, p. 307".
+  The only work by Isaac Todhunter I could access online is called "Spherical Trigonometry (for the Use of Colleges and Schools)".
+  It has 171 pages.
+  I guess we're on our own now.
+
+  //  Traditions vs. logic
+
+  We've reached the point where we'll go beyond Stephen Butterworth's article.
+  What he calls a "single element" is already a second-order filter.
+  So his "m", our "N", is always even.
+
+  People after him found a way to apply his model to odd orders, but with a distinct formula,
+  which is neither convenient nor elegant.
+
+  This also comes from the fact that Stephen used a ready-to-serve formula provided by Isaac Todhunter.
+  The math part is a small fraction of his article: he's an engineer occupied with electronics.
+  Almost as if I should have named this chapter "Isaac Todhunter"... But who would read that?
+
+  Let's grant ourselves an extra level of Freedom and assume N can be odd right from the start.
+  We should end up with a single formula for even and odd orders.
+
+  /*
+    SPOILER:
+  
+      I know it's possible because I've already found said formula by induction (a pretentious word for luck):
+  
+      https://github.com/antoineportes/DSP/blob/main/filters/Damping%20factors%20in%20Butterworth%20cascades
+  
+      But this time we're doing things properly: we don't gather, we don't hunt -- we learn agriculture.
+   */
+
+   As I wrote: I couldn't find Todhunter's Trigonometry.
+   No choice but Working-calss trigonometry!
+
+   Ain't it better this way? Not knowing the results in advance? Having to find not only the path but also the destination?
+   You thought time travel was a joke, didn't you?
+   We're not even in 1930 yet: we're in Plato's Meno: doing trigonometry with mammoth bones.
+
+   /*
+     I'll be taking for granted that we're comfortable with trigonometric concepts and dynamics.
+     If anything feels not deeply detailed enough, refer to the appendix at the end of this chapter.
+   */
+
+
+
+===============================================================================================
+#02  Meet Isaac?
+===============================================================================================
+
+  https://en.wikipedia.org/wiki/Isaac_Todhunter
+
+  There's been a time when all you needed, to figure out the mechanics of the solar system,
+  was watching an apple fall from a tree.
+
+  There was no "How to tie your shoes" Youtube tutorial. Ha! Evolution.
+
+  Oops: wrong Isaac.
+
+  //  Confession
+  I've tried hard to solve directly for s' = jω/ωc, using the identity x = ω/ωc = s'/j...
+  It lead nowhere: I always ended up with one single solution for all N -- instead of N solutions.
+  It doesn't mean that it's impossible, it shouldn't be, please try. I did, I failed.
+
+  Solving for x looks promising, but we need to know what to do with our results.
+  Once we find a root r1, x = r1 is a solution. But we want poles: roots in terms of s'.
+  Let's say p1 is the pole corresponding to r1, then:
+    
+    x = s'/j    =>    p1 = j r1
+
+  So if  r1  =  Re (r1)  +  j Im (r1)    then:    p1  =  j Re (r1)  -  Im (r1)
+
+
+  //  ƒ (x)  =  1 + x^2N  =  0
+
+    x^2N  =  -1    or:    (x^N)²  =  -1
+
+  Apparently, x^2N is a square, then it has two opposite solutions for x^N.
+  It's a square that produces a negative number. So x^N has an imaginary part.
+  You don't produce imaginary parts by multiplying purely real numbers together.
+  /*
+    Proof:
+      z  =  Re (z)  +  j Im (z)    ;    ζ  =  Re (ζ)  +  j Im (ζ)
+
+      =>    z ζ  =  ( Re (z)  +  j Im (z) ) ( Re (ζ)  + j Im (ζ) )
+                 =  Re (z) Re (ζ)  +  j Re (z) Im (ζ)  +  j Im (z) Re (ζ)  -  Im (z) Im (ζ)
+
+    If  Im (z)  =  Im (ζ)  =  0    then:    z ζ  =  Re (z) Re (ζ)
+    If  Re (z)  =  Re (ζ)  =  0    then:    z ζ  = -Im (z) Im (ζ)
+
+    Therefore, for a product to have an imaginary part, at least one of its terms must have an imaginary part,
+    and at least one of its terms must have a real part.
+  */
+  So: x^N, being a repeated product of x, all roots for x have an imaginary part (and a real part).
+  Except: if N is odd, our polynomial can be expressed as a product of second-order polynomials and one first-order
+  (affine) extra polynomial whose only root could very well be real.
+  Solution:
+    First of all: not necessarily:  x - j  =  0  has one root:  j  -- purely imaginary.
+    But the statement about x^2N being a product of x stands.
+    For instance, if N = 1, then  x^2N  =  -1  means  x² = -1  and  x = ±j... Almost unstable.
+
+    But  x =  s'/j  so if  x = ±j  then  s' = ±1. And we'll pick -1 for the stake of stability.
+
+  Anyway. Apart from the possible extra real root, our results will always come in complex conjugate pairs.
+  Then we can build second-order blocks as products of conjugates.
+
+  We're dealing with complex numbers and exponentiation. The exponential form should make our lives easier.
+
+    -1  =  -1  +  0 j    so   Re (-1)  =  -1    and  Im (-1)  =  0
+
+  Then:
+
+    |-1|  =  √( (-1)² + 0² )  =  √(1)  =  1
+
+  Having no imaginary part, -1 is on the real (horizontal axis) -- having a negative real part, it's on the left semi-plane.
+  Getting there requires a half a turn, so a flat angle -- so π. So  arg (-1)  =  π.
+  
+  Then:
+
+    -1  =  |-1| exp ( j arg (-1) )  =  exp (jπ)
+
+  /*
+    Double check:
+
+      cos (π)  =  cos (0 + 2π/2)
+      So  cos (0)  =  1  +  half a period.
+
+      Cosine and sine have a center of symmetry in the horizontal middle of their period. One side is the opposite of the other.
+      So any 2π jump produces equivalent results. Any π jump gets us halfway there, in the horizontally mirrored part of the period.
+      So:
+
+        cos (x ± π)  =  -cos (x)    and    sin (x ± π)  =  -sin (x)
+
+      Also, if n is an integer:
+
+        cos (x ± 2πn)  =  cos (x)    and    sin (x ± 2πn)  =  sin (x)    //  "±" emphasises the fact that integers can be negative.
+
+      2πn is called a modulus and written:
+
+        cos (x)  =  cos (x mod 2π)    ||    sin (x)  =  sin (x mod 2π)        //  https://en.wikipedia.org/wiki/Modulo
+
+      We'll need this concept right away.
+
+      So:
+
+        cos (π)  +  j sin (π)  =  -cos (0)  -  j sin (0)  =  -1  -  j 0  =  -1.  Perfect.
+  */
+
+  Then:
+
+    1 + x^2N  =  0    <=>    x^2N  =  exp (jπ)  =  cos (π mod 2π)  +  j sin (π mod 2π)  =  exp ( j (π mod 2π) )
+
+                                                          /   π mod 2π \             /   π + 2πn \
+    <=>    x  =  ± exp ( j (π mod 2π) )^(1/2N)  =  ± exp ( j ---------- )  =  ± exp ( j --------- )    where n is an integer.
+                                                          \      2N    /             \      2N   /
+
+  Let's simplify the notation by defining:
+
+    φ (n)  =  (π + 2πn) / 2N  =  π (1 + 2n) / 2N    //  n is an integer, so 2n is even and 1 + 2n is odd.
+
+  Then our roots r[n] will have the form:
+
+    r[n]  =  cos ( φ (n) )  +  j sin ( φ (n) )
+
+  And our corresponding poles:
+
+    p[n]  =  j r[n]  =  j cos ( φ (n) )  -  sin ( φ (n) )
+
+  Therefore, if we want poles in the left semi-plane, we want:    sin ( φ (n) )  >  0.
+  Several possible restrictions allow to achieve this goal.
+  Here's the one I chose:
+
+    In the expressions of r[n] and p[n] above, I've ignored the "±" sign in the expression of x.
+    Let's keep it that way. First restriction.
+    Then we want an angle φ (n) whose sine is assured to be positive.
+    The period of sine is 2π. So we want an angle:  0 < φ (n) < 2π.
+    This period has a center of symmetry in its horizontal middle:  2π/2  =  π.
+    First half is positive, second half negative (mirrored horizontaly).
+    So we want our angle in the first half.
+
+    Then:    0 < φ (n) < π
+                                                                       πμ
+  Let's define:  μ  the maximal value of 1 + 2n  then:    φ (max)  =  ----  <  π.
+                                                                       2N
+       1 + 2n
+    π --------  <  π    <=>    1 + 2n  <  2N
+         2N
+
+  The maximal value of 1 + 2n is 2N. But it cannot be reached because 2N is even, while 1 + 2n is odd. So it's actually 2N - 1.
+  Therefore:
+
+                   2N - 1       πμ
+    φ (max)  =  π --------  =  ----
+                     2N         2N
+
+  Notice that the limit of φ (max) when N tends to infinity is π.
+
+  From there we can use the modulus backward, each time subtracting 2 to μ in the numerator (with π factored, we retrieve 2π).
+  Then, if ν is a positive integer:
+
+               π (μ - 2ν)
+    φ (n)  =  ------------
+                   2N
+
+  Now we need the maximal value of ν. Then we should be good.
+  Our angle corresponds to the first half-period of sine.
+  The first half-period of sine has a symmetry axis at its horizontal middle:
+  sin (x) rises from 0 to 1 during the first quarter-period, that is as x goes from 0 to 2π/4 = π/2;
+  then we reach the second quarter-period and sin (x) goes back from 1 to 0 at a mirrored rate,
+  so we'll go through the same values again, except in reverse (axial symmetry indeed);
+  second qarter period means x goes from π/2 to 2π/4 + 2π/4 = π.
+  The minimal value of N is 1.
+  Then:    2N - 1  =  1    ;    2N = 2    so:    φ (max)  =  π/2    //  (its minimal value)
+  We've already noticed that the upper limit of φ (max) is π.
+  So:
+
+    φ (max)  ∈  [π/2 , π[    i.e. φ (max) is always in the second quarter-period.
+
+  So we start in the second quarter-period and progress backward.
+  Due to the symmetry axis:    φ (max) - π/2  =  φ (max)    then everything repeats.
+  Let's define:  ν_max  the highest necessary value of ν. Then:
+
+     π (μ - 2ν_max)                     μ - 2ν_max
+    ----------------  ≤  π/2    <=>    ------------  ≤  1/2    <=>    μ - 2ν_max  ≤  2N/2  =  N
+           2N                               2N
+
+                                                                                                    N - 1
+    <=>  μ  ≤   N + 2ν_max    <=>    2ν_max  ≥  μ - N  =  2N - 1 - N  =  N - 1    <=>    ν_max  ≥  -------
+                                                                                                      2
+
+  ν_max is a special value of ν, so if ν is an integer, so is ν_max.
+  So it can only be (N - 1)/2 if N is odd -- otherwise it's N/2.
+  Another way to express this is to consider that it's always equal to the integer part of N/2.
+  E.g. N = 9, N/2 = 9/2 = 4.5  =>  ν_max  =  4  =  8/2  =  (9 - 1)/2  =  (N - 1)/2.
+
+  The "floor" function serves exactly this purpose:    https://en.wikipedia.org/wiki/Floor_and_ceiling_functions
+
+  So:
+
+    ν_max  =  floor (N/2)    also written:  ⌊N/2⌋
+
+  Important clarification:
+
+    ν_max is not exactly the highest value of ν. It would be if ν sarted at ν = 1. But it starts at zero.
+    So it's the number of angles we need. And for even orders, it's redundant with zero, since it gives exactly π/2.
+    An odd order needs the same number of angles as the inferior even order and one extra real pole.
+    So in this case either, ν_max is not actually reached.
+    Otherwise:
+
+      even:  μ - 2ν_max  =  2N - 1 - 2N/2  =  N - 1    <=>    φ (min)  =  π (N - 1)/2N  =  π/2 - 1/2N  <  π/2
+
+       odd:  μ - 2ν_max  =  2N - 1 - 2 (N - 1) / 2  =  2N - 1 - N + 1  =  N    <=>    φ (min)  =  πN/2N  =  π/2
+
+      j cos (π/2)  -  sin (π/2)  =  -1  -- our extra real pole. But I've promised a general formula.
+  
+  /*
+    I can think of a convoluted fix if we want a single formula that generates the extra real pole of odd orders.
+
+    The modulo function outputs the remainder of the ratio of its variable over its modulus.
+    So  N mod 2  will output 0 for even orders and 1/2 for odd orders.
+
+    The ceil function rounds up decimal numbers to the next integer. It doesn't modify integers.
+    So:  ceil (1/2)  =  1    and    ceil (0)  =  0
+
+    So:
+
+      ceil (N mod 2)  =  0  if N is even and  1  if N is odd.
+
+    So:
+
+      floor (N/2)  +  ceil (N mod 2)  will give N/2 for even orders and (N - 1)/2 + 1 for odd orders.
+
+    This +1 is the extra real pole.
+
+    I don't think I'll personally use this formula: yes it unifies the algorithm completely.
+    But adding a 1-pole filter when N is odd feels less twisted.
+    Anyway, I've delivered the general formula as promised.
+    In the rest of the chapter:
+
+      ν_max  =  floor (N/2)  and   ν < ν_max  (strictly less than)
+
+    /*
+      We could have ν_max included in the range of ν by subtracting 1 in the definition of ν_max or in the range of ν:
+  
+        ν_max  =  floor (N/2)  -  1    OR    ν  ∈  [0 , ν_max - 1]
+    */
+  */
+
+  Then:
+
+    φ (ν)  =  π (μ - 2ν) / 2N    with    0 ≤ ν < ⌊N/2⌋    &&    ν ∈ ℕ    &&    μ  =  2N - 1
+
+  //  Hey wait! What about cosine?
+  
+  I've already secretly verified. If you don't like trigonometry, I hope I'm about to change your mind.
+
+  Cosine starts at one. Compared to sine, it's a quarter-period early -- or three quarters late.
+  So when sine reaches its first symmetry axis at π/2, cosine reaches its symmetry center.
+
+  So the interval [π/2 , π] corresponds to sine positive and decreasing and cosine negative and decreasing.
+  And [0 , π/2] has sine increasing and still positive and cosine positive, still decreasing.
+
+  This means: to get the values excluded by our restriction on the maximal value of ν,
+  all we need is to reverse cosine's sign.
+
+  We don't have to examinate our poles to group them by conjugate pairs: we build the pairs ourselves.
+
+  Before we decrypt all this: pause. Consider what we've just accomplished.
+
+  We have fixed a formula that remained incomplete for almost a century.
+  We managed it with even less tools than the original author: he had Todhunter's Trigonometry --
+  -- we didn't even use a calculator.
+  
+  It might help if I were to actually write down the formula:
+
+  The poles p[ν], and their respective conjugates q[ν], of our hypothetical filter are obtained by the formulae:
+
+    p[ν]  =  j cos ( φ (ν) )  -  sin ( φ (ν) )    and    q[ν]  =  -j cos ( φ (ν) )  -  sin ( φ (ν) )
+  
+  where:
+
+                 μ - 2ν
+    φ (ν)  =  π --------    ;    0 ≤ ν < ⌊N/2⌋  &&  ν ∈ ℕ    ;    μ  =  2N - 1    ;    N is the order of the filter
+                   2N
+  
+  and:  if N is odd, the extra pole is -1.
+
+
+
+===============================================================================================
+#03  Γνῶθι σεαυτόν
+===============================================================================================
+
+  I haven't made this explicit yet, but what we're doing here is an example of filter design.
+  Filter design can have distinct starting points:
+    #  start with an analog circuit
+    #  start with a block diagram
+    #  start with a transfer function
+
+  Then "start" can mean build a concept ex nihilo or modify/mix something extant.
+
+  Right now, we're designing a whole family of filters by building transfer functions ex nihilo.
+  We've started with "what's the simplest polynomial?" -- and arithmetic and trigonometry alone got us here.
+
+  https://en.wikipedia.org/wiki/Butterworth_filter
+  "Butterworth had a reputation for solving very complex mathematical problems thought to be 'impossible'."
+  (Lucky I didn't know.)
+  He didn't use Laplace. Neither did we.
+  He used Todhunter's book. We didn't.
+  He didn't solve odd orders. We did.
+
+  This cannot be nothing.
+
+  If you've followed the whole reasoning and feel able to do it on your own:
+
+    You're a filter designer.
+
+  Plus next time someone asks you "what's the biggest polynomial you've discriminated?",
+  You get to answer "undefined" -- or "NaN" (if you really need to show off).
+  I mean... we all get this question a lot, don't we?
+
+
+
+===============================================================================================
+#04  Life gives you lemons...
+===============================================================================================
+
+  We have poles. Let's make transfer functions.
+
+  But first let's notice something.
+  Something that's usually the introduction to a regular Butterworth chapter.
+
+  //  A: unit-circle
+
+  All our poles have the form:
+
+    j cos (φ)  -  sin (φ)  =  j sin (φ + π/2)  -  cos (φ - π/2)  =  j sin (φ + π/2)  +  cos (φ -π/2 + π)
+                           =  cos (φ + π/2)  +  j sin (φ + π/2)  =  cos (φ2)  +  j sin (φ2)
+                           =  exp (jφ2)
+  
+  or the same with negative cosine, which, knowing that they're conjugates, gives:    exp (-jφ2)
+
+  The absolute value is always 1. Which is the radius of the unit-circle.
+  So all our poles are located on the left half of the unit-circle.
+  (For the dark-energy filter, it would be the right half.)
+
+  //  B: equal spacing
+
+  We've found several poles inside a single complex sinusoid by making use of the trigonometric modulus.
+
+                 μ - 2ν         2N - 1 - 2ν              π          π
+    φ (ν)  =  π --------  =  π -------------  =  π  -  -----  -  ν ---
+                   2N               2N                  2 Ν         N
+  
+  We're splitting π (half the unit-circle) in equal slices of  π/N  with an initial offset of  π/2N.
+  Down to π/2 -- or, since we mirror cosine: down to 0 + π/2N.
+  /*
+    The range [0 , π] is the top half of the unit-circle.
+    But once we convert sine in cosine and cosine in sine to reach the standard polar notation,
+    the half-circle gets shifted a quarter-turn counter-clockwise (and the imaginary part switches sign).
+    The range becomes [-π/2 , π/2]. Or rather:  [ -π/2 + π/2N  ,  π/2 - π/2N ]
+  */
+
+  These equal slices make our poles equally spaced.
+
+  Notice that when N tends to infinity:
+
+    π/N  and  π/2N  both tend to zero
+
+    then the range  [ -π/2 + π/2N  ,  π/2 - π/2N ]  tends to  [-π/2 , π/2]
+    which is the full left half of the unit-circle -- i.e. all the possible stable poles on the circle;
+    and the space between poles tends to zero.
+
+  https://www.desmos.com/calculator/cukzft6ntq
+
+  //  A + B
+
+  The poles of a Butterworth filter are equally spaced on the left half of the unit-circle.
+  Their range and their proximity both grow with the order of the filter.
+
+  I first met Butterworth filters through this "definition".
+  It didn't make sense to me.
+  That tends to happen when you put effect before cause.
+  The equal spacing on the unit circle is a consequence of the initial concept. Not the other way around.
+  Instead of:
+
+    A Butterworth filter has the optimal pass-band and stop-band because its poles are this way.
+
+  We've proven that:
+
+    Its poles are this way because that's where you get if you seek optimal pass-band and stop-band.
+
+  I felt stupid because I couldn't understand what everyone seemed to find obvious.
+  I'm starting to suspect that the world is full of pretenders.
+
+  Maybe I'm wrong and indeed stupid. I can live with that.
+
+  //  C?
+
+  This is commonly known but easilly overlooked:
+
+    #  The amplitude at the cutoff frequency is always:  √(1/2)    or    (1/2)^(1/2)    etc.
+
+       ≈  0.7071067811865475244008443621048490392848359376884740365883398689...
+
+       ≈ -3.010299956639811952137388947244930267681898814621085413104274611... dB.
+
+    #  First-order passive RC filters are Butterworth filters.
+
+
+
+===============================================================================================
+#05  ... grow lemon trees.
+===============================================================================================
+
+  Let's name stuff.
+
+  We're going to build a filter of order N.
+  It's a Butterworth filter, so its name will be B and its transfer function B (s').
+
+  It will be decomposed in second-order filters and (if N is odd) an extra first-order filter.
+  These filters will be called β_ν and their transfer functions β_ν (s').
+  Where ν is a placeholder for each filter's index.
+
+  The second-order filters β_ν will be obtained by multiplying conjugate poles p_ν and q_ν.
+
+  Each pole p_ν or q_ν is built from an angle φ_ν. Such that:
+
+    #  p_ν  =  +j cos (φ_ν)  -  sin (φ_ν)
+
+    #  q_ν  =  -j cos (φ_ν)  -  sin (φ_ν)
+
+  Ok, that's probably all we need for now.
+
+  /*
+    Let's address the special case: 1 pole.
+    We've found that it's always -1.
+  
+    Let's solve:    -j cos (φ_ν)  -  sin (φ_ν)  =  -1
+    Cosine first: we want cos (x) = 0.
+  
+      cos (x)  =  sin (x + π/2)  =  ± sin (x + π/2 ± π)    ;    sin (0) = 0
+  
+      =>    cos (x) = 0  <=>  x  =  π/2 mod π
+  
+    Ok, sine now: we want sin (x) = 1.
+    Maximal value, so first quarter-period, so 2π/4 = π/2.
+    
+    Perfect, we don't need the modulus in cos.
+
+    So:
+
+      φ_ν = π/2    and    -j cos (φ_ν)  -  sin (φ_ν)  =  +j cos (φ_ν)  -  sin (φ_ν)  =  -1  =  p_ν  =  q_ν
+
+    The formula works. We knew that.
+    Plus if you've looked at the Desmos link in the previous section, you've literally seen this result.
+
+    But it's worth noticing that if we rely blindly on our algorithm, we will generate the real single pole twice.
+    If we automate the process not carefully, we could inadvertently add an extra 1-pole filter to our cascade.
+
+    Oh by the way:
+    cascade is a standard term for what we're currently doing: stacking filters in series to build a bigger filter;
+    or dividing a big filter into smaller ones.
+    Attested advantage: polynomials of order greater than 2 are a pain to discriminate (I've tried of course).
+    Rumour: I personally don't understand why and therefore don't consider it undoubtedly true,
+    but digital filters of higher order seem to be less prone to denormal noise when split this way.
+    (My personal, maybe wrong, hypothesis: the z^-N previous states are as negligible as N is high if the filter is stable --
+     -- N = 2 is often as low as we can get without introducing imaginary gains... ?
+  */
+
+
+  //  β_ν^-1 (s')
+
+  Let's temporarily simplify our notation de-crowd information:
+
+    β_ν^-1 (s')  =  (s' - p_ν) (s' - q_ν)    <----    1/β  =  (s' - p)(s' - q)
+
+    cos (φ_ν)  <----  cos
+
+    sin (φ_ν)  <----  sin
+
+  We'll easily reverse the these substitutions once our expression is clean enough.
+  Also: N is even until further notice.
+
+    p  =  +j cos  -  sin    ;    q  =  -j cos  -  sin    ;    1/β  =  (s' - p)(s' - q)
+
+    =>    1/β  =  ( s'  -  j cos  +  sin ) ( s'  +  j cos  +  sin )
+
+               =  s'²  +  j cos s'  +  sin s'  -  j cos s'  +  cos²  -  j cos sin  +  sin s'  +  j cos sin  +  sin²
+
+  Ok, let's group simplifying terms before removing them:
+
+    1/β  =  s'²  +  [ sin s'  +  sin s' ]  +  [ cos²  +  sin² ]  +  [ j cos s'  -  j cos s' ]  +  [ j cos sin  -  j cos sin ]
+
+  The two last pairs of brackets both sum down to zero, we can forget them.
+  The first pair of brackets adds two identical terms: it can be simplified with a factor 2.
+
+  And, of course, the second pair of brackets is self-explanatory because, obviously, everybody remembers their Pythagoras...
+
+  /*
+    Just in case:
+
+      adjacent² + opposite²  =  hypotenuse²
+
+      cos  =  adjacent / hypotenuse    ;    sin  =  opposite / hypotenuse
+
+                        adjacent²         opposite²        adjacent² + opposite²       hypotenuse²
+      cos² + sin²  =  -------------  +  -------------  =  -----------------------  =  -------------  =  1
+                       hypotenuse²       hypotenuse²            hypotenuse²            hypotenuse²
+
+    Obviously!
+    This demonstration goes even quicker if you assume hypotenuse = 1.
+    But I tend to consider that zero prior assumption makes the result feel more "always true".
+  */
+
+  Ok, so:
+                                                                       1
+    1/β  =  s'²  +  2 sin s'  +  1    =>    β_ν (s')  =  ------------------------------
+                                                          s'²  +  2 sin (φ_ν) s'  +  1
+
+                                         1                                     ωc²
+    <=>    β_ν (s)  =  ------------------------------------  =  ---------------------------------
+                        (s/ωc)²  +  2 sin (φ_ν) s/ωc  +  1       s²  +  2 sin (φ_ν) ωc s  +  ωc²
+
+
+  Now each angle φ_ν will produce a distinct transfer function. B (s) is their product.
+  
+  Update: N can be odd now.
+  How do we deal with this?
+  We need an extra 1-pole filter, let's buid it first.
+
+  It has a pole at  s' = -1. So its denominator is:
+                  
+    H (s')^-1  =  s' + 1
+
+  and its transfer function:
+
+                  1             1                             ωc           //  Our now well-known RC low-pass.
+    H (s')  =  --------  =  ----------    <=>    H (s)  =  --------        //  This aligns with one of the first things we've noticed:
+                s' + 1       s/ωc + 1                       s + ωc         //  N = 1  means  Butterworth = RC.
+
+  Ok. If N is even, we multiply all second-order transfer functions β_ν (s) with H (s). That's it.
+
+  How do we write it as a formula without clumsy conditional branching?
+
+  //  Détour
+
+  If N is even,  N mod 2  =  0    ;    if N is odd,  N mod 2  = 1
+
+  Basic exponentiation rule:  x^0 = 1  and  x^1 = x.
+
+  So:  x^(N mod 2)  =  [ 1 if N is even  ||  x if N is odd ]
+
+  So:  H (s)^(N mod 2)  =  [ 1 if N is even  ||  H (s) if N is odd ]
+
+  Let's define:
+
+    o  =  N mod 2  ("o" as in "o"dd...)    and    Π (s) the product of all second-order instances.
+
+  Then, if N is even:
+
+    H (s)^o Π (s)  =  Π (s)  =  B (s)
+
+  and, if N is odd:
+
+    H (s)^o Π (s)  =  H (s) Π (s)  =  B (s)
+
+  Almost smells like success.
+
+  Except one last nit pick: what if N = 1 ?
+  Then we don't want Π (s).
+  An exponent switching between zero and one should do again:  N = 1  -->  Π (s)^0    ;    N > 1  -->  Π (s)^1.
+  Ok, got it:
+    
+    N  =  1    <=>    N - 1  =  0    ;    N  >  1    <=>    N - 1  >  0
+
+  Let's call our exponent α. Then we need α = 0 when N = 1 and α = 1 when N > 1.
+  So α should always pick the smallest value between 1 and N - 1. This way it will always be 1 except when N - 1 = 0.
+  This function is called the min function: input two numbers, output the smallest of the two.
+
+    https://en.cppreference.com/cpp/algorithm/min        //  Not Wikipedia. I've noticed, thanks. Sue me.
+
+  What if the two inputs are equal? ... Well it won't create a third number. So N = 2 will compare 1 and 1, and output 1. Alles gut.
+
+    α  =  min (1 , N - 1)    ;    B (s)  =  H (s)^o Π (s)^α
+
+  How about we write the complete algorithm in one single formula with all terms fully developed, just once? For fun?
+
+  Any low-pass Butterworth filter ever, of ANY order, has the exact transfer function:
+
+  
+                                    ⌊ N/2 ⌋ - 1
+                                     _________     /                                               \  min (1 , N - 1)
+                          (N mod 2)  |       |    /                       ωc²                       \^
+               /   ωc   \^           |       |   /  -----------------------------------------------  \
+    B (s)  =  ( -------- )           |       |  (                  /   2N - 1 - 2ν \                  )
+               \ s + ωc /            |       |   \   s²  +  2 sin ( π ------------- ) ωc s  +  ωc²   /
+                                       ν = 0      \                \       2N      /                /
+
+
+  Where  N ∈ ℕ  is the order of the filter,  ωc ∈ ]0 , +∞[  is the cutoff frequency, s = jω and ω ∈ ]0 , +∞[ is any frequency.
+
+  Bode plot:  [coming soon]
+
+  All this from:  F  =  (1 + x^2N)^-(1/2)  and 2 parameters.
+
+  Hello World, copy/paste this!  --  I guess this is a cookbook now.
+
+
+
+===============================================================================================
+#06  That all you got?
+===============================================================================================
+
+  Ok, we've found a unique formula that works for any order... but let's be honest: those exponents are conditional branching in disguise.
+  It's probably the best we'll get with real algebra. So let's call it the dev's formula.
+  Now let's say we're not afraid of imaginary numbers.
+  We could define each pole separately and chain complex 1-pole filters.
+
+  What we know:
+    #  the poles are equally spaced along the unit-circle
+    #  the ones we've discarded where the opposites of the ones we've kept
+    #  they all come in complex conjugate pair
+
+  What it means:
+    #  their repartition has two axis of symmetry:  the real axis, and the imaginary axis
+    #  they split the full circle (2π) in 2N equal angles:    δ_φ  =  2π / 2N
+
+  What else we know:
+    #  odd orders have real poles at  -1  and  +1 ; so, in terms of arguments, at:  π  and  0.
+    #  even orders don't
+
+  What it means:
+    #  the only way to preserve symmetry without pure imaginary or pure real poles is to split φ in the middle
+       (inequal angles would be asymmetrical...)
+    #  so if we choose 0 rad as our initial pole, even orders will have an offset of  δ_φ / 2  =  2π / 4N
+
+  We can focus on any of the four available half-circles (top, left, bottom, right).
+  The right one is convenient because it contains zero and is just the opposite of the one we actually want.
+  So let's build our angles on the positive side, where it's easy -- then we'll just have to invert the signs or add π (both trivial).
+  Our half-circle's range is  [-π/2 , +π/2]  which puts zero right in the middle.
+
+  //  Odd order:
+  One angle at zero.
+  N - 1 angles left: half positive, half negative -- so:  (N - 1) / 2  in each quadrant.
+  Then our first angle is:
+
+                     N - 1     2π       (1 - N) 2π        π
+    φ_min  =  0  -  ------- * ----  =  ------------  =  ----- (1 - N)
+                       2       2N           4N           2 N
+
+  and our last angle is:
+
+                     N - 1     2π       (N - 1) 2π        π
+    φ_max  =  0  +  ------- * ----  =  ------------  =  ----- (N - 1)
+                       2       2N           4N           2 N
+
+  //  Even order:
+  Zero splits the first angle in half (because symmetry).
+  So positive angles have a negative offset -- negative angles have a positive offset.
+  Half are positive, half are negative -- so:  N / 2  in each quadrant.
+  Then our first angle is:
+
+               2π       N     2π       2π  -  2π N        π
+    φ_min  =  ----  -  --- * ----  =  -------------  =  ----- (1 - N)
+               4N       2     2N           4 N           2 N
+
+  and our last angle is:
+
+               N     2π       2π       2π N  -  2π        π
+    φ_max  =  --- * ----  -  ----  =  -------------  =  ----- (N - 1)
+               2     2N       4N           4 N           2 N
+
+  Wunderschön:    φ_min  =  φ_min        &&        φ_max  =  φ_max
+  We get two formulae!
+                             π                  2π        π
+    (1)  arg ( p [n] )  =  ----- (1 - N)  +  n ----  =  ----- (1 - N + 2n)        n  ∈  [0 , N - 1]
+                            2 N                 2N       2 N
+
+                             π                  2π        π
+    (2)  arg ( p [n] )  =  ----- (N - 1)  -  n ----  =  ----- (N - 1 - 2n)        n  ∈  [0 , N - 1]
+                            2 N                 2N       2 N
+
+  Now we need to get back to the left semi-plane.
+  Cosine is always positive in the range  [-π/2 , +π/2]. So we need to reverse its sign.
+  But since our poles are complex conjugates we can reverse the sign of each whole pole.
+  They will be re-mapped by a diagonal vector, not a transversal one -- but symmetry doesn't care.
+  So:
+                          /    π               \                                         /    π               \
+    (1)  p [n]  =  - exp ( j ----- (1 - N + 2n) )        OR        (2)  p [n]  =  - exp ( j ----- (N - 1 - 2n) )
+                          \   2 N              /                                         \   2 N              /
+
+  We can do cleaner:
+
+    j  =  |j| exp ( j arg (j) )  =  exp (j π/2)
+
+  then:        p [n]  =  - exp ( j π/2 * (1 - N + 2n) / N )  =  - exp (j π/2)^{ (1 - N + 2n) / N }  =  -j^{ (1 - N + 2n) / N }
+
+    or:        p [n]  =  -j^{ (N - 1 - 2n) / N }
+
+  Full formula (1):
+
+               1 - N + 2n
+    ε (n)  =  ------------        &&        p (n)  =  - j^(ε (n))        &&        s'  =  jω / ωc
+                   N
+
+                        1
+    H (s)  =  -----------------------
+                N-1
+                 ∏  (s'  -  p (n) )
+               n = 0
+
+  Full formula (2):
+
+               N - 1 - 2n
+    ε (n)  =  ------------        &&        p (n)  =  - j^(ε (n))        &&        s'  =  jω / ωc
+                   N
+
+                        1                    //
+    H (s)  =  -----------------------        //  The only difference between formula (1) and formula (2)
+                N-1                          //  is the numerator of  ε (n).
+                 ∏  (s'  -  p (n) )          //
+               n = 0                         //
+
+  __We can do even better__
+  While geeking on Desmos, messing with the zeroes in order to generalise the formula to non-low-pass filters --
+  -- I couldn't get the notch right.
+  After geeking out a bit more, I noticed that the product of all poles always gave ±1 and an imaginary part that looked like denormal noise.
+  I then tested the same product, only with  - p(n)  instead of  + p (n).
+  I got +1 for all orders and some potential imaginary denormal noise.
+  This proves nothing.
+  But it's a question we can answer.                                                                                       /  N-1                \
+  I've used formula (2) -- we'll test (1) afterwards.                                                                     (    ∑  (N - 1 - 2n)/N  )
+                                                                                   N-1              N-1                 ^  \ n = 0               /
+    p (n)  =  - j^(ε (n))        <=>        - p (n)  =  j^(ε (n))        <=>        ∏  (- p (n))  =  ∏  j^(ε (n))  =  j 
+                                                                                  n = 0            n = 0
+  Let's define:
+                                            N-1                          N       N        N-1                          N-1
+                                             ∑  (N - 1 - 2n)             ∑ N  -  ∑ 1  -  2 ∑ n           N²  -  N  -  2 ∑ n
+               N-1                         n = 0                       n = 1   n = 1     n = 0                        n = 0                       2    N-1
+    Σ_ε    =    ∑  (N - 1 - 2n)/N    =    -------------------    =    -------------------------    =    --------------------    =    N  -  1  -  --- *  ∑ n
+              n = 0                                N                              N                               N                               N   n = 0
+
+  Let's define:            //    and notice:
+                           //
+               N-1         //            Δ_N  =     0     +     1     +  ...  +  (N - 2)  +  (N - 1)
+    Δ_N    =    ∑ n        //            Δ_N  =  (N - 1)  +  (N - 2)  +  ...  +     1     +     0
+              n = 0        //      Δ_N + Δ_N  =   N - 1   +   N - 1   +  ...  +   N - 1   +   N - 1    =    N (N - 1)    =    N² - N
+
+  Then:
+                         2 Δ_N                   N² - N
+    Σ_ε  =  N  -  1  -  -------  =  N  -  1  -  --------  =  N - 1 - (N - 1)  =  N - 1 - N + 1  =  ZERO!!!
+                           N                       N
+  so:
+                                      N-1                         N-1
+    =>    j^Σ_ε  =  j^0  =  1    =>    ∏  j^(ε (n))  =  1    =>    ∏  (- p (n))  =  1    ∀  N
+                                     n = 0                       n = 0
+
+  Imaginary noise truely owns its name.
+  If you have some mic to drop, now's a good time:
+
+                            1                    N-1  /     -p (n)     \
+    H (s)    =    -----------------------    =    ∏  (  --------------  )
+                    N-1                         n = 0 \  s'  -  p (n)  /
+                     ∏  (s'  -  p (n) )
+                   n = 0
+
+  Formula (1):
+  Let's skip redundant steps and go straight to:
+                                                             2 Δ_N
+    ε (n)  =  (1 - N + 2n) / N    =>    Σ_ε  =  1  -  N  +  -------  =  1  -  N  +  (N² - N) / N  =  1 - N + N - 1  =  0
+                                                               N
+  Ok.
+
+  Bode plot (1):  [coming soon]
+  Bode plot (2):  [coming soon]
+
+  [[TO BE CONTINUED]
+
+
+
+
