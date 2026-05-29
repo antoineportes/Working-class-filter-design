@@ -45,9 +45,25 @@ ___
 ___
 ### [<ins>Chapter IV:</ins>  Jargon](Chapter%2004%3A%20Jargon)
 + Logarithmic scales
-  +  Musical intervals, Pythagorean tuning, 12-ET
   + dB
-  + Bode plots
+  + Musical intervals, Pythagorean tuning, 12-ET
++ Bode plots
+  + Working-class canevas I
+___
+### [<ins>Chapter V:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
++ Polynomials
++ Poles and zeroes
++ Unit-cutoff
+  + Pole-zero plot
+  + Working-class canevas II
++ Stability
+  + Impulse / step / transient / steady-state response
+  + Left semi-plane
+  + Time-varying cutoff \(?\)
+___
+#### dead links ahead
+___
+### [<ins>Chapter VI:</ins>  More jargon](Chapter%2006%3A%20More%20jargon)
 + Types of filters \(non-exhaustive\)
   +  Low-pass \(LP\)
   +  High-pass \(HP\)
@@ -58,26 +74,6 @@ ___
   +  Pass-band
   +  Transition-band, gain at cutoff
   +  Stop-band: slope / stop-band attenuation / roll-off
-___
-### [<ins>Chapter V:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
-+ Polynomials
-+ Poles and zeroes
-+ Unit-cutoff
-  + Pole-zero plot
-+ Stability
-  + Impulse response
-  + Left semi-plane
-  + Time-varying cutoff \(?\)
-___
-### [<ins>Chapter VI:</ins>  More jargon](Chapter%2006%3A%20More%20jargon)
-+ Polynomials
-+ Poles and zeroes
-+ Unit-cutoff
-  + Pole-zero plot
-+ Stability
-  + Impulse response
-  + Left semi-plane
-  + Time-varying cutoff \(?\)
 ___
 ### [<ins>Chapter VII:</ins>  Ones and zeroes](Chapter%2007%3A%20Ones%20and%20zeroes)
 + Nyquist frequency
@@ -102,6 +98,8 @@ ___
   + Trapezoidal differentiation
   + Trapezoidal integration
 + Trigonometry
+___
+#### total mess ahead
 ___
 ### <ins>Chapter IX:</ins>  Butterworth +  \[temporary (*shitty*) title\]
 + Gain at cutoff = Q = 1/2D
@@ -142,8 +140,8 @@ ___
 + Watch me __explode__...
 ___
 ### <ins>Chapter XV:</ins>  Interstellar overdrive  \[temporary title... but, come on, it's cool!\]
-+ "I am the god of Hell fire and I bring you \[*sigmoids*\]"  \-\-  Athur \[*nerd*\] Brown
 + "Let me stand next to your \[*waveshaper*\]"  --  Jimi \[*geek*\] Hendrix
++ "I am the god of Hell fire and I bring you \[*sigmoids*\]"  \-\-  Athur \[*nerd*\] Brown
 + "Come on baby light my \[*Newton-Raphson iterative approximation*\]"  --  Jim \[*math-head*\] Morrison
 + "Let me take you to the anti-place of my \[*anti-aliasing*\] engine"  --  Roky \[*smart-ass*\] Erickson
 ___
