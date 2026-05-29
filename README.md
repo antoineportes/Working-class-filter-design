@@ -61,15 +61,18 @@ So if all you want in life is designing filters: read this and skip elementary s
 (It's a joke, don't do this.)
 <br/><br/><br/>
 ### Editorial note (sounds fancy!)
+>This is the opposite of a cookbook.
+
 The extension-less files and the pseudo-code syntax are deliberate.
 
 If you're too shy to pull a request, download a chapter, edit it locally, make it yours.\
 Do it with my blessing. It's kind of the whole point.\
 (If some software requires an extension — although most text editors won't — .txt will do.)\
-((monospace font required))
->This is the opposite of a cookbook.
-
-
+((monospace font required))<br/><br/>
+While there's no proper changelog in this repository, I try to keep the [table of content](ζ-Table%20of%20content.md) up to date.\
+It's basically a changelog that deals with past, present and future at once.\
+Which makes its commit history a multiverse browser?
+<br/><br/>
 ### Acknowledgements
 This book is dedicated to whoever will take time to read parts of it.\
 Don't let institutional elitism discourage you.\
