@@ -3,7 +3,7 @@ Nothing necessarily definitive here.<br/>
 I'm just deallocating memory in my part-time-schizophrenic-full-time-autistic GPU of a brain.<br/><br/>
 So this is mainly a guideline for myself.<br/>
 But maybe publicly pushing it can help you make sense of all the parallel chapters full of "coming soon" and "in progress".<br/><br/>
-As long as a chapter id in progress, it's name or, especially, its number might change.\
+As long as a chapter is in progress, its name or, more likely, its number might change.\
 So if you like this book so much that you sometimes read it, and want to save a link to it, try to avoid saving links to chapters that are in progress.\
 Right now you're safe up to:  **<ins>Chapter III:  = 1 + 2</ins>**  (included).<br/><br/>
 <sup><sub>Attempting to read this is very bad for your eyes.</sub></sup>
