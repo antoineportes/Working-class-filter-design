@@ -143,54 +143,36 @@
 
 ## [<ins>Chapter IV\:</ins>  Jargon](Chapter%2004%3A%20Jargon)
 ### Wiki
-
 ### Desmos
-
 ### Other
-
 
 ## [<ins>Chapter V\:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
 ### Wiki
-+ [Polynomial](https://en.wikipedia.org/wiki/Polynomial)
-+ [Elementary arithmetic](https://en.wikipedia.org/wiki/Elementary_arithmetic)
-+ [Associative property](https://en.wikipedia.org/wiki/Associative_property)
-+ [Commutative property](https://en.wikipedia.org/wiki/Commutative_property)
-+ [Distributive property](https://en.wikipedia.org/wiki/Distributive_property)
-+ [Laurent polynomial](https://en.wikipedia.org/wiki/Laurent_polynomial)
-+ [Pierre Alphonse Laurent](https://en.wikipedia.org/wiki/Pierre_Alphonse_Laurent)
-+ [Constant function](https://en.wikipedia.org/wiki/Constant_function)
-+ [Linearity\: *Linear polynomials*](https://en.wikipedia.org/wiki/Linearity#Linear_polynomials)
-+ [Quadratic formula](https://en.wikipedia.org/wiki/Quadratic_formula)
-+ [Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio)
 ### Desmos
-
 ### Other
 
-
-## [<ins>Chapter VI\:</ins>  Ones and zeroes](Chapter%2006%3A%20Ones%20and%20zeroes)
+## <ins>Chapter VI\:</ins>  More jargon
 ### Wiki
-
 ### Desmos
-+ [aliasing \(time domain\)](https://www.desmos.com/calculator/oz8zur70sz)
-
 ### Other
 
 
-## [<ins>Chapter VII\:</ins>  Stephen Butterworth](Chapter%2007%3A%20Stephen%20Butterworth)
+## <ins>Chapter VII\:</ins>  Ones and zeroes
+### Wiki
+### Desmos
+### Other
+
+## [<ins>Chapter VIII\:</ins>  Stephen Butterworth](Chapter%2008%3A%20Stephen%20Butterworth)
 ### Wiki
 + [Stephen Butterworth](https://en.wikipedia.org/wiki/Stephen_Butterworth)
++ [Low-pass filter\: *Ideal and real filters*](https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters)
 + [Isaac Todhunter](https://en.wikipedia.org/wiki/Isaac_Todhunter)
 + [Modulo](https://en.wikipedia.org/wiki/Modulo)
 + [Floor and ceiling functions](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions)
 + [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter)
-+ [State variable filter](https://en.wikipedia.org/wiki/State_variable_filter)
 ### Desmos
 + [Working-class ButterPoles](https://www.desmos.com/calculator/cukzft6ntq)
-+ [Quintessential trigonometry](https://www.desmos.com/calculator/fbsuiq7kgg)
 ### Other
-+ [\[ archive.org \] Experimental Wireless and The Wireless Engineer, Oct. 1930 — *On the Theory of Filter Amplifiers* \(**S. Butterworth**\)](https://archive.org/details/sim_electronic-technology_experimental-wireless-and-the-wireless-engineer_1930-10_7_85/page/536/mode/2up)
-+ [\[ github.com\] 0im\: *Damping factors in Butterworth cascades*](https://github.com/antoineportes/DSP/blob/main/filters/Damping%20factors%20in%20Butterworth%20cascades)
++ [\[ archive.org \] Experimental Wireless and The Wireless Engineer \(No. 85, October 1930\)](https://archive.org/details/sim_electronic-technology_experimental-wireless-and-the-wireless-engineer_1930-10_7_85/page/536/mode/2up)
++ [\[ github.com \] Damping factors in Butterworth cascades](https://github.com/antoineportes/DSP/blob/main/filters/Damping%20factors%20in%20Butterworth%20cascades)
 + [\[ cppreference.com \] std::min](https://en.cppreference.com/cpp/algorithm/min)
-+ [\[ github.com \] 0im\: *Stupid note on nomenclature*](https://github.com/antoineportes/DSP/blob/main/filters/Stupid%20note%20on%20nomenclature)
-+ [\[ airwindows.com \] Suzan](https://www.airwindows.com/suzan/)
-
