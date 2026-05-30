@@ -171,7 +171,7 @@
 + [Floor and ceiling functions](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions)
 + [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter)
 ### Desmos
-+ [Working-class ButterPoles](https://www.desmos.com/calculator/cukzft6ntq)
++ [Working-class ButterPoles I: dev's formula](https://www.desmos.com/calculator/mqxdx6d7l5)
 ### Other
 + [\[ archive.org \] Experimental Wireless and The Wireless Engineer \(No. 85, October 1930\)](https://archive.org/details/sim_electronic-technology_experimental-wireless-and-the-wireless-engineer_1930-10_7_85/page/536/mode/2up)
 + [\[ github.com \] Damping factors in Butterworth cascades](https://github.com/antoineportes/DSP/blob/main/filters/Damping%20factors%20in%20Butterworth%20cascades)
