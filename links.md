@@ -148,6 +148,35 @@
 
 ## [<ins>Chapter V\:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
 ### Wiki
++ [Polynomial](https://en.wikipedia.org/wiki/Polynomial)
++ [Elementary arithmetic](https://en.wikipedia.org/wiki/Elementary_arithmetic)
++ [Associative property](https://en.wikipedia.org/wiki/Associative_property)
++ [Commutative property](https://en.wikipedia.org/wiki/Commutative_property)
++ [Distributive property](https://en.wikipedia.org/wiki/Distributive_property)
++ [Laurent polynomial](https://en.wikipedia.org/wiki/Laurent_polynomial)
++ [Pierre Alphonse Laurent](https://en.wikipedia.org/wiki/Pierre_Alphonse_Laurent)
++ [Constant function](https://en.wikipedia.org/wiki/Constant_function)
++ [Linearity\: *Linear polynomials*](https://en.wikipedia.org/wiki/Linearity#Linear_polynomials)
++ [Quadratic formula](https://en.wikipedia.org/wiki/Quadratic_formula)
++ [Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio)
++ [Degree of a polynomial\: *Names of polynomials by degree*](https://en.wikipedia.org/wiki/Degree_of_a_polynomial#Names_of_polynomials_by_degree)
++ [Euclidean division](https://en.wikipedia.org/wiki/Euclidean_division)
++ [Long division](https://en.wikipedia.org/wiki/Long_division)
++ [Division posée](https://fr.wikipedia.org/wiki/Division_posée)
++ <a href="https://ar.wikipedia.org/wiki/قسمة_مطولة" rel="external" target="_blank">قسمة مطولة</a>
++ [División larga](https://es.wikipedia.org/wiki/División_larga)
++ [Staartdeling\: *België*](https://nl.wikipedia.org/wiki/Staartdeling#België)
++ [長除法](https://zh.wikipedia.org/wiki/長除法)
++ [Κάθετη διαίρεση](https://el.wikipedia.org/wiki/Κάθετη_διαίρεση)
++ [Phép chia số lớn](https://vi.wikipedia.org/wiki/Phép_chia_số_lớn)
++ <a href="https://fa.wikipedia.org/wiki/تقسیم_طولانی" rel="external" target="_blank">تقسیم طولانی</a>
++ [Деление столбиком](https://ru.wikipedia.org/wiki/Деление_столбиком)
++ [Fundamental theorem of algebra](https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra)
++ [Polynomial long division](https://en.wikipedia.org/wiki/Polynomial_long_division)
++ [Polynomial remainder theorem](https://en.wikipedia.org/wiki/Polynomial_remainder_theorem)
++ [Factorization of polynomials](https://en.wikipedia.org/wiki/Factorization_of_polynomials)
++ [Factor theorem](https://en.wikipedia.org/wiki/Factor_theorem)
++ [Complex conjugate root theorem](https://en.wikipedia.org/wiki/Complex_conjugate_root_theorem)
 ### Desmos
 ### Other
 
