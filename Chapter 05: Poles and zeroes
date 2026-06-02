@@ -9,82 +9,141 @@
 ###############################################################################################
 /*          "You're the opposite of Batman."                                                 */
 /*                                                      --  Troy Barnes (Community)          */
+/*          "You don't know what that means."                                                */
+/*                                                      --  ad hoc                           */
 ===============================================================================================
-#1  Polynomials I:  for fun
+#1  More jargon...
 ===============================================================================================
+
+  TEASER: polynomial, degree, order, coefficient, leading coefficient, term, leading term, canonical form, factored form, monic, discriminant, discriminate, root, monomial, binomial, trinomial, constant, affine, linear, quadratic, biquadratic, cubic, quartic, quintic, sextic, septic, octic, nonic, decic, undecic, duodecic, tredecic, ... yes, indeed: I did ruin the whole chapter's layout right from the very first line only for the sake of a stupid joke -- you're welcome.
+  Welcome to the section of legion words.
+
+  "Naturopathy" is an illiterate word. It starts Latin and turns Greek about half-way.
+  ("Naturopassion", ok; "physicopathy", ok; "naturopathy", please.)
+  It has one foot on each side of the Ionian Sea. So when you cross the Ionian Sea, don't look up.
+
+  "Polynomial" doesn't suffer from this syndrome:
+  πολύς is Ionic for "many";
+  νομός is Ionic for a set of homonyms, amongst which: "division, distribution";
+  νόμος is Ionic for a set of homonyms, amongst which: "law, ordinance".
 
   https://en.wikipedia.org/wiki/Polynomial                   https://en.wikipedia.org/wiki/Elementary_arithmetic
   https://en.wikipedia.org/wiki/Associative_property         https://en.wikipedia.org/wiki/Commutative_property
   https://en.wikipedia.org/wiki/Distributive_property
 
   A polynomial is an exhaustive set of equivalent polynomial expressions.
-  A polynomial expression is an arithmetical expression involving two types of terms: constants and variables.
+  A polynomial expression is an arithmetical expression mixing constants and variables.
   An arithmetical expression is a mathematical expression involving only addition and multiplication (sums and products).
   An addition is sometimes called a subtraction (difference) -- usually when involving one or several negative numbers.
   A multiplication is sometimes called a division (ratio) -- usually when involving one or several rational numbers.
   The notation of a repeated multiplication of the same term by itself can be simplified with exponentiation of said term
-  to an integer power.
+  to a positive integer power.
   
-  Because of this property, classical definitions often present exponentiation as a third type of operation
-  and exponents as a third type of term.
-  This is valid for polynomials as long as the exponents are integers.
+  Because of this property, classical definitions often present exponentiation as a third type of allowed operation.
+  This is valid for polynomials as long as the exponents are positive integers.
   That is: a polynomial can feature exponentiation if and only if said exponentiation is in fact a product.
   
   Choose the less confusing formulation of the definition.
   I like mine better hopefully, but perhaps I'm weird.
 
   A polynomial can be defined by several distinct (but equal) expressions.
-  One of them is called canonical.
+  One of them is called canonical (or standard).
   It's obtained by making use of commutativity, associativity and distributivity so that each instance of a variable
-  (or product of variables if more than one variable) with the same exponent(s) appears only once, therefore having a
-  single constant factor.
+  (or product of variables if more than one variable) with the same exponent(s) appears only once, therefore having a single constant factor.
   E.g.:    ax² + bx²  =  (a + b) x²
   This single constant factor is called a coefficient.
-  The highest integer exponent -- whose corresponding coefficient is *non-zero* -- is called degree of the polynomial.
-  The coefficient associated to this exponent is called the leading coefficient.
+  A coefficient's association with its corresponding exponentiation of the variable forms a term.
+  The canonical form is the sum of all terms.
+  (Note that, since there's a zeroth term, the number of terms is greater than the degree / oder by 1 -- if we include potential null terms.)
+  The highest integer exponent -- whose corresponding coefficient is *non-zero* -- is called degree, or order, of the polynomial.
+  The coefficient associated with this exponent is called the leading coefficient.
+  The term associated with the leading coefficient is called the leading term.
+  If the leading coefficient is 1, the polynomial is called a monic polynomial.
+  The coefficient associated with the zeroth power of the variable is called the constant term.
 
     For instance,  y = x  is a special case of the affine function  y  =  a1 * x^1  +  a0 * x^0
     which is a polynomial of order 1 with coefficients  a1 = 1  and  a0 = 0.
+    In this case, a1 is the leading coefficient, a1 x is the leading term, a0 is the constant term.
   
     Or:  y = 1.33  is equivalent to  y  =  1.33 * x^0
     which is a polynomial of order 0 whose unique coefficient is a0 = 1.33.
+    In this case, the leading coefficient, the leading term, and the constant term are indistinguishably: a0.
   
     And of course:  y  =  a2 * x^2  +  a1 * x  +  a0  is a polynomial of order 2 -- as long as a2 is non-zero.
 
+  The canonical form:    a [N] x^N  +  a [N-1] x^(N-1)  +  ...  +  a [1] x  +  a [0]
+
+                           N
+  or, equivalently:        ∑  a [n] x^n
+                         n = 0
+
+  can be re-expressed as:    a [N] {  x^N  +  (a [N-1] / a [N]) x^(N-1)  +  ...  +  (a [1] / a [N]) x  +  a [0] / a [N]  }
+
+                                  N
+  or, equivalently:        a [N]  ∑  (a [n] / a [N]) x^n
+                                n = 0
+
+  This factorisation allows to extract a monic polynomial out of any polynomial.
+  Beware of amphibology: this expression is sometimes loosely referred to as factorised form -- but this name is more typically reserved for
+  a distinct form, with which we'll deal in a few lines.
+  I won't be using this equivocal acception, but know that it happens elsewhere.
+  Factoring out the leading coefficient to extract a monic is quite often called normalising the polynomial.
+  Therefore, should we need a name for this form, let's agree on "normalised form".
+
+  A polynomial with a single term is called a monomial. Two terms? Binomial. Three terms? Trinomial. Etc.
+  (E.g.:  x^7  is a seventh-order monic monomial...)
+
   A polynomial with strictly real coefficients *in canonical form* is called a real polynomial.
+  (If the canonical form has only real coefficients, so does the normalised form.)
   If it has complex coefficients, it's a complex polynomial.
-  If it has complex coefficient but is not in canonical form, we cannot say whether it's complex or real.
+  (Real numbers are special cases of complex numbers. Real polynomials are special cases of complex polynomials.)
+  If it's not in canonical (or normalised) form, we cannot say whether it's real.
   Important distinction: "real" in "real polynomial" only concerns the coefficients -- the variable can still be complex.
   
   A polynomial of negative order is called a Laurent polynomial, after Pierre Alphonse Laurent.
+  More rigorously: a Laurent polynomial can have a positive order; its specificity is that it allows negative exponents.
   
   https://en.wikipedia.org/wiki/Laurent_polynomial
   https://en.wikipedia.org/wiki/Pierre_Alphonse_Laurent
   
   Since  x^-n  =  1 / x^n  a Laurent polynomial is not defined at x = 0.
-  We won't be needing Laurent polynomials here. You'll see why later during this chapter.
+  We won't be needing Laurent polynomials before next chapter.
 
-  We have a definition. Let's build stuff.
+  We now see how whether division happens in polynomials really depends on perspective: textbooks tend to answer "no, never".
+  Let's be more rigorous than textbooks: the canonical and normalised forms of non-Laurent polynomials are not supposed to show division...
+  But if I write:
+                                                                                                                        //  ƒ (x) is a Laurent polynomial
+               x / 11  -  17 / x          1             17                                                              //  of the first order.
+    ƒ (x)  =  -------------------  =  ---------- x  -  ----- x^-1  =  (10 / 165) x^1  +  0 x^0  +  (34 / 3) x^-1        //  Its leading coefficient is:  10 / 165.
+                    15 / 10            11 * 1.5         1.5                                                             //  Its constant term is:  0.
 
-  //  Order 0 "constant"
+  /*
+    Fun fact: a0 is the only coefficient not multiplied by a non-zero power of x.
+    So no matter the (non-Laurent) polynomial's order, its value at  x = 0  is always a0.
+  */
 
-  https://en.wikipedia.org/wiki/Constant_function
+  The values of the variable(s) at which a polynomial outputs zero are called its **_ROOTS_**.
+  ƒ (x)  is a polynomial?  ƒ (r)  =  0 ? Then r is a ROOT of ƒ (x).
+  ƒ (x)  is a polynomial?  ƒ (x)  =  0  has 17 solutions for x?  ƒ (x)  has 17 roots.
+  (Sometimes, roots are called "zeros" or "zeroes" -- in the context of filter design, this would be confusing. I'll stick to "roots".)
+
+  Let's build stuff.
+
+  //  Order 0 "constant"        https://en.wikipedia.org/wiki/Constant_function
 
   ƒ (x)  =  a0
 
   Then  ƒ (x)  =  0  means  a0 = 0  which has 1 solution for a0 but none for x.
   Therefore a polynomial of the zeroth order has zero root.
 
-  //  Order 1 "affine" or "linear"
-
-  https://en.wikipedia.org/wiki/Linearity#Linear_polynomials
+  //  Order 1 "affine" or "linear"        https://en.wikipedia.org/wiki/Linearity#Linear_polynomials
   
   ƒ (x)  =  a1 x  +  a0
   
   ƒ (x)  =  0    <=>    a1 x  +  a0    <=>    a1 (x  +  a0/a1)  =  0    <=>    x  =  -a0/a1
 
   /*
-    This factorisation is possible because a1 is non-zero by definition of a polynomial.
+    This normalising factorisation is relevant because a1 is non-zero by definition of a polynomial.
   */
 
   Therefore a polynomial of the first order has one root  r1 = -a0/a1.
@@ -93,14 +152,17 @@
     a1 (x  +  a0/a1)  =  a1 (x - r1)
 
   shows that it can be expressed in terms of this root.
+  And this is the **factored form**.
+  This is very important, so just to make sure you don't rush over this tiny line:
+  The **factored form** is the expression of a polynomial **in terms of its roots**.
 
 
   //  Order 2 "quadratic"
 
-  a2 x²  +  a1 x  +  a0  =  0    <=>    a2 (x²  +  (a1/a2) x  +  a0/a2)  =  0
+  a2 x²  +  a1 x  +  a0  =  0    <=>    a2 ( x²  +  (a1/a2) x  +  a0/a2 )  =  0
 
   /*
-    This factorisation is possible because a2 is non-zero by definition of a polynomial.
+    This normalising factorisation is relevant because a2 is non-zero by definition of a polynomial.
   */
 
   <=>    x²  +  (a1/a2) x  +  a0/a2  =  0    <=>    x²  +  (a1/a2) x  =  -a0/a2
@@ -119,26 +181,24 @@
 
     x²  +  (a1/a2) x  +  a1² / (2 a2)²  =  a1² / (2 a2)²  -  a0/a2
 
-    <=>
-                                                            a1²  -  2² a2 a0
-    ( x  +  a1 / (2 a2) )²  =  a1² / (2 a2)²  -  a0/a2  =  ------------------
-                                                                 (2 a2)²
-    <=>                      ___________________
-                            ⎟  a1²  -  4 a2 a0         √( a1²  -  4 a2 a0 )
-    x  +  a1 / (2 a2)  =  ± ⎟ -----------------  =  ± ----------------------
-                            ⎷      (2 a2)²                    2 a2
+                                                                   a1²  -  2² a2 a0
+    <=>    ( x  +  a1 / (2 a2) )²  =  a1² / (2 a2)²  -  a0/a2  =  ------------------
+                                                                        (2 a2)²
+                                    ___________________
+                                   ⎟  a1²  -  4 a2 a0         √( a1²  -  4 a2 a0 )
+    <=>    x  +  a1 / (2 a2)  =  ± ⎟ -----------------  =  ± ----------------------
+                                   ⎷      (2 a2)²                    2 a2
     
-    <=>
-             √( a1²  -  4 a2 a0 )        a1        -a1  ±  √( a1²  -  4 a2 a0 )
-    x  =  ± ----------------------  -  ------  =  ------------------------------
-                     2 a2               2 a2                   2 a2
+                    √( a1²  -  4 a2 a0 )        a1        -a1  ±  √( a1²  -  4 a2 a0 )
+    <=>    x  =  ± ----------------------  -  ------  =  ------------------------------
+                            2 a2               2 a2                   2 a2
 
   a1²  -  4 a2 a0  is called the polynomial's discriminant. (Hence "discriminating" meaning "finding the roots".)
   It's usually notated Δ (upper-case delta).
 
   /*
     My notation is not standard (well it both is and is not, but you'll see that I'm not the inconsistent one here).
-    Expressing polynomials' coefficients with indexes of "a" or "b" is standard (the latter usually reserved for denominators).
+    Expressing polynomials' coefficients with indexes of "a" or "b" is standard (the latter usually being reserved for denominators).
 
     But when dealing with the special cases of affine or quadratic, the classical notation is (respectively):
 
@@ -180,12 +240,14 @@
   Then r1 and r2 are complex conjugates.
   If Δ is real and positive, √(Δ) is real and so are r1 and r2.
 
-  So the roots of a real quadratic polynomial are either both real or complex conjugates.
+  So the roots of a real quadratic polynomial are either both real or complex conjugates.                //  Pedagogy with a hammer.
+  Again: the roots of a real quadratic polynomial are either both real or complex conjugates.            //  Patented by a guy named Friedrich.
+  And again: the roots of a real quadratic polynomial are either both real or complex conjugates.        //  (Thanks, my friend. I wish you were here.)
 
-  Now if x = r1,  x - r1  =  0  and if x = r2,  x - r2  =  0.
+  Now if  x = r1,  x - r1  =  0    and if  x = r2,  x - r2  =  0.
   So if x equals r1 OR r2:
 
-    (x - r1)(x - r2)  =  0    since one of the factor is necessarily zero.
+    (x - r1)(x - r2)  =  0    since one of the factors is necessarily zero.
 
   Then the roots of (x - r1)(x - r2) are r1 and r2.
   Same as  x²  +  (a1/a2) x  +  a0/a2.
@@ -214,8 +276,9 @@
 
                       =  x²  +  (a1/a2) x  +  a0/a2
 
-  Nice. Then  a2 (x²  +  (a1/a2) x  +  a0/a2)  =  a2 (x - r1)(x - r2).
+  Nice. Then  a2 ( x²  +  (a1/a2) x  +  a0/a2 )  =  a2 (x - r1)(x - r2).
   Therefore any second order (or quadratic) real polynomial can be expressed in terms of its roots and leading coefficient.
+  Der Hammer redet noch ein Mal: this is the factored form of the quadratic.
 
   Notice that:
 
@@ -227,6 +290,7 @@
 
   Therefore any second-order polynomial is the product of two first-order polynomials, whose respective roots are also
   the roots of said second-order polynomial.
+  If the second-order polynomial is real, the first-order ones are either both real or forming a conjugate pair.
   /*
     Fun example:
 
@@ -291,8 +355,8 @@
   Re (r2) is a constant, x is a variable. So the only solution for all x is  Im (r1)  =  0.
 
   Ok! We now have an "if and only if" (or "iff" for friends and family).
-  So, any real second-order polynomial can be expressed as a product of first-order polynomials, either purely real or complex conjugates.
-  AND, any product of two complex conjugate, or purely real, first-order polynomials is a real second-order polynomial.
+  So, any real second-order polynomial can be expressed as a product of first-order polynomials, either purely real, or with complex conjugate roots.
+  AND, any product of two purely real, or having complex conjugate roots, first-order polynomials is a real second-order polynomial.
   There wouldn't be a chapter VII if not for this tiny little "and only if".
   /*
     What if...
@@ -310,7 +374,7 @@
     which is a valid second-order polynomial.
     So when we say that order 2 => 2 roots, we do carefully not say "distinct" roots...
 
-    Also: 1st-order polynomials which are not exactly conjugates just because of their leading coefficients can be re-arranged in proper conjugates.
+    Also: 1st-order polynomials which are not exactly conjugates, just because of their leading coefficients, can be re-arranged as proper conjugates.
     E.g.:
 
       8 (x - 11 + 6j) 2 (x - 11 - 6j)  =  16 (x - 11 + 6j) (x - 11 - 6j)  =  4 (x - 11 + 6j) 4 (x - 11 - 6j)
@@ -320,17 +384,38 @@
       a1 ( x  -  Re (r)  -  j Im (r) ) b1 ( x  -  Re (r)  +  j Im (r) )  =  √(a1 b1) ( x  -  Re (r)  -  j Im (r) ) √(a1 b1) ( x  -  Re (r)  +  j Im (r) )
   */
 
+  Before raising the order any further, there's a special polynomial that tends to pop up in filter design and analysis.
+  It's called a biquadratic polynomial. (Ever heard of biquad filters? -- If not you will soon.)
+  Theoretically, a biquadratic polynomial is a quartic (4th-order). It has the form:
+
+    a4 x^4  +  a2 x^2  +  a0        ( a4 ≠ 0 )
+
+  It's of order 4 indeed, but its lack of any odd-exponent term makes it easier to discriminate than the average quartic.
+  Define:
+
+    ξ  =  x^2        &&        α2 = a4        &&        α1 = a2        &&        α0 = a0
+
+  It becomes:
+
+    α2 ξ²  +  α1 ξ  +  α0        //  a quadratic in x²
+
+  It has 2 roots for ξ:  ρ1  and  ρ2
+  And therefore 4 roots for x:  ±√(ρ1)  and  ±√(ρ2)
+
   //  Order N
 
-  Cubic, quartic, quintic, sextic, heptic, octic, nonic, decic, hendecic, duodecic, tridecic... name your price.
+  Cubic, quartic, quintic, sextic, septic, octic, nonic, decic, undecic, duodecic, tredecic... name your price.
 
   https://en.wikipedia.org/wiki/Degree_of_a_polynomial#Names_of_polynomials_by_degree
 
-  [needs transition]
+  Let's define:
 
-    P1 (x)  =  a1 (x - r1)        P2 (x)  =  a2 (x - r2) (x - r3)
+    P1 (x)  =  a1 (x - r1)        P2 (x)  =  a2 (x - r2) (x - r3)        //  respectively a 1st- and a 2nd-order real polynomial in factored form.
 
-    Π (x)  =  P1 * P2  =  a1 a2 (x - r1) (x - r2) (x - r3)    //  This expression clearly has three roots:  r1, r2 and r3.
+    Π (x)  =  P1 * P2  =  a1 a2 (x - r1) (x - r2) (x - r3)               //  their product.
+
+  This last expression clearly has three roots:  r1, r2 and r3.
+  It also looks very much like a factored form.
 
     Π (x)  =  a1 a2 ( x²  -  r2 x  -  r1 x  +  r1 r2 ) (x - r3)  =  a1 a2 ( x³  -  r3 x²  -  r2 x²  +  r2 r3 x  -  r1 x²  +  r1 r3 x  + r1 r2 x  -  r1 r2 r3 )
 
@@ -344,7 +429,7 @@
 
   So  Π (x)  is a third-order polynomial.
   Is it real? -- Two cases:
-    (1) r2 and r3 are real, then yes it is: the only way to get an imaginary number from a real one is with a negative sign and a fractional exponent.
+    (1) r2 and r3 are real, then yes it is: the only way to get an imaginary number out of real ones is with a negative sign and a fractional exponent.
     (2) r2 and r3 are complex conjugates...
 
   Let's try (2):
@@ -369,6 +454,8 @@
   Which converts to:
 
     A real 3rd-order polynomial CAN be the product of a real 1st-order and a real 2nd-order polynomial. (particular affirmative)
+
+  (Corollary: in that case, at least, it has three roots and admits a factored form.)
 
   Not satisfying. We need grown-up maths.
 
@@ -399,11 +486,10 @@
     https://el.wikipedia.org/wiki/Κάθετη_διαίρεση
     https://vi.wikipedia.org/wiki/Phép_chia_số_lớn
     https://fa.wikipedia.org/wiki/تقسیم_طولانی
-    https://ru.wikipedia.org/wiki/Деление столбиком
 
   The "French" long division is not French and not a long division -- it's called "gallows method".
   There's the German / Austrian algorithm, and the actual long division.
-  Russians seem to know them all:  https://ru.wikipedia.org/wiki/Деление столбиком
+  Russians seem to know them all:  https://ru.wikipedia.org/wiki/Деление_столбиком
 
   Let's divide 6711 by 19.
 
@@ -411,7 +497,7 @@
    -57      |------        //
     10      | 353          //    This method (gallows method) seems to be the most widespread:
     101     |              //    pretty much all Latin countries except Mexico (basically South-western Europe and South America + Quebec)
-   - 95     |              //    most Arabic-speaking countries (in Middle-East and North Africa), plus Iran, Turkey, Armenia...
+   - 95     |              //    most Arabic-speaking countries (in the Middle-East and in North Africa), plus Iran, Turkey, Armenia...
       6     |              //    Palestine, Israel...
       61    |              //    Russia, Ukraine, all 3 Baltic states, Romania, Greece, Kazakhstan, Mongolia, Vietnam...
    -  57    |              //    Belgium and Republic of Congo fell on the Latin side of the equation,
@@ -420,9 +506,9 @@
 
     6711  :  19  =  353    //
    -57                     //
-    10                     //    This method (German / Austrian) is (very basically) used in Germanic-languages speaking countries:
+    10                     //    This method (German / Austrian) is (very basically) used in Germanic-language-speaking countries:
     101                    //    Germany, Austria, Switzerland, Norway, Sweden, Denmark...
-   - 95                    //    and former neighbours of the Austro-Hungarian empire:
+   - 95                    //    and former neighbours / members of the Austro-Hungarian Empire:
       6                    //    Hungary, Slovenia, Croatia, Poland, Bulgaria, Czech Republic...
       61                   //    Also Finland.
    -  57                   //    In Netherlands, the ":" sign becomes "/" and the "=" sign becomes "\".
@@ -448,22 +534,353 @@
   Planet Earth is a Greek colony. Well done Euclid.
   United by division, haha.
 
+  Why does it work?
+  Let's divide 6789 by 33. We'll denote the divisor by d, the quotient by q and the remainder by r.
+
+           6789
+    ε  =  ------  =  10³ * (6 / 33)  +  10² * (7 / 33)  +  10¹ * (8 / 33)  +  10⁰ * 9 / 33  =  (((6 / 33) * 10  +  7 / 33) * 10  +  8 / 33) * 10  +  9
+            33
+
+    6 / 33  -->  q = 0  &&  r = 6    =>    6  =  0 * 33  +  6  =  q * d + r    =>    10 * 6 / 33  =  10 * 0  +  10 * 6 / 33
+
+    ε  =  ((10 * 0  +  (10 * 6  +  7) / 33) * 10  +  8 / 33) * 10  +  9 / 33  =  ((67 / 33) * 10  +  8 / 33) * 10  +  9 / 33
+
+    67 / 33  -->  q = 2  &&  r = 1    =>    67  =  2 * 33  +  1  =  q * d + r    =>    10 * 67 / 33  =  10 * 2  +  10 * 1 / 33
+
+    ε  =  (10 * 2  +  (10 * 1  +  8) / 33) * 10  +  9 / 33  =  100 * 2  +  (18 / 33) * 10  +  9 / 33
+
+    18 / 33  -->  q = 0  &&  r = 18    =>    18  =  0 * 33  +  18  =  q * d + r    =>    10 * 18 / 33  =  10 * 0  +  10 * 18 / 33
+
+    ε  =  100 * 2  +  10 * 0  +  10 * 18 / 33  +  9 / 33  =  100 * 2  +  (180 + 9) / 33  =  100 * 2  +  189 / 33
+
+    189 / 33  -->  q = 5  &  r = 24    =>    189  =  5 * 33  +  24  =  q * d + r    =>    189 / 33  =  5  +  24 / 33
+
+    ε  =  100 * 2  +  5  +  24 / 33  =  205 + 24/33    =>    Q = 205    &&    R = 24
+
+  This is Euclid's raw algorithm. It shows that the conventional notations are valid, but also shorter and clearer.
+  I choose random numbers to reduce the feeling of abstraction, but 6, 7, 8, 9 and 33 are just symbols -- forget they're numbers: this is a general formula.
+  (Just add "..." left and right to include -- respectively -- larger, and fractional powers of 10. Also, replace 10 by whatever -- just stay inside the set of complex numbers.)
+  Conclusion:
+
+    Any number can take the form:  δ  =  q * d  +  r    //  δ for dividend, d for divisor, q for quotient and r for remainder.
+    where:  q  =  floor (δ/d)    &&    r  =  δ mod d  =  δ  -  q * d    &&    d ≠ 0
+
+  We're using powers of ten because Arabic numbers are a ten-symbol alphabet.
+  We could use any base -- we could use base x...
+  Which makes every (complex) number an infinity of polynomials -- or every polynomial one (complex) number per infinity of bases.
+  (I'm taking for granted that the set of complex numbers is algebraically closed:  https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra )
+
+  So any polynomial could take the form:  δ  =  q * d  +  r  for a fixed value of x (or whatever symbol it uses as a variable).
+  If it's valid for all x, then it's a function of x. Then any polynomial can take the form:
+
+                                                      P (x)  -  R (x)
+    P (x)  =  Q (x) D (x)  +  R (x)        or        -----------------  =  Q (x)
+                                                            D (x)
+  Let's demonstrate that, shall we?
+  The Euclidean division answers the question:
+
+    How many times can we subtract the divisor in full from the dividend?
+    The answer is the quotient, and whatever is left is the remainder.
+
+  So the quotient and the divisor are smaller than the dividend, and the remainder is smaller than the divisor.
+  Polynomials are functions. They take an infinity of variables. So "smaller" makes little sense now.
+  But they all have an order -- which is a constant integer -- so "smaller order" makes sense.
+  Let's define:
+
+    #  N_P  the order of  P (x)        #  N_D  the order of  D (x)        #  N_Q  the order of  Q (x)        #  N_R  the order of  R (x)
+
+  Then we want:    N_P  >  N_D  >  N_R
+  /*
+    How about N_Q? (the order of the quotient)
+    N_R < N_D  being an initial requirement means we will break the loop as soon as one of the successive subtractions outputs a difference-polynomial
+    whose order is less than the divisor's order.
+  */
+  Let's try a random example:
+
+    #  P (x)  =  4 x²  +  3 x  -  5    =>    N_P = 2
+
+    #  D (x)  =  7 x  +  12            =>    N_D = 1
+
+  Now I need to commit to a notation for Euclidean division...
+  Sorry but I don't like the British long division: it's driving on the wrong side of the road.
+  Division unites peoples? Let's go one step further: let's reconcile Germans and French -- Umwerthung aller Werthe.
+  Let a French guy claim: "I prefer the German way".
+  (I'm talking Euclidean division, not cheese, of course.)
+  Vielleicht konnte ich sogar probieren, auf Deutsch zu schreiben... Ok, no.
+
+    P (x) -->    4 x²  +     3 x  -  5    :    7 x  +  12    =    (4/7) x  -  27/49        //  (4 x²) / (7 x)  =  4/7 x
+               - 4 x²  -  48/7 x     |         __________         _________________        //
+              -------------------    v              ^                     ^                //  4/7 x (7 x  +  12)  =  4 x²  +  48/7 x
+                        - 27/7 x  -  5              |                     |                //
+                        + 27/7 x  +  324/49       D (x)                 Q (x)              //  4 x²  +  3 x  -  (4 x²  +  48/7 x)
+                       ---------------------                                               //  =  3 x  -  48/7 x
+                                     79/49  <-- R (x)                                      //  =  x (21/7 - 48/7)
+                                                                                           //  =  x ( - (48 - 21) / 7 )
+  We know we're going to subtract D (x) from P (x) several times.                          //  =  - 27/7 x
+  So we can take advantage of the subtraction to reduce Q (x)'s order,                     //
+  by finding a factor which makes the leading term of P (x) and D (x) cancel out.          //  (- 27/7 x) / (7 x)  =  -27 / (7 * 7)  =  - 27/49
+  We find it by dividing  4 x²  by  7 x.                                                   //
+  Then we multiply D (x) by the result and subtract this from P (x).                       //  - 27/49 * (7 x  +  12)  =  -27/7 x  -  (27 * 12) / 49
+  (Don't forget to reverse all signs when you subtract.)                                   //  =  -27/7 x  -  324/49
+  The leading term of what's left is -27/7 x.                                              //
+  Repeat: we divide this new term by 7 x and get a new factor for D (x),                   //  324/49  -  5  =  (324  -  49 * 5) / 49
+  multiply, subtract -- the leading term is now 79/49.                                     //  =  (324 - 245) / 49
+  This is a constant, a coefficient for x⁰, a zeroth-order polynomial...                   //  =  79/49
+  D (x) is of order 1, and 1 > 0. So, stop.
+
+    Q (x)  =  4/7 x  -  27/49        &&        R (x)  =  R  =  79/49
+
+    4 x²  +  3 x  -  5  =  (7 x  +  12) (4/7 x  -  27/49)  +  79/49
+
+  This algorithm is called the polynomial long division:    https://en.wikipedia.org/wiki/Polynomial_long_division
+  We proceed by cancelling the leading term and repeating until the result of the subtraction is of lower order than the divisor.
+  So we'll always have  N_R  <  N_D  (assuming N_D > 0).
+  Notice that in our example:  N_P = 2  &&  N_D = 1  &&  N_Q = 1  &&  N_R = 0
+  So:  N_P  =  N_D + N_Q + N_R
+  Is it always the case?
+
+  Let's generalise P (x) and D (x):
+
+             N_P                                     N_D
+    P (x)  =  ∑  a [n] x^n        &&        D (x)  =  ∑  b [n] x^n
+            n = 0                                   n = 0
+                                                                                                              a [N_P] x^N_P       a [N_P]
+  We'll always start the polynomial long division by cancelling  a [N_P] x^N_P  by  subtracting D (x) times:  ---------------  =  --------- x ^ (N_P - N_D)
+                                                                                                              b [N_D] x^N_D       b [N_D]
+  And, as we've seen, this factor becomes the leading term of Q (x).
+  So it defines:  N_Q  =  N_P - N_D.
+  Therefore: NOPE --  N_P  =  N_D + N_Q + N_R  is not always the case, only when N_R = 0.
+
+                   11 x^5  +  3 x^2  -  17 x  +  5         //  I suggest you do too.
+  I've tested:    ---------------------------------        //  It's fun.
+                        - x^3  +  2 x  -  12               //  You should end up with:    N_Q  =  5 - 3  =  2    &&    N_R  =  2  <  N_D  =  3
+
+  Let's address the special case:  N_D = 0  which means:  D (x)  =  k  where k can be any constant.
+
+             N_P                                     N_D
+    P (x)  =  ∑  a [n] x^n    =>    P (x) / D (x)  =  ∑  (a [n] / k) x^n  =  P (x) / k  =  Q (x)
+            n = 0                                   n = 0
+
+  We still have:  N_Q  =  N_P - N_D  =  N_P - 0  =  N_P
+  But since polynomial long division, unlike Euclidean division of constants, allows fractions in the quotient --
+  -- there won't be a remainder:  R (x)  =  0    =>    N_R = 0    =>    N_R  =  N_D
+  So we still have:
+
+    P (x)  -  R (x)                       P (x)  -  0
+   -----------------  =  Q (x)    <=>    -------------  =  P (x) / k    <=>    P (x)  =  k Q (x)
+         D (x)                                 k
+
+  Also:
+
+     P (x)  -  R (x)
+    -----------------  =  Q (x)    <=>    P (x)  -  R (x)  =  D (x) Q (x)    <=>    - R (x)  =  D (x) Q (x)  -  P (x)    <=>    R (x)  =  P (x)  -  D (x) Q (x)
+          D (x)
+
+  In the  N_D = 0  case, that's:    0  =  P (x)  -  k Q (x)    <=>    P (x)  =  k Q (x)        //  ok.
+
+  So every relation we've found so far stands except the one between N_D and N_R.
+  An expression of N_R which would remain true for any positive integers:  N_P > N_D ≥ 0
+  would be:
+
+    0  ≤  N_R  <  N_D    ∀  N_D  >  0        &&        N_D  =  0    =>    R (x)  =  0
+
+
+
+===============================================================================================
+#3  Three theorems (but who's counting?)
+===============================================================================================
+
+  Let  P [N] (x)  be a polynomial of order N, and z any complex number.
+  (Whether  P [N] (x)  is fully complex or purely real is undefined until further notice.)
+  Then  x - z  is a 1st-order polynomial.
+  So if we use  x - z  as the divisor in the polynomial long division of  P [N] (x)  (the dividend), the quotient will be of order N - 1.
+  Let's call it  Q [N-1] (x).
+  And the remainder will be of order:  1 - 1  =  0, so it will be a constant.
+  Let's call it R [N-1].
+  So, based on what has been established during the previous section:
+
+     P [N] (x)  -  R [N-1]
+    -----------------------  =  Q [N-1] (x)    <=>    P [N] (x)  =  (x - z) Q [N-1] (x)  +  R [N-1]
+            (x - z)
+
+  Right now if we keep running the loop, we risk missing an opportunity to demonstrate a theorem...
+  What kind of weirdo wouldn't want to demonstrate every last theorem on Earth? (Answering rhetorical questions is rude.)
+  What if...  x = z ?
+
+    P [N] (z)  =  (z - z) Q [N-1] (z)  +  R [N-1]  =  0  +  R [N-1]    <=>    R [N-1]  =  P [N] (z)
+
+  This is the polynomial remainder theorem.        https://en.wikipedia.org/wiki/Polynomial_remainder_theorem
+  It basically says that instead of bothering with polynomial long division, when the divisor is of order 1, you can get the remainder by using
+  the last (zeroth-order) coefficient of the divisor as the dividend's variable.
+  The divisor must be normalised by factoring out its leading coefficient:
+
+    a x + b  <--  a (x + b/a)    then the remainder is  R [N-1]  =  P [N] (b/a)
+
+  Now imagine we compute  P [N] (z)  and it outputs zero.
+  It means that z is a root of  P [N] (x)  (by definition of a root).
+  It also means that  R [N-1]  =  0  (according to the polynomial remainder theorem -- the one we've just demonstrated).
+  See:
+
+    P [N] (z)  =  0    <=>    (z - z) Q [N-1] (z)  +  R [N-1]  =  0    <=>    0  +  R [N-1]  =  0    <=>    R [N-1]  =  0
+
+  What this proves:
+  when we divide a non-constant polynomial by a monic binomial of the first order whose constant term is the inverse of any of the roots of the dividend --
+  -- there is no remainder.
+  The monic and the quotient are called factors of the dividend polynomial. This is where the factored form got its name from.
+  https://en.wikipedia.org/wiki/Factorization_of_polynomials
+
+  Plain English may not offer the clearest formulation:
+
+                N                                                                                   N-1
+    P_0 (x)  =  ∑  a [n] x^n        &&        P_0 (r1)  =  0        <=>        P_0 (x)  =  (x - r1)  ∑  b [n] x^n
+              n = 0                                                                                n = 0
+
+  Let's define:
+                                      N-1
+    P_1 (x)  =  P_0 (x) / (x - r1)  =  ∑  b [n] x^n        &&        P_1 (r2)  =  0
+                                     n = 0
+  then:
+                         N-2                                                         N-2
+    P_1 (x)  =  (x - r2)  ∑  c [n] x^n        =>        P_0 (x)  =  (x - r1)(x - r2)  ∑  c [n] x^n        =>        P_0 (r2)  =  0
+                        n = 0                                                       n = 0
+
+  So any root of P_1 is also a root of P_0. And, of course, r1 is the root of  x - r1 , and r2 is the root of  x - r2 .
+  What this proves:
+  All roots of a polynomial's factor are roots of said polynomial.
+  This is the factor theorem.        https://en.wikipedia.org/wiki/Factor_theorem
+
+  If we keep running this loop, knowing that the order of the quotient is the order of the dividend minus the order of the divisor,
+  and that the order of our monic first-order binomial divisor is always 1,
+  we'll end up with  P_N (x)  being a constant factor -- let's call it Q.
+  So:
+                   N                         //
+    P_0 (x)  =  Q  ∏  ( x  -  r [ν] )        //  where  r [ν]  are the roots of  P_0 (x).
+                 ν = 1                       //
+
+  What this proves:    the order / degree of a plynomial is equal to the number of its roots.
+  Equalities read in both directions.                            //
+  So:  (1)  if a polynomial has N roots, it's of order N;        //  TRY NOT MISSING THESE TWO LINES.
+       (2)  if it's of order N, it has N roots.                  //
+
+  Q being constant, the only solutions to    P_0 (x)  =  0    are    x  =  r [ν].
+  So N roots is to be understood as a maximum. It's an exact number if we admit duplictates as distinct.
+  ("Distinct duplicates" is very oxymoronic, but it's the only way to characterise every possible polynomial in a general statement.)
+  E.g.:
+
+    ƒ (x)  =  (x - 11)(x - 11)(x - 11) / 2  =  (x²  -  11 x  -  11 x  +  11²) (x - 11) / 2  =  (x³  -  22 x²  +  121 x  -  11 x²  +  11 * 22 x  -  11³) / 2
+
+                                            =  (x³  -  33 x²  +  363 x  -  1331) / 2  =  0.5 x³  +  -16.5 x²  +  181.5 x  +  -665.5
+
+  The only solution to  ƒ (x)  =  0  is  x  =  11.
+  So  ƒ (x)  is a third-order polynomial with one root, or three equal roots -- as you want.
+  Notice that the constant factor in the factored form (1/2) is equal to the leading coefficient in the standard form (0.5).
+  Also notice that the last expression of  P_0 (x)  looks very much like a factored form.
+  So the next question is:    Q  ==  a [N]  ?
+  We got to the final expression through successive divisions of  P_0 (x)  by  ( x  -  r [ν] ).
+  We start polynomial long division by cancelling the leading term, so that the leading term of P_1 (x) is:    a [N] x^(N-1).
+  So as we run the loop, the leading coefficient of the quotient always remain the leading coefficient ( a [N] ) of the initial dividend ( P_N (x) ).
+  Which means that the leading coefficient of Q is  a [N].
+  Since Q is of order zero, its leading coefficient is also its constant term... therefore, yep:    Q  =  a [N]
+  THEREFORE:
+                                                            //  This is the true power of the factor theorem.
+      N                           N                         //  And it's our "if and only if".
+      ∑  a [n] x^n    =    a [N]  ∏  ( x  -  r [ν] )        //  Meaning: any product of N 1st-order polynomials is an Nth order polynomial;
+    n = 0                       ν = 1                       //  AND: any Nth order polynomial is a product of N 1st-order polynomials.
+
+  Another way to phrase this conclusion is: a polynomial and its non-constant factors have the same roots;
+  AND the order of a polynomial is the number of its non-constant factors.
+  A corollary of the factor theorem is: every polynomial admits a factored form.
+
+  Ok, next.
+  This book is about filters.
+  So for these theorems to be of any use, we need to know if the factored form of a real polynomial multiplies real polynomials.
+  At first sight: not likely.
+  But we don't need only real roots: we've seen that pairs of conjugate roots form real biquadratic polynomials.
+  And since real numbers are their own conjugates (their imaginary part is:  0 = -0 ) -- all we need to check is:
+  given any polynomial -- of any order -- are the conjugates of the roots also necessarily roots?
+  If yes, it would mean that any real polynomial can be expressed as a product of real polynomials (of order 1 or 2).
+
+  Let  P [N] (x)  be a real polynomial.
+  And let's evaluate its value at  z  (any complex number) and at  conj (z)  =  Re (z)  -  j Im (z) .
+  (Remember: "real" polynomial means "real coefficients in standard form" -- the variable can still have an imaginary part, hence "z" here.)
+
+                  N                                             N
+    P [N] (z)  =  ∑  a [n] z^n    <=>    P [N] ( conj (z) )  =  ∑  a [n] conj (z)^n
+                n = 0                                         n = 0
+
+  Ok, so first, let's refresh our complex arithmetic.
+
+    cos  =  adjacent / hypotenuse    =>    cos ( arg (z) )  =  Re (z) / |z|    <=>    Re (z)  =  |z| cos ( arg (z) )
+    sin  =  opposite / hypotenuse    =>    sin ( arg (z) )  =  Im (z) / |z|    <=>    Im (z)  =  |z| sin ( arg (z) )
+
+    =>    conj (z)  =  |z| cos ( arg (z) )   -  j |z| sin ( arg (z) )  =  |z| {  cos ( -arg (z) )  +  j sin ( -arg (z) )  }
+                    =  |z| exp ( -j arg (z) )
+
+    =>    |conj (z)|  =  |z|        &&        arg ( conj (z) )  =  -arg (z)
+
+    z^n  =  |z|^n exp ( j arg (z) )^n  =  |z|^n exp ( j n arg (z) )    =>    |z^n|  =  |z|^n        &&    arg (z^n)  =  n arg (z)
+
+    conj (z)^n  =  |z|^n exp ( -j arg (z) )^n  =  |z|^n exp ( -j n arg (z) )
+
+    conj (z^n)  =  |z^n| exp ( -j arg (z^n) )  =  |z|^n exp ( -j n arg (z) )  =  conj (z)^n
+
+  Let's define:  ζ [n]  =  z^n
+  Then:  conj ( ζ [n] )  =  conj (z^n)  =  conj (z)^n
+  So:
+                  N                                               N
+    P [N] (z)  =  ∑  a [n] ζ [n]    <=>    P [N] ( conj (z) )  =  ∑  a [n] conj ( ζ [n] )
+                n = 0                                           n = 0
+
+  If  P [N] (z)  is a real polynomial, then all coefficients  a [n]  are purely real.
+  Then if:  Z [n]  =  a [n] ζ [n]:
+
+    Re ( Z [n] )  =  a [n] Re ( ζ [n] )        &&        Im ( Z [n] )  =  a [n] Im ( ζ [n] )
+
+  and:
+
+    a [n] conj ( ζ [n] )  =  a [n] Re ( ζ [n] )  -  j a [n] Im ( ζ [n] )  =  Re ( Z [n] )  -  j Im ( Z [n] )  =  conj ( Z [n] )
+
+  Then:
+                  N            N                                            N                   N                     N                     N
+    P [N] (z)  =  ∑  Z [n]  =  ∑  {  Re ( Z [n] )  +  j Im ( Z [n] )  }  =  ∑  Re ( Z [n] )  +  ∑  j Im ( Z [n] )  =  ∑  Re ( Z [n] )  +  j ∑  Im ( Z [n] )
+                n = 0        n = 0                                        n = 0               n = 0                 n = 0                 n = 0
+  Therefore:
+                         N                                                     N
+    Re ( P [N] (z) )  =  ∑  Re ( Z [n] )        &&        Im ( P [N] (z) )  =  ∑ Im ( Z [n] )
+                       n = 0                                                 n = 0
+  Almost there:
+                           N                     N                                            N                     N
+    P [N] ( conj (z) )  =  ∑  conj ( Z [n] )  =  ∑  {  Re ( Z [n] )  -  j Im ( Z [n] )  }  =  ∑  Re ( Z [n] )  -  j ∑  -j Im ( Z [n] )
+                         n = 0                 n = 0                                        n = 0                 n = 0
+  Therefore:
+
+    P [N] ( conj (z) )  =  conj ( P [N] (z) )
+
+  Ok.
+  Now imagine that z is a root of  P [N] (x).
+  It means:
+
+    P [N] (z)  =  0        =>        P [N] ( conj (z) )  =  conj (0)  =  0
+
+  What we've just proven:
+  The complex conjugate of the root of a real polynomial is necessarily also a root.
+  This is the complex conjugate root theorem:    https://en.wikipedia.org/wiki/Complex_conjugate_root_theorem
+  A purely real number is its own conjugate, so the theorem was obvious in that case.
+  But all roots (of a *real* polynomial) having an imaginary part are guaranteed to come in conjugate pairs.
+
+  Once we express the polynomial as a product of first-order polynomials and a constant factor, assuming each first-order polynomial is expressed in terms
+  of its roots, these complex conjugate pairs will form second-order real polynomials.
+
+  So -- and this is fucking fundamental -- a real polynomial of any order can be expressed as a product of **real** first-order and/or second-order polynomials
+  and one optional constant factor.
+  Ok.
+
+
+
+===============================================================================================
+#4  I thought this was gonna be a book about filters...
+===============================================================================================
+
+
 [[ IN PROGRESS ]]
-
-
-[[
-
-Notes for myself:
-
-#  Remainder theorem
-#  Factor theorem
-#  Complex conjugate roots theorem
-
-]]
-
-
-
-
-
-
 
