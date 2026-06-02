@@ -23,9 +23,9 @@
   It has one foot on each side of the Ionian Sea. So when you cross the Ionian Sea, don't look up.
 
   "Polynomial" doesn't suffer from this syndrome:
-  πολύς is Ionic for "many";
-  νομός is Ionic for a set of homonyms, amongst which: "division, distribution";
-  νόμος is Ionic for a set of homonyms, amongst which: "law, ordinance".
+  πολύς is Ionian for "many";
+  νομός is Ionian for a set of homonyms, amongst which: "division, distribution";
+  νόμος is Ionian for a set of homonyms, amongst which: "law, ordinance".
 
   https://en.wikipedia.org/wiki/Polynomial                   https://en.wikipedia.org/wiki/Elementary_arithmetic
   https://en.wikipedia.org/wiki/Associative_property         https://en.wikipedia.org/wiki/Commutative_property
@@ -569,6 +569,7 @@
   We could use any base -- we could use base x...
   Which makes every (complex) number an infinity of polynomials -- or every polynomial one (complex) number per infinity of bases.
   (I'm taking for granted that the set of complex numbers is algebraically closed:  https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra )
+  ((Very basically, it means that it's impossible for a non-constant complex polynomial to have no complex root.))
 
   So any polynomial could take the form:  δ  =  q * d  +  r  for a fixed value of x (or whatever symbol it uses as a variable).
   If it's valid for all x, then it's a function of x. Then any polynomial can take the form:
