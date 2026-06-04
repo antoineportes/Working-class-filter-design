@@ -810,7 +810,7 @@
     (I get the appeal: if your whole ecosystem is symmetrical, you only have to remember half of it.
     Obsessing over palindromes can nourish art -- ask Anton Webern; or even sociology -- ask Guy Debord.)
 
-    Now do these integral describe transcendental reality?
+    Now do these integrals describe transcendental reality?
     So far we still haven't performed an integration over the biderectional infinity of time, so... yes, no, maybe, I don't know.
     But do they work?
     I've called the first set the engineer's favourite because integrating over time is the most common way to perform spectral analysis.
@@ -822,7 +822,15 @@
     the longer the time window, the finer the average: you get a more precise evaluation of the amplitude and a narrower frequency band;
     the shorter the window, the more accurately you can track amplitude variations.
     So depending on your source signal and your goal either method can turn out appropriate.
-
+    /*
+      In filter design and analysis, we tend to assume that our input signal has constant amplitude and phase -- 
+      -- that is:  X (ω)  is assumed potentially distinct for distinct partials -- distinct vaules of ω -- but constant over time.
+      But music and sound design rarely stick to analytic signals -- X (ω) varies over time: it becomes  X (ω, t).
+      So at the full spectral scale, your signal varies over time and frequency.
+      Then, depending on which variable affects it the most, you may want a short or long or medium integration window.
+      E.g.: a drone or a saturated sine wave (say you're testing the harmonics generation of a plugin) call for long windows --
+      -- drums will prefer short windows -- an 88-key keyboard needs a compromise...
+    */
   </EDIT>
 
   https://en.wikipedia.org/wiki/Fourier_transform
