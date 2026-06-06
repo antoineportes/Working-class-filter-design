@@ -1317,7 +1317,7 @@
   to our constant input signal (U_A). The greater the value of RC, the slower the convergence. Indeed:  -t / RC  is inversely proportional to RC.
   A constant voltage is a DC offset. U_C (t) will not block DC: it will progressively rebuild it: a fade-in with an exponential curve.
 
-  Next: what if we take the output across the capacitor?
+  Next: what if we take the output across the resistor?
   U_R (t)  =  (U_A  -  U_C (0)) exp (-t / RC)
   -t / RC  =  -ωc t  and  U_A  -  U_C (0)  is constant, so the chain rule and the constant factor rule give:
 
