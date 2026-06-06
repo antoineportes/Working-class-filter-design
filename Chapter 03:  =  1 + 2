@@ -1274,50 +1274,6 @@
   And the transfer function H (s) describes the system's response to signals of constant real amplitude and phase.
   Which explains why the equation involving a time-varying complex amplitude never provided a fully satisfying result.
 
-  /*
-    Actually let's try again.
-
-      Y (s) exp (st)  =  H (s) X (s) exp (st)
-      H (s) is a function of s = jω and ωc -- both constant over time for each partial.
-      So if X (s) varies over time, H (s) is still a constant factor.
-
-      Then (according to the chain rule):
-
-          Y (s, t) exp (st)       dY
-        d-------------------  =  ---- exp (st)  +  Y (s, t) s exp (st)
-                 dt               dt
-
-      and (according to the constant factor rule, then the chain rule):
-
-          H (s) X (s, t) exp (st)              X (s, t) exp (st)             dX
-        d-------------------------  =  H (s) d-------------------  =  H (s) ---- exp (st)  +  H (s) X (s, t) s exp (st)
-                    dt                                dt                     dt
-      
-                                              dX
-                                    =  H (s) ---- exp (st)  +  Y (s, t) s exp (st)
-                                              dt
-      So:
-
-         dY                                              dX
-        ---- exp (st)  +  Y (s, t) s exp (st)  =  H (s) ---- exp (st)  +  Y (s, t) s exp (st)
-         dt                                              dt
-
-      Dividing both sides by exp (st):
-
-        dY/dt  +  Y (s, t) s  =  H (s) dX/dt  +  Y (s, t) s
-
-      Subtracting  Y (s, t) s  from both sides:
-
-        dY/dt  =  H (s) dX/dt
-
-      The output's rate of change is proportional to the input's rate of change, by a factor which happens to be the transfer function.
-      Simpler proof:
-
-        Y (s)  =  H (s) X (s), so by the constant factor rule:  dY/dt  =  H (s) dX/dt
-
-      but where's the fun in simple?
-  */
-
   Ok back to business.
   So: real amplitude is twice the absolute value of the complex amplitude and phase is the argument of the complex amplitude.
   So if  y  =  Y (s) exp (st)  =  H (s) X (s) exp (st),
@@ -1378,7 +1334,9 @@
 
     1 > 0    =>    arctan (1)  >  0    =>    x > 0
 
-    -π/2  <  arctan  <  π/2    =>    0  <  x  <  π/2    =>    x  =  π/4    =>    arg (j + 1)  =  -π/4  =  φ
+    -π/2  <  arctan  <  π/2    =>    0  <  x  <  π/2    =>    x  =  π/4    =>    arg (j + 1)  =  π/4    <=>    arg ( 1 / ( j + 1) )  =  0 - π/4
+
+    <=>    φ  =  -π/4
 
   Oops, sorry. I got carried away. Another pro-trigonometry / anti-calculator stupid statement. Pardon my stubbornness.
   If you didn't follow, either:
@@ -1387,6 +1345,7 @@
 
   I am, in fact, making a not so gratuitous point: many calculators have the argument function implemented (Desmos at least),
   so there's no imperative call for twisted moduli or multiline first-principles-trigonometry.
+  (Although, you're not reading the Working-class calculator user manual...)
 
   But evaluating partials one by one while there's an infinity of them isn't exactly practical.
   We need to build better tools.
