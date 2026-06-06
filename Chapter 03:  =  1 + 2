@@ -1172,7 +1172,7 @@
           La Mettrie               Diderot
                ^                      ^
                |                      |
-    x -->(+)-->o-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]-->o--> Hobach
+    x -->(+)-->o-->[ ωc ]-->[ 1/s ]-->o-->[ ωc ]-->[ 1/s ]-->o--> Holbach
           ^ -                         |                      |
           |                           v                      |
           |                         [ 2 ]                    |
@@ -1383,7 +1383,7 @@
   Oops, sorry. I got carried away. Another pro-trigonometry / anti-calculator stupid statement. Pardon my stubbornness.
   If you didn't follow, either:
     (1)  you don't care
-    (2)  check out the appendix to Chapter VII
+    (2)  check out the appendix to Chapter VIII
 
   I am, in fact, making a not so gratuitous point: many calculators have the argument function implemented (Desmos at least),
   so there's no imperative call for twisted moduli or multiline first-principles-trigonometry.
