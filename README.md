@@ -69,6 +69,9 @@ If you're too shy to pull a request, download a chapter, edit it locally, make i
 Do it with my blessing. It's kind of the whole point.\
 (If some software requires an extension — although most text editors won't — .txt will do.)\
 ((monospace font required))<br/><br/>
+The non-negligible trade-off, when rejecting reliance on rendering scripts, is that links are not clickable.\
+That's why I've added [this page](links.md) (all links on a .md file, so that they're clickable, grouped by chapter).\
+Leaving it open somewhere while reading a chapter is the best workaround I could think of.<br/><br/>
 While there's no proper changelog in this repository, I try to keep the [table of content](ζ-Table%20of%20content.md) up to date.\
 It's basically a changelog that deals with past, present and future at once.\
 Which makes its commit history a multiverse browser?
