@@ -1,47 +1,39 @@
 # Working-class filter design\: links
 ## [<ins>Chapter I\:</ins>  Analytic signals](Chapter%2001%3A%20Analytic%20signals)
-### Wiki
-+ [Complex number](https://en.wikipedia.org/wiki/Complex_number)
-+ [Argument \(complex analysis\)](https://en.wikipedia.org/wiki/Argument_(complex_analysis))
-+ [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)
-+ [Complex plane](https://en.wikipedia.org/wiki/Complex_plane)
-+ [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem)
-+ [Trigonometry](https://en.wikipedia.org/wiki/Trigonometry)
-+ [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions)
-+ [Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
-+ [Vector \(mathematics and physics\)](https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics))
-+ [atan2](https://en.wikipedia.org/wiki/Atan2)
-+ [Exponential function](https://en.wikipedia.org/wiki/Exponential_function)
-+ [**Euler\'s formula**](https://en.wikipedia.org/wiki/Euler's_formula)
-+ [List of trigonometric identities\: *Reflections, shifts, and periodicity*](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Reflections,_shifts,_and_periodicity)
-+ [Complex conjugate](https://en.wikipedia.org/wiki/Complex_conjugate)
-+ [Angular frequency](https://en.wikipedia.org/wiki/Angular_frequency)
-+ [Hilbert transform](https://en.wikipedia.org/wiki/Hilbert_transform)
-+ [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform)
-+ [Joseph Fourier \[ fr \]](https://fr.wikipedia.org/wiki/Joseph_Fourier)
-+ [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler)
-+ [Daniel Bernoulli](https://en.wikipedia.org/wiki/Daniel_Bernoulli)
-+ [Alternating current](https://en.wikipedia.org/wiki/Alternating_current)
-+ [Direct current](https://en.wikipedia.org/wiki/Direct_current)
-+ [Integral](https://en.wikipedia.org/wiki/Integral)
-+ [Differential \(mathematics\)](https://en.wikipedia.org/wiki/Differential_(mathematics))
-+ [Απολογία Σωκράτους \(Πλάτων\) \[ el \]](https://el.wikisource.org/wiki/Απολογία_Σωκράτους_(Πλάτων))
-+ [Apology \(Jowett\)](https://en.wikisource.org/wiki/Apology_(Jowett))
-+ [Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis)
-+ [Function \(mathematics\)](https://en.wikipedia.org/wiki/Function_(mathematics))
-+ [Inverse Laplace transform](https://en.wikipedia.org/wiki/Inverse_Laplace_transform)
-+ [Greek alphabet](https://en.wikipedia.org/wiki/Greek_alphabet)
-+ [List of trigonometric identities\: *Angle sum and difference identities*](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Angle_sum_and_difference_identities)
-+ [Logarithm](https://en.wikipedia.org/wiki/Logarithm)
-### Desmos
-+ [Frequency, Amplitude and Phase](https://www.desmos.com/calculator/cxjrs1adv9)
-+ [Fourrier VCO](https://www.desmos.com/calculator/rgix4pizjo)
-+ [periodic random phase](https://www.desmos.com/calculator/caofpdn4om)
-+ [discrete noise](https://www.desmos.com/calculator/b74sfhstoh)
-+ [Laplace: non-zero sigma](https://www.desmos.com/calculator/cknw6utsjy)
-### Other
-+ [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
-+ [\[ youtube.com \] L. v. Beethoven — *9th Symphony \(Op. 125\)\: IV. "An die Freude"* \(Bach Collegium Japan, M. Suzuki\)](https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4)
+| Wiki | Desmos | Other |
+| :--- | :----- | :---- |
+| [Complex number](https://en.wikipedia.org/wiki/Complex_number) | [Frequency, Amplitude and Phase](https://www.desmos.com/calculator/cxjrs1adv9) | [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
+| [Argument \(complex analysis\)](https://en.wikipedia.org/wiki/Argument_(complex_analysis)) | [Fourrier VCO](https://www.desmos.com/calculator/rgix4pizjo) | [\[ youtube.com \] L. v. Beethoven — *9th Symphony \(Op. 125\)\: IV. "An die Freude"* \(Bach Collegium Japan, M. Suzuki\)](https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4) |
+| [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system) | [periodic random phase](https://www.desmos.com/calculator/caofpdn4om) |  |
+| [Complex plane](https://en.wikipedia.org/wiki/Complex_plane) | [discrete noise](https://www.desmos.com/calculator/b74sfhstoh) |  |
+| [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) | [Laplace: non-zero sigma](https://www.desmos.com/calculator/cknw6utsjy) |  |
+| [Trigonometry](https://en.wikipedia.org/wiki/Trigonometry) |  |  |
+| [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions) |  |  |
+| [Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions) |  |  |
+| [Vector \(mathematics and physics\)](https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)) |  |  |
+| [atan2](https://en.wikipedia.org/wiki/Atan2) |  |  |
+| [Exponential function](https://en.wikipedia.org/wiki/Exponential_function) |  |  |
+| [**Euler\'s formula**](https://en.wikipedia.org/wiki/Euler's_formula) |  |  |
+| [List of trigonometric identities\: *Reflections, shifts, and periodicity*](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Reflections,_shifts,_and_periodicity) |  |  |
+| [Complex conjugate](https://en.wikipedia.org/wiki/Complex_conjugate) |  |  |
+| [Angular frequency](https://en.wikipedia.org/wiki/Angular_frequency) |  |  |
+| [Hilbert transform](https://en.wikipedia.org/wiki/Hilbert_transform) |  |  |
+| [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform) |  |  |
+| [Joseph Fourier \[ fr \]](https://fr.wikipedia.org/wiki/Joseph_Fourier) |  |  |
+| [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) |  |  |
+| [Daniel Bernoulli](https://en.wikipedia.org/wiki/Daniel_Bernoulli) |  |  |
+| [Alternating current](https://en.wikipedia.org/wiki/Alternating_current) |  |  |
+| [Direct current](https://en.wikipedia.org/wiki/Direct_current) |  |  |
+| [Integral](https://en.wikipedia.org/wiki/Integral) |  |  |
+| [Differential \(mathematics\)](https://en.wikipedia.org/wiki/Differential_(mathematics)) |  |  |
+| [Απολογία Σωκράτους \(Πλάτων\) \[ el \]](https://el.wikisource.org/wiki/Απολογία_Σωκράτους_(Πλάτων)) |  |  |
+| [Apology \(Jowett\)](https://en.wikisource.org/wiki/Apology_(Jowett)) |  |  |
+| [Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) |  |  |
+| [Function \(mathematics\)](https://en.wikipedia.org/wiki/Function_(mathematics)) |  |  |
+| [Inverse Laplace transform](https://en.wikipedia.org/wiki/Inverse_Laplace_transform) |  |  |
+| [Greek alphabet](https://en.wikipedia.org/wiki/Greek_alphabet) |  |  |
+| [List of trigonometric identities\: *Angle sum and difference identities*](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Angle_sum_and_difference_identities) |  |  |
+| [Logarithm](https://en.wikipedia.org/wiki/Logarithm) |  |  |
 
 ## [<ins>Chapter II\:</ins>  RC](Chapter%2002%3A%20RC)
 ### Wiki
