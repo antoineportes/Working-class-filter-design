@@ -5,7 +5,7 @@
 | [Complex number](https://en.wikipedia.org/wiki/Complex_number) | [Amplitude, frequency & phase](https://www.desmos.com/calculator/hwpazzploq) | [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
 | [Argument \(complex analysis\)](https://en.wikipedia.org/wiki/Argument_(complex_analysis)) | [Partials-split VCO](https://www.desmos.com/calculator/seevdzs1xi) | [\[ youtube.com \] L. v. Beethoven — *9th Symphony \(Op. 125\)\: IV. "An die Freude"* \(Bach Collegium Japan, M. Suzuki\)](https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4) |
 | [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system) | [Pseudo-noise](https://www.desmos.com/calculator/w0dxrgh6kj) |  |
-| [Complex plane](https://en.wikipedia.org/wiki/Complex_plane) | [discrete noise](https://www.desmos.com/calculator/b74sfhstoh) |  |
+| [Complex plane](https://en.wikipedia.org/wiki/Complex_plane) | [Discrete (actual) noise](https://www.desmos.com/calculator/i4irwiua4p) |  |
 | [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) | [Laplace: non-zero sigma](https://www.desmos.com/calculator/cknw6utsjy) |  |
 | [Trigonometry](https://en.wikipedia.org/wiki/Trigonometry) |  |  |
 | [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions) |  |  |
