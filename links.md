@@ -8,9 +8,9 @@
 | [Complex plane](https://en.wikipedia.org/wiki/Complex_plane) | [Pseudo-noise](https://www.desmos.com/calculator/w0dxrgh6kj) |  |
 | [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) | [Discrete (actual) noise](https://www.desmos.com/calculator/i4irwiua4p) |  |
 | [Trigonometry](https://en.wikipedia.org/wiki/Trigonometry) | [Sigma](https://www.desmos.com/calculator/h8zpw4fkp5) |  |
-| [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions) | [Integrating sinusoids](https://www.desmos.com/calculator/d48phf8pfv) |  |
-| [Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions) | [Fourier series](https://www.desmos.com/calculator/zhamhdokfl) |  |
-| [Vector \(mathematics and physics\)](https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)) |  |  |
+| [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions) | [Calculus 101](https://www.desmos.com/calculator/8cnsrnpc7i) |  |
+| [Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions) | [Integrating sinusoids](https://www.desmos.com/calculator/d48phf8pfv) |  |
+| [Vector \(mathematics and physics\)](https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)) | [Fourier series](https://www.desmos.com/calculator/zhamhdokfl) |  |
 | [atan2](https://en.wikipedia.org/wiki/Atan2) |  |  |
 | [Exponential function](https://en.wikipedia.org/wiki/Exponential_function) |  |  |
 | [**Euler\'s formula**](https://en.wikipedia.org/wiki/Euler's_formula) |  |  |
