@@ -2,14 +2,14 @@
 ## [<ins>Chapter I\:</ins>  Analytic signals](Chapter%2001%3A%20Analytic%20signals)
 | Wiki | Desmos | Other |
 | :--- | :----- | :---- |
-| [Complex number](https://en.wikipedia.org/wiki/Complex_number) | [Amplitude, frequency & phase](https://www.desmos.com/calculator/hwpazzploq) | [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
-| [Argument \(complex analysis\)](https://en.wikipedia.org/wiki/Argument_(complex_analysis)) | [Partials-split VCO](https://www.desmos.com/calculator/seevdzs1xi) | [\[ youtube.com \] L. v. Beethoven — *9th Symphony \(Op. 125\)\: IV. "An die Freude"* \(Bach Collegium Japan, M. Suzuki\)](https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4) |
-| [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system) | [Pseudo-noise](https://www.desmos.com/calculator/w0dxrgh6kj) |  |
-| [Complex plane](https://en.wikipedia.org/wiki/Complex_plane) | [Discrete (actual) noise](https://www.desmos.com/calculator/i4irwiua4p) |  |
-| [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) | [Laplace: non-zero sigma](https://www.desmos.com/calculator/cknw6utsjy) |  |
-| [Trigonometry](https://en.wikipedia.org/wiki/Trigonometry) |  |  |
-| [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions) |  |  |
-| [Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions) |  |  |
+| [Complex number](https://en.wikipedia.org/wiki/Complex_number) | [Chapter 01 \(gallery\)](https://www.desmos.com/gallery/65938952-5857-4885-a122-b409f9e08ace) | [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
+| [Argument \(complex analysis\)](https://en.wikipedia.org/wiki/Argument_(complex_analysis)) | [Amplitude, frequency & phase](https://www.desmos.com/calculator/hwpazzploq) | [\[ youtube.com \] L. v. Beethoven — *9th Symphony \(Op. 125\)\: IV. "An die Freude"* \(Bach Collegium Japan, M. Suzuki\)](https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4) |
+| [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system) | [Partials-split VCO](https://www.desmos.com/calculator/seevdzs1xi) |  |
+| [Complex plane](https://en.wikipedia.org/wiki/Complex_plane) | [Pseudo-noise](https://www.desmos.com/calculator/w0dxrgh6kj) |  |
+| [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) | [Discrete (actual) noise](https://www.desmos.com/calculator/i4irwiua4p) |  |
+| [Trigonometry](https://en.wikipedia.org/wiki/Trigonometry) | [Sigma](https://www.desmos.com/calculator/h8zpw4fkp5) |  |
+| [Trigonometric functions](https://en.wikipedia.org/wiki/Trigonometric_functions) | [Integrating sinusoids](https://www.desmos.com/calculator/d48phf8pfv) |  |
+| [Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions) | [Fourier series](https://www.desmos.com/calculator/zhamhdokfl) |  |
 | [Vector \(mathematics and physics\)](https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)) |  |  |
 | [atan2](https://en.wikipedia.org/wiki/Atan2) |  |  |
 | [Exponential function](https://en.wikipedia.org/wiki/Exponential_function) |  |  |
