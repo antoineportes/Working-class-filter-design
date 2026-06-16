@@ -10,7 +10,7 @@
 /*          "Feed your head."                                                                */
 /*                                                   --  Grace Slick (White Rabbit)          */
 ===============================================================================================
-#1  Complex numbers
+#01  Complex numbers
 ===============================================================================================
   /*
     Pre-scriptum 1:
@@ -22,15 +22,14 @@
     Pre-scriptum 2:
       Some trigonometry happens in this chapter.
       Prior knowledge in fact required...
-      You'll find all the pre-requirements at the end of Chapter VII "Stephen Butterworth" (#9  APPENDIX: Post-apocalupsis trigonometry).
+      You'll find all the pre-requirements at the end of Chapter VIII "Stephen Butterworth" (APPENDIX: Post-apocalupsis trigonometry).
   */
 
-  https://en.wikipedia.org/wiki/Complex_number					      https://en.wikipedia.org/wiki/Argument_(complex_analysis)
-  https://en.wikipedia.org/wiki/Cartesian_coordinate_system		      https://en.wikipedia.org/wiki/Complex_plane
-  https://en.wikipedia.org/wiki/Pythagorean_theorem				      https://en.wikipedia.org/wiki/Trigonometry
-  https://en.wikipedia.org/wiki/Trigonometric_functions			      https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
-  https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)      https://en.wikipedia.org/wiki/Atan2
-
+  https://en.wikipedia.org/wiki/Complex_number                          https://en.wikipedia.org/wiki/Argument_(complex_analysis)
+  https://en.wikipedia.org/wiki/Cartesian_coordinate_system             https://en.wikipedia.org/wiki/Complex_plane
+  https://en.wikipedia.org/wiki/Pythagorean_theorem                     https://en.wikipedia.org/wiki/Trigonometry
+  https://en.wikipedia.org/wiki/Trigonometric_functions                 https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+  https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)        https://en.wikipedia.org/wiki/Atan2
 
   A complex number is the sum of a real number and an imaginary number.
   It takes the form:
@@ -44,12 +43,11 @@
   is the ensemble I (pure imaginary numbers). This plane is called the complex plane.
 
   Now imagine we plot z on this plane. It shows how any complex number can be regarded as a vector joining the origin of both axis and the
-  point with coordinates {x = Re (z) , y = Im (z)}.
+  point with coordinates [x = Re (z) , y = Im (z)].
 
   This vector traces the diagonal of a rectangle with two sides = Re (z) and two sides = Im (z).
   The vector z splits this rectangle in two identical right triangles whose hypotenuse is the length (magnitude) of the vector.
-
-  This hypotenuse is called the absolute value of the complex number z and is notated |z|  --  sometimes abs (z).
+  This hypotenuse is called the absolute value (or magnitude) of the complex number z and is notated |z|  --  sometimes abs (z).
 
   The theorem of Pythagoras gives:
 
@@ -61,7 +59,7 @@
     complex analysis applies to purely real numbers. This coincides with the fact that real numbers are a subset of complex numbers).
   */
 
-  Let's call θ the angle formed by the vector z and the real (horizontal) axis.
+  Let's call θ the angle formed by the vector z and the real (horizontal) axis.        //  "theta", not "zero".
   θ is called the argument of the complex number z and is notated arg (z).
   Since Re (z) is its adjacent side and since Im (z) is its opposite side:
 
@@ -69,7 +67,7 @@
 
   And thus:
 
-    arg  (z)  =  arctan ( Im (z) / Re (z) )    or    arctan2 ( Im (z), Re (z) )
+    arg (z)  =  arctan ( Im (z) / Re (z) )    or    atan2 ( Im (z) , Re (z) )
 
   /*
     atan2:
@@ -85,11 +83,11 @@
       The function atan2 fixes this too.
 
       Note that if Re (z) = 0, the vector is vertical and arg (z) = ± π/2 regardless of Im (z) (only its sign matters, unless it's zero too).
-      If Im (z) = 0, the vector is horizontal and arg (z) = 0 regardless of Re (z) (even if it is = 0).
+      If Im (z) = 0, the vector is horizontal and  arg (z) = 0  when  Re (z)  ≥  0  and  arg (z)  =  π  otherwise.
 
       Knowing all that, atan2 could easily (not elegantly) get worked around. Luckily this is usually not necessary.
-  */
-  
+  */  
+
   We also know that  cos (θ)  =  adjacent / hypotenuse   and    sin (θ)   =  opposite / hypotenuse
   which means:      adjacent  =  cos (θ) * hypotenuse    and    opposite  =  sin (θ) * hypotenuse
 
@@ -120,7 +118,7 @@
 
 
 ===============================================================================================
-#2  Euler's formula
+#02  Euler's formula
 ===============================================================================================
 
   https://en.wikipedia.org/wiki/Exponential_function
@@ -128,6 +126,10 @@
   Let  j = √(-1)  and  x  be a real number, then Euler's formula states that:
 
     exp (j * x)  =  cos (x)  +  j * sin (x)                   //  https://en.wikipedia.org/wiki/Euler's_formula
+
+  /*
+    We'll demonstrate it at some point.
+  */
 
   By making use of the 2 following trigonometric identities:
 
@@ -145,7 +147,6 @@
 
     exp (j * x)  +  exp (-j * x)  =  cos (x)  +  j * sin (x)  +  ( cos (x)  -  j * sin (x) )  =  2 * cos (x)
 
-
   Solving [1] for sin (x) gives:
 
                  exp (j * x)  -  exp (-j * x)
@@ -156,19 +157,20 @@
 
                  exp (j * x)  +  exp (-j * x)
     cos (x)  =  ------------------------------    [3]
-                              2
-  
+                              2  
+
   Considering the identity:
 
     cos (θ)  =  sin (θ  +  π / 2)
 
   Equation [3] shows that any real sinusoid can be expressed as half the sum of two complex exponentials.
   This is interesting because the rules of exponentiation are a lot simpler than the rules of trigonometry.
-  For instance, exp (x) is its own derivative (and thus anti-derivative). This makes processes such as integration or differentiation become
-  very trivial, compared to the same processes applied to cos (x) or sin (x).
+  For instance, exp (x) is its own derivative (and thus anti-derivative) -- by definition.
+  This makes processes such as integration or differentiation become very trivial, compared to the same processes applied to cos (x) or sin (x).
+  (Actually, derivatives and antiderivatives are not where real trigonometric functions are the most tricky, but:  cos (ax + b) , etc.)
 
-  Let    z1  =  exp (j * x) / 2    ,    z2  =  exp (-j * x) / 2    , then:
-    
+  Let    z1  =  exp (j * x) / 2    ,    z2  =  exp (-j * x) / 2    , then:    
+
     z1  =  cos (x) / 2  +  j * +sin (x) / 2
     z2  =  cos (x) / 2  +  j * -sin (x) / 2
 
@@ -180,9 +182,10 @@
     =>  Re (z1)  =  Re (z2)    ;    Im (z1)  =  -Im (z2)
 
   z1 and z2 form a complex conjugate pair.                          //  https://en.wikipedia.org/wiki/Complex_conjugate
+  (Which means: they have equal real parts and opposite imaginary parts.)
   So any real sinusoid (equation [3]) can be expressed as the sum of two complex conjugates.       [a]
   /*                                                                                             __
-    Complex xonjugates are usually denoted by a horizontal bar over the number's symbol:  z2  =  z1  means that z2 and z1 are conjugates.
+    Complex conjugates are usually denoted by a horizontal bar over the number's symbol:  z2  =  z1  means that z2 and z1 are conjugates.
     Sometimes also with an asterisk:  z2  =  z1*.
     First option is really not convenient because monospace.
     Second option looks like multiplication in most programming languages.
@@ -190,68 +193,71 @@
     But know that this is not standard and be ready to encounter other conventions.
   */
 
+  // Euler's formula and the polar form
 
-  //	Euler's formula and the polar form
+  Let's consider a complex number z with argument arg (z) and absolute value |z|.
+  
+  According to Euler's formula:
+  
+    exp ( j * arg (z) )  =  cos ( arg (z) )  +  j * sin ( arg (z) )
+  
+  Recalling the polar form expression:
+  
+    z  =  |z| * [ cos ( arg (z) )  +  j * sin ( arg (z) ) ]
+  
+  Combining these two expressions leads to:
+  
+    z  =  |z| * exp ( j * arg (z) )
+  
+  I haven't found any documentation on this form (perhaps from not digging deep enough...) so let's call it the exponential form of the
+  complex number z.
+  
+  This means that any number in the form:
+  
+    ζ  =  α * exp (j * θ)
+  
+  has an absolute value    |ζ|  =  α    and an argument    arg (ζ)  =  θ
+  
+  Then    Re (ζ)  =  α * cos (θ)    and    Im (ζ)  =  α * sin (θ)
+  
+  Now in the special case:    θ  =  ω * t
+  where t is the time (in seconds) and ω is an angular frequency (in radians per second), the exponential form:
+  
+    ζ  =  α * exp (j * ω * t)       [4]
+  
+  is what is called a COMPLEX SINUSOID -- sometimes a phasor.
+  It is also called an analytic signal as it has optimal qualities in order to study a system's response to pure sinusoids.
+  Indeed comparing equations [3] and [4] reveals that if we express a real sinusoid in terms of complex exponentials, we end up with two
+  complex sinusoids, one of which has a negative frequency; while a pure complex sinusoid has its amplitude and phase embedded in its
+  constant factor and only involves positive frequencies.
+  More on that right away.
 
-    Let's consider a complex number z with argument arg (z) and absolute value |z|.
-
-    According to Euler's formula:
-
-      exp ( j * arg (z) )  =  cos ( arg (z) )  +  j * sin ( arg (z) )
-
-    Recalling the polar form expression:
-
-      z  =  |z| * [ cos ( arg (z) )  +  j * sin ( arg (z) ) ]
-
-    Combining these two expressions leads to:
-
-      z  =  |z| * exp ( j * arg (z) )
-
-    I haven't found any documentation on this form (perhaps from not digging deep enough...) so let's call it the exponential form of the
-    complex number z.
-
-    This means that any number in the form:
-
-      ζ  =  α * exp (j * θ)
-
-    has an absolute value    |ζ|  =  α    and an argument    arg (ζ)  =  θ
-
-    Then    Re (ζ)  =  α * cos (θ)    and    Im (ζ)  =  α * sin (θ)
-
-    Now in the special case:    θ  =  ω * t
-    where t is the time (in seconds) and ω is an angular frequency (in radians per second), the exponential form:
-
-      ζ  =  α * exp (j * ω * t)       [4]
-
-    is what is called a COMPLEX SINUSOID.
-    It is also called an analytic signal as it has optimal qualities in order to study a system's response to pure sinusoids.
-    Indeed comparing equations [3] and [4] reveals that if we express a real sinusoid in terms of complex exponentials, we end up with two
-    complex sinusoids, one of which has a negative frequency; while a pure complex sinusoid has its amplitude and phase embedded in its
-    constant factor and only involves positive frequencies.
-    More on that right away.
+  https://en.wikipedia.org/wiki/Analytic_signal
 
   /*
     Before we move on: what happens to ζ if α is a complex number?
 
       α  =  |α| * exp ( j * arg (α) )
+
       then:
+
       ζ  =  |α| * exp ( j * arg (α) ) * exp (j * ω * t)  =  |α| * exp (  j * ( ω * t  +  arg (α) )  )    [4-bis]
   */
 
 
 
 ===============================================================================================
-#3  Frequency, Amplitude and Phase
-===============================================================================================
-  
-  https://www.desmos.com/calculator/cxjrs1adv9
+#03  Amplitude, frequency & phase
+===============================================================================================  
+
+  [Amplitude, frequency & phase]  https://www.desmos.com/calculator/hwpazzploq
 
   If t is the time (in seconds),  ƒ (t)  =  cos (t)  is a sinusoid of:
 
-    Amplitude	  α  =  1
-    Period 		  T  =  2 * π  seconds
-    Frequency	  f  =  1 / (2 * π)  Hz
-    Phase		  φ  =  0  rad.
+    Amplitude    α  =  1
+    Period       T  =  2 * π  seconds
+    Frequency    f  =  1 / (2 * π)  Hz
+    Phase        φ  =  0  rad.
 
   That is,  ƒ (t)  oscillates from -1 to +1 through a repetitive pattern of length = 2 * π with an offset = 0.
 
@@ -262,7 +268,7 @@
 
   That is,  ƒ (t)  oscillates from -α to +α through a repetitive pattern of length = 1 / ω with an offset = φ.
 
-  Note that for φ to be expressed in radians (that is as a ratio of the period T), the offset t0 (seconds) must be defined.
+  Note that for φ to be expressed in radians (that is as a portion of the modulus 2π), the offset t0 (seconds) must be defined.
   t0 is the time it takes for ƒ (t) to reach the beginning of an oscillation cycle ( ƒ (t) = 1 ) for the first time.
   (This implies  t0 < T)
 
@@ -279,7 +285,7 @@
     Since converting one convention into the other is as trivial as an addition, which one we choose has few consequences.
     So if one convention simplifies the maths, why choose the other? Right?
 
-    We're just about to call back Euler's formula. Choosing cos avoids having j in the denominator.
+    We're just about to call back Euler's formula. Choosing cosine avoids having j in the denominator.
     I hope now it doesn't feel arbitrary anymore.
   */
 
@@ -289,8 +295,7 @@
     ƒ (t)  =  --- * exp ( j * (ω * t  +  φ) )  +  --- * exp ( -j * (ω * t  +  φ) )
                2                                   2
 
-
-               α * exp (j * φ)                            α * exp (j * -φ)        
+               α * exp (j * φ)                            α * exp (j * -φ)
     ƒ (t)  =  -----------------  * exp (j * ω * t)   +   ------------------  * exp (j * -ω * t)       [6]
                      2                                           2
 
@@ -298,7 +303,6 @@
   has a negative frequency.
 
   Let's define:
-
                                      α * exp (j * φ)
     s  =  j * ω    and    X (s)  =  -----------------
                                             2
@@ -311,12 +315,12 @@
 
   can be considered the positive-frequency-component of a real sinusoid with:          [b]
 
-    Amplitude	  α  =  2 * |X (s)|
-    Phase		  φ  =  arg (X (s))
-    Frequency	  ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
+    Amplitude   α  =  2 * |X (s)|
+    Phase   φ  =  arg (X (s))
+    Frequency   ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
 
   /*
-    X (s) is called the complex amplitude of ƒ (t). It embeds the actual amplitude and the phase.
+    X (s) is called the complex amplitude of ƒ (t). It embeds the real amplitude and the phase.
     X (s) is just a symbol. The complex sinusoid  A * exp (z * t)  has a complex amplitude = A as long as  Re (z) = 0.
   */
 
@@ -342,7 +346,7 @@
 
 
 ===============================================================================================
-#4  Fourier integral
+#04  Fourier integral
 ===============================================================================================
 
   https://en.wikipedia.org/wiki/Fourier_transform
@@ -356,45 +360,51 @@
 
     https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up
 
-    He references Leonhard Euler and Daniel Bernoulli during his demonstration.
+    He references Leonhard Euler and Daniel Bernoulli (the discoverers of the exponential function, more on them later) during his demonstration.
+    Yet he sticks to real trigonometry all along.
 
     https://en.wikipedia.org/wiki/Leonhard_Euler        https://en.wikipedia.org/wiki/Daniel_Bernoulli
   */
+
   These sinusoids are called partials and their sum is called spectrum.
   If all partials have their frequencies related by an integer factor, they are called harmonics. Then the one with the lowest
   frequency is called fundamental and all the other ones are called overtones.
   In such a case, the composite signal is periodic and its frequency is the fundamental's frequency thus called fundamental frequency.
 
-  In case of a periodic signal, the sum is discrete ( ω2 = 2 * ω , ω3 = 3 * ω , ... , ωn = n * ω  //  where ω is the fundamental frequency ) and can
-  therefore be effectively expressed as a literal sum:
+  In case of a periodic signal, the sum is discrete ( ω2 = 2 * ω , ω3 = 3 * ω , ... , ωn = n * ω  //  where ω is the fundamental frequency
+  and can therefore be effectively expressed as a literal sum:
 
                 ∞
-    ƒ (t)  =    Σ   α[n] * cos (n * ω * t  +  φ[n])         [7]          //  https://www.desmos.com/calculator/rgix4pizjo
+    ƒ (t)  =    Σ   α[n] * cos (n * ω * t  +  φ[n])         [7]
               n = 0
+
+  [Partials-split VCO]  https://www.desmos.com/calculator/seevdzs1xi
 
   Notice that ω is a constant.
   α[n] means that each partial has its own amplitude without necessarily being mathematically related to n.
   (It's an index, not necessarily a function — although it could be. It could also be = 0)
   Same goes for φ[n]. The partials don't have to be in phase for the signal to be periodic. (I thought so. I checked, I was wrong. If the partials
   are not in phase, the period will have a random shape but it will be repeated at the fundamental frequency. Which is pretty obvious once you start
-  thinking about it... but first you have to start thinking about it!)       //  https://www.desmos.com/calculator/caofpdn4om
+  thinking about it... but first you have to start thinking about it!)
+
+  [Pseudo-noise]  https://www.desmos.com/calculator/w0dxrgh6kj
 
   /*
-  	//	Digression: What happens when n = 0 ?
-  	////	D.C. offset
+  // Digression: What happens when n = 0 ?
+  //// D.C. offset
 
-  	  https://en.wikipedia.org/wiki/Alternating_current
-  	  https://en.wikipedia.org/wiki/Direct_current
+    https://en.wikipedia.org/wiki/Alternating_current
+    https://en.wikipedia.org/wiki/Direct_current
 
-  	  In an analog circuit, the fact that    α * cos (ω * t  +  φ)    changes sign each half-period corresponds to the current changing direction,
-  	  as is normal with A.C. (alternating current).
-  	  A direct current (D.C.) can be either positive or negative but its sign (polarity) doesn't change.
+    In an analog circuit, the fact that  α * cos (ω * t  +  φ)  changes sign each half-period corresponds to the current changing direction,
+    as is normal with A.C. (alternating current).
+    A direct current (D.C.) can be either positive or negative but its sign (polarity) doesn't change.
 
-  	  When n = 0    α[n] * cos (n * ω * t  +  φ[n])  =  α[0] * cos (φ[0])
+    When  n = 0    α[n] * cos (n * ω * t  +  φ[n])  =  α[0] * cos (φ[0])
 
-  	  Which is a constant. It's called a D.C. offset.
-  	  D.C. because it doesn't alternate. Offset because if you plot ƒ (t) it will shift the curve of the whole spectrum up or down by its value.
-  	  In this regard it could be extracted from the sum:
+    Which is a constant. It's called a D.C. offset.
+    D.C. because it doesn't alternate. Offset because if you plot ƒ (t) it will shift the curve of the whole spectrum up or down by its value.
+    In this regard it could be extracted from the sum:
 
                            ∞
         ƒ (t)  =  α[0]  +  Σ   α[n] * cos (n * ω * t  +  φ[n])        //  Why cos (φ[0]) disappeared gets answered right away.
@@ -418,12 +428,13 @@
       One of my personal rules in life is to never follow anyone's advice. If you don't play with fire how will you ever know for sure that it burns?
   */
 
-
   Now let's assume ƒ (t) is not a periodic signal (e.g. white noise, a rocket launch or Beethoven's ninth symphony).
 
   ( https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4 )
 
-  Any frequency at any phase and with any amplitude can be present in the spectrum.      //  https://www.desmos.com/calculator/b74sfhstoh
+  Any frequency at any phase and with any amplitude can be present in the spectrum.
+
+  [Discrete (actual) noise]  https://www.desmos.com/calculator/i4irwiua4p
 
   In other words: ω has become a variable which can take any real positive value (n has become meaningless).
   In other words: the spectrum is no longer discrete, it's continuous. Which means that even if defined on a finite interval it will have infinite
@@ -436,13 +447,12 @@
   we integrate is actually f.
 
   Then:
-
                ∞
               ⌠
     ƒ (t)  =  |  α[ω] * cos (ω * t  +  φ[ω]) * df
               ⌡
-               0
-  
+               0 
+
   Or, in a cleaner fashion (fewer variables):
 
                ∞
@@ -459,7 +469,8 @@
                2 * π    ⌡
                          0
 
-  Integration is a constant sum, so the rules of factorisation apply as usual. Since 1 / (2 * π) is a constant factor it can be extracted from the
+  Integration is a pseudo-continuous sum, so the rules of factorisation apply as usual.
+  Since 1 / (2 * π) is a constant factor it can be extracted from the
   integral (it really isn't anything more than a factorisation).
 
   I'm not done tweaking this formula, but it's important that I stop here and analyse something that I had a hard time understanding.
@@ -479,13 +490,13 @@
   Two mistakes here: one arose from inattention (easy to debug, not a big deal), the other from the worst disease in the Cosmos: thinking you
   know something when really you don't (catchy, I know).
 
-    /*
-		https://el.wikisource.org/wiki/Απολογία_Σωκράτους_(Πλάτων)
-		https://en.wikisource.org/wiki/Apology_(Jowett)
-	*/
-  
+  /*
+    https://el.wikisource.org/wiki/Απολογία_Σωκράτους_(Πλάτων)
+    https://en.wikisource.org/wiki/Apology_(Jowett)
+  */  
+
   Ok so first mistake:  α[0]  in equation [7] is an amplitude. Its unit is implicit because there are several possibilities; but let's say it's
-  Volts (V). Then let's run a dimensional analysis.           //  https://en.wikipedia.org/wiki/Dimensional_analysis
+  Volts (V). Then let's run a dimensional analysis.                //  https://en.wikipedia.org/wiki/Dimensional_analysis
 
   The unit of ω is rad/s. Dividing rad/s by  2 * π  gives Hertz (Hz). Then  dω / (2 * π)  is in Hz and  (α[0] * dω) / (2 * π) is in Volts per second.
   (The inattention was omitting dω.)
@@ -498,7 +509,7 @@
 
   Second mistake: I stuck to brackets instead of moving to parenthesis. So what? It's just a convention.
   Said convention is: brackets for indexes, parenthesis for functions.
-  That is I assumed α[ω] (and φ[ω] by the way) had to be an index and not a function.     //  https://en.wikipedia.org/wiki/Function_(mathematics)
+  That is I assumed α[ω] (and φ[ω] by the way) had to be an index and not a function.        //  https://en.wikipedia.org/wiki/Function_(mathematics)
   Because I assumed a function, by definition, had input and output related by some mathematical formula (which can not be the case if I want
   my integral to apply to random signals). Turns out I didn't know what a function is (even though I'm aware of the possible use of tabulation
   as a waveshaper...). A mathematical relation is in fact facultative: a function assigns a unique output to any input from its ensemble of
@@ -534,8 +545,8 @@
                  1      ⌠   /  A(ω) * exp (j * φ(ω))                         A(ω) * exp (j * -φ(ω))                     \
     ƒ (t)  =  ------- * |  (  ----------------------- * exp (j * ω * t)  +  ------------------------ * exp (j * -ω * t)  ) * dω
                2 * π    ⌡   \            2                                             2                                /
-                         0
-  
+                         0  
+
   (I could have gone straight to this form by recalling equation [6] but the previous one makes the complex conjugates more obvious.)
 
   ((Notice that, according to statement [b], the amplitude and phase of each infinitesimal partial are encoded in  A(ω) * exp (j * φ(ω)) as
@@ -573,25 +584,24 @@
     ⌠  A(ω) * exp (j * φ(ω))
     | ----------------------- * exp (j * ω * t) * dω       [12]
     ⌡            2
-    -∞
-  
-  Now if I want  variable [12]  =  Ω-  what I really want is:
-  
-    A(-ω) = A(ω)  and  φ(-ω) = -φ(ω)          [13]
-  
+    -∞  
+
+  Now if I want  variable [12]  =  Ω-  what I really want is:  
+
+    A(-ω) = A(ω)  and  φ(-ω) = -φ(ω)          [13]  
+
   This doesn't break any rule because A(ω) and φ(ω) didn't have any mathematical definition so far. Well now they do.
   The restriction in equation [13] is the condition for the signal to be purely real when substituting variable [12] for Ω- in equation [10].
   Then I can safely write:
 
     if ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) )
     {
-      
                             / +∞                                                      0                                               \
                    1       /  ⌠  A(ω) * exp (j * φ(ω))                               ⌠  A(ω) * exp (j * φ(ω))                          \
       ƒ (t)  =  ------- * (   | ----------------------- * exp (j * ω * t) * dω   +   | ----------------------- * exp (j * ω * t) * dω   ) ;
                  2 * π     \  ⌡            2                                         ⌡            2                                    /
-                            \  0                                                     -∞                                               /
-      
+                            \  0                                                     -∞                                               /      
+
     }   //  endif
 
   Now of course I want to combine both integrals... But let's not be too rash, shalln't we?
@@ -606,8 +616,8 @@
     (A mathematical proof would have been quicker but abstraction is not required here.)
     Then:
 
-      ω = 0  =>  φ(ω) = φ(-ω) = 0                        //  check.
-  
+      ω = 0  =>  φ(ω) = φ(-ω) = 0                        //  check.  
+
   Then:
 
      A(0) * exp (j * φ(0))                         A(-0) * exp (j * φ(-0))                          A(0)
@@ -618,13 +628,11 @@
 
     if ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) )
     {
-      
                           +∞
                    1      ⌠  A(ω) * exp (j * φ(ω))
       ƒ (t)  =  ------- * | ----------------------- * exp (j * ω * t) * dω ;
                  2 * π    ⌡            2
-                          -∞
-      
+                          -∞      
     }   //  endif
 
   Let's define:
@@ -632,17 +640,17 @@
               A(ω) * exp (j * φ(ω))
     X (ω)  = -----------------------
                         2
+
   Then:
 
     if ( A(-ω) == A(ω)  &&  φ(-ω) == -φ(ω) )
     {
-      
-                          +∞
-                   1      ⌠
-      ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω ;        //  And that's the academic
-                 2 * π    ⌡                                       //  expression of the inverse
-                          -∞                                      //  Fourier transform.
-      
+                          +∞                                      //
+                   1      ⌠                                       //  And that's one of the academic expressions of:
+      ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω ;        //
+                 2 * π    ⌡                                       //    the inverse Fourier transform.
+                          -∞                                      //      
+
     }   //  endif
 
   The amplitude of each infinitesimal (real) partial being:  2 * |X (ω)|    and its phase being:  arg ( X (ω) ).
@@ -659,7 +667,7 @@
 
 
 ===============================================================================================
-#5  Conclusion
+#05  Conclusion
 ===============================================================================================
 
   This'll be quick.
@@ -669,178 +677,7 @@
 
 
 ===============================================================================================
-#6  Not so fast...
-===============================================================================================
-
-  D.C. offset needs closure.
-  Remember "if you plot ƒ (t) it will shift the curve of the whole spectrum up or down by its value"?
-
-  This statement contains the solution to the aporia: "How to deduce the D.C. offset from the Inverse Fourier Transform?".
-
-  A spectrum is a sum of sinusoids. So the vertical shift of a spectrum is a vertical shift of sinusoid(s).
-  A sinusoid without a D.C. offset has a period: a unique motif repeated identically ad infinitum.
-  This period has a center of symmetry in its middle: when it crosses zero.
-
-  Which means that the integration of the sinusoid over one period gives zero: indeed, the two halves have equal area under the curve
-  and complementary signs -- therefore their sum cancels out.
-
-  So, assuming that the D.C. offset is constant, the integration over time of the Inverse Fourier Transform gives the value of the D.C. offset.
-  (Assuming this integration starts and stops when all partials are crossing zero.)
-  Of course, all partials crossing zero at once (all the more twice) is very unlikely (unless the spectrum is fully periodic).
-  But a long enough integration will approximate the D.C. offset accurately enough. (Notice how enough relies on enough.)
-
-  /*
-    I don't like the word "approximation" either. But noise is a random and unstable phenomenon.
-    So we're making sense out of chaos (sounds better?).
-
-    For periodic signals we still get the exact value of the D.C. offset: α[0] (remember?).
-  */
-
-  The integration over time of the Inverse Fourier Transform is called the Fourier Transform.
-
-  <EDIT>
-    Not entirely true.
-
-    Assume our spectrum ƒ (t) has only one (complex) partial whose complex amplitude X (ω) is constant over time.
-    Then the continuous sum has one term. And:
-                          +∞
-                   1      ⌠                                   X (ω) * exp (j * ω * t)
-      ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω  =  -------------------------
-                 2 * π    ⌡                                            2 * π
-                          -∞
-    Let's ignore the division by 2π (we'll fix it in a moment) and define:    X' (ω)  =  X (ω) / 2π.
-    Then:
-                       ƒ (t)
-      X' (ω)  =  -----------------  =  ƒ (t) * exp (-j * ω * t)
-                  exp (j * ω * t)
-
-    Except there's something wrong with this equation: it's a function of ω. Yet t is in the expression.
-    If ω has become the variable, has time become constant over frequency? Does it make any sense?
-    And yet X (ω) and X' (ω) are assumed constant over time, but if we vary ω (that is, if we add more partials),
-    X (ω) and X' (ω) won't necessarily be constant over frequency (ω)...
-    Our partial is oscillating. So if we pick an arbitrary value for t, we'll be somewhere random in the period --
-    -- we'll get a random complex amplitude...
-
-    Our formula for X' (ω) is not entirely wrong. It's only instantaneous.
-    Actually it's not wrong at all: X' (ω) is -- it should be:  X' (ω, t).
-
-    Good -- because it has something appealing: the division by the complex sinusoid of interest resembles a normalisation formula;
-    express something as a portion of some reference.
-    Like when we say e.g. "one fifth of the population of [whatever]": it's clearer than absolute millions and gives meaning to data.
-    The difference here is that our referential is not constant: it's oscillating in two dimensions (real and imaginary),
-    for each of the infinite partials -- which makes the process tricky to visualise by pure abstraction or even on a graph.
-    Still, we're looking for a complex amplitude -- that is: we're trying to extract a constant out of oscillations.
-    So normalising with oscillations at the same rate is unsettling but not totally counter-intuitive.
-
-    The actual issue is that ƒ (t) is instantaneous.
-    Another way to phrase "X' (ω) is constant over time" could be: "X' (ω) is constant across all values of t".
-    "All values of t" is yelling INTEGRATION too loud for us to ignore it.
-    We know that a raw integration of the inverse Fourier transform over time will give us DC.
-    Intuitively, multiplying DC by a complex sinusoid should give this sinusoid an amplitude equal to DC.
-    Perhaps intuition is not enough?
-
-    The reason why it gives DC is: sinusoids have symmetrical periods: the positive half equals the negative one -- integration cancels them out.
-    What if we apply our normalisation inside the integral?
-    Let's say we're looking for X (ω0), the complex amplitude of the partial whose frequency is ω0.
-
-    Then each partial in the integral will become:
-
-      X (ω) * exp (j * ω * t) * exp (-j * ω0 * t)  =  X (ω) * exp ( j * (ω - ω0) * t )
-
-    Their frequency is shifted but they remain periodic and they still cancel out.
-    Ok, now what happens when ω = ω0?
-
-      X (ω0) * exp ( j * (ω0 - ω0) * t )  =  X (ω0) * exp (j * 0 * t)  =  X (ω0) * exp (0)  =  X (ω0) * 1  =  X (ω0)    !!!
-
-    Amazing. Now there's still DC... Well actually:
-
-      X (0) * exp (j * 0 * t) * exp (-j * ω0 * t)  =  DC * exp (-j * ω0 * t)
-
-    Our normalisation makes DC the amplitude of a sinusoid. Which means it will cancel out like any partial once integrated over time.
-    And if it's DC that we're measuring:  exp (-j * 0 * t)  =  1. So our DC fix right before this edit was valid, only not general.
-    Hence "not *entirely* true".
-    So the (regular) Fourier transform would be:
-
-                +∞                                                                      +∞
-                ⌠                                                                1      ⌠
-      X (ω)  =  | ƒ (t) * exp (-j * ω * t) * dt        with:        ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω
-                ⌡                                                              2 * π    ⌡
-                -∞                                                                      -∞
-
-    Full Fourier, jolly good. Except there's still this 1/2π factor...
-    Won't we end up with  X (ω) / 2π instead of X (ω)?
-    Remember where it came from: before we factored it out of the continuous sum, it was part of the differential:  dω/2π.
-    It's here to convert Hertz in radians per second (regular frequency in angular frequency).
-    It's almost purely notational: we integrate over the frequency in Hz but we use a variable in rad/s. It's just dimensional rigour.
-
-    In fact this is one of several conventions. Very basically the engineer's one. I'll come back to why.
-    The generic formula is:
-                                              +∞
-                                    ^         ⌠
-      Fourier transform:            ƒ (ξ)  =  | ƒ (x) exp (-j 2π ξ x) dx
-                                              ⌡
-                                              -∞
-
-                                              +∞
-                                              ⌠ ^
-      inverse Fourier transform:    ƒ (x)  =  | ƒ (ξ) exp (j 2π ξ x) dξ
-                                              ⌡
-                                              -∞
-
-    Then there's the "mathematician's version":
-                                                      +∞
-                                    ^            1    ⌠
-      Fourier transform:            ƒ (ω)  =  ------- | ƒ (t) exp (-jωt) dt
-                                               √(2π)  ⌡
-                                                      -∞
-
-                                                      +∞
-                                                 1    ⌠ ^
-      inverse Fourier transform:    ƒ (t)  =  ------- | ƒ (ω) exp (jωt) dω
-                                               √(2π)  ⌡
-                                                      -∞
-
-    Each transform contains 1 / √(2π) and multiplies the other by it. So we get:
-
-         1         1            1
-      ------- * -------  =  ----------  =  1/2π
-       √(2π)     √(2π)       (√(2π))²
-
-    This way both the dimensional accuracy and the original symmetry are preserved.
-    (I get the appeal: if your whole ecosystem is symmetrical, you only have to remember half of it.
-    Obsessing over palindromes can nourish art -- ask Anton Webern; or even sociology -- ask Guy Debord.)
-
-    Now do these integrals describe transcendental reality?
-    So far we still haven't performed an integration over the biderectional infinity of time, so... yes, no, maybe, I don't know.
-    But do they work?
-    I've called the first set the engineer's favourite because integrating over time is the most common way to perform spectral analysis.
-    So in signal processing, the Fourier transform does work. Assuming this is new to you, you still may have encountered the acronym "FFT"?
-    It means "Fast Fourier Transform". (If you haven't and yet you're reading this, I bet you will at some point.)
-    The integration is not infinite of course. It usually happens over a periodic time window (although you could very well design an algorithm
-    that integrates from init up to further notice -- maybe someone did already).
-    What, compared to the theoretical formula, could seem like a limitation, actually becomes a parameter:
-    the longer the time window, the finer the average: you get a more precise evaluation of the amplitude and a narrower frequency band;
-    the shorter the window, the more accurately you can track amplitude variations.
-    So depending on your source signal and your goal either method can turn out appropriate.
-    /*
-      In filter design and analysis, we tend to assume that our input signal has constant amplitude and phase -- 
-      -- that is:  X (ω)  is assumed potentially distinct for distinct partials -- distinct vaules of ω -- but constant over time.
-      But music and sound design rarely stick to analytic signals -- X (ω) varies over time: it becomes  X (ω, t).
-      So at the full spectral scale, your signal varies over time and frequency.
-      Then, depending on which variable affects it the most, you may want a short or long or medium integration window.
-      E.g.: a drone or a saturated sine wave (say you're testing the harmonics generation of a plugin) call for long windows --
-      -- drums will prefer short windows -- an 88-key keyboard needs a compromise...
-    */
-  </EDIT>
-
-  https://en.wikipedia.org/wiki/Fourier_transform
-
-  How d'you like closure?
-
-
-
-===============================================================================================
-#7  Don't stop me now ('cause I'm having a good time)
+#06  Not so fast...
 ===============================================================================================
 
   Integral transforms are rather fun. How about another one?
@@ -848,11 +685,11 @@
   First let's assume we don't care whether the sinusoids in our spectrum are purely real.
   Then we can get rid of the "if" statement, and:
 
-                          +∞
-                   1      ⌠
-      ƒ (t)  =  ------- * | X (ω) * exp (j * ω * t) * dω 
-                 2 * π    ⌡
-                          -∞
+                      +∞
+                  1   ⌠
+      ƒ (t)  =  ----- | X (ω) exp (jωt) dω 
+                 2 π  ⌡
+                      -∞
 
   Ok, neat.
   Now, the angular frequency ω is always multiplied by j. So varying the frequency (angular or not) is equivalent to traveling along the
@@ -891,7 +728,7 @@
 
   If σ = 0 then problem solved. But it would be nice to allow it to be non-zero (just in case).
   We can't touch 2πj, it's a constant.
-  And what does dσ even mean in the first place? -> The variation of σ by an infinitesimal amount.
+  And what does dσ even mean in the first place? --> The variation of σ by an infinitesimal amount.
   Ha! So no variation of σ means dσ = 0, right? So we need it to be a constant. That's it.
   And when setting it to zero (implicitly *always* zero) we were in fact already defining a constant.
   Plus we've named it σ, not σ (ω) -- so, intuitively, we've always known what we were doing.
@@ -905,11 +742,11 @@
           Differential? -> Fixed.
            Left to fix? -> Nothing.
 
-                    σ +j∞
+                     σ + j∞
                   1   ⌠
-      ƒ (t)  =  ----- | F (s) * exp (st) ds 
+      ƒ (t)  =  ----- | F (s) exp (st) ds 
                  2πj  ⌡
-                    σ -j∞
+                     σ - j∞
 
   Look at what we've just invented! Enjoy.
   Now quit enjoying because we didn't invent shit.
@@ -947,7 +784,7 @@
   What was I saying (I mean writing)?
   Oh yes. What happens if  σ ≠ 0 ?
 
-  exp (st)  =  exp (σt + jωt)  =  exp (σt) * exp (jωt)
+    exp (st)  =  exp (σt + jωt)  =  exp (σt) * exp (jωt)
 
   Notice that it's not only not called σ (ω) but also not σ (t).
   So it remains constant for all values of t (constant across time).
@@ -962,19 +799,19 @@
 
                            +∞
                  exp (σt)  ⌠
-      ƒ (t)  =  ---------- | χ (ω) * exp (jωt) dω
+      ƒ (t)  =  ---------- | χ (ω) exp (jωt) dω
                     2π     ⌡
                            -∞
 
   Let's define the spectrum:
 
                 +∞
-                ⌠                    dω
-      𝓕 (t)  =  | χ (ω) * exp (jωt) ----
-                ⌡                    2π
+                ⌠                  dω
+      S (t)  =  | χ (ω) exp (jωt) ----
+                ⌡                  2π
                 -∞
 
-  Then:    ƒ (t)  =  exp (σt) * 𝓕 (t)
+  Then:    ƒ (t)  =  exp (σt) S (t)
 
   exp (jωt)  =  cos (ωt) + j sin (ωt)  so its real part is bounded in the range [-1 , +1] and its imaginary part is bounded
   in the range [-j , j] -- or [-1 , +1] on the imaginary axis.
@@ -984,45 +821,46 @@
   (Ok, we knew that already but re-phrasing doesn't hurt.)
 
   /*
-    By "amplitude" I mean "complex amplitude" which embeds both the actual amplitude and the phase.
+    By "amplitude" I mean "complex amplitude" which embeds both the real amplitude and the phase.
   */
 
   So if we were to ignore the oscillations and focus on the amplitude, we could define:
 
-                 +∞
-                 ⌠         dω
-      𝓐 (t)  =  | χ (ω)  -----    the complex amplitude of the spectrum 𝓕 (t).
-                 ⌡         2π
-                 -∞
+                +∞
+                ⌠        dω
+      A (t)  =  | χ (ω) ----    the complex amplitude of the spectrum  S (t).
+                ⌡        2π
+                -∞
 
-  Then, recalling statement [d], the real amplitude of 𝓐 (t) is simply |𝓐 (t)|.
-  The phase of the spectrum would be arg ( 𝓐 (t) ) but since the phase (in radians) is dependent on the angular frequency, the phase
-  of a full spectrum doesn't make much sense (pull a request if you disagree).
-  
-  We can thus define:  α (t)  =  exp (σt) * |𝓐 (t)|  the real amplitude of ƒ (t).
+  Then, recalling statement [d], the real amplitude of  A (t)  is simply  |A (t)| .
+  The phase of the spectrum would be  arg ( A (t) )  but since the phase (in radians) is dependent on the angular frequency, the phase
+  of a full spectrum doesn't make much sense (pull a request if you disagree).  
+
+  We can thus define:  α (t)  =  exp (σt) * |A (t)|  the real amplitude of ƒ (t).
 
   /*
-    Proof:        //  See #9 Bonus for a generalisation.
+    Proof:        //  See BONUS (at the end of this chapter) for a generalisation.
       Let a, x and y be purely real numbers.
       And  z  =  x + jy
       Then:  |z|  =  √(x² + y²)
       And:   az  =  ax + jay
-      Then:  |az|  =  √( (ax)² + (ay)² )  =  √( a²x² + a²y² )  =  √( a² * (x² + y²) )  =  √(a²) * √(x² + y²)  =  a * √(x² + y²)  =  a * |z|
+      Then:  |az|  =  √( (ax)² + (ay)² )  =  √( a²x² + a²y² )  =  √( a² (x² + y²) )  =  √(a²) √(x² + y²)  =  a √(x² + y²)  =  a |z|
   */
 
-  Notice that X (ω) is not a function of t. So, in Fourier's integral, the amplitude of each partial is constant over time.
-  So 𝓐 (t) is a sum of constants and therefore is itself constant over time.
-  Therefore same goes for |𝓐 (t)|.
-  Let's make it obvious by defining:  k  =  |𝓐 (t)|.
+  Notice that X (ω) is not a function of t. So, in Fourier's integral, the amplitude of each partial is constant over time --
+  -- more rigorously: we integrate with respect to frequency at one frozen value of time.
+  So  A (t)  is a sum of constants and therefore is itself constant over time.
+  Therefore same goes for |A (t)|.
+  Let's make it obvious by defining:  k  =  |A (t)|.
 
-  Then:  α (t)  =  k * exp (σt)
+  Then:  α (t)  =  k exp (σt)
 
   t is linearly growing (it's the affine function  y = x  or  y = ax + b  with  a = 1  and  b = 0).
   Since σ is constant, σt is also affine. So it's also linear. But whether it's growing, decaying or constant depends on the value of σ.
 
     case 1:
       σ = 0  ->  σt = 0  --  it's constant (more precisely: null)
-      then  exp (σt)  =  exp (0)  =  1    and    α (t)  =  |𝓐 (t)|    and    Laplace = Fourier  (grossly speaking... I mean writing)
+      then  exp (σt)  =  exp (0)  =  1    and    α (t)  =  |A (t)|    and    Laplace = Fourier  (grossly speaking... I mean writing)
     case 2:
       σ < 0  ->  σt inherits the sign inversion and becomes linearly decaying over time.
       then  exp (σt) is exponentially decaying over time.
@@ -1040,18 +878,17 @@
 
   So if we reunite s this means that, in its Laplace representation, a signal has an exponentially growing amplitude when Re (s) > 0;
   an exponentially decaying amplitude when Re (s) < 0; and a constant amplitude when Re (s) = 0.
-    
-  https://www.desmos.com/calculator/cknw6utsjy
+
+  [Sigma]  https://www.desmos.com/calculator/h8zpw4fkp5
 
   Another way to come to the same conclusion would have been to consider one (complex) partial in isolation:
 
-   F (s) * exp (st)       F (s)
-  ------------------  =  ------- * exp (σt) * exp (jωt)
-          2πj              2πj
+   F (s) exp (st)       F (s)
+  ----------------  =  ------- exp (σt) exp (jωt)
+         2πj             2πj
 
-  exp (jωt) is a periodic attenuator, F (s) / 2πj is a constant, t is linearly growing, then case 1, case 2, case 3 etc.
+  exp (jωt) is a periodic 2-dimension attenuator, F (s) / 2πj is a constant, t is linearly growing, then case 1, case 2, case 3 etc.
   Since σ is constant over time and across all partials, cases 1, 2 and 3 will apply to all partials.
-
 
   Why did I ask?
   Genuine curiosity unrelated to anything practical. (We'll see about that...)
@@ -1064,6 +901,7 @@
       These transforms' functions are usually represented quite freely.
       Sometimes ℒ {f} (s) represents the Laplace transform and ℒ^-1 {F} (t) its inverse.
       Sometimes Fourier gets:
+
                  F                            F T             //  T for Transform I guess.
         f (t)  <--->  f (ω)    or    f (t)  <----->  f (ω)
 
@@ -1073,14 +911,805 @@
         s  =  σ + jω    //  s for Laplace, ω for Fourier -- this is where the actual consensus lies.
   */
 
+  This is where this chapter originally ended.
+  I've removed a confusing and sometimes even erroneous section and replaced it with what follows.
+  It didn't exist when I wrote Chapters II and III.
+  So if you're eager to move on to an actual circuit or afraid to get overloaded with more trigonometric Calculus,
+  jumping straight to Chapter II won't hurt. (Maybe come back later...)
+  The more comfortable we get with sinusoids and integration, the easier everything filter-related gets.
+  So finishing the chapter won't hurt either.
+
+  Your call.
+
 
 
 ===============================================================================================
-#8  Appendix: Greek alphabet
+#07  Ewige Wiederkunft
 ===============================================================================================
+
+  I had to heavily edit this section because I had the (regular -- not inverse) Fourier transform wrong.
+  Mainly because I erroneously thought that integration (a pseudo-constant sum) could output an average value.
+  I've searched the internet about Fourier, and it looks like a common confusion.
+  Let's fix that.
+                               b
+                              ⌠
+    What does:        int  =  | ƒ (x) dx        actually mean?
+                              ⌡
+                               a
+
+  Let's say we're in a Cartesian plane, with x on the horizontal axis and ƒ (x) on the vertical one.
+  The range is [a , b] -- a and b are values of x: the first and the last values x will take during the integration.
+  So the integration horizontally spans from a to b. So:
+
+   span  =  b - a
+
+  Now what is the differential (dx)?
+  It's also a value of x: the constant increment in x, a horizontal segment stacked by the integration over all it previous selves up to x = b
+  So  ƒ (x) dx  is the area of a rectangle with two horizontal sides dx and two vertical sides ƒ (x).
+  (Which is why integration is used to compute the area under curves -- special areas that can be negative.)
+  ƒ (x) dx  is also stacked like dx, except in 2-D.
+
+  How many slices do we stack? It depends on how many times you can fit dx inside span. Let's call this number of slices nb.
+  Then:
+                          b - a
+    nb  =  span / dx  =  -------    <=>    dx  =  span / nb    <=>    span  =  nb dx
+                           dx
+
+  Then, what's an average value?
+  Usually: an arithmetic mean.
+  E.g.:  2, 3, 5 and 7  --  four values (that's our nb).
+  Add all values together and divide by nb:
+
+   sum  =  2 + 3 + 5 + 7
+
+                         2 + 3 + 5 + 7
+   avg  =  sum / nb  =  ---------------  =  17 / 4  =  16/4 + 1/4  =  4.25  
+                               4
+
+  Now what would sum be in our integral?
+
+    sum  =  ƒ (a)  +  ƒ (a + dx)  +  ƒ (a + 2 dx)  +  ...  +  ƒ (b - dx)  +  ƒ (b)
+
+  The only difference with the integral is that we don't multiply each term by dx.
+  Instead of stacking rectangles, we're stacking vertical segments.
+  So:
+
+    int  =  sum dx    <=>    sum  =  int / dx
+
+  Then:
+                                       int / dx
+    avg  =  sum / nb    =>    avg  =  -----------  =  int / span
+                                       span / dx
+
+  So an integral is not averaging, but it provides all the terms required to average:
+
+                     b
+               1    ⌠
+    avg  =  ------- | ƒ (x) dx
+             b - a  ⌡
+                     a
+
+  Now what if  ƒ (x)  is a constant? -- Let's say  ƒ (x)  =  1 , a = 0, and b = 5.
+  Then:
+             5          //                          5 - 0
+            ⌠           //    nb  =  span / dx  =  -------    <=>    nb dx  =  5
+    int  =  | dx        //                           dx
+            ⌡           //
+             0          //  So, no matter the values of nb and dx, their product is always 5.
+
+  If  dx = 0.01 , then  nb  =  5 / 0.01  =  5 * 100  =  500.
+  Then we'll add dx 500 times to itself and get:
+
+    int  =  500 dx  =  500 * 0.01  =  5  =  span
+
+  (In fact, if you don't mind heresy, dx being constant, it could be factored out of the integral.)
+  Now let's say  ƒ (x)  =  k  where k is some constant.
+
+             b            b                                   //  This is *important*.
+            ⌠            ⌠                                    //  It's what I got wrong and why I re-wrote this section.
+    int  =  | k dx  =  k | dx  =  k span  =  k (b - a)        //
+            ⌡            ⌡                                    //  Integrating a constant doesn't output the constant,
+             a            a                                   //  it multiplies it by the integration span.
+
+  If we want k:    int  =  k span    <=>    k  =  int / span    //  in our example:  k  =  int / (b - a)
+  /*
+    Geometrical approach:
+    Remember how each step of the integral is the area of an infinitesimal rectangle of area  ƒ (x) dx.
+    If we remove  ƒ (x)  and only keep dx, then the rectangles loose their vertical sides and become horizontal segments.
+    Then the whole integral becomes a segment of length  span  =  b - a .
+    We add dx to itself nb times.
+    So:  int  =  dx nb  =  dx span / dx  =  span  =  b - a .
+  */
+
+  [Calculus 101]  https://www.desmos.com/calculator/8cnsrnpc7i
+
+  //  Sinusoids
+  Sinusoids have a modulus (period) of 2π -- their curve is a unique motif repeated identically ad infinitum.
+
+  Sine starts at zero; it rises up to 1 between zero and π/2; then it falls down to zero between π/2 and π.
+  This is the first half-period, it has a vertical axis of symmetry at π/2.
+  So the area under the curve, during this half-period, is split in two equal halves by this axis.
+  So the areas under the curve of the two first quarter-periods are equal to each other.
+  Then the second half-period is identical to the first one, except mirrored across the abscissa (horizontal) axis.
+  So the two last quarter-periods are also symmetrical, and also have equal area under the curve;
+  and the full period has a center of symmetry at (0 , π) -- and the two half-periods have complementary areas under the curve.
+  So the area under the curve of each full period cancels out to zero.
+  Which means that integrating sine over a full period outputs zero.
+
+  Cosine starts at one, falls down to to zero (π/2), then to minus one (π), then rises up to zero (3π/2), then back to one (2π).
+  So it has an axis of symmetry at the middle of its full period and a center of symmetry at the middle of each half-period.
+  So the areas under the curve of the two first quarter-periods cancel out to zero -- idem for the two last quarter-periods.
+  So the area under the curve of a full period adds zero to zero.
+  Which means that integrating cosine over a full period outputs zero.
+
+  Complex sinusoids in the form:  exp (jx)  have a magnitude (absolute value) of 1 and an argument of x.
+  So, in the complex plane, they run along the unit-circle at a constant angular speed.
+  When  x = π  the argument is half a circle.
+  The half-circle is above the real axis.
+  Each quarter is on one side of the imaginary axis, so the real area cancels out, and the imaginary area is strictly positive.
+  When  x = 2π  the argument is a full circle.
+  The second half-circle is below the real axis and also split inthe middle by the imaginary axis.
+  So the last two quarter-circles also cancel the real area.
+  The two half-circles have the same absolute imaginary area, but the first one is positive and the second one is negative;
+  so integrating the full circle outputs zero.
+  Complex sinusoids reset at 2π -- they have the same modulus (period) as real sinusoids.
+
+  Sine has a specificity: between zero and π, it's positive; between zero and -π, it's negative.
+  So its full infinite curve has a center of symmetry at the origin of the Cartesian plane.
+  Which means that its right semi-plane and its left semi-plane are complementary.
+  So integrating sine from  -k  to  +k  (where k is any real positive number) will always output zero.
+  Therefore, integrating a complex sinusoid from  -k  to  +k  (i.e. in both directions) will always output a real number.  
+
+  [Integrating sinusoids]  https://www.desmos.com/calculator/d48phf8pfv
+
+  In fact, cosine also has a symmetry -- except axial: the ordinate (vertical) axis cuts its bi-directional infinite range in half.
+  Their respective symmetries can be expressed as such:
+
+    cos (-x)  =  cos (x)        &&        sin (-x)  =  - sin (x)
+
+  or: cosine is an *even* function; sine is an *odd* function.
+  https://en.wikipedia.org/wiki/Even_and_odd_functions
+
+  //  Back to Fourier!
+
+  What if we want to retrieve the complex amplitude of a partial?
+  Let's start with a simple case: the spectrum is only one complex sinusoid, and its amplitude and phase are constant:
+
+    ƒ (t)  =  X (ω) exp (jωt)    <=>    X (ω)  =  ƒ (t) / exp (jωt)  =  ƒ (t) exp (-jωt)
+
+  Let's expand Euler's formula and see what it means in terms of cosine and sine:
+
+    exp (jωτ) exp (-jωt)  =  ( cos (ωt)  +  j sin (ωt) ) ( cos (ωt)  -  j sin (ωt) )
+
+                          =  cos² (ωt)  -  j cos (ωt) sin (ωt)  +  j cos (ωt) sin (ωt)   -  j² sin² (ωt)  =  cos² (ωt)  +  sin² (ωt)
+
+  (Remember Pythagoras:  opposite² + adjacent²  =  hypotenuse²    <=>    cos² + sin²  =  1 )
+
+     exp (jωτ) exp (-jωt)  =  1        //  ok.
+
+  /*
+    This, by the way, is a special case of:
+      z conj (z)  =  ( Re (z)  +  j Im (z) ) ( Re (z)  -  j Im (z) )  =  Re (z)²  -  j Re (z) Im (z)  +  j Re (z) Im (z)  +  Im (z)²
+                  =  Re (z)²  +  Im (z)²  =  |z|²
+  */
+
+  Now let's assume that our spectrum contains several partials in a harmonic relationship, all constant over time in amplitude and phase.
+  Harmonic means that their frequencies are related by integer factors:
+
+                N                                       //  where ω0 is the fundamental frequency in rad./s,
+    ƒ (t)   =   ∑ α [n] cos ( n ω0 t  +  φ [n] )        //  N is the number of harmonics, N - 1 is the number of overtones,
+              n = 1                                     //  α [n] are the real amplitudes, φ [n] are the phases.
+
+  ω0 is an angular frequency in radians per second. Its value in Hertz is   f0  =  ω0 / 2π .
+  Its corresponding period is  T0  =  1 / f0  =  2π / ω0.
+  Each partial has an angular frequency  n ω0 , which, in Hertz gives:  f_n  =  n ω0 / 2π  and a period:  T_n  =  2π / (n ω0) .
+  If we integrate  ƒ (t)  with respect to t over the range [0 , T], the fundamental will have reached a full cycle and its positive and negative half
+  will cancel out.
+  If we integrate over a time window that is an integer multiple of T (say μT, where μ is a strictly postive integer), the fundamental will have reached
+  μ full cycles and cancel out as well.
+  Since T is an integer multiple of T_n, all overtones will also cancel out.
+  /*
+    Let's check:
+
+      α [n] cos ( n ω0 t  +  φ [n] )  =  α [n] cos ( n ω0 (t - t0) )
+
+    at  t = μT :
+                                                    /      /   2 π          \ \
+      α [n] cos ( n ω0 (μT - t0_n) )  =  α [n] cos ( n ω0 ( μ -----  -  t0_n ) )  =  α [n] cos ( n μ 2π  -  n ω0 t0_n )
+                                                     \     \    ω           / /
+
+    n and μ are integers, so:  n μ 2π  mod 2π  =  0 , so:
+
+      α [n] cos ( n ω0 t  +  φ [n] )  =  α [n] cos (- n ω0 t0_n)  =  α [n] cos (φ [n])
+
+    Now, at  t = 0 :
+
+      α [n] cos ( n ω0 (0 - t0_n) )  =  α [n] cos ( 0  -  n ω0 t0_n )  =  α [n] cos (- n ω0 t0_n)  =  α [n] (φ [n])
+
+    Ok.
+  */
+  So integrating  ƒ (t)  during an integer multiple of T will always output zero -- even when N tends to infinity:
+
+             μT             μT
+            ⌠              ⌠   N
+    int  =  | ƒ (t) dt  =  |   ∑ α [n] cos ( n ω0 t  +  φ [n] ) dt  =  0
+            ⌡              ⌡ n = 1
+             0              0
+
+  Now let's say we want to find α [κ] (where  1 ≤ κ ≤ N  is a positive integer).
+
+  We can seek inspiration in what we did a few lines ago for  X (ω) : multiply  int  with  exp (-j κ ω0 t) .
+  We've just found that every other partial will cancel out, so let's isolate  α [κ] cos ( κ ω0 t  +  φ [κ] ) :
+
+                                                              exp { +j (κ ω0 t  +  φ [κ]) }  +  exp { -j (κ ω0 t  +  φ [κ]) }
+    α [κ] cos ( κ ω0 t  +  φ [κ] ) exp (-j κ ω0 t)  =  α [κ] ----------------------------------------------------------------- exp (-j κ ω0 t)
+                                                                                            2
+
+              exp { +j κ ω0 t  +  j φ [κ]  -  j κ ω0 t }             exp { -j κ ω0 t  +  j φ [κ]  -  j κ ω0 t }
+    =  α [κ] --------------------------------------------  +  α [κ] --------------------------------------------
+                                  2                                                     2
+
+        α [κ]                     α [κ]                                      //
+    =  ------- exp (j φ [κ])  +  ------- exp (j φ [κ]  -  2 j κ ω0 t)        //  Let's clean up the right-most term in isolation first.
+          2                         2                                        //
+
+    exp (j φ [κ]  -  2 j κ ω0 t)  =  cos (-2 κ ω0 t  +  φ [κ])  +  j sin (-2 κ ω0 t  +  φ [κ])
+
+    =  cos ( 2 κ ω0 (t - t0_κ) )  -  j sin ( 2 κ ω0 (t - t0_κ) )
+
+  2 κ  is an integer, so both sine and cosine will cancel out if we integrate over μΤ.
+  Perfect, what's left?
+
+   α [κ]                       //  A complex number in exponential form,
+  ------- exp (j φ [κ])        //  whose magnitude is  α [κ] / 2
+     2                         //  and whose argument is  φ [κ]
+
+  So:
+
+    μT0                                                         μT0                                                  μT0
+    ⌠   N                                                       ⌠  α [κ]                        α [κ]                ⌠
+    |   ∑ α [n] cos ( n ω0 t  +  φ [n] ) exp (-j κ ω0 t) dt  =  | ------- exp (j φ [κ]) dt  =  ------- exp (j φ [κ]) | dt
+    ⌡ n = 1                                                     ⌡    2                            2                  ⌡
+     0                                                           0                                                    0
+
+        α [κ]                                     α [κ]
+    =  ------- exp (j φ [κ]) ( μT  -  0 )  =  μT ------- exp (j φ [κ])
+          2                                         2
+
+  If we define:                            //    Then:
+                                           //
+                                           //                      μ T0
+               α [κ]                       //                  1   ⌠   N
+    X (κ)  =  ------- exp (j φ [κ])        //      X (κ)  =  ----- |   ∑ α [n] cos ( n ω0 t  +  φ [n] ) exp (-j κ ω0 t) dt
+                 2                         //                 μT0  ⌡ n = 1
+                                           //                       0
+
+  ( Then:  α [κ]  =  2 |X (κ)|    and:    φ [κ]  =  arg (X (κ)) )
+
+  Let's clean that up.
+  First: μ is undefined (apart from positive integer). What's the best value for it?
+  You might recognise:  avg  =  int / span  from earlier.
+  So our formula for  X (κ)  is an average.
+  At the end of a period T0, everything cancels out except the amplitude and phase we're extracting.
+  So it would seem that μ doesn't really matter -- because if  X (κ)  is constant, it's equal to its average value.
+  But if we drop this assumption, then we need a span as short as possible:  the smallest positive integer is 1.
+  So we can drop μ: if amplitude and phase are constant, no difference -- if not: better approximation.
+  Ok.
+
+  We start at zero... What does this zero mean?
+  It's not an absolute fixed point in time: it's just the beginning of T0.
+  So the fact that it looks like a referential is actually confusing, since our referential is actually T0.
+  We don't care where the integration starts or where it ends: as long as it lasts exactly T0.
+  The cleanest way to display T0 as the only differential, while preserving the integration span, is probably to split T0 in its middle.
+  So the range of integration becomes:  [-T0/2 , +T0/2].
+  Ok, minus and plus still imply a zero, but (1) we don't see it; and (2) our integration is now symmetrical around this zero --
+  -- which (as you undoubtedly remember) cancels any sine component -- which means any imaginary component...
+  /*
+    What we're building now is a hybrid form of the Fourier series.
+
+    https://en.wikipedia.org/wiki/Fourier_series#Amplitude-phase_form
+
+    Except we're mixing real and complex trigonometry -- which no one seems to do -- as if the equal sign in Euler's identity was somehow suspicious.
+
+    I stopped here to mention this because: Joseph Fourier derived this system of equations while studying the propagation of heat in a metal rod.
+    So everywhere we use time as a variable, Joseph had a one-dimensional space.
+    Since his experiment consisted in applying heat in the middle of the rod and studying the dissipation in both directions,
+    splitting T0 in half was actually the straightforward move from his perspective.
+  */
+
+  What else?
+  Our spectrum could very well have infinite harmonics. So N doesn't have to be undefined.
+  Let:    N  =  ∞ , then:
+
+                    +T0/2                                                          //
+                1   ⌠   ∞                                                          //    where  T_0  =  T0
+    X (κ)  =  ----- |   ∑ α [n] cos ( n ω0 t  +  φ [n] ) exp (-j κ ω0 t) dt        //  
+               T_0  ⌡ n = 1                                                        //    for the sake of symmetry (and OCDs).
+                    -T0/2                                                          //
+
+  [Fourier series]  https://www.desmos.com/calculator/zhamhdokfl
+
+  How much further can we push?
+  Really, we have two parameters left:  ω0  and T0  -- whose relationship is:
+
+    f0  =  1 / T0    |                  2π                    2π              1        ω0             T_0        2π
+                     |    =>    ω0  =  ----    <=>    T0  =  ----    <=>    -----  =  ----    <=>    -----  =  ------  =  π / ω0
+    ω0  =  2π f0     |                  T0                    ω0             T_0       2π              2        2 ω0
+
+  So, really, we have one parameter:  ω0  -- the fundamental frequency -- or the lowest frequency in the spectrum.
+  Or: since each partial's frequency is an integer multiple of ω0, add it to one partial's frequency, you get the next partial's frequency;
+  so, in the frequency domain, ω0 is the distance between any two partials:
+  let  p [n]  and  p [n+1]  be two consecutive partials in our spectrum, and let  ω [n]  and  ω [n+1]  be their respective frequencies.
+  Then:
+
+    #  p [n]  =  cos ( ω [n] t  +  φ [n] )  =  cos ( n ω0 t  +  φ [n] )
+
+    #  p [n+1]  =  cos ( ω [n+1] t  +  φ [n+1] )  =  cos ( (n + 1) ω0 t  +  φ [n+1] )
+
+    =>    ω [n+1]  -  ω [n]  =  (n + 1) ω0  -  n ω0  =  n ω0  +  ω0  -  n ω0  =  ω0
+
+  So it's the difference between consecutive frequencies -- so, basically a non-infinitesimal differential.
+  Its limit values are:
+
+    (1)  ∞  -->  our spectrum is infinitely ultrasonic and its partials are infinitely apart;
+
+    (2)  0 (DC)  -->  our spectrum's fundamental is a constant and its partials are infinitely close to each other.
+
+  Case (1) is pretty much the answer to "what's the most useless mathematical model of which an engineer can think?"...
+  Case (2) is a non-harmonic signal with a continuous spectrum. That's interesting.
+  Discrete vs. continuous doesn't have to be a dichotomy: continuous is a limit-case of discrete.
+  Then, instead of non-infinitesimal differential, ω0 is a non-necessarily-infinitesimal differential.
+  In syllogistic, when reversing propositions, necessity becomes contingency, which, in a deterministic universe, is indistinguishable from potentiality.
+  So ω0 is a potentially infinitesimal differential.
+  Choose your favourite adjective (your favourite accident), it's *essentially* (in the most rigorously literal meaning) -- a differential.
+  Let's rename stuff:
+
+    ω0    <--    dω        ||        n ω0    <--    n dω  =  ω        ||        α [n]    <--    α (ω)        ||        φ [n]    <--    φ (ω)
+
+    κ ω0    <--    κ dω  =  ω_p        ||        X (κ)    <--    X (ω_p)        ||        α [κ]    <--    α (ω_p)        ||        φ [κ]    <--    φ (ω_p)
+
+  Then:
+                                             1        dω
+    ± T0 / 2  =  ± π / dω        &&        -----  =  ----
+                                            T_0       2π
+
+  //  Integrals vs. Sums
+  The symbols: ∫ and ∑ are, respectively, a long s and a capital sigma (Greek s).
+  The long s a weird West-European 18th-century fashion that didn't last very long but, since fate seems to have a shitty sense of humour,
+  it still had time to pollute the full age of enlightenment -- because, of course: our friend Gottfried (Leibniz) fancied it...
+
+  Both symbols are basically a big S -- the first letter of the Latin "summa" :    https://en.wiktionary.org/wiki/summa#Latin
+  which gave the English "sum"  (and means exactly that in the context of mathematics).
+  Because they describe the exact same thing: a repeated sum, addition in a loop.
+
+  So:           +π/dω                                                                 //
+                ⌠    /  +∞                               \                            //  Ok, this can look vertiginous.
+                |   /  ⌠                              dω  \                           //  But we haven't modified anything
+    X (ω_p)  =  |  (   | α (ω) cos ( ω t  +  φ (ω) ) ----  ) exp (-j ω_p t) dt        //  except for the variables' names.
+                |   \  ⌡                              2π  /                           //
+                ⌡    \  dω                               /                            //  The terms inside parenthesis are 
+                -π/dω                                                                 //  the updated expression of  ƒ (t) , the full spectrum.
+
+  Can our spectrum have a constant partial?
+  Let's define:
+
+    ω_dc  =  0        and        p_dc  =  α (0) cos ( ω_dc (t - t0) )    (the constant partial)
+
+  We get:
+                   
+   p_dc  =  α (0) cos (0)  =  α (0)
+
+  Then:
+
+    p_dc exp (-j ω_p t)  =  α (0) exp (-j ω_p t)  =  α (0) cos (-ω_p t)  +  j α (0) sin (-ω_p t)  =  α (0) cos (ω_p t)  -  j α (0) sin (ω_p t)
+
+  Since ω_p is an integer multiple of dω, this will cancel to zero when we integrate over time.
+  Now can we use the formula to get  α (0) ?
+
+    p_dc exp (-j ω_dc t)  =  p_dc exp (0)  =  p_dc  =  α (0)
+                                                               π  -  -π       2π
+  Then if we integrate from  -π/dω  to  +π/dω , the span is:  ----------  =  ----
+                                                                  dω          dω
+  So:
+
+    +π/dω
+    ⌠                              dω                       dω         2π
+    | α (0) cos ( ω_dc (t - t0) ) ---- exp (-j ω_dc t)  =  ---- α (0) ----  =  α (0)  =  Χ (ω_dc)  or  X (0)
+    ⌡                              2π                       2π         dω
+    -π/dω
+
+  If it's constant over time, we get the exact value, if not we get the average value over the window of temporal integration.
+  Perfect: we can start the frequency integration at zero.
+  The uncertainty about the DC partial is what prevented us from using a bilateral complex integral.
+  Now, we just have to check what happens to negative-frequency partials once multiplied with our normalising sinusoid:
+
+                                                          exp ( j ω t  +  j φ (ω) )  +  exp ( -j ω t  -  j φ (ω) )
+    α (ω) cos ( ω t  +  φ (ω) ) exp (-j ω_p t)  =  α (ω) ---------------------------------------------------------- exp (-j ω_p t)
+                                                                                      2
+        α (ω)                                             α (ω)
+    =  ------- exp ( j ω t  +  j φ (ω)  -  j ω_p t )  +  ------- exp ( -j ω t  -  j φ (ω)  -  j ω_p t )
+          2                                                 2
+
+        α (ω)                                             α (ω)
+    =  ------- exp ( j φ (ω) ) exp ( j (ω - ω_p) t )  +  ------- exp ( -j φ (ω) ) exp ( -j (ω + ω_p) t )
+          2                                                 2
+
+  The frequencies become:  ω - ω_p  and  -ω - ω_p .
+  All these terms are integer multiples of dω, so their partials will all cancel to zero once we integrate over time --
+  -- except if  ω = ω_p  -- then the negative frequency doubles (still integer multiple, alles gut); and the positive one becomes zero.
+  Only  X (ω_p)  is left.
+  /*
+    Notice (or remember) that the negative-frequency part of cosine has an opposite phase -- cosine is the sum of a complex conjugate pair.
+    This explains why it's real:
+
+      z  +  conj (z)  =  Re (z)  +  j  Im (z)  +  Re (z)  -  j Im (z)  =  2 Re (z)
+
+    So if we want to split our cosine and go bilateral, we need to address this matter.
+    We'll need the signum (or sign) function:        https://en.wikipedia.org/wiki/Sign_function
+
+      sgn (x)  =  { x == 0  ?  0  :  x / |x| }
+
+    that is:  zero if x is null, -1 if it's negative, +1 if it's positive.
+    Then, since:
+
+      x  ≥  0    <=>    |x|  =  x        &&        x  <  0    <=>    |x|  =  -x
+
+    if we substitute:
+
+      φ (ω)    <--    φ (|ω|) sgn (ω)
+
+    we get:
+
+      ω  >  0    =>    j ω t  +  φ (|ω|) sgn (ω)  =  j ω t  +  φ (ω)
+
+    and:
+
+      ω  <  0    =>    j ω t  +  φ (|ω|) sgn (ω)  =  j ω t  -  φ (-ω)
+
+    and:
+
+      ω  =  0    =>    j ω t  +  φ (|ω|) sgn (ω)  =  0
+
+    Finally:    α (-ω)  =  α (ω) , so we can use  α (|ω|)  for both the positive and negative component.
+    Perfect.
+  */
+  Go.           +π/dω
+                ⌠    /  +∞                                                             \
+                |   /  ⌠  α (|ω|)                                                   dω  \
+    X (ω_p)  =  |  (   | --------- exp ( j φ (|ω|) sgn (ω) ) exp ( j (ω - ω_p) t ) ----  ) dt
+                |   \  ⌡     2                                                      2π  /
+                ⌡    \  -∞                                                             /
+                -π/dω
+
+  Meet the Fourier transform (not inverse this time).
+  You probably won't encounter this way of expressing it elsewhere, but we've built it together: you know it's valid.
+  (Shall I dare call it the Working-class Fourier transform?)
+  It doesn't have one single consensual expression because the division by 2π (being a constant) can be placed anywhere.
+  We've left it inside the inverse transform ( ƒ (t) , everything inside parenthesis ), that's one possibility;
+  we'll leave it exactly that way to leave a trace of the original T0 visible.
+  It's often left with the inverse transform but moved outside of its integral.
+  It can be transferred to the (not inverse) transform, or split in half:
+
+      1          1         1           //
+    -----  =  ------- * -------        //  and equally shared by each transform (inverse and not inverse)
+     2 π       √(2π)     √(2π)         //
+
+  for the sake of symmetry.
+  (I get the appeal: if your whole ecosystem is symmetrical, you only have to process half of it.
+  Obsessing over palindromes can nourish art -- ask Anton Webern; or even sociology -- ask Guy Debord.)
+
+  Of course, no one bothers with absolute values and the sgn function: the phase is quitely assumed automatically reversed.
+  In fact, you rarely encounter both integrals together like this:  X (ω_p)  integrates  ƒ (t) exp (-j ω_p t) over time,
+  and  ƒ (t)  integrates  X (ω_p)  over frequency --  α (ω)  and  φ (ω)  being embedded in  X (ω_p) .
+
+  Finally, since  π/dω  tends to infinity when dω tends to zero (which it should, by definition of "infinitesimal"),
+  the range of the temporal integration is classically simplfied as  [-∞ , +∞]  -- which gives a beautiful symmetry to the nested integrals,
+  but erases the record of how we got there (by stretching the Fourier series).
+  Plus, free usage of the differential as a regular number is highly non-conventional -- that's where we diverge the most.
+
+
+
+===============================================================================================
+#08  ἀρχαί
+===============================================================================================
+
+  Let's go full-on first principles.
+
+  //  Change
+  Let  ƒ (x)  be some function of some variable x; and a and b be any values of x (they can be equal if they will).
+  Let's agree to stick to the largest set of numbers we need: complex numbers (which includes real numbers, positive integers, etc.).
+
+  When x evolves from a to b (I didn't write "increase" because it could very well be a decrease or a stagnation) --
+  --  it goes from  x = a  to  x = b .
+  Since:    b  =  b + a - a  =  a  +  (b - a) ,
+  going from a to b is adding  (b - a)  to a.
+  Then  (b - a)  is the change of x between a and b. Let's call it dx.
+  Then:
+
+    b  =  a + dx
+
+  So:    ƒ (b)  =  ƒ (a + dx)
+  Which means that, when x changes from a to b,  ƒ (x)  changes from  ƒ (a)  to  ƒ (b)  =  ƒ (a + dx) .
+  The difference between  ƒ (b)  and  ƒ (a)  is:
+
+    ƒ (b)  -  ƒ (a)  =  ƒ (a + dx)  -  ƒ (a)
+
+  That's the change of  ƒ (x)  when x goes from a to b. Let's call it dƒ.
+
+  Since a and b can be anything, we could decide that:    a = x .
+  Then dx would express the change of x for any value of x;
+  and  ƒ (x + dx)  -  ƒ (x)  would be the corresponding change of  ƒ (x) .
+
+  //  Rate
+  The latin verb "reor, reri", whose past participle is "ratus, -a, -um", means "to reckon, to compute, to think, to judge, ..." --
+  -- basically "to use a brain".
+  It gave "ratio": "reason" (sometimes loosely confused with "cause"), which passed to English and German with the meaning of "arithmetical division".
+  Reor (or rather its participle ratus, -a, -um) also gave "rate" which describes a proportional relationship between two things.
+
+  E.g.:  if there are 1,000,000 flat-earthers amongst 8,000,000,000 Earthers:
+
+       1,000,000           1
+    ---------------  =  -------  =  1 / 8 E-3  =  0.125 * 0.001  =  0.000125    is the rate of flat-earthers.
+     8,000,000,000       8,000
+
+  Times 100 gives you a percentage:  0.0125 % .
+
+  Or, if you've walked 1 km in ten minutes:
+
+     1,000
+    -------  =  10/6  =  1 + 2/3 m/s  is your average walking rate.
+      600
+
+  (A frequency -- cycles or radians per second -- is therefore a rate.)
+
+  //  Rate of change
+  If we want to know how much  ƒ (x)  changes in proportion of a corresponding change in x,
+  we'll get:
+
+     dƒ       ƒ (x + dx)  -  ƒ (x)         //  The ratio of changes, commonly referred to as
+    ----  =  ----------------------        //  rate of change
+     dx               dx                   //  or first derivative.
+
+  Except that this formula implies that  dƒ/dx  is constant:
+
+     dƒ                   ƒ (x + dx)  -  ƒ (x)
+    ----  =  k    <=>    ----------------------  =  k    <=>    ƒ (x + dx)  =  k dx  +  ƒ (x)
+     dx                            dx
+
+  If we know the initial value:
+
+    ƒ (0)  =  c    =>    ƒ (0 + dx)  =  k dx  +  ƒ (0)  =  k dx  +  c
+
+  Since dx can be anything, we've just found the generic expression of functions with a constant rate of change:
+
+    ƒ (x)  =  k x  +  ƒ (0)        where k is constant (notice that nothing prevents any one of the terms to be zero).
+
+  These functions are called linear because they're the equations of straight lines.
+  If k is non-zero, a linear function is called affine. Both terms are very frequently used interchangeably.
+  Although, if k and c are null,  ƒ (x)  =  0  is a straight line (the abscissa axis), yet the function is not affine per se.
+  (We'll properly deal with this terminology when discussing polynomials in Chapter V "Poles and zeroes".)
+
+  //  Calculus
+  The big idea of Calculus is to pick two points on a non-linear function, assume it's linear between these two points,
+  repeat at fixed horizontal intervals to get an approximation; then reduce the interval as much as possible to get a more precise approximation;
+  the ultimate limit being zero.
+  But dividing by dx when dx equals zero won't help, so we explicitly express it as a limit.
+
+  (We're sticking to Riemann integrals for now, so continuity is a requirement of integration until further notice -- real numbers as well.)
+  https://en.wikipedia.org/wiki/Riemann_integral
+  https://en.wikipedia.org/wiki/Bernhard_Riemann
+
+  When I write "assume it's linear between these two points", "linear" could have two meanings: constant or affine.
+  Affine leads to trapezoidal integration (which will have to wait for Chapter VII "Ones and zeroes").
+  Constant means we build our functions with successive flat steps in a staircase fashion (which is the Leibnizian standard).
+  E.g.:
+                                               1          1                 x - x - dx                   dx
+                                            --------  -  ---              -------------              -  ----
+               1            dƒ               x + dx       x                x²  +  x dx                   dx                       -1
+    ƒ (x)  =  ---    =>    ----  =   lim   ------------------  =   lim   ---------------  =   lim   -------------  =   lim   -------------
+               x            dx     dx -> 0         dx            dx -> 0        dx          dx -> 0  x²  +  x dx     dx -> 0  x²  +  x dx
+
+  As dx tends to zero, so does  x dx , so  x²  +  x dx  tends to x², so:    dƒ/dx  =  -1/x² .
+  This rate of change is always negative (if x is real) so the function is always decaying.
+  /*
+    Look at that: the function has a discontinuity at zero, its rate of change is symmetrical around it...
+    If the curve is your referential (meaning you travel on it and see everything else moving) --
+    you'll jump from minus infinity to plus infinity without noticing: your acceleration will remain smoothly continuous.
+    (You may experience an infinitesimal blackout... but maybe it just happened, how would you know?)
+    As if real numbers were on a circumference where minus infinity and plus infinity were the same point.
+    Pretty much like if you're on a moon of a moon of a moon of a moon of a planet of a star, and look at the sky,
+    everything revolves around you -- short-sighted referentials make the marvellous trivial.
+  */
+
+  Now what if:
+
+           b                     //    4 cases:
+          ⌠                      //      (1)  a and b are constant: X is constant and its rate of change is null;
+    X  =  | ƒ (x) dx    ?        //      (2)  a is constant, b is not: X is a function of b and should be written  X (b) ;
+          ⌡                      //      (3)  b is constant, a is not: X is a function of a and should be written  X (a) ;
+          a                      //      (4)  a and b are varying: X is a function of both and should be written  X (a , b).
+
+  Let's go with case (2):                           b + db         b
+                                                   ⌠              ⌠
+                                                   | ƒ (x) dx  -  | ƒ (x) dx
+               b                                   ⌡              ⌡                        b + db           b                b
+              ⌠                    dX               a              a                      ⌠        dx      ⌠        dx      ⌠        dx
+    X (b)  =  | ƒ (x) dx    =>    ----  =   lim   ---------------------------  =   lim    | ƒ (x) ----  +  | ƒ (x) ----  -  | ƒ (x) ----
+              ⌡                    dB     db -> 0             db                 db -> 0  ⌡        db      ⌡        db      ⌡        db
+               a                                                                           b                b                b
+
+                     b + db             //    
+     dX             ⌠        dx         //    I can think of three paths by which we can go frome here.
+    ----  =   lim   | ƒ (x) ----        //    
+     db     db -> 0 ⌡        db         //    Let's rty all three.
+                     b                  //
+
+  //  First path (the Clean):
+  We're dividing the integral by:  db  =  b + db - b  =  span.
+  So we're computing the average of all the values between  ƒ (b)  and  ƒ (b + db) .
+  As db tends to zero,  b + db  tends to b, and  ƒ (b + db)  tends to  ƒ (b) .
+  So the limit case is the average value of a constant, ergo:
+
+    dX/db  =  ƒ (b)
+
+  //  Second path (the Unorthodox):
+
+                     b + db             //    Induction time!
+     dX             ⌠        dx         //    3 possibilities:
+    ----  =   lim   | ƒ (x) ----        //      (1)  db < dx
+     db     db -> 0 ⌡        db         //      (2)  db > dx
+                     b                  //      (3)  db = dx
+
+  Possibility (1):  db < dx
+  Then:  b + dx  >  b + db .
+  The integral exceeds its prescribed range. Possibility (1) wasn't a possibility.
+
+  Possibility (2):  db > dx
+  Then db could be smaller.
+  The limit is not a limit. Possibility (2) wasn't a possibility.
+
+  Possibility (3):  db = dx
+  Then:  b + dx  =  b + db .
+  The integral has only one step:
+
+                     b + db
+     dX             ⌠        dx                         dx
+    ----  =   lim   | ƒ (x) ----  =   lim   ƒ (b + db) ----  =   lim   ƒ (b + db)  =  ƒ (b)
+     db     db -> 0 ⌡        db     db -> 0             db     db -> 0
+                     b              db = dx
+
+  /*
+    Why this is unorthodox: seeking two limits at once could be thought of as equivalent to implying that:  0/0 = 1 .
+    Which tends to hold for odd functions in Calculus, where limits and rates of change and limits of rates of change work around the aporia.
+    (Take  x/x  or  sin (x) / sin (x)  or whatever over the same whatever -- the curve is 1 everywhere and undefined when "whatever" is zero.
+    But since it's 1 before and after, the rate of change is zero everywhere, and as you tend to 0/0, no rate of change can make the ratio escape 1.
+    This, though, relies on a rather bold petitio principii: constant rational functions have no discontinuity...
+    A principle every one is free to reject or admit.
+    Even functions like  x/x²  break this tendency.)
+    Whereas, in algebra, 0/0 is always multi-valued (and therefore undefined):    x * 0  =  0    =>    0 / 0  =  x
+    i.e. literally anything -- pretty similarily to infinity.
+  */
+
+  //  Third path (the Clumsy)
+  Let's give possibility (1) a second chance.
+  We're looking at the limit of db. So let's assume everything else is fixed.
+  That is: dx is infinitesimal but not undefined nor literally zero.
+  Then the integral won't exeed its prescribed range: it will remain stuck at step zero:  ƒ (x)  =  ƒ (b)  --
+  -- because  b + dx  would exceed  b + db , it never happens.
+  So  ƒ (x)  =  ƒ (b)  everywhere inside the integral; so it's constant; so it can be extracted (factored out).
+  Then:
+                            b + db
+     dX              ƒ(b)  ⌠                  ƒ(b)                                 db
+    ----  =   lim   ------ | dx    =   lim   ------ (b + db - b)  =   lim   ƒ (b) ----  =  ƒ (b)
+     db     db -> 0   db   ⌡         db -> 0   db                   db -> 0        db
+                            b
+
+  */
+    Why clumsy? Because if you actually compute an integral with a null span, you're not stuck with the first value: you get zero.
+    Remember:  dx  =  span / nb  -- if span is zero, so is dx, then each step is multiplied by zero.
+    But there's zero step... or one step? (the zeroth one?)
+    The clumsy path fights hard against my intuition.
+    If it serves yours, good, go with it. If not, choose your favourite path and do not let the other two pollute your focus!
+    I personally prefer the Clean (as my biased nomenclature suggests), but actually came up with the Unorthodox first and derived the clumsy by trying
+    to fix it. The Clean arrived last...
+    The destination felt obvious, the path really wasn't.
+  */
+
+  Ok, so:  ƒ (x)  is the rate of change (or first derivative) of X (x).
+  So X (x) is an *atiderivative* of  ƒ (x) .
+
+  Finding the rate of change of a function is called differentiating.
+  We've just started to show how differentiation and integration are reciprocal operations.
+  This suggests that we could retrieve a function from its first derivative...
+  Spoiler: yes, but...
+  Is it enough?
+
+  //  E.g.
+
+    g (x)  =  x² - x - 1        &&        h (x)  =  x² - x + √(5)
+
+     dg              (x + dx)² - (x + dx) - 1 - x² + x + 1              x²  +  2 x dx  +  dx²  -  x  -  dx  -  1  -  x²  +  x  +  1
+    ----  =   lim   ---------------------------------------  =   lim   -------------------------------------------------------------
+     dx     dx -> 0                  dx                        dx -> 0                             dx
+
+                     2 x dx  +  dx²  -  dx              /     dx       dx²      dx \
+          =   lim   -----------------------  =   lim   ( 2 x ----  +  ----  -  ---- )  =  2 x  -  1  +   lim  dx  =  2 x  -  1
+            dx -> 0           dx               dx -> 0  \     dx       dx       dx /                    dx -> 0
+
+
+     dh              x²  +  2 x dx  +  dx²  -  x  -  dx  +  √(5)  -  x²  +  x  -  √(5)              /     dx       dx²      dx \
+    ----  =   lim   -------------------------------------------------------------------  =   lim   ( 2 x ----  +  ----  -  ---- )
+     dx     dx -> 0                                 dx                                     dx -> 0  \     dx       dx       dx /
+
+                            dg
+          =  2 x  -  1  =  ----
+                            dx
+
+  So if we're given the differential equation:    dƒ/dx  =  2 x  -  1 ,
+  the solution could be  g (x)  or  h (x) , or: replace the constant terms by what you like, it will never affect the rate of change.
+  So the differential equation has an infinity of solutions (an infinity of possible constant terms):
+
+    ƒ (x)  =  x² - x + k        //  where k can be any constant
+
+  But now say we know one value of  ƒ (x) :
+
+    ƒ (λ)  =  ε
+
+  Then:
+
+    λ² - λ + k  =  ε    <=>    k  =  ε - λ² + λ    =>    ƒ (x)  =  x² - x + (ε - λ² + λ)
+
+  If  λ = 0  then  k = ε .
+  So one value of a function and its rate of change (first derivative) are sufficient to retrieve its expression.
+  Knowing the value at zero is optimal -- but not required.
+  The known value is often referred to as "initial conditions", which could sound like a mandatory zero -- but nope.
+  /*
+    Lagrange's notation:
+
+        ƒ' (x)    <--    dƒ/dx
+
+        F' (x)  =  ƒ (x)  means that  F(x)  is the antiderivative of  ƒ (x)  with a constant term of zero,
+
+        then any antiderivative of  ƒ (x)  has the form:  F (x)  +  k  -- where k is any constant.
+
+    This notation is convenient, but also a tad confusing: in French (Lagrange's language) an antiderivative is called a "primitive".
+    So the symbol "prime" designates the antithesis of "primitive". Luckily this book tries its best no to speak French.
+    I'll be using a hybrid notation: Lagrange (big F) for reference-antiderivative (null constant term), Leibniz ( dƒ/dx ) for derivatives.
+
+    https://en.wikipedia.org/wiki/Notation_for_differentiation#Leibniz's_notation
+    https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange's_notation
+    https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange
+    https://archive.org/details/theoriedesfoncti00lagr/page/30/mode/2up
+  */
+
+  Ok, so how do we reconstruct a function from these two data?
+
+  [IN PROGRESS]
+
+
+
+===============================================================================================
+#09  Βίοι Παράλληλοι
+===============================================================================================
+
+  [IN PROGRESS]
+
+
+
+===============================================================================================
+#10  Jubilee
+===============================================================================================
+
+  [IN PROGRESS]
+
+
+
+-----------------------------------------------------------------------------------------------
 /*          "Speak in secret alphabets."                                                     */
 /*                                                  --  Jim Morrison (Soul Kitchen)          */
------------------------------------------------------------------------------------------------
+===============================================================================================
+APPENDIX:  Greek alphabet
+===============================================================================================
 
   //  https://en.wikipedia.org/wiki/Greek_alphabet
 
@@ -1140,7 +1769,7 @@
 
 
 ===============================================================================================
-#9  Bonus: Complex arithmetics
+BONUS:  Complex arithmetic
 ===============================================================================================
 
   Let z1 and z2 be complex numbers such that:
@@ -1309,15 +1938,3 @@
       ln (4)  =  ln ( 4 * exp (j * 0) )  =  ln (4 * 1)  =  ln (4)
 
     Good news: we didn't break anything.
-    Actually...
-
-      exp (j * 0)  =  cos (0 mod 2π)  +  j * sin (0 mod 2π)  =  exp ( j * (0 mod 2π) )
-
-    so:
-
-      ln (4)  =  ln ( 4 * exp (j * (0 mod 2π)) )  =  ln (4)  +  ln ( exp (0 mod 2πj) )  =  ln (4) mod 2πj
-
-    Logarithms have infinite solutions.
-    This last demonstration is only addressing 4. But the one for ζ a few lines earlier didn't define ζ.
-    So it's valid for any complex number (including ±4) -- except zero.
-    It actually makes sense: exp (jx) travels along the unit-circle, it has a modulus of 2π (like cosine and sine).
