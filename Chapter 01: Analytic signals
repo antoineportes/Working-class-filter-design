@@ -34,7 +34,7 @@
   A complex number is the sum of a real number and an imaginary number.
   It takes the form:
 
-    z  =  x  +  √(-1) * y                //  √(x) means "square root of x".
+    z  =  x  +  √(-1) * y        //  √(x) means "square root of x".
 
     where x is the real part of z:      Re (z)  =  x
     and y is the imaginary part of z:   Im (z)  =  y
@@ -156,7 +156,7 @@
   Solving [2] for cos (x) gives:
 
                  exp (j * x)  +  exp (-j * x)
-    cos (x)  =  ------------------------------    [3]
+    cos (x)  =  ------------------------------        [3]
                               2  
 
   Considering the identity:
@@ -183,7 +183,7 @@
 
   z1 and z2 form a complex conjugate pair.                          //  https://en.wikipedia.org/wiki/Complex_conjugate
   (Which means: they have equal real parts and opposite imaginary parts.)
-  So any real sinusoid (equation [3]) can be expressed as the sum of two complex conjugates.       [a]
+  So any real sinusoid (equation [3]) can be expressed as the sum of two complex conjugates.        [a]
   /*                                                                                             __
     Complex conjugates are usually denoted by a horizontal bar over the number's symbol:  z2  =  z1  means that z2 and z1 are conjugates.
     Sometimes also with an asterisk:  z2  =  z1*.
@@ -223,7 +223,7 @@
   Now in the special case:    θ  =  ω * t
   where t is the time (in seconds) and ω is an angular frequency (in radians per second), the exponential form:
   
-    ζ  =  α * exp (j * ω * t)       [4]
+    ζ  =  α * exp (j * ω * t)        [4]
   
   is what is called a COMPLEX SINUSOID -- sometimes a phasor.
   It is also called an analytic signal as it has optimal qualities in order to study a system's response to pure sinusoids.
@@ -239,32 +239,32 @@
 
       α  =  |α| * exp ( j * arg (α) )
 
-      then:
+    then:
 
-      ζ  =  |α| * exp ( j * arg (α) ) * exp (j * ω * t)  =  |α| * exp (  j * ( ω * t  +  arg (α) )  )    [4-bis]
+      ζ  =  |α| * exp ( j * arg (α) ) * exp (j * ω * t)  =  |α| * exp (  j * ( ω * t  +  arg (α) )  )        [4-bis]
   */
 
 
 
 ===============================================================================================
-#03  Amplitude, frequency & phase
+#03  Frequency, Amplitude and Phase
 ===============================================================================================  
 
   [Amplitude, frequency & phase]  https://www.desmos.com/calculator/hwpazzploq
 
   If t is the time (in seconds),  ƒ (t)  =  cos (t)  is a sinusoid of:
 
-    Amplitude    α  =  1
-    Period       T  =  2 * π  seconds
-    Frequency    f  =  1 / (2 * π)  Hz
-    Phase        φ  =  0  rad.
+    Amplitude:    α  =  1
+       Period:    T  =  2 * π  seconds
+    Frequency:    f  =  1 / (2 * π)  Hz
+        Phase:    φ  =  0  rad.
 
   That is,  ƒ (t)  oscillates from -1 to +1 through a repetitive pattern of length = 2 * π with an offset = 0.
 
   Notice that  ƒ (t)  =  α * cos (2 * π * f * t  +  φ)
-  Or, after defining the angular frequency  ω  =  2 * π * f  (rad. / s.):      //  https://en.wikipedia.org/wiki/Angular_frequency
+  Or, after defining the angular frequency  ω  =  2 * π * f  (rad. / s.):        //  https://en.wikipedia.org/wiki/Angular_frequency
 
-    ƒ (t)  =  α * cos (ω * t  +  φ)     [5]
+    ƒ (t)  =  α * cos (ω * t  +  φ)        [5]
 
   That is,  ƒ (t)  oscillates from -α to +α through a repetitive pattern of length = 1 / ω with an offset = φ.
 
@@ -286,7 +286,7 @@
     So if one convention simplifies the maths, why choose the other? Right?
 
     We're just about to call back Euler's formula. Choosing cosine avoids having j in the denominator.
-    I hope now it doesn't feel arbitrary anymore.
+    I hope now it doesn't feel arbitrary any more.
   */
 
   Using equation [3] to express ƒ (t) in terms of complex exponentials instead of raw trigonometry:
@@ -296,7 +296,7 @@
                2                                   2
 
                α * exp (j * φ)                            α * exp (j * -φ)
-    ƒ (t)  =  -----------------  * exp (j * ω * t)   +   ------------------  * exp (j * -ω * t)       [6]
+    ƒ (t)  =  -----------------  * exp (j * ω * t)   +   ------------------  * exp (j * -ω * t)        [6]
                      2                                           2
 
   Comparing this expression of ƒ (t) to equation [4] shows that a real sinusoid is the sum of two complex sinusoids, one of which
@@ -313,11 +313,11 @@
 
     ƒ (t)  =  X (s) * exp (s * t)        //  where s is a *pure imaginary* number! (Re (s) = 0)
 
-  can be considered the positive-frequency-component of a real sinusoid with:          [b]
+  can be considered the positive-frequency-component of a real sinusoid with:        [b]
 
-    Amplitude   α  =  2 * |X (s)|
-    Phase   φ  =  arg (X (s))
-    Frequency   ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
+    Amplitude:    α  =  2 * |X (s)|
+        Phase:    φ  =  arg (X (s))
+    Frequency:    ω  =  s / j  rad/s    or    f  =  s / (2 * π * j)  Hz
 
   /*
     X (s) is called the complex amplitude of ƒ (t). It embeds the real amplitude and the phase.
@@ -346,7 +346,7 @@
 
 
 ===============================================================================================
-#04  Fourier integral
+#04  Fourier's integral
 ===============================================================================================
 
   https://en.wikipedia.org/wiki/Fourier_transform
@@ -396,7 +396,7 @@
     https://en.wikipedia.org/wiki/Alternating_current
     https://en.wikipedia.org/wiki/Direct_current
 
-    In an analog circuit, the fact that  α * cos (ω * t  +  φ)  changes sign each half-period corresponds to the current changing direction,
+    In an analogue circuit, the fact that  α * cos (ω * t  +  φ)  changes sign each half-period corresponds to the current changing direction,
     as is normal with A.C. (alternating current).
     A direct current (D.C.) can be either positive or negative but its sign (polarity) doesn't change.
 
@@ -411,7 +411,7 @@
                          n = 1
 
       I find this concept quite intuitive: the frequency is the speed of the oscillations. When the speed is zero, there are no oscillations.
-      If there are no oscillations, there is no period. If there is no period there is no phase.       [c]
+      If there are no oscillations, there is no period. If there is no period there is no phase.        [c]
 
       A mathematical proof could be:  ω[n] = n * ω    then:
 
@@ -439,7 +439,7 @@
   In other words: ω has become a variable which can take any real positive value (n has become meaningless).
   In other words: the spectrum is no longer discrete, it's continuous. Which means that even if defined on a finite interval it will have infinite
   partials.
-  Well that's pretty much the definition of integration!       //  https://en.wikipedia.org/wiki/Integral
+  Well that's pretty much the definition of integration!        //  https://en.wikipedia.org/wiki/Integral
 
   One last thing: the angular frequency   ω  =  2 * π * f   is essentially a mathematical tool used to embed the natural period of sine and cosine
   functions and the frequency in a single factor, a way to shorten expressions. In real life the time (t) is expressed in seconds and frequencies (f)
@@ -512,14 +512,14 @@
   That is I assumed α[ω] (and φ[ω] by the way) had to be an index and not a function.        //  https://en.wikipedia.org/wiki/Function_(mathematics)
   Because I assumed a function, by definition, had input and output related by some mathematical formula (which can not be the case if I want
   my integral to apply to random signals). Turns out I didn't know what a function is (even though I'm aware of the possible use of tabulation
-  as a waveshaper...). A mathematical relation is in fact facultative: a function assigns a unique output to any input from its ensemble of
+  as a wave-shaper...). A mathematical relation is in fact facultative: a function assigns a unique output to any input from its ensemble of
   definition, period.
 
   So let's (temporarily) forget about the DC term and fix these two mistakes:
 
                          ∞
                  1      ⌠
-    ƒ (t)  =  ------- * |  A(ω) * cos ( ω * t  +  φ(ω) ) * dω     [9]
+    ƒ (t)  =  ------- * |  A(ω) * cos ( ω * t  +  φ(ω) ) * dω        [9]
                2 * π    ⌡
                          0
 
@@ -557,7 +557,7 @@
 
                           /  ∞                                                      ∞                                                 \
                  1       /  ⌠  A(ω) * exp (j * φ(ω))                               ⌠  A(ω) * exp (j * -φ(ω))                           \
-    ƒ (t)  =  ------- * (   | ----------------------- * exp (j * ω * t) * dω   +   | ------------------------ * exp (j * -ω * t) * dω   )    [10]
+    ƒ (t)  =  ------- * (   | ----------------------- * exp (j * ω * t) * dω   +   | ------------------------ * exp (j * -ω * t) * dω   )        [10]
                2 * π     \  ⌡            2                                         ⌡            2                                      /
                           \  0                                                      0                                                 /
 
@@ -570,7 +570,7 @@
 
      0
     ⌠  A(ω) * exp (j * -φ(ω))
-    | ------------------------ * exp (j * ω * t) * dω      [11]
+    | ------------------------ * exp (j * ω * t) * dω        [11]
     ⌡            2
     -∞
 
@@ -582,13 +582,13 @@
 
      0
     ⌠  A(ω) * exp (j * φ(ω))
-    | ----------------------- * exp (j * ω * t) * dω       [12]
+    | ----------------------- * exp (j * ω * t) * dω        [12]
     ⌡            2
     -∞  
 
   Now if I want  variable [12]  =  Ω-  what I really want is:  
 
-    A(-ω) = A(ω)  and  φ(-ω) = -φ(ω)          [13]  
+    A(-ω) = A(ω)  and  φ(-ω) = -φ(ω)        [13]  
 
   This doesn't break any rule because A(ω) and φ(ω) didn't have any mathematical definition so far. Well now they do.
   The restriction in equation [13] is the condition for the signal to be purely real when substituting variable [12] for Ω- in equation [10].
@@ -692,7 +692,7 @@
                       -∞
 
   Ok, neat.
-  Now, the angular frequency ω is always multiplied by j. So varying the frequency (angular or not) is equivalent to traveling along the
+  Now, the angular frequency ω is always multiplied by j. So varying the frequency (angular or not) is equivalent to travelling along the
   imaginary axis.
   We could decide to make it obvious by embedding j in the variable with respect to which we integrate.
 
@@ -938,7 +938,7 @@
                                a
 
   Let's say we're in a Cartesian plane, with x on the horizontal axis and ƒ (x) on the vertical one.
-  The range is [a , b] -- a and b are values of x: the first and the last values x will take during the integration.
+  The range is ]a , b] -- a and b are values of x: the first and the last values x will take during the integration.
   So the integration horizontally spans from a to b. So:
 
    span  =  b - a
@@ -954,6 +954,8 @@
                           b - a
     nb  =  span / dx  =  -------    <=>    dx  =  span / nb    <=>    span  =  nb dx
                            dx
+
+  (nb must remain an integer, so even though it never appears in integral notation, it's defining dx, not the other way around.)
 
   Then, what's an average value?
   Usually: an arithmetic mean.
@@ -1032,12 +1034,12 @@
   So the areas under the curve of the two first quarter-periods are equal to each other.
   Then the second half-period is identical to the first one, except mirrored across the abscissa (horizontal) axis.
   So the two last quarter-periods are also symmetrical, and also have equal area under the curve;
-  and the full period has a center of symmetry at (0 , π) -- and the two half-periods have complementary areas under the curve.
+  and the full period has a centre of symmetry at (0 , π) -- and the two half-periods have complementary areas under the curve.
   So the area under the curve of each full period cancels out to zero.
   Which means that integrating sine over a full period outputs zero.
 
   Cosine starts at one, falls down to to zero (π/2), then to minus one (π), then rises up to zero (3π/2), then back to one (2π).
-  So it has an axis of symmetry at the middle of its full period and a center of symmetry at the middle of each half-period.
+  So it has an axis of symmetry at the middle of its full period and a centre of symmetry at the middle of each half-period.
   So the areas under the curve of the two first quarter-periods cancel out to zero -- idem for the two last quarter-periods.
   So the area under the curve of a full period adds zero to zero.
   Which means that integrating cosine over a full period outputs zero.
@@ -1048,14 +1050,14 @@
   The half-circle is above the real axis.
   Each quarter is on one side of the imaginary axis, so the real area cancels out, and the imaginary area is strictly positive.
   When  x = 2π  the argument is a full circle.
-  The second half-circle is below the real axis and also split inthe middle by the imaginary axis.
+  The second half-circle is below the real axis and also split in the middle by the imaginary axis.
   So the last two quarter-circles also cancel the real area.
   The two half-circles have the same absolute imaginary area, but the first one is positive and the second one is negative;
   so integrating the full circle outputs zero.
   Complex sinusoids reset at 2π -- they have the same modulus (period) as real sinusoids.
 
   Sine has a specificity: between zero and π, it's positive; between zero and -π, it's negative.
-  So its full infinite curve has a center of symmetry at the origin of the Cartesian plane.
+  So its full infinite curve has a centre of symmetry at the origin of the Cartesian plane.
   Which means that its right semi-plane and its left semi-plane are complementary.
   So integrating sine from  -k  to  +k  (where k is any real positive number) will always output zero.
   Therefore, integrating a complex sinusoid from  -k  to  +k  (i.e. in both directions) will always output a real number.  
@@ -1105,7 +1107,7 @@
   Each partial has an angular frequency  n ω0 , which, in Hertz gives:  f_n  =  n ω0 / 2π  and a period:  T_n  =  2π / (n ω0) .
   If we integrate  ƒ (t)  with respect to t over the range [0 , T], the fundamental will have reached a full cycle and its positive and negative half
   will cancel out.
-  If we integrate over a time window that is an integer multiple of T (say μT, where μ is a strictly postive integer), the fundamental will have reached
+  If we integrate over a time window that is an integer multiple of T (say μT, where μ is a strictly positive integer), the fundamental will have reached
   μ full cycles and cancel out as well.
   Since T is an integer multiple of T_n, all overtones will also cancel out.
   /*
@@ -1398,12 +1400,12 @@
   (I get the appeal: if your whole ecosystem is symmetrical, you only have to process half of it.
   Obsessing over palindromes can nourish art -- ask Anton Webern; or even sociology -- ask Guy Debord.)
 
-  Of course, no one bothers with absolute values and the sgn function: the phase is quitely assumed automatically reversed.
+  Of course, no one bothers with absolute values and the sgn function: the phase is quietly assumed automatically reversed.
   In fact, you rarely encounter both integrals together like this:  X (ω_p)  integrates  ƒ (t) exp (-j ω_p t) over time,
   and  ƒ (t)  integrates  X (ω_p)  over frequency --  α (ω)  and  φ (ω)  being embedded in  X (ω_p) .
 
   Finally, since  π/dω  tends to infinity when dω tends to zero (which it should, by definition of "infinitesimal"),
-  the range of the temporal integration is classically simplfied as  [-∞ , +∞]  -- which gives a beautiful symmetry to the nested integrals,
+  the range of the temporal integration is classically simplified as  [-∞ , +∞]  -- which gives a beautiful symmetry to the nested integrals,
   but erases the record of how we got there (by stretching the Fourier series).
   Plus, free usage of the differential as a regular number is highly non-conventional -- that's where we diverge the most.
 
@@ -1441,7 +1443,7 @@
   and  ƒ (x + dx)  -  ƒ (x)  would be the corresponding change of  ƒ (x) .
 
   //  Rate
-  The latin verb "reor, reri", whose past participle is "ratus, -a, -um", means "to reckon, to compute, to think, to judge, ..." --
+  The Latin verb "reor, reri", whose past participle is "ratus, -a, -um", means "to reckon, to compute, to think, to judge, ..." --
   -- basically "to use a brain".
   It gave "ratio": "reason" (sometimes loosely confused with "cause"), which passed to English and German with the meaning of "arithmetical division".
   Reor (or rather its participle ratus, -a, -um) also gave "rate" which describes a proportional relationship between two things.
@@ -1518,7 +1520,7 @@
     (You may experience an infinitesimal blackout... but maybe it just happened, how would you know?)
     As if real numbers were on a circumference where minus infinity and plus infinity were the same point.
     Pretty much like if you're on a moon of a moon of a moon of a moon of a planet of a star, and look at the sky,
-    everything revolves around you -- short-sighted referentials make the marvellous trivial.
+    everything revolves around you -- short-sighted frames of reference make the marvellous trivial.
   */
 
   Now what if:
@@ -1539,9 +1541,9 @@
                a                                                                           b                b                b
 
                      b + db             //    
-     dX             ⌠        dx         //    I can think of three paths by which we can go frome here.
+     dX             ⌠        dx         //    I can think of three paths by which we can go from here.
     ----  =   lim   | ƒ (x) ----        //    
-     db     db -> 0 ⌡        db         //    Let's rty all three.
+     db     db -> 0 ⌡        db         //    Let's try all three.
                      b                  //
 
   //  First path (the Clean):
@@ -1587,14 +1589,14 @@
     A principle every one is free to reject or admit.
     Even functions like  x/x²  break this tendency.)
     Whereas, in algebra, 0/0 is always multi-valued (and therefore undefined):    x * 0  =  0    =>    0 / 0  =  x
-    i.e. literally anything -- pretty similarily to infinity.
+    i.e. literally anything -- pretty similarly to infinity.
   */
 
   //  Third path (the Clumsy)
   Let's give possibility (1) a second chance.
   We're looking at the limit of db. So let's assume everything else is fixed.
   That is: dx is infinitesimal but not undefined nor literally zero.
-  Then the integral won't exeed its prescribed range: it will remain stuck at step zero:  ƒ (x)  =  ƒ (b)  --
+  Then the integral won't exceed its prescribed range: it will remain stuck at step zero:  ƒ (x)  =  ƒ (b)  --
   -- because  b + dx  would exceed  b + db , it never happens.
   So  ƒ (x)  =  ƒ (b)  everywhere inside the integral; so it's constant; so it can be extracted (factored out).
   Then:
@@ -1604,7 +1606,7 @@
      db     db -> 0   db   ⌡         db -> 0   db                   db -> 0        db
                             b
 
-  */
+  /*
     Why clumsy? Because if you actually compute an integral with a null span, you're not stuck with the first value: you get zero.
     Remember:  dx  =  span / nb  -- if span is zero, so is dx, then each step is multiplied by zero.
     But there's zero step... or one step? (the zeroth one?)
@@ -1616,7 +1618,7 @@
   */
 
   Ok, so:  ƒ (x)  is the rate of change (or first derivative) of X (x).
-  So X (x) is an *atiderivative* of  ƒ (x) .
+  So X (x) is an *antiderivative* of  ƒ (x) .
 
   Finding the rate of change of a function is called differentiating.
   We've just started to show how differentiation and integration are reciprocal operations.
@@ -1647,6 +1649,7 @@
 
   So if we're given the differential equation:    dƒ/dx  =  2 x  -  1 ,
   the solution could be  g (x)  or  h (x) , or: replace the constant terms by what you like, it will never affect the rate of change.
+  (Because it's identical in the output at x and at  x + dx  so the subtraction in the numerator will always cancel it.)
   So the differential equation has an infinity of solutions (an infinity of possible constant terms):
 
     ƒ (x)  =  x² - x + k        //  where k can be any constant
@@ -1683,11 +1686,177 @@
   */
 
   Ok, so how do we reconstruct a function from these two data?
+  Let  ƒ (x)  be some function; and let us know  dƒ/dx  and  ƒ (a) .
+  We want to find  ƒ (b) .
+  Or: we know the change of  ƒ (x)  -- dƒ -- corresponding to an infinitesimal change in x -- dx.
+  That is:
+                                                                                                            x + dξ
+                                                                                      dƒ                   ⌠  dƒ
+    ƒ (x + dx)  =  ƒ (x)  +  ( ƒ (x + dx)  -  ƒ (x) )  =  ƒ (x)  +  dƒ  =  ƒ (x)  +  ---- dx  =  ƒ (x)  +  | ---- dξ
+                                                                                      dx                   ⌡  dξ
+                                                                                                            x
+  Where ξ is an alias of x, allowing it to be constant inside the integral.
 
-  [IN PROGRESS]
+  Let's be over-casually heretic and decide that a and b are so close together that they're exactly 4 infinitesimal steps apart.
+  (For the purpose of example only.)
+  Then:
+
+    b  =  a  +  4 dx
+
+  then:
+
+    ƒ (b)  =  ƒ (a  +  4 dx)  =  ƒ (a)  +  dƒ  +  dƒ  +  dƒ  +  dƒ
+
+  (This looks like 4 times dƒ but it has to keep the form of a sum, because, unless  ƒ (x) is linear, dƒ is not a constant.)
+
+    ƒ (b)  =  ƒ (a)  +  { ƒ (a + dx)  -  ƒ (a) }  +  { ƒ (a  +  2 dx)  -  ƒ (a + dx) }  +  { ƒ (a  +  3 dx)  -  ƒ (a  +  2 dx) }
+
+              +  { ƒ (a  +  4 dx)  -  ƒ (a  +  3 dx) }
+
+  The curly brackets are facultative, they just help identify dƒ. Notice that each term of the sum gets cancelled by its opposite,
+  except the positive term of the last dƒ:
+
+    ƒ (a  +  4 dx)  =  ƒ (b)
+
+  Good: the equal sign isn't lying.
+  Moving on:
+                                                                                   a + 4dx                 b
+                         dƒ          dƒ          dƒ          dƒ                   ⌠  dƒ                   ⌠  dƒ
+    ƒ (b)  =  ƒ (a)  +  ---- dx  +  ---- dx  +  ---- dx  +  ---- dx  =  ƒ (a)  +  | ---- dx  =  ƒ (a)  +  | ---- dx
+                         dx          dx          dx          dx                   ⌡  dx                   ⌡  dx
+                                                                                   a                       a
+
+  Now, as a and b grow apart from each other, more and more instances of dx fit between them.
+  Earlier we had:
+
+    dx  =  span / nb    <=>    nb dx  =  span
+
+  here nb starts tending to infinity, so we won't write the full sum, but the mechanics remain the same:
+
+                         b                           b
+                        ⌠  dƒ                       ⌠  dƒ
+    ƒ (b)  =  ƒ (a)  +  | ---- dx        <=>        | ---- dx  =  ƒ (b)  -  ƒ (a)        for all a and b.
+                        ⌡  dx                       ⌡  dx
+                         a                           a
+  /*
+    Even if  a > b ?
+    Let's check. E.g.:    a = 6    &&    b = 3    &&    nb = 12
+    Then:
+  
+      span  =  b - a  =  3 - 6  =  -3
+  
+      dx  =  span / nb  =  -3 / 12  =  -1/4
+  
+      a + dx + dx + dx + dx + dx + dx + dx + dx + dx + dx + dx + dx  =  6 + 12 (-1/4)  =  6 - 12/4  =  6 - 3  =  3  =  b
+    
+    ok.
+  */
+  ƒ (x) is an antiderivative of  dƒ/dx  whose constant term is encoded in  ƒ (a) .
+  The reference-antiderivative has a constant term of zero.
+  Compared to it,  ƒ (x)  has a vertical offset equal to its constant term, so the difference between their respective values
+  anywhere is the constant term of  ƒ (x) .
+  Since we know both their values at a, we can find it.
+
+  Let's invent a problem.
+
+                         b                //  We know the expression of  ƒ (x) ;
+                        ⌠                 //  we know a and  X (a) ;
+    X (b)  =  X (a)  +  | ƒ (x) dx        //  we know b;
+                        ⌡                 //
+                         a                //  we want  X (b) .
+
+  We know that:  X (x)  =  F (x)  +  k        //  where  F (x)  is the reference-antiderivative of  ƒ (x)  and k is some constant.
+  So:  k  =  X (x)  -  F (x)
+
+  If we find the expression of  F (x) , we know  F (a) , then we know  X (a)  -  F (a)  =  k .
+  Then:
+
+    X (b)  =  F (b)  +  k  =  F (b)  +  X (a)  -  F (a)  =  X (a)  +  { F (b)  -  F (a) }
+
+  Then:
+    
+     b                                    //  This may seem like a redundant result...
+    ⌠                                     //
+    | ƒ (x) dx  =  F (b)  -  F (a)        //  Except this time involves the unique reference-antiderivative,
+    ⌡                                     //  the one whose constant term is zero -- not any antiderivative.
+     a                                    //  Now we can express integrals in algebraic terms.
+
+  E.G.:
+
+    F (x)  =  √(x)
+
+  then:
+
+               dF              √(x + dx)  -  √(x)         //  These square roots in the numerator must go.
+    ƒ (x)  =  ----  =  lim    --------------------        //  Both of them.
+               dx     dx -> 0         dx                  //  We need a magical factor that cleans up everything at once.
+
+  /*
+    Let's find a general solution to:
+
+      (a - b) k  =  a² - b²        //  Assuming  a ≠ b  --  otherwise the difference is zero and k is undefined.
+
+             a² - b²         a - b + b         a - b - a         a - b        a b          a - b        a b
+      k  =  ---------  =  a -----------  +  b -----------  =  a -------  +  -------  +  b -------  -  -------  =  a + b
+              a - b            a - b             a - b           a - b       a - b         a - b       a - b
+
+    Let's check that result:
+
+      (a - b) (a + b)  =  a² + ab - ab + b²  =  a² + b²
+
+    ok.
+  */
+  So:
+                        { √(x + dx)  -  √(x) } { √(x + dx)  +  √(x) }                     x + dx - x
+      ƒ (x)  =   lim   -----------------------------------------------  =   lim   ---------------------------
+               dx -> 0          dx { √(x + dx)  +  √(x) }                 dx -> 0  dx { √(x + dx)  +  √(x) }
+
+                       dx / dx               1
+       =   lim   --------------------  =  --------
+         dx -> 0  √(x + dx)  +  √(x)       2 √(x)
+
+  Now, say we face:
+                             b                            b
+                            ⌠    dx                      ⌠ 
+    X (b)    =    X (a)  +  | --------    =    X (a)  +  | ƒ (x) dx    =    X (a)  +  F (b)  -  F (a)    =    X (a)  +  √(b)  -  √(a)
+                            ⌡  2 √(x)                    ⌡ 
+                             a                            a
+
+  If we know a,  X (a)  and b, we can compute  X (b) .
+  For instance:    a = 16 ,  b = 25  and  X (a)  =  17
+  then:
+
+    X (b)  =  17  +  √(25)  -  √(16)  =  17 + 5 - 4  =  18
+
+  or better yet, if we leave b undefined:
+
+    X (x)  =  X (a)  +  F (x)  -  F (a)  =  17  +  √(x)  -  √(16)  =  √(x)  +  17  -  4  =  √(x)  +  13
+
+  we get the algebraic expression of  X (x) .
+
+  Let's say:    X (x)  =  √(x)  -  2/3    and pretend we don't know the formula yet;
+  let's also say that our initial conditions give:    X (36)  =  6  -  2/3  =  16/3    and again pretend we only have the final result;
+  then:
+                                                                                                            16 - 18
+    X (x)  =  X (36)  +  F (x)  -  F (36)  =  16/3  +  √(x)  -  √(36)  =  √(x)  +  16/3  -  6  =  √(x)  -  ---------  =  √(x)  -  2/3
+                                                                                                               3
+  It works!
+
+  But as you've seen, it requires finding the reference-antiderivative of the function inside the integral...
+  Finding a first (or nth) derivative can be tricky sometimes, but at least we have a formula to apply --
+  -- we have a problem and seek a solution.
+  There's no general formula for antiderivatives: we have a solution and seek an infinity of problems to then discriminate...
+  It requires experience with derivatives, memory and pattern recognition -- which can be vertiginous.
+  
+  That's why, in this book, I'll try to always find derivatives from scratch without shortcuts -- with maximum struggle -- because:
+  pain is the best mnemotechnic tool I know -- traumatisms stick with you for longer than tattoos -- you won't forget them accidentally --
+  -- you won't forget them, period.
 
 
 
+-----------------------------------------------------------------------------------------------
+/*          "Does this guy know how to party or what?"                                       */
+/*                                                   --  Mike Myers (Wayne's World)          */
 ===============================================================================================
 #09  Βίοι Παράλληλοι
 ===============================================================================================
@@ -1697,7 +1866,7 @@
 
 
 ===============================================================================================
-#10  Jubilee
+#10  [untitled yet (?)]
 ===============================================================================================
 
   [IN PROGRESS]
