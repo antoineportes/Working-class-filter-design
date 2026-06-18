@@ -582,7 +582,6 @@
       Temporarily of course.
   */
   Then:
-
                            X (s)  -  Y (s)
     Y (s) exp (st)  =  ωc ----------------- exp (st)
                                   s
@@ -636,7 +635,6 @@
     Y (s)  =  ωc -----------------    <=>    ---------  =  X (s)  -  Y (s)    <=>    ---------  +  Y (s)  =  X (s)
                          s                      ωc                                      ωc
     
-
             s Y (s)  +  ωc Y (s)                       s + ωc                                         ωc
     <=>    ----------------------  =  X (s)    <=>    -------- Y (s)  =  X (s)    <=>    Y (s)  =  -------- X (s)
                      ωc                                  ωc                                         s + ωc
@@ -680,7 +678,7 @@
   Since we're re-defining everything, let's re-define:
 
                s
-    H (s) = --------    ;  and:  Y (s)  =  H (s) X (s)    ;  then:  y (t)  =  Y (s) exp (st)
+    H (s) = --------    ;    and:  Y (s)  =  H (s) X (s)    ;    then:  y (t)  =  Y (s) exp (st)
              s + ωc
 
   Frequency untouched, H (s) altering complex amplitude. Pretty familiar by now. Plus it was to be expected:
@@ -778,6 +776,8 @@
   Then we cannot divide by it, true (good catch).
   But s being zero means the frequency is zero, so DC voltage.
   We've solved this case last chapter: RC + DC.
+  (Also: integrating a constant quickly blows up: you basically permanently and continuously stack the same value over itself,
+  Laplace's division by zero kind of reflects this explosion.)
 
   Ok, let's start over:
 
@@ -861,7 +861,7 @@
           ---[ 1/s ]<---[ ωc ]<---
            C          B         A
   
-  Just follow the signal path. I guess you could go from input (x), but I usually go the other way around.
+  Just follow the signal path. I guess you could go from input (x), but I often go the other way around.
   So:
 
     y  =  x - C
@@ -876,7 +876,7 @@
                 s                             s + ωc
 
   /*
-    I personally always start with y if I can, I find it less error-prone.
+    I personally start with y whenever I can, I find it less error-prone.
     But it's a loop, choose any point and complete the loop.
     Adding upper-case Latin letters or lower-case Greek letters (depends on the mood) is my thing too.
     I'd advise doing so because it helps split the problem and forces to write every step down (less error-prone).
@@ -1082,7 +1082,6 @@
           ----[ 1/s ]<---[ ωc ]<--    --------------------------
 
     y  =  E / s    ;    E  =  ωc D    ;    D  =  A - y
-
 
               A - y                                                                       s + ωc
     y  =  ωc -------    <=>    y s/ωc  =  A - y    <=>    y (s/ωc + 1)  =  A    <=>    y --------  =  A
@@ -1320,7 +1319,7 @@
 
   then:
 
-    φ  =  arg ( H (s) X (s) )  =  [ ( arg ( H (s) )  +  arg ( X (s) )  +  π )  mod 2π ]  -  π            //  Chapter I, #9
+    φ  =  arg ( H (s) X (s) )  =  [ ( arg ( H (s) )  +  arg ( X (s) )  +  π )  mod 2π ]  -  π        //  Chapter I, BONUS
 
   Again, if we normalise the input's phase to zero, the output's phase is  arg ( H (s) ).
 
