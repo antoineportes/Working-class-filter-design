@@ -1,5 +1,5 @@
 # Working-class filter design\: links
-## [<ins>Chapter I\:</ins>  Analytic signals](Chapter%2001%3A%20Analytic%20signals)
+## [<ins>Chapter I\:</ins>  Analytic signals](Chapter%2001_%20Analytic%20signals)
 | Wiki | Desmos | Other |
 | :--- | :----- | :---- |
 | [Complex number](https://en.wikipedia.org/wiki/Complex_number) | [Chapter 01 \(gallery\)](https://www.desmos.com/gallery/65938952-5857-4885-a122-b409f9e08ace) | [\[ archive.org \] J.-B. J. Fourier — *Théorie analytique de la chaleur* \(1822\)](https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up)
@@ -35,7 +35,7 @@
 | [List of trigonometric identities\: *Angle sum and difference identities*](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Angle_sum_and_difference_identities) |  |  |
 | [Logarithm](https://en.wikipedia.org/wiki/Logarithm) |  |  |
 
-## [<ins>Chapter II\:</ins>  RC](Chapter%2002%3A%20RC)
+## [<ins>Chapter II\:</ins>  RC](Chapter%2002_%20RC)
 ### Wiki
 + [Separation process](https://en.wikipedia.org/wiki/Separation_process)
 + [RC circuit](https://en.wikipedia.org/wiki/RC_circuit)
@@ -115,7 +115,7 @@
 ### Other
 + [\[ archive.org \] Aristotle\: *Physica* \(translation\: R.P. Hardie & R.K. Gaye\)](https://archive.org/details/physica0000rpha/mode/2up)
 
-## [<ins>Chapter III\:</ins>  =  1 + 2](Chapter%2003%3A%20%20%3D%20%201%20%2B%202)
+## [<ins>Chapter III\:</ins>  =  1 + 2](Chapter%2003_%20%20%3D%20%201%20%2B%202)
 ### Wiki
 + [Notation for differentiation\: *Lagrange\'s notation for antidifferentiation*](https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange's_notation_for_antidifferentiation)
 + [Chain rule\: *Proofs*](https://en.wikipedia.org/wiki/Chain_rule#Proofs)
@@ -133,12 +133,12 @@
 ### Desmos
 + [Discontinuity](https://www.desmos.com/calculator/uqreqq7tu9)
 
-## [<ins>Chapter IV\:</ins>  Jargon](Chapter%2004%3A%20Jargon)
+## [<ins>Chapter IV\:</ins>  Jargon](Chapter%2004_%20Jargon)
 ### Wiki
 ### Desmos
 ### Other
 
-## [<ins>Chapter V\:</ins>  Poles and zeroes](Chapter%2005%3A%20Poles%20and%20zeroes)
+## [<ins>Chapter V\:</ins>  Poles and zeroes](Chapter%2005_%20Poles%20and%20zeroes)
 ### Wiki
 + [Polynomial](https://en.wikipedia.org/wiki/Polynomial)
 + [Elementary arithmetic](https://en.wikipedia.org/wiki/Elementary_arithmetic)

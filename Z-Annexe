@@ -1,33 +1,37 @@
-###############################################################################################
-###############################################################################################
-                               WORKING CLASS FILTER DESIGN
-###############################################################################################
-###############################################################################################
+###################################################################################################
+###################################################################################################
+                                    WORKING CLASS FILTER DESIGN
+###################################################################################################
+###################################################################################################
 
-###############################################################################################
-                                          Annexe
-###############################################################################################
-/*          "And I guess that I just don't know."                                            */
-/*                                                            --  Lou Reed (Heroin)          */
-===============================================================================================
+###################################################################################################
+                                              Annexe
+###################################################################################################
+/*          "And I guess that I just don't know."                                                */
+/*                                                                ——  Lou Reed (Heroin)          */
+===================================================================================================
 Below the ground is the underground
-===============================================================================================
+===================================================================================================
 
-  Time for Cartesian doubt: let's assume we know shit. (René's words, not mine.)
+  Time for Cartesian doubt: let's assume we know shit.
+  (René's words, not mine.)
 
-//  Equation
+  //  Equation
   As Etymology suggests an equation involves an equal sign "=".
 
-  When two propositions stand each on one side of an equal sign we have an equality, or equation.
+  When two propositions stand each on one side of an equal sign,
+    we have an equality, or equation.
   An equation can be read in both directions:
 
     A = B  means  B = A
 
-  So it's not a statement. It's two statements. We're defining A and B.
+  So it's not a statement.
+  It's two statements. We're defining A and B.
   Then if we know A, we know B. If we know B we know A.
-  But that's assuming the expression is true. Which is assuming we know what true means.
+  But that's assuming the expression is true.
+  Which is assuming we know what true means.
 
-//  Truth
+  //  Truth
   What's the definition of truth?
 
   Easy: Truth is the adequation between a concept and its counterpart in reality.
@@ -35,9 +39,13 @@ Below the ground is the underground
   Then how is abstract thinking ever able to provide truth?
 
   This aporia is resolvable.
-  I've broken the first rule of science: even before defining terms (first rule of dialectics): define a referential.
-  My definition of truth is correct. It's also not correct.
-  Usually when logic seems broken, it's the speaker's fault.
+  I've broken the first rule of science:
+    even before defining terms (first rule of dialectics):
+    define a frame of reference.
+  My definition of truth is correct.
+  It's also not correct.
+  Usually when logic seems broken,
+    it's the speaker's fault.
 
   The correct answer to "What is truth?" is:  "Which truth?"
 
@@ -50,18 +58,20 @@ Below the ground is the underground
 
   The definition I gave quietly implies "transcendental" before "truth".
   (Notice that transcendental truth is declared unknowable by its own definition.)
-  (Same goes with objective truth: truth from the object's perspective -- try not being a subject.)
+  (Same goes with objective truth:
+    truth from the object's perspective —— try not being a subject.)
   We're talking Maths, so we're talking Logic, so we want a definition of logical truth.
 
-  Logical truth, as the name suggests, applies to a statement that doesn't violate any logical rule.
-  
+  Logical truth, as the name suggests,
+  applies to a statement that doesn't violate any logical rule.
+
   We've seen A = B  <=>  B = A. That's an example of logical truth.
   A = B. Ok. Then refer to the definition of B:  B = A.
   Substituting B with its definition in the expression of A, we get:
 
     A  =  A
 
-  Nothing's truer than a tautology.         //  https://en.wikipedia.org/wiki/Tautology_(logic)
+  Nothing's truer than a tautology.        //  https://en.wikipedia.org/wiki/Tautology_(logic)
   So it's true, right?
   Ok, prove it.
 
@@ -72,73 +82,98 @@ Below the ground is the underground
 
   *SPOILER ALERT* It's also impossible.
 
-//  Principles
-  A  =  A  is a principle of logic called the Law of identity.      //  https://en.wikipedia.org/wiki/Law_of_identity
+  //  Principles
+  A  =  A  is a principle of logic called the Law of identity.        //  https://en.wikipedia.org/wiki/Law_of_identity
   A principle is a statement that can not be proven either right or wrong.
   You can admit it or reject it.
-  Every field of science relies on principles. In that regard science is dogmatic.
+  Every field of science relies on principles.
+  In that regard science is dogmatic.
   In mathematics principles are called Axioms.
   Why two words? Because two books:
-    ¤  Aristotle's Prior Analytics (ἀρχή)          //  https://en.wikipedia.org/wiki/Prior_Analytics
-    ¤  Euclid's Elements (ἀξίωμα).                 //  https://en.wikipedia.org/wiki/Euclid%27s_Elements
+    ¤  Aristotle's Prior Analytics (ἀρχή)        //  https://en.wikipedia.org/wiki/Prior_Analytics
+    ¤  Euclid's Elements (ἀξίωμα).               //  https://en.wikipedia.org/wiki/Euclid%27s_Elements
 
   Logically true means "which does not contradict the chosen principles, directly or not".
 
-  Assuming you've admitted  A = A  is TRUE (again: you don't have to, you can choose to reject logic),
-  remembering that  B = A  by definition, and that this definition leads to  A = A, then, according to the law of identity, or,
-  in other words: according to the principle you willingly admitted (by hypothesis) we can safely say that  A = B  is TRUE.
+  Assuming you've admitted  A = A  is TRUE
+  (again: you don't have to, you can choose to reject logic),
+  remembering that  B = A  by definition,
+  and that this definition leads to  A = A,
+  then, according to the law of identity,
+  or, in other words:
+    according to the principle you willingly admitted (by hypothesis)
+  we can safely say that  A = B  is TRUE.
 
   Which proves that  A ≠ B  is not_TRUE.
   Does it though?
   Can you formulate the demonstration?
 
   Looks like we've found another principle of logic.
-  This one's called the Principle of non-contradiction.        //  https://en.wikipedia.org/wiki/Law_of_noncontradiction
-  Same as before: you're free to reject it as long as you don't need logic.
+  This one's called the Principle of non-contradiction.
+
+  //  https://en.wikipedia.org/wiki/Law_of_noncontradiction
+
+  Same as before: you're free to reject it
+    as long as you don't need logic.
 
   Let me try to express it with a proper sentence.
 
   If something is TRUE, it cannot be not_TRUE at the same time.
-  For instance if  "A ≠ B  is not_TRUE"  is TRUE,  "A ≠ B  is TRUE"  is necessarily not_TRUE.
+  For instance:
+    if  "A ≠ B  is not_TRUE"  is TRUE,
+    "A ≠ B  is TRUE"  is necessarily not_TRUE.
 
   Obviously "FALSE" means "not_TRUE".
   Are you sure of that?
 
   Well you should be: "FALSE" means "not_TRUE" by definition.
 
-  So the Principle of non-contradiction can be re-phrased as: TRUE and FALSE cannot coexist.
+  So the Principle of non-contradiction can be re-phrased as:
+    TRUE and FALSE cannot coexist.
 
   Now what's the third option?
 
-  If you believe there's one, please name it. Otherwise you've just admitted another principle of logic called the Principle of
-  excluded middle.                                             //  https://en.wikipedia.org/wiki/Law_of_excluded_middle
+  If you believe there's one, please name it.
+  Otherwise you've just admitted another principle of logic
+  called the Principle of excluded middle.
 
-  It can be expressed as:  something  +  not_someting  =  everything
+  //  https://en.wikipedia.org/wiki/Law_of_excluded_middle
+
+  It can be expressed as:  something  +  not_something  =  everything
 
   That is: a proposition, a variable, a concept, ... and its negation form a cosmic sum.
-  Nothing exists outside of a cosmic sum. Or in less Greek words: nothing exists outside of everything.
+  Nothing exists outside of a cosmic sum.
+  Or in less Greek words: nothing exists outside of everything.
 
-//  Mathematical contraries
-  TRUE and FALSE are the archetypal form of what I personally call mathematical contraries.
-  Mathematical contraries are pairs of propositions (or variables, or concepts, ...) that share the same relations as TRUE and
-  FALSE. More precisely:
+  //  Mathematical contraries
+  TRUE and FALSE are the archetypal form of what I personally call
+    mathematical contraries.
+  Mathematical contraries are pairs of propositions (or variables, or concepts, ...)
+  that share the same relations as TRUE and FALSE.
+  More precisely:
 
-    If A and B are mutually exclusive and form a cosmic sum, they are mathematical contraries.
-    If A and B are mathematical contraries, they are mutually exclusive and form a cosmic sum.
+    If A and B are mutually exclusive and form a cosmic sum,
+      they are mathematical contraries.
+    If A and B are mathematical contraries,
+      they are mutually exclusive and form a cosmic sum.
 
   Examples:
 
-    - What is the mathematical contrary of Love?
-    - Easy: Hate!
-    - WRONG! Even if I admit that an infinitesimal amount of Love or Hate counts as Love or Hate, I forgot Indifference.
-      Loving and Hating can be grouped as Caring and Indifference is synonymous with not_Caring.
-      Ergo  ->  Love + Hate  =  COSMOS - Indifference
-      Ergo  ->  the mathematical contrary of Indifference is (Love + Hate)
-      Ergo  ->  the mathematical contrary of Love is (Hate + Indifference)
+    — What is the mathematical contrary of Love?
+    — Easy: Hate!
+    — WRONG!
+      Even if I admit that an infinitesimal amount of Love or Hate
+      counts as Love or Hate,
+      I forgot Indifference.
+      Loving and Hating can be grouped as Caring
+      and Indifference is synonymous with not_Caring.
+      Ergo  —>  Love + Hate  =  COSMOS — Indifference
+      Ergo  —>  the mathematical contrary of Indifference is (Love + Hate)
+      Ergo  —>  the mathematical contrary of Love is (Hate + Indifference)
 
-    - What is the mathematical contrary of Poor?
-    - Rich, obviously...
-    - WRONG AGAIN! I forgot about tuna sandwich and alien spaceship...
+    — What is the mathematical contrary of Poor?
+    — Rich, obviously...
+    — WRONG AGAIN! I forgot about tuna sandwich and alien spaceship...
       The mathematical contrary of Poor is not_Poor.
 
   Now let's play a game.
@@ -155,51 +190,71 @@ Below the ground is the underground
   3)  Confront steps 1 and 2.
 
   If you've picked [B], you've rejected logic.
-  Indeed [A] is a principle of logic called the Principle of sufficient reason.        //  https://en.wikipedia.org/wiki/Principle_of_sufficient_reason#Formulation
+  Indeed [A] is a principle of logic called the Principle of sufficient reason.
+
+  //  https://en.wikipedia.org/wiki/Principle_of_sufficient_reason#Formulation
+
   If you'd rather not reject logic: replay the game.
 
-  std::cout << "Welcome to your new life.";                                            //  https://en.wikipedia.org/wiki/Input/output_%28C%2B%2B%29#Input/output_streams
+  std::cout << "Welcome to your new life.";
+
+  //  https://en.wikipedia.org/wiki/Input/output_%28C%2B%2B%29#Input/output_streams
 
   First time hurts, I know. Been there.
   Don't blame me, blame him:  https://en.wikipedia.org/wiki/Spinoza%27s_Ethics
 
-//  Muslims call him "The Master"
-  If you enjoy playing with such concepts as much as I do, I'd advise you to read Aristotle's Organon.    //  https://en.wikisource.org/wiki/Organon
-  The guy literally invented the concept of concept. It's worth attention at least.
-  In those days "Meta" was a prefix which meant "emancipated" not "incarnation of evil".
+  //  Muslims call him "The Master"
+  If you enjoy playing with such concepts as much as I do,
+  I'd advise you to read Aristotle's Organon.
+
+  //  https://en.wikisource.org/wiki/Organon
+
+  The guy literally invented the concept of concept.
+  It's worth attention at least.
+  In those days "Meta" was a prefix which meant "emancipated"
+    not "incarnation of evil".
 
 
 
------------------------------------------------------------------------------------------------
-/*          "We're the poison in the human machine.                                          */
-/*           We're the flowers on the dustbin."                                              */
-/*                                           --  Johnny Rotten (God save the Queen)          */
-===============================================================================================
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "We're the poison in the human machine.                                              */
+/*           We're the flowers on the dustbin."                                                  */
+/*                                               ——  Johnny Rotten (God save the Queen)          */
+===================================================================================================
 Bottoms up
-===============================================================================================
-  
-  Reality is a 4-dimensional sum of infinitesimal particles over the range [-∞ , +∞] for dimensions 1, 2, 3 and [-∞ , τ] for dimension 4
-  (assuming τ is now and future is not real, which is a bold assumption... if you don't like it just replace [-∞ , τ] with [-∞ , +∞]).
-  Whether "infinitesimal" means "approximation of continuous" or what it actually means... go ask Planck.
+===================================================================================================
+
+  Reality is a 4-dimensional sum of infinitesimal particles
+  over the range [—∞ , +∞] for dimensions 1, 2, 3
+  and [—∞ , τ] for dimension 4
+  (assuming τ is now and future is not real, which is a bold assumption...
+  if you don't like it just replace [—∞ , τ] with [—∞ , +∞]).
+  Whether "infinitesimal" means "approximation of continuous"
+  or what it actually means... go ask Planck.
 
                  τ +∞ +∞ +∞
-                ⌠  ⌠  ⌠  ⌠        d E
-    COSMOS  =   |  |  |  | ------------------ dx dy dz dt
-                ⌡  ⌡  ⌡  ⌡     dx dy dz dt
-                -∞ -∞ -∞ -∞
-  
+                ⌠  ⌠  ⌠  ⌠       dE
+    COSMOS  =   |  |  |  | ————————————— dx dy dz dt
+                ⌡  ⌡  ⌡  ⌡  dx dy dz dt
+                —∞ —∞ —∞ —∞
+
     E (x, y, z, t) is the amount of energy of each point in the space-time continuum.
     d E / (dx dy dz dt) is its rate of change in Joules per cubic metre per second.
     x, y and z are the three dimensions of space in metres (so their product is in cubic metres).
     t is time in seconds.
-    If Lavoisier's famous statement -- about everything changing form, neither ever getting created nor destructed -- is true,
+    If Lavoisier's famous statement ——
+    —— about everything changing form, neither ever getting created nor destructed ——
+    —— is true,
     then COSMOS is a constant.
     Dimensional analysis reveals that COSMOS is expressed in Joules.
 
-  Matter = energy  is my personal hypothesis. It's based upon an intuition.
+  Matter = energy  is my personal hypothesis.
+  It's based upon an intuition.
   This intuition is based upon a historical pattern:
-  every time new measuring tools allow to zoom in further on particles, they turn out to be made of predominant void and smaller particles.
-  Assuming we could bypass Quantum physics minima and run the loop ad infinitum, cosmic matter would end up being nothing more than interlaced
+  every time new measuring tools allow to zoom in further on particles,
+  they turn out to be made of predominant void and smaller particles.
+  Assuming we could bypass Quantum physics minima and run the loop ad infinitum,
+  cosmic matter would end up being nothing more than interlaced
   instances of two fundamental forces:  attraction and repulsion.
 
   This system reconciles Arthur Schopenhauer with Empedocles.
@@ -210,9 +265,12 @@ Bottoms up
     https://en.wikisource.org/wiki/Lives_of_the_Eminent_Philosophers/Book_VIII#Empedocles
   */
   This system makes some paradoxes not paradoxical.
-  For instance: "mass is energy with a wrong unit" ( m  =  E / c² ), or "particles and waves are just points of view".
+  For instance: "mass is energy with a wrong unit" ( m  =  E / c² ),
+  or "particles and waves are just points of view".
 
-  Said system belongs to a discipline called Metaphysics. The study of first principles. An attempt to know the unknowable.
+  Said system belongs to a discipline called Metaphysics.
+  The study of first principles.
+  An attempt to know the unknowable.
   Peremptory pedantic bullshit.
 
   Anyway, let's pretend dogmatism is ok.
@@ -222,35 +280,35 @@ Bottoms up
   Is it valid? Yes. Why?
 
   Addition is valid if used on commensurable variables.
-  
+
     1 apple + 1 apple  makes 2 apples.
     1 apple + 1 orange makes no sense... Or 2 fruits.
-  
+
   What makes 2 variables commensurable is the amount of data we choose to ignore:
-  
-    1 red apple of variety "Altländer Pfannkuchenapfel" and radius 2.76 centimeters
+
+    1 red apple of variety "Altländer Pfannkuchenapfel" and radius 2.76 centimetres
       +
-    1 yellow apple of variety "Winter Banana" and radius 3.01 centimeters
+    1 yellow apple of variety "Winter Banana" and radius 3.01 centimetres
       =  ???
-  
+
   "Two apples, you pedantic dumbass." -- Exactly, thank you very much.
-  
+
   As well as:
-  
+
     1 human race  +  1 big pile of shite  =  2 things (unless they're the same thing...)
 
   OBJECTION:
-  
+
   If I have three apples that's 3 * 1 apple.
   The dimension of 1 apple is "apple", the dimension of 3 is "none".
   So incommensurability does not always forbid mathematical operations.
-  
+
   Good point, thank you.
   How much is  1 apple + 3 seconds  ?
   The commensurability rule only stands for additions. But what is a multiplication?
   Isn't 3 * 1 apple a short way of writing 1 apple + 1 apple + 1 apple?
   Isn't  pow (x, n)  just:
-  
+
     for (int i = 1; i < n; i++;)
     {
       for (int j = 1; j < x; j++;)
@@ -258,20 +316,20 @@ Bottoms up
         x += x;
       }
     }
-  
+
   ?
-  
-  Εxample:  3^5  =  3 * 3 * 3 * 3 * 3  =  3 * (3 * (3 * (3 * 3)))
 
-       3  / 3  / 3  / 3   \\\
-    =  Σ (  Σ (  Σ (  Σ 3  )))
-       1  \ 1  \ 1  \ 1   ///
+  Example:  3⁵ = 3·3·3·3·3 = 3·(3·(3·(3·3)))
+
+       3 ╭ 3 ╭ 3 ╭ 3   ╮╮╮
+    =  Σ │ Σ │ Σ │ Σ 3 │││
+       1 ╰ 1 ╰ 1 ╰ 1   ╯╯╯
 
 
-  (Let's save subtration, division and logarithm for later.)
-  
+  (Let's save subtraction, division and logarithm for later.)
+
   My point is made: addition is only valid once you ignore a sufficient amount of data.
-  
+
   This ignorance of data is called a concept.
 
 
@@ -279,45 +337,55 @@ Bottoms up
 
 
 
------------------------------------------------------------------------------------------------
-/*          "Heavier-than-air flying machines are impossible."                               */
-/*                                                           --  Lord Kelvin (1895)          */
-/*                                                                                           */
-/*          "Do not attempt to boost and attenuate simultaneously on the low frequencies."   */
-/*                                                  --  Pultec (EQP-1A user manual)          */
-/*                                                                                           */
-/*          "No rule is the first rule!"                                                     */
-/*                                                    --  Abrasive Wheels (No rule)          */
-/*                                                                                           */
-/*          "Women are not worthy of life."                                                  */
-/*                                               --  Saint Peter (Gospel of Thomas)          */
-/*                                                                                           */
-/*          "I fought the law and I won."                                                    */
-/*                                              --  Jello Biafra (I fought the law)          */
-/*                                                                                           */
-/*          "Earth is flat."                                                                 */
-/*                                             --  your neighbour? (anonymous post)          */
-/*                                                                                           */
-/*          "A meta-quote is better than a quote by definition."                             */
-/*                                    --  Working-class filter design (Annexe, #03)          */
-===============================================================================================
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Heavier-than-air flying machines are impossible."                                   */
+/*                                                               ——  Lord Kelvin (1895)          */
+/*                                                                                               */
+/*          "Do not attempt to boost and attenuate simultaneously on the low frequencies."       */
+/*                                                      ——  Pultec (EQP-1A user manual)          */
+/*                                                                                               */
+/*          "No rule is the first rule!"                                                         */
+/*                                                        ——  Abrasive Wheels (No rule)          */
+/*                                                                                               */
+/*          "Women are not worthy of life."                                                      */
+/*                                                   ——  Saint Peter (Gospel of Thomas)          */
+/*                                                                                               */
+/*          "I fought the law and I won."                                                        */
+/*                                                  ——  Jello Biafra (I fought the law)          */
+/*                                                                                               */
+/*          "Earth is flat."                                                                     */
+/*                                                 ——  your neighbour? (anonymous post)          */
+/*                                                                                               */
+/*          "A meta-quote is better than a quote by definition."                                 */
+/*               ——  Working-class filter design (Annexe, "A good law is a broken law")          */
+===================================================================================================
 A good law is a broken law
-===============================================================================================
+===================================================================================================
 
   For centuries, square-rooting a negative number was a big no-no.
-  Let's say you were happily discriminating a polynomial on your spare time like a normal person would.
+  Let's say you were happily discriminating a polynomial on your spare time
+  like a normal person would.
   And you ended up with negative numbers inside square roots.
   You had to stop and obey the commandment.
 
-  Mathematicians started to think: "Come on, if ontological proof is ok, I'm not denying myself a workaround."
+  Mathematicians started to think:
+  "Come on, if ontological proof is ok, I'm not denying myself a workaround."
   (That's why you don't touch people's polynomials.)
+                      ____
+  If we define:  i = √ —1
+  then we can factor it out each time a square root receives a negative argument.
+  Who's hurt?
+  Turns out it allows a generalisation:
+  any number in the set of complex numbers
+  can take any number in the set of complex numbers as its exponent.
 
-  If we define:  i = √(-1)  then we can factor it out each time a square root receives a negative argument. Who's hurt?
-  Turns out it allows a generalisation: any number in the set of complex numbers can take any number in the set of complex numbers
-  as its exponent.  E.g.  (-6.66)^(1/16)  or  z^i
-  Also turns out physicists and engineers ended up happy to have it ready to serve (Chapter I...).
+  E.g.:  (—6.66)⁽¹ᐟ¹⁶⁾  or  zⁱ
 
-  Lucky any question is allowed in mathematics and physics don't have to ask them first and wait for centuries.
+  Also turns out physicists and engineers ended up happy to have it ready to serve
+  (Chapter I...).
+
+  Lucky any question is allowed in mathematics
+  and physics don't have to ask them first and wait for centuries.
   If mathematics were forced to have a point, they would have no point.
   Expecting maths to be immediately useful is asking physics to know the unknown.
 
@@ -327,11 +395,15 @@ A good law is a broken law
   Anyone can answer a question. It takes Freedom to ask it.
   The powers in place hate Freedom as much as they need it.
 
-  During a storm there's a voltage across the air between the sky and the earth. Sometimes lightning strikes.
-  But before it happens we have U ≠ 0 and I = 0.
-  So Ohm's law gives  R  =  U / 0.
-  And it makes perfect sense: infinite Resistance is the extreme case that characterises an insulator.
-  So  x / 0  =  sign (x) * ∞  makes logical sense and is the best way to describe a real-life phenomenon.
+  During a storm there's a voltage across the air between the sky and the earth.
+  Sometimes lightning strikes.
+  But before it happens we have  U ≠ 0  and  I = 0 .
+  So Ohm's law gives  R = U/0 .
+  And it makes perfect sense:
+  infinite Resistance is the extreme case that characterises an insulator.
+
+  So  x/0  =  sign(x) · ∞
+  makes logical sense and is the best way to describe a real-life phenomenon.
 
   I've heard someone say "only god is allowed to divide by zero".
 
@@ -339,27 +411,37 @@ A good law is a broken law
 
   ...
 
-  Still waiting......  --  Nothing to prove, have you? -- Classy move. Giordano Bruno says hi.
+  Still waiting......  ——  Nothing to prove, have you? —— Classy move. Giordano Bruno says hi.
 
   Never mind, let's move on.
 
-  If I define, say:  ι  =  1 / 0  then I can factor it out each time a division by zero shows up. Who's hurt?
-  The issue then is that since ι = +∞, using it with distinct factors produces distinct infinities.
+  If I define, say:  ι = 1/0
+  then I can factor it out each time a division by zero shows up.
+  Who's hurt?
+  The issue then is that since  ι = +∞ ,
+  using it with distinct factors produces distinct infinities.
   But Set theory seems fine with this issue.
 
   https://en.wikipedia.org/wiki/Set_theory
 
   Thought I had a genius idea. Got all excited.
-  Turns out ignorance had made me presumptuous: Bernhard Riemann got here first. Congrats Bernie!
+  Turns out ignorance had made me presumptuous: Bernhard Riemann got here first.
+  Congrats Bernie!
   If anything it was genius plagiarism... (Not much to brag about!)
 
   https://en.wikipedia.org/wiki/Riemann_sphere
 
   It's alright: Truth is all, ego is the insecure's disease.
   I'm not jealous of Riemann: I like him now!
+  /*
+    Edit from the future:
+      I've followed this instinct,
+      and it turns out I really, really, really like Bernhard Riemann now.
+  */
 
   But I wouldn't say that I found nothing.
-  There's a historical pattern from which one can extract the recipe for genius ideas (gather and hunt or learn agriculture):
+  There's a historical pattern from which one can extract the recipe for genius ideas
+  (gather and hunt or learn agriculture):
 
     The answer to  "you can't do that"  is  "wanna bet?".
 
@@ -371,51 +453,72 @@ A good law is a broken law
       https://en.wikisource.org/wiki/Proslogion#Chapter_III
         "
          [I]f that than which no greater can be conceived can be conceived not to exist;
-         it follows that that than which no greater can be conceived is not that than which no greater can be conceived
-         [for there can be thought a greater than it, namely, an object whose non-existence shall be inconceivable];
+         it follows that that than which no greater can be conceived
+         is not that than which no greater can be conceived
+         [for there can be thought a greater than it,
+         namely, an object whose non-existence shall be inconceivable];
          and this brings us to a contradiction.
-         And thus it is proved that that thing than which no greater can be conceived exists in so true a sense,
-         that it cannot even be conceived not to exist: and this thing art Thou, O Lord our God!
+         And thus it is proved that that thing
+         than which no greater can be conceived
+         exists in so true a sense,
+         that it cannot even be conceived not to exist:
+         and this thing art Thou, O Lord our God!
         "
-                                                                               -- Saint Anselm of Canterbury (Proslogion, 1077-1078)
+                                  —— Saint Anselm of Canterbury (Proslogion, 1077-1078)
 
-        Dear Anselm, thank you for exposing the limits of your understanding with such humility. You must be a true Christian.
-        Whatever subjective meaning you associate with "great", you're describing something that cannot not exist because of how you conceive it.
+        Dear Anselm, thank you for exposing the limits of your understanding with such humility.
+        You must be a true Christian.
+        Whatever subjective meaning you associate with "great",
+        you're describing something that cannot not exist because of how you conceive it.
         So... a concept that exists by definition.
-        You're obviously begging for a beginner-level logic tutorial. Your almighty Lord answered your prayers many centuries before your birth
-        (It obviously loves you back).
+        You're obviously begging for a beginner-level logic tutorial.
+        Your almighty Lord answered your prayers many centuries before your birth
+        (it obviously loves you back).
 
       https://en.wikisource.org/wiki/Posterior_Analytics_(Bouchier)/Book_II/Chapter_VII
         "
-         It is necessary, in order to learn the nature of Man or of anything else, to know that the subject in question exists;
-         for no one can know the nature of the non-existent, but only what its name or other designation signifies, as when I say e.g. ‘Goatstag’;
+         It is necessary, in order to learn the nature of Man or of anything else,
+         to know that the subject in question exists;
+         for no one can know the nature of the non-existent,
+         but only what its name or other designation signifies,
+         as when I say e.g. ‘Goatstag’;
          for the nature of a goatstag it is impossible to know.
-         Moreover, though one may prove both the nature of a thing and that it exists, how can it be possible to do so by one and the same method?
-         Definition and demonstration each prove one single thing; but ‘what man is,’ and ‘that man exists’ are two different questions.
+         Moreover, though one may prove both the nature of a thing and that it exists,
+         how can it be possible to do so by one and the same method?
+         Definition and demonstration each prove one single thing;
+         but ‘what man is,’ and ‘that man exists’ are two different questions.
         "
-                                                                               -- Aristotle [384 – 322 BC] (Organon, Posterior Analytics, Book II, Chapter 7)
+                                —— Aristotle [384 – 322 BC]
+                                     (Organon, Posterior Analytics, Book II, Chapter 7)
 
-        I won't reproduce the full text of the Organon. But in short: the word "is" sometimes means "exists". This is called "homonymy".
-        Interchangeable use of homonyms is a logical fallacy (when done on purpose it's an example of what is called a sophism).
-        "What is it?" and "is it?" are distinct questions. First is about essence, second is about existence.
-        Essence relies on definition. Existence relies on demonstration.
+        I won't reproduce the full text of the Organon.
+        But in short: the word "is" sometimes means "exists".
+        This is called "homonymy".
+        Interchangeable use of homonyms is a logical fallacy
+        (when done on purpose it's an example of what is called a sophism).
+        "What is it?" and "is it?" are distinct questions.
+        First is about essence, second is about existence.
+        Essence relies on definition.
+        Existence relies on demonstration.
         E.g.:
-          "I think therefore I am"                                -> demonstration (existence)
-          "A triangle with four angles"                           -> definition (essence)
-          "A four-angled triangle which thinks and therefore is"  -> ontological nonsense
+          "I think therefore I am"                                —> demonstration (existence)
+          "A triangle with four angles"                           —> definition (essence)
+          "A four-angled triangle which thinks and therefore is"  —> ontological nonsense
 
       https://en.wikipedia.org/wiki/Ontological_argument#Kurt_Gödel
         "Axiom 3: The property of being God-like is positive"
 
         Ain't that cheating, Kurt?
         I must acknowledge your unique gift: your parody of Spinoza is hilarious.
-        (Petitio principii, et caetera. Everyone should read the Organon blah blah blah...)
+        (Petitio principii, et cetera. Everyone should read the Organon blah blah blah...)
 
-      We wouldn't be having this boring debate if believers just understood the difference between believing and knowing.
+      We wouldn't be having this boring debate
+      if believers just understood the difference between believing and knowing.
       Also the difference between "not proven to exist" and "proven not to exist".
       Your faith was never in danger, dummy.
 
-      But since we seem to be playing the definition game, please explain how something both infinitely powerful AND infinitely good
+      But since we seem to be playing the definition game,
+      please explain how something both infinitely powerful AND infinitely good
       creates injustice.
 
       https://en.wikipedia.org/wiki/Giordano_Bruno#Imprisonment,_trial_and_execution,_1593–1600
@@ -426,23 +529,23 @@ A good law is a broken law
 
 
 
------------------------------------------------------------------------------------------------
-/*          "Don't know what I want but I know how to get it."                               */
-/*                                            --  Johnny Rotten (Anarchy in the UK)          */
-===============================================================================================
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Don't know what I want but I know how to get it."                                   */
+/*                                                ——  Johnny Rotten (Anarchy in the UK)          */
+===================================================================================================
 I'm so much more nihilistic than you are that I'm not even nihilistic
-===============================================================================================
+===================================================================================================
 
   Empty section. So what?
 
 
 
------------------------------------------------------------------------------------------------
-/*          "Ce qu'il y a de certain c'est que moi, je ne suis pas Marxiste."                */
-/*                                                             --  Karl Marx (1882)          */
-===============================================================================================
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Ce qu'il y a de certain c'est que moi, je ne suis pas Marxiste."                    */
+/*                                                                 ——  Karl Marx (1882)          */
+===================================================================================================
 No epigone is a free thinker
-===============================================================================================
+===================================================================================================
 
   In a very messy progress. But drafts do exist.
 
@@ -450,14 +553,14 @@ No epigone is a free thinker
 
 
 
------------------------------------------------------------------------------------------------
-/*          "[The inquisitors] had the desire to serve freedom                               */
-/*           and promote the common good                                                     */
-/*           and did everything possible to save [Giordano Bruno's] life."                   */
-/*                                   -- Cardinal Angelo Sodano (17th February 2000)          */
-===============================================================================================
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "[The inquisitors] had the desire to serve freedom                                   */
+/*           and promote the common good                                                         */
+/*           and did everything possible to save [Giordano Bruno's] life."                       */
+/*                                       —— Cardinal Angelo Sodano (17th February 2000)          */
+===================================================================================================
 The R word
-===============================================================================================
+===================================================================================================
 
   History is written by winners... That's partially true.
   History is written by everybody in real time. It's called lying.
@@ -474,76 +577,93 @@ The R word
 
   Ho no! He was president, this cannot be revisionism... Got my answer it seems.
 
-  Plato (and everybody after him): Sophists are evil, they twist language to make you agree to faulty logic.
-  Quietly bury Protagoras in the infamous common grave and start pretending Idealism came before Empiricism.
-  That's proper obscurantism -- proper revisionism -- from the guy credited for inventing Philosophy...
+  Plato (and everybody after him):
+  Sophists are evil, they twist language to make you agree to faulty logic.
+  Quietly bury Protagoras in the infamous common grave
+  and start pretending Idealism came before Empiricism.
+  That's proper obscurantism —— proper revisionism ——
+  —— from the guy (self-?)credited for inventing Philosophy...
 
   Losers write History as much as winners do. If you don't read them, it's on you.
 
   History is just story with a pretentious prefix.
   If someone powerful enough lied in the past, History is a fiction.
   A whole system of values could very well rely on a 2000-year-old lie.
-  
+
   Asking questions is therefore legitimate. And it never hurts anyone fully honest.
-  
+
   Revisionism is not asking questions. It's a dogmatic affirmation.
-  
+
   The most vicious kind of lie: instead of saying something while knowing it's false,
   you say something without caring whether it's true.
   You discard truth.
-  
+
   Here's the fundamental difference between:
-  
+
     "Do we know for sure that Judas Iscariot actually existed?"
-  
+
   and:
-  
+
     "Gas chambers never happened."
-  
+
   First asks for proofs and refuses dogmatism.
-  Second neglects the very concept of proof and tries to impose dogmatism. Probably for disgusting reasons in this very case.
-  
-  Same difference between "I believe god exists" and "god definitely exists, you ignorant Babylonian prostitute".
-  
+  Second neglects the very concept of proof and tries to impose dogmatism.
+  Probably for disgusting reasons in this very case.
+
+  Same difference between:  "I believe god exists"
+  and:  "god definitely exists, you ignorant Babylonian prostitute".
+
   You've read Immanuel Kant of course.
-  So you know that's one of his four unanswerable questions in Amphibology of the pure Reason...
+  So you know that's one of his four unanswerable questions
+  in Amphibology of the pure Reason...
   "I know the Universe is infinite". No you don't. Because you can't.
-  
+
   And that's good news for believers:
-  no matter how far Science pushes the frontiers of knowledge, there will always be room left for faith.
+  no matter how far Science pushes the frontiers of knowledge,
+  there will always be room left for faith.
   Because Physics is not Metaphysics. By definition.
-  
-  I like knowing too much and I'm comfortable with ignorance. So I believe in shit.
+
+  I like knowing too much, and I'm comfortable with ignorance.
+  So I believe in shit.
   But being comfortable with ignorance, I can accept what I don't understand.
   Your faith for instance.
   You need to believe? Please believe!
   But don't try to convince me that your beliefs are factual truths.
-  There's no metaphysical fact -- by both definitions.
+  There's no metaphysical fact —— by both definitions.
 
-  Another kind of vicious lie -- that also applies to revisionism -- is stating subjective judgments as objective truths.
+  Another kind of vicious lie —— that also applies to revisionism ——
+  —— is stating subjective judgements as objective truths.
 
-  For instance "Spinoza was a misogynist". It's neither true or false. (i.e. outside the scope of logic: excluded middle)
-  Spinoza tried to prove that women should not vote in his Political treatise. That's a fact.
+  For instance "Spinoza was a misogynist".
+  It's neither true or false.
+  (i.e. outside the scope of logic: excluded middle)
+  Spinoza tried to prove that women should not vote in his Political treatise.
+  That's a fact.
 
-  But if he tried to answer the question, it means he first asked it -- mid 17th century...
+  But if he tried to answer the question,
+  it means he first asked it —— mid 17th century...
   The word "feminist" has no meaning in such a context.
 
-  But Spinoza probably comes close to what it could have been by not systematically accepting the common dogma --
-  -- or at least questioning it.
+  But Spinoza probably comes close to what it could have been
+  by not systematically accepting the common dogma ——
+  —— or at least questioning it.
 
   Of course his answer was biased and he could have done better.
   But better by today's standards.
   Despite the appearances, he was ahead of his time.
 
-  I'm not saying his arguments are worth anything -- but I respect questions more than answers:
-  answers quickly become obsolete, some questions are eternal.
+  I'm not saying his arguments are worth anything ——
+  —— but I respect questions more than answers:
+  answers quickly become obsolete,
+  some questions are eternal.
 
   Newton's answers became obsolete because Einstein asked Newton's questions.
   Einstein's answers will be made obsolete by someone asking Einstein's questions.
   Which are still Anaxagoras', or even Thales' questions.
 
 
-  Valid syllogisms using tacitly shifted definitions harm the very concept of truth in an insidious way.
+  Valid syllogisms using tacitly shifted definitions
+  harm the very concept of truth in an insidious way.
 
   "History is our shared memory".
 
@@ -552,9 +672,12 @@ The R word
   It serves as a substitute for the shared memory we don't have.
   It's a workaround for global oblivion.
 
-  I don't remember the Peloponnesian war. I don't remember Louise Michel's fair trial.
+  I don't remember the Peloponnesian war.
+  I don't remember Louise Michel's fair trial.
 
-  Herodotus wrote a book. So did Dante Alighieri.
+  Herodotus wrote a book.
+  So did Dante Alighieri.
+
 
   Fallacious definitions even reach the word "truth" itself.
 
@@ -563,16 +686,59 @@ The R word
 
   I'm in the desert. I see a mirage.
   I say "I see water".
-  I didn't lie -- yet it's not true.
+  I didn't lie —— yet it's not true.
 
 
 
------------------------------------------------------------------------------------------------
-/*          "Alle Menschen werden Brüder wo dein sanfter Flügel weilt."                      */
-/*                                            -- Friedrich Schiller (An die Freude)          */
-===============================================================================================
+===================================================================================================
+δαίμονε
+===================================================================================================
+
+  Platon le mythomane s'est appelé φιλόσοφος
+    parce qu'il n'était pas Sage.
+
+  Le traumatisé, ne parvenant à haïr son bourreau,
+    en a fait une aimable fiction.
+
+  Platon n'a pas témoigné au procès parce qu' "il est malade"...
+  Sa maladie s'appelle le syndrome de Stockholm.
+
+  Xénophon et Platon ont chacun rédigé un plaidoyer.
+  Le mensonge est leur seul point commun.
+  Ils ont effacé un crime qu'ils ne savaient souffrir.
+
+  Leur lâcheté a innocenté un pédophile et légalisé le mensonge.
+
+  Le banquet est une récidive :
+    le décor est posé, le pervers aviné se réjouit de
+  l'entourage des beaux garçons —— Platon est prêt, il va témoigner...
+  Il s'envole de pétoche et se planque quelque part
+    entre les étoiles fixes et ses Idées saugrenues.
+
+  L'idéalisme venait de naître.
+  L'idéalisme est un déni.
+
+  Dans le Ménon, Platon dissèque une agonie
+    avec le sadisme le plus méticuleux.
+  Un meurtre psychanalytique…
+  Il s'est excusé en immortalisant l'âme.
+  L'idéalisme est une lâcheté.
+
+  Dans les Lois, le démon de Platon est enfin exorcisé.
+  Trop tard. Les menteurs ont déjà une République.
+  L'idéalisme est une pandémie.
+
+  Platon le mythomane s'est appelé φιλόσοφος
+    et les Sages ont disparu.
+
+
+
+---------------------------------------------------------------------------------------------------
+/*          "Alle Menschen werden Brüder wo dein sanfter Flügel weilt."                          */
+/*                                                -- Friedrich Schiller (An die Freude)          */
+===================================================================================================
 The [ A , ... , Z ] words
-===============================================================================================
+===================================================================================================
 
   Conspiracism is not a social disease.
   It's a social symptom.
@@ -580,7 +746,8 @@ The [ A , ... , Z ] words
 
   Conspiracists are not evil. They are not stupid.
   They are depressed. Traumatised.
-  They have been lied to so many times that they've lost trust in pretty much everything.
+  They have been lied to so many times
+  that they've lost trust in pretty much everything.
   They've become paranoid and desperately eager to meet anyone honest.
   It makes them very easy to manipulate.
 
@@ -589,21 +756,31 @@ The [ A , ... , Z ] words
 
   Now I'm addressing conspiracists directly.
   This constant urge to blame Israel for everything immoral is not rational.
-  It's also pointless: its government, at the time of writing, is committing a genocide -- a crime against humanity.
+  It's also pointless:
+  its government, at the time of writing, is committing a genocide ——
+  —— a crime against humanity.
   Does the Godwin point really need further charges?
 
-  I get the logic: you've found out that humanity is monstrous and it broke you.
-  Somehow if "all humans" is replaced with "only the Jews" -- reality becomes a lesser evil.
+  I get the logic:
+  you've found out that humanity is monstrous and it broke you.
+  Somehow if "all humans" is replaced with "only the Jews" ——
+  —— reality becomes a lesser evil.
   But reality doesn't obey your denial.
   And racism cannot possibly be the answer to injustice.
 
-  Narcissism is not an ethnical feature. Genetics won't excuse it.
+  Narcissism is not an ethnic feature.
+  Genetics won't excuse it.
 
-  Explain Rwanda otherwise -- a social class exterminating a social class -- regardless of ethnicity -- nobody Jewish involved.
+  Explain Rwanda otherwise ——
+  —— a social class exterminating a social class ——
+  —— regardless of ethnicity —— nobody Jewish involved.
 
-  "Epstein is a paedophile -- he's Jewish -- ergo: paedophile = Jewish"... Come on.
+  "Epstein is a paedophile —— he's Jewish —— ergo: paedophile = Jewish"
+  ...
+  Come on.
   How much more faulty can logic get?
-  Plus Catholic church as a world-wide leader in this discipline will be hard to beat.
+  Plus, Catholic church, as a world-wide leader in this discipline,
+  will be hard to beat.
   Christians have not been Jewish for generations of generations. Amen.
 
   You seek people like you? Sick of all the lies?
@@ -615,14 +792,24 @@ The [ A , ... , Z ] words
 
 
 
------------------------------------------------------------------------------------------------
-/*          "Aggressive nations understand only the threat of force."                        */
-/*                                                      -- Margaret Thatcher (1950)          */
-/*          "I shall never stop fighting."                                                   */
-/*                                                      -- Margaret Thatcher (1975)          */
-===============================================================================================
+===================================================================================================
+der Fall Nazismus
+===================================================================================================
+
+  Hans Asperger le traître a torturé et massacré des enfants
+    parce qu'il n'a pas compris Zarathustra.
+  La bêtise est un crime contre l'Humanité.
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Aggressive nations understand only the threat of force."                            */
+/*                                                          —— Margaret Thatcher (1950)          */
+/*          "I shall never stop fighting."                                                       */
+/*                                                          —— Margaret Thatcher (1975)          */
+===================================================================================================
 The sole difference between a psychopath and a narcissist is passage to the act
-===============================================================================================
+===================================================================================================
 
   Not "all humans"... Just the loud ones.
   No surprise: narcissism comes with a pathological craving for attention.
@@ -630,116 +817,179 @@ The sole difference between a psychopath and a narcissist is passage to the act
   It's a disease too.
   They're not happy either.
   They harm because they suffer.
-  They suffer because they don't understand what Freedom is or how self-esteem works.
-  They hurt (transitive and reflective) because they don't know that they don't understand.
-  They believe they know what there is to know, they believe they do what happiness requires.
+  They suffer because they don't understand what Freedom is
+    or how self-esteem works.
+  They hurt (transitive and reflective)
+    because they don't know that they don't understand.
+  They believe they know what there is to know,
+    they believe they do what happiness requires.
   And when it fails, they blame the universe.
-  They feel attacked by reality itself and persist in defensive mechanisms.
+  They feel attacked by reality itself
+    and persist in defensive mechanisms.
   They're never at rest.
   They fix problems with bigger problems.
-  Their frustration feeds their anger. Their anger feeds their frustration.
-  They're exponentially bitter. Exponentially despised...
+  Their frustration feeds their anger.
+    Their anger feeds their frustration.
+  They're exponentially bitter.
+    Exponentially despised...
   Self-oscillation up to illusion of legitimate revenge.
   Cosmic annihilation in Holocaust for the Holy Ego...
 
   The spoiled children of today are the assholes of tomorrow.
 
-  They get what they want just by wanting it. They never learn independence.
-  They're paralysed by material comfort. They never learn Freedom.
-  They never learn how to solve problems, because they never have problems.
-  They acquire, they possess -- they'll never create.
-  They destroy. Because it gives the illusion of power. Because it's easy.
-  Unconditional love and systematic approval makes them strangers to the concept of merit.
-  They never learn to question themselves, they're right by definition.
+  They get what they want just by wanting it.
+    They never learn independence.
+  They're paralysed by material comfort.
+    They never learn Freedom.
+  They never learn how to solve problems,
+    because they never have problems.
+  They acquire, they possess ——
+    —— they'll never create.
+  They destroy.
+    Because it gives the illusion of power. Because it's easy.
+  Unconditional love and systematic approval
+    makes them strangers to the concept of merit.
+  They never learn to question themselves,
+    they're right by definition.
   Adulthood is a fall from Heaven.
   They're not prepared.
   They will cheat, keep not learning and keep cheating...
   They will wear masks and take shortcuts.
   They will never have a friend.
-  They will never learn courage. They will remain cowards.
-  They will feed on other's weaknesses and mistake dependency for domination.
-  They will destroy other's self-confidence because they don't have one.
-  Because it gives the illusion of power. Because it's easy.
+  They will never learn courage.
+    They will remain cowards.
+  They will feed on other's weaknesses
+    and mistake dependency for domination.
+  They will destroy other's self-confidence
+    because they don't have one.
+    Because it gives the illusion of power. Because it's easy.
   They will live fake, they will be fake.
   Pretenders, performers.
-  They will feel threatened by anything or anyone contradicting their denial.
+  They will feel threatened by anything or anyone
+    contradicting their denial.
   The dogma of their inherent innate overall superiority.
   They will hate themselves and lie to themselves about it.
-  They will be jealous and revengeful towards happiness and innocence.
+  They will be jealous and revengeful
+    towards happiness and innocence.
   They will abhor beauty and fear Freedom.
-  They will keep destroying. Because it gives the illusion of power. Because it's easy.
+  They will keep destroying.
+    Because it gives the illusion of power. Because it's easy.
   They will project their hate on everyone and everything.
   They will hate. They will hurt. They will hate. They will hurt.
-  And every time it will be easy and safe enough -- they will kill.
-  Because it gives the illusion of power. Because it's easy.
+  And every time it will be easy and safe enough ——
+    —— they will kill.
+    Because it gives the illusion of power. Because it's easy.
 
-  Villains are not interesting people. They know it deep inside. And they blame the world for it.
+  Villains are not interesting people.
+  They know it deep inside.
+  And they blame the world for it.
 
   I guess they deserve compassion as much as the next guy does...
   Not sure my guts have what it takes.
 
 
 
-===============================================================================================
+===================================================================================================
 Moronic apophthegms
-===============================================================================================
+===================================================================================================
 
   //  The "time is money" psychological type
-  You look at something as mysterious, wonderfully paradoxical, as time --
-  -- and think: "I could turn it into profit"...
-  You look at a prodigy of evolution with seven stomachs that can digest almost any matter and think: "steak"...
+  You look at something as mysterious,
+    wonderfully paradoxical, as time ——
+    —— and think: "I could turn it into profit"...
+  You look at a prodigy of evolution
+    with seven stomachs
+    that can digest almost any matter
+    and think: "steak"...
 
-  You're the embodiment of pollution, a beauty-spoiling machine --
-  -- you know one object: the commodity --
-  -- you know one unit of measure: the dollar.
-  The Cosmos is one big pile of gross approximated undistinguishable soul-less matter in your petty short-circuit of a brain.
+  You're the embodiment of pollution,
+    a beauty-spoiling machine ——
+    —— you know one object: the commodity ——
+    —— you know one unit of measure: the dollar.
+  The Cosmos is one big pile
+    of gross approximated undistinguishable soul-less matter
+    in your petty short-circuit of a brain.
 
-  You're the opposite of a creator: you turn matter into void.
+  You're the opposite of a creator:
+    you turn matter into void.
 
-  Because, of course, you need money to buy all you're unable to create.
-  You need it to pay for your unhealthy food and the mediacl bills that come with it;
-  you need it to pay for a bigger car than your neighbour's, so that every one knows how insecure you are;
+  Because, of course, you need money
+    to buy all you're unable to create.
+  You need it to pay for your unhealthy food
+    and the medical bills that come with it;
+  you need it to pay for a bigger car than your neighbour's,
+    so that every one knows how insecure you are;
   so that you can hate yourself a bit more,
-  and look for the next piece of emptiness that will fail at fulfilling the nothingness you persist on being.
+  and look for the next piece of emptiness
+    that will fail at fulfilling
+    the nothingness you persist on being.
 
-  But mostly: to buy toilet paper — because you're the emperor of bed-shitters.
+  But mostly: to buy toilet paper ——
+    —— because you're the imperator of bed-shitters.
 
   Time is not money. By definition.
   Time is one quarter of everything.
-  Money is a pretentious word for debt. It's literally negative.
+  Money is a pretentious word for debt.
+  It's literally negative.
 
 
   //  Meta-definition 101
-  Doing the exact same thing twice and expecting different results is not the exact definition of madness.
-  It's how you learn how to play of a musical instrument for instance.
+  Doing the exact same thing twice and expecting different results
+    is not the exact definition of madness.
+  It's how you learn how to play of a musical instrument
+    for instance.
 
-  At the climax of a hallucinatory paranoid delirium -- as long as I don't repeat anything, I'm not mad?
+  At the climax of a hallucinatory paranoid delirium ——
+    —— as long as I don't repeat anything,
+    I'm not mad?
   That's convenient, thanks doc!
 
-  Exponentiating the same failure as if quantity was all and quality was nothing --
-  -- saying that kind of bullshit and believing it makes you shine --
-  -- that's closer to madness -- or rather profound stupidity.
+  Exponentiating the same failure as if quantity was all
+    and quality was nothing ——
+  —— saying that kind of bullshit
+    and believing it makes you shine ——
+  —— that's closer to madness ——
+    —— or rather profound stupidity.
 
 
 
-===============================================================================================
+===================================================================================================
 Cure neurotypicals now
-===============================================================================================
+===================================================================================================
 
-  Nous nous adonnons corps et âme à nos passions pour la seule raison qu'elles nous passionnent.
-  Nous n'obéissons qu'à notre volonté, notre loi intime. Nous sommes libres.
-  Nous sommes imperméables aux instincts de mimétisme d'une race de singes dans le déni, qui s'imite en cercles jusques à la méta-caricature;
-  qui danse la sarabande inébriante de de la vacuité exponentielle, et se croit immobile par absence de recul.
-  Qui fait pétition de tous ses principes, vérité de toutes ses apparences, fierté de toutes ses vanités.
+  Nous nous adonnons corps et âme à nos passions
+    pour la seule raison qu'elles nous passionnent.
+  Nous n'obéissons qu'à notre volonté, notre loi intime.
+    Nous sommes libres.
+  Nous sommes imperméables aux instincts de mimétisme
+    d'une race de singes dans le déni,
+    qui s'imite en cercles jusques à la méta-caricature;
+  qui danse la sarabande inébriante de de la vacuité exponentielle,
+    et se croit immobile par absence de recul.
+  Qui fait pétition de tous ses principes,
+    vérité de toutes ses apparences,
+    fierté de toutes ses vanités.
 
-  Nous sommes différents, nous sommes moins nombreux, nous sommes le problème.
+  Nous sommes différents,
+    nous sommes moins nombreux,
+    nous sommes le problème.
 
-  Ils nous voient à travers des barreaux et nous croient en cage.
-  Ils croient voir de la soufrance dans la pitié qu'ils nous inspirent.
+  Ils nous voient à travers des barreaux
+    et nous croient en cage.
+  Ils croient voir de la soufrance
+    dans la pitié qu'ils nous inspirent.
 
-  Ce qui ne leur ressemble pas est forcément malade. Ils confondent santé avec normalité.
-  Ce qui ne s'encombre pas de superficiel est forcément démuni. Ils confondent bonheur avec confort.
+  Ce qui ne leur ressemble pas
+    est forcément malade.
+    Ils confondent santé avec normalité.
+  Ce qui ne s'encombre pas de superficiel
+    est forcément démuni.
+    Ils confondent bonheur avec confort.
 
-  Quand la majorité aurait la peste, elle tâcherait de nous contaminer avec les meilleures intentions.
-  Quand les aléas de la génétique feraient naître un être incapable de vieillir et, partant, de mourir de vieillesse;
+  Quand la majorité aurait la peste,
+    elle tâcherait de nous contaminer
+    avec les meilleures intentions.
+  Quand les aléas de la génétique
+    feraient naître un être incapable de vieillir
+    et, partant, de mourir de vieillesse;
   la bienveillance des singes voudrait encor le guérir.

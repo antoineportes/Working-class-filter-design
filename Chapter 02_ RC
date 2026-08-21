@@ -1,0 +1,2421 @@
+###################################################################################################
+###################################################################################################
+                                    WORKING CLASS FILTER DESIGN
+###################################################################################################
+###################################################################################################
+
+###################################################################################################
+                                          Chapter II:  RC
+###################################################################################################
+/*          "Scuse me while I kiss the sky."                                                     */
+/*                                                       ——  Jimi Hendrix (Purple Haze)          */
+===================================================================================================
+#01  Do I know what a filter is?
+===================================================================================================
+
+  /*
+    EDIT (also: spoiler?):
+      Sections #01 to #05 are the vicissitudes of bottom-up intuition building.
+      Maths start at #06.
+  */
+
+  https://en.wikipedia.org/wiki/Separation_process
+
+  Being a caffeine addict, I should certainly hope so.
+  Some people enjoy Turkish coffee. Good for them. I don't.
+  I like the grains in my cup to be under a certain size.
+  And I choose my coffee filters accordingly.
+  Fine grains go in my cup, coarse grains go in the compost.
+  The sum of the fine grains in my cup and the coarse grains in the compost
+  is equal to the unfiltered coffee.
+
+  Maybe the coffee paradigm is not as irrelevant as it would seem
+  (Turkish people might disagree...).
+  We've written Chapter I together,
+  we know what a spectrum and its partials are.
+  Let "unfiltered coffee" be the name of a spectrum
+  and "grain" be an alias of "partial".
+  Now what could "coarse" and "fine" possibly mean?
+
+  All partials can very well have amplitude = 1 and phase = 0,
+  the spectrum remains a spectrum.
+  Their frequency is their identity.
+  Their frequency is linked by definition to their period.
+  So coarse could mean either "high frequency" or "long period".
+  And since we're free (aren't we?)
+  we can assign the pointer to what feels the most intuitive.
+  Frequency is abstract
+  (speed is not something you can see,
+  it's the first derivative of something you can see);
+  while a period is very palpable on a plot.
+  I'll assign "coarse" to "long period"
+  and "fine" to "short period".
+  Pull a request if you disagree.
+
+  It would mean that frequencies under a threshold set to my taste
+  would end up in the compost.
+  And "the filter" would remain "the filter".
+
+  But how would such a filter work?
+  How do we separate velocities?
+
+  I can think of a way,
+  but if you don't like my parables... well bad news.
+
+  //  Second paradigm: Lost in the woods.
+  A group of people is *lost* in the woods.
+  No known destination, just moving forward towards the unknown.
+  It's heavily raining and they're not dressed adequately.
+  They reach a crossroad.
+    #  One path is not covered by trees, the rain falls upon it.
+    #  One path has a gap over which you can jump
+       —— on the condition that you're fast enough.
+
+  Everyone wants to take the path they consider the easiest.
+  For fast people it means "no rain". (:= group H)
+  For slow people it means "no gap".  (:= group L)
+
+  The group splits.
+  I've filtered people based on their velocity.
+  Notice that group H + group L = initial group.
+
+  Now replace "people" with "electric potential",
+  "rainy path" with "Resistor"
+  and "gaped path" with "Capacitor".
+  You get what is called an RC circuit.
+  //  https://en.wikipedia.org/wiki/RC_circuit
+
+  /*
+    EDIT:
+    This is mainly bullshit, as the rest of the chapter will reveal.
+    We learn from our mistakes, don't we?
+    Well I've learnt a lot here!
+  */
+
+  Which path leads to the ground (compost)
+  and which to the output (coffee cup)
+  depends on whether you want a filter that
+  discards low frequencies and lets high frequencies pass (High-Pass filter);
+  or one that discards high frequencies and lets low frequencies pass (Low-Pass filter).
+
+  An RC circuit is an electrical circuit.
+  What is electricity?
+
+
+===================================================================================================
+#02  Electricity
+===================================================================================================
+
+  https://en.wikipedia.org/wiki/Conservation_of_energy             https://en.wikipedia.org/wiki/Entropy
+  https://en.wikipedia.org/wiki/First_law_of_thermodynamics        https://en.wikipedia.org/wiki/Second_law_of_thermodynamics
+  https://en.wikipedia.org/wiki/Proton                             https://en.wikipedia.org/wiki/Electron
+  https://en.wikipedia.org/wiki/Elementary_charge                  https://en.wikipedia.org/wiki/Neutron
+  https://en.wikipedia.org/wiki/Atom                               https://en.wikipedia.org/wiki/Ion
+  https://en.wikipedia.org/wiki/Electric_charge                    https://en.wikipedia.org/wiki/Electric_potential
+  https://en.wikipedia.org/wiki/Electrical_energy                  https://en.wikipedia.org/wiki/Electricity
+  https://en.wikipedia.org/wiki/Electric_potential                 https://en.wikipedia.org/wiki/Coulomb's_law
+  https://en.wikipedia.org/wiki/Electric_field                     https://en.wikipedia.org/wiki/Drift_velocity
+
+  Equilibrium comes out of movement.
+  Movement doesn't come out of equilibrium.
+  If the whole cosmos were to reach total equilibrium,
+  movement would become unrecoverable.
+  Everything would remain dead forever.
+
+  Luckily that's impossible.
+
+  Energy causes movement.
+  Energy changes form but it's indestructible.
+  So movement is eternal in both temporal directions.
+
+  Matter is made of various particles,
+  among which: atoms.
+  The structure of an atom is similar to the one of the solar system:
+  items gravitate around a bigger item.
+  In an atom the planets are called electrons.
+  The sun is called the nucleus
+  and is an aggregation of protons and neutrons.
+  Let's ignore neutrons.
+
+  Electrons repel electrons.
+  Protons repel protons.
+  Electrons and protons are attracted to each other.
+  Assuming a one-dimension space
+  (which is a valid assumption if we also assume two particles in isolation),
+  this reciprocal attraction could be represented with two vectors of opposite sign.
+  The sign of these vectors is called polarity.
+  Which means: electrons and protons have opposite polarities.
+  By convention, electrons get the minus sign
+  and protons get the positive sign.
+  Neutrons have a neutral polarity
+  (no contribution to attraction nor repulsion,
+  that's why we're ignoring them).
+
+  The amount of contribution to this attraction / repulsion phenomenon
+  is a property of matter called electric charge.
+  Usual symbol: Q (constant) or  q(t)  (varying).
+  A charge with positive polarity is called a positive charge;
+  a charge with negative polarity is called a negative charge.
+  (Also:  neutral polarity —> neutral charge.)
+
+  The charge of one proton and the charge of one electron
+  have an equal absolute value called elementary charge.
+  From where:
+    Equilibrium for an atom means equal number of protons and electrons.
+    (Neutral polarity, no urge to move.)
+    The atom is then said to be stable,
+    otherwise it is said to be unstable.
+  Sometimes a particle carrying an elementary charge (charge carrier)
+  is called a charge.
+  So the word charge can have two distinct meanings:
+  a particle,
+  or a property of matter
+  (quantitative or qualitative).
+  Beware of context.
+  (Here I'll try to stick with the qualitative meaning: the property of matter.)
+
+  An unstable atom has an electric charge.
+  It's called an ion.
+  Its protons are at the nucleus,
+  they cannot leave the atom without destroying it.
+  So the electric charge has to be due to a lack or an excess of electrons.
+
+  A positively charged atom is lacking one or several electrons.
+  It's called a cation.
+  A negatively charged atom has one or several extra electrons.
+  It's called an anion.
+  Cations attract electrons.
+  Anions repel electrons.
+
+  /*
+    Disclaimer:
+      We're in the field of electronics.
+      So in what follows, I'll ignore:
+            this:    https://en.wikipedia.org/wiki/Electrolyte
+        and this:    https://en.wikipedia.org/wiki/Plasma_(physics)
+
+    (I'm also ignoring Quantum physics
+    when boldly declaring "matter is made of various particles, among which: atoms".
+    If you find it lame and would rather read a 4000-line chapter —— I guess pull a request?)
+
+    EDIT:
+      There were no 4000+-line chapters yet when I wrote this...
+  */
+
+  Let's consider two clusters of ions
+  with different charges
+  somehow isolated from everything, even each other (more on that later).
+  Equilibrium requires that the more negative cluster
+  send electrons to the less negative one.
+  This results in an urge for electrons
+  to move from the more negative point to the more positive point.
+  THIS IS IMPORTANT:
+    Both points can have the same polarity (+ && + || — && —)
+    or not (+ && — || — && +),
+    as long as their charges differ,
+    electrons will have an urge to move.
+    In fact one of the two could even have a neutral charge:
+    if the other is positive it will attract electrons,
+    if it's negative the neutral point will attract electrons.
+  THIS IS ALSO IMPORTANT:
+    In case electrons somehow manage to move,
+    the equilibrium they will eventually reach will be relative.
+    Meaning that they will not move until both points have reached a neutral charge:
+    this can very well be impossible.
+    They will move until both points have the same charge
+    (which could be positive or negative).
+    Indeed, if their movement is from the more negative point to the more positive one,
+    equal charge prevents movement.
+
+  As long as our two clusters/points are isolated from each other,
+  there is an urge to move but no opportunity to move.
+  Aristotle would say there's movement in potency (δύναμις)
+  but not in actuality (ἐντελέχεια).
+  //  https://en.wikipedia.org/wiki/Potentiality_and_actuality
+  Modern physics call this phenomenon potential energy.
+
+  (I had a hard time understanding what follows
+  so I suggest you read it slowly.)
+  One charge carrier does not store potential energy on its own.
+  It could very well be in a stable atom.
+  And even that would in fact be irrelevant.
+  Potential energy comes from the proximity of points in matter with different electric charges.
+  Which means that the energy in one charge carrier
+  is dependent upon the other charge carriers that surround it.
+  So the greater the difference in charge between both points,
+  the greater the energy per charge at each point.
+  The energy per charge at one point
+  is called the electric potential (of said point).
+  Notice that the electrons' urge to move grows with the electric potential.
+
+  Coulomb's law adds: it also grows with the proximity of charges.
+  Good to know, we'll need it later.
+
+  Now let's assume the urge to move is somehow suddenly satisfied
+  (the charged points are now isolated from everything *but* each other).
+  If electrons can move, they will.
+  Potential energy becomes kinetic energy...
+  This sounds very generic.
+  We can go more microscopic than that.
+
+  Electric potential is a scalar (i.e. not a vector).
+  It has no direction.
+  It says how much a particle is urged to move —— not whereto.
+  If I say "Socrates is 70 years old",
+  you don't need more information to know Socrates' age.
+  Age is a scalar.
+  If I say "Pheidippides ran about 240 km",
+  you might want to know from where to where.
+  Distance is a scalar.
+  Sometimes a scalar lacks information,
+  like for instance "from Athens to Sparta".
+  Now Pheidippides' performance has a magnitude (about 240 km)
+  and a direction (from Athens to Sparta) ——
+  —— it's a vector.
+  The vector associated with electric potential
+  is called electric field.
+  It's called a field because it's actually several vectors
+  across the three dimensions of space,
+  originating from all points which contribute by having an electric potential.
+  (Their sum is counter-intuitively discrete: remember elementary charge.)
+  Addition can be performed on vectors,
+  so the electric field can be considered one vector
+  when focusing on one point in space.
+  Both conceptions peacefully co-exist mathematically.
+
+  Since we're building a universe from scratch
+  and so far only have two points with a difference in electric potential,
+  our electric field has one dimension:
+  its direction is from the more negative point to the more positive point ——
+  —— its magnitude is dependent upon said difference in electric potential.
+
+  /*
+    EDIT [a]:
+      I got wrong about many things, let me clarify.
+      The electric field's direction is actually opposite to what I wrote:
+      it goes from plus to minus.
+      The reason is that in the theory of electricity,
+      the reference charge is positive.
+      It's counter-intuitive in electronics
+      where only negative charge carriers move
+      but electronics is not all
+      (see links in last disclaimer for instance).
+      So a (relatively) negative electric potential
+      will attract the reference (positive) charge (it's called a test charge) ——
+      —— this attraction is real
+      even though the positive charge carriers that are attracted
+      might not end up being the ones moving.
+      (Imagine a very light magnet and a very heavy piece of iron:
+      the magnet is attracting the iron,
+      yet it's the one moving ——
+      —— or the iron is attracting the magnet...
+      both views are valid but we need to agree on a convention.
+      The convention for electricity is:
+      positive charges are attracted and repelled.)
+
+      And yes: I've just written "negative electric potential".
+      I never made it explicit
+      but "electric potential is a scalar"
+      implied "it has no sign" (or if it has one it's +).
+      This is false.
+      First of all, a scalar can have a sign:
+      Pheidippides ran about —240 km from Sparta to Athens
+      and Socrates could have —50 Drachmae on his bank account.
+
+      Charge in isolation has no energy.
+      It's the surrounding of other charges that defines its energy.
+      Actually, even this is false:
+      a particle has internal energy upon which its very structure relies.
+      Everything is dependent on everything
+      ——> we need a reference, a zero (think sea level).
+      In my following simplified examples
+      this zero will implicitly be "stable isolated atoms",
+      that is literally no (external) energy per charge.
+      Too abstract to be true, isn't it?
+      Real life is different indeed,
+      I'll probably elaborate on this matter at some point.
+
+      Anyway, once energy per charge has a zero-reference
+      it can take both signs.
+      A plus means positive charge is repelled,
+      and a minus means positive charge is attracted.
+  */
+
+  Now suddenly our two points are no longer isolated from each other,
+  the vacuum between them has become some ideal material
+  where nothing dissipates kinetic energy,
+  that is: no external nor internal perturbation opposes the movement of electrons.
+  [SPOILER]
+    No lattice collision,
+    no electromagnetic field (apart from the one electric field we're considering),
+    no Joule effect of any kind...).
+    /*
+      "SPOILER" doesn't mean "we'll study that later",
+      just "I usually don't name undefined concepts".
+      But my approach here is as disturbing as it is unconventional.
+      So I have to insist: this is an extreme idealisation,
+      a mental abstraction performed in order to isolate infinitesimal phenomena
+      for didactic purposes ——
+      —— if electricity is completely new to you,
+      then you're fine, just try to ignore this block of text.
+    */
+  [/SPOILER]
+
+  So we have point A with some electric charge,
+  and point B with some more positive charge.
+  Different charges means different electric potentials ——
+  —— B being more positively polarised means electrons urge to move from A to B.
+  The electric field is composed of two immobile vectors with identical directions:
+  from B to A (remember the conventional positive test charge).
+  Their sum is the strength / magnitude of the electric field.
+  Then the piece of imaginary matter connects A and B.
+
+  The electric field moves from B to A.
+  It has a speed: experiments have helped quantify it
+  "up to almost the speed of light in a vacuum (c)".
+  (Assuming it's exactly c in our imaginary matter is so tempting
+  that I'm almost doing it right now.)
+  //  https://en.wikipedia.org/wiki/Speed_of_light
+
+  As the field travels,
+  it redistributes the potential energy amongst electrons
+  in the new form of kinetic energy.
+  Electrons start moving from A to B.
+  They have a speed: it's called drift velocity.
+  Which is proportional to the strength of the electric field
+  and **different** from the latter's speed.
+  It's a lot slower:
+  the order of magnitude of the drift velocity is millimetres per second.
+
+  Once the electric field has reached A,
+  all the potential energy has been transformed into kinetic energy.
+  There is no longer any difference in electric potential,
+  equilibrium has been reached.
+  Yet the electrons are still moving.
+
+  Electrical speed is an ambiguous term
+  that can refer without distinction to
+  either drift velocity
+  or speed of the electric field.
+  My advice is: do not use it.
+  It inherently creates a confusion about two concepts
+  whose distinction is really not straightforward.
+  (If it's obvious to you, sorry for the noise. It wasn't for me.)
+
+  /*
+    Digression 1:
+      Imagine you push a ball on the ground.
+      It will roll up to a certain point.
+      How far depends on how hard you pushed —— is that it?
+      Imagine the ground is sticky,
+      or the wind is blowing in the direction opposed to the ball's movement.
+      This is surely going to have an impact on how far the ball goes.
+      Then does the ball roll with a constant speed and suddenly stops?
+      No.
+      Its speed progressively decays down to zero.
+      So how far is not really the question.
+      Initial speed and acceleration are the meaningful parameters here.
+      Initial speed depends on the initial impulse
+      (you pushing the ball),
+      acceleration depends on the frictions encountered by the ball during its movement
+      (wind, sticky ground, hitting a wall...) ——
+      —— the stronger the friction, the steeper the speed decay
+      (hitting a wall stops the movement pretty much instantaneously).
+
+      Now what if there's no friction at all?
+      Well it's called a vacuum (space is one for instance).
+      But I don't know, let's ask this guy:  https://en.wikipedia.org/wiki/Newton's_laws_of_motion#First_law
+
+      Ok so now a cosmonaut stole your ball
+      and took it with them across the final frontier
+      (where no ball has gone before): space.
+      The cosmonaut kicks the ball.
+      No friction so no (negative nor positive) acceleration.
+      The ball will move forever with constant speed and constant direction
+      both dependent on the initial impulse
+      (the cosmonaut's foot).
+
+      In our piece of imaginary matter,
+      there's no friction either.
+      It's basically a one-dimension vacuum.
+      Once the electric field initiates the electrons' movement,
+      they'll never stop moving (perpetuum mobile).
+      (This is very very theoretical,
+      we could also consider that the ball hits a wall
+      once enough electrons have reached point B...)
+
+      The reason why I insist so much?
+      This is really NOT intuitive.
+  */
+  /*
+    Digression 2:
+      Before writing this section
+      I thought that electric potential was a pure charge (expressed in Coulombs)
+      and that the speed of electricity was the speed of the electrons.
+      Also that the difference in potential reached equilibrium
+      once electrons had stopped moving;
+      and that they only moved from negative charges to positive charges.
+      Now I know that electric potential is the energy per charge
+      and that it's indifferent to polarity.
+      I know that electrons flow towards the relatively more negative charge
+      (which can very well be positive).
+      I know that what I used to call "speed of electricity"
+      is the speed of the electric field,
+      that the speed of the electrons is actually called drift velocity.
+      I know that equilibrium is reached long before the electrons stop moving ——
+      —— in fact they don't even have to stop ever.
+
+      If you already knew all that,
+      well sorry for wasting your time.
+  */
+  /*
+    Digression 3:
+      If you don't know what an electromagnetic wave is,
+      you don't need this digression.
+      I've been considering the propagation of the electric field
+      without ever mentioning electromagnetic waves,
+      even though it's a rather classical approach.
+      The reason is: waves oscillate, they have a frequency.
+      The imaginary system we've just built purely involves
+      [SPOILER] static current [/SPOILER].
+      Oscillations and frequency don't apply.
+      Electromagnetic field is the general concept.
+      Electromagnetic waves are a special case.
+      The fact that most real-life cases are special doesn't affect this truth.
+  */
+
+  Now take a deep breath and prepare for a harsh twist.
+  Our imaginary matter is not real.
+  Matter that behaves like a vacuum
+  has contradictory terms in its very definition.
+  I'm allowed to say "four-angled triangle",
+  but if I add "it exists" I'm either lying or mistaking.
+  We've put essence before existence, ignoring Jean-Paul's warning.
+  //  https://en.wikipedia.org/wiki/Existence_precedes_essence
+
+  Let Materialism be the cure for Idealism.        //  https://en.wikipedia.org/wiki/The_System_of_Nature
+  Let there be no imaginary matter.
+
+
+===================================================================================================
+#03  Ohm's law
+===================================================================================================
+
+  https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity  
+  https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance
+  https://en.wikipedia.org/wiki/Voltage
+  https://en.wikipedia.org/wiki/Electric_current
+  https://en.wikipedia.org/wiki/Ohm's_law
+
+  //  Conductance and its reciprocal
+  As promised,
+  let's connect points A and B with a piece of extant matter.
+  Let's temporarily assume that nothing prevents the electric field
+  from travelling from B to A [b].
+
+  /*
+    Important clarification:
+      As we connect A and B,
+      the electric charge will travel from A to B ——
+      —— not the electric charge carriers.
+      This is why we call their movement a drift.
+      Electrons will slightly glide in the direction of B
+      until their kinetic energy is fully dissipated
+      by the friction they encounter (more on that right away).
+
+      They don't travel in a queue or fall sequentially like dominoes.
+      Imagine they're balls in a pipe.
+      You push the ball at one extremity,
+      all balls move at once.
+      If one falls off of the tube,
+      it will be the one on the opposite end of the tube.
+      Like the balls in the pipe, electrons all move at once.
+  */
+
+  A difference in electric potential tends towards a flow of charge through matter.
+  How easily this flow happens
+  depends on the composition of said matter.
+  That is: each material has the property of letting electrons drift more or less easily.
+  This property is called its conductivity.
+  The physical quantity is the Conductance.
+  Its usual symbol is G.
+  (If you happen to know why, please let me know...
+  perhaps C, D, E, F were already taken and Greeks have no 'C'?)
+
+  As its conductance decreases,
+  a material is increasingly resisting the flow of electric charge.
+  This property is called its resistivity.
+  The physical quantity is the Resistance.
+  Its usual symbol is R.
+  (This one's pretty obvious.)
+
+  By resisting the drift, the material dissipates kinetic energy.
+  In this particular case,
+  "dissipates" means "converts into heat".
+  This phenomenon is called the Joule effect.    //  https://en.wikipedia.org/wiki/Joule_heating
+
+  Don't let the dichotomy fool you: nothing binary here.
+  Like autism or dissonance,
+  Resistance is a spectrum.
+  Conductance and Resistance are both extremities of one same axis.
+  Extreme cases are:
+    #  Conductance = infinity   &&    Resistance = zero
+    #   Resistance = infinity   &&   Conductance = zero
+
+  /*
+    In Calculus (integration / differentiation)
+    extreme cases are called limits:
+    we can observe what happens when a variable tends to (approaches) an extreme case (limit)
+    but if it actually reaches it (equality),
+    the result is undefined.
+    These concepts are often implicit and expressed by equalities in literature,
+    including here.
+    //  https://en.wikipedia.org/wiki/Calculus
+
+    EDIT:
+      A bad habit I'm fixing.
+  */
+
+  The arithmetical operation that opposes zero to infinity is the division:
+  divide by zero, you get infinity;
+  divide by infinity, you get zero.
+  So they're not opposites,
+  they're inverses:
+
+    R = 1/G    <=>    G = 1/R    <=>    R/G = G/R  = 1
+
+  A mass of water or a copper wire have a Resistance.
+  The air and your body have a Conductance.
+
+  Assuming adequate conditions,
+  an electric charge can flow through the air: it's called lightning.
+  Your body is a dipole (go ask golfers).
+
+  #define adequate_conditions
+
+  Remember:
+  the urge for a flow of electric charge to happen
+  grows with the difference in electric potential.
+  Ergo: greater difference  =>  greater charge flowing at once.
+  In time domain,
+  this instantaneous phenomenon translates as: higher flow rate.
+  Whether this means electrons drifting faster
+  or more electrons drifting
+  is made irrelevant by the concepts of rate and charge.
+  Which is precisely why these concepts are useful.
+
+  Matter resists the flow.
+  How much depends on its composition (Conductance / Resistance).
+  Ergo: greater Resistance  =>  lower flow rate.
+
+  This means:
+    #  Assuming constant Resistance:
+        the rate of the flow grows with the difference in potential.
+    #  Assuming constant difference in potential:
+        the rate of the flow decreases
+        when the Resistance increases (and vice versa).
+    #  Assuming constant rate of the flow:
+        if the Resistance increases,
+        the difference in potential must compensate
+        by increasing too (and vice versa).
+
+  For R to remain constant if flow and difference grow together (which they do),
+  some mathematical formula must compensate for it in the definition of R.
+  The difference is energy per charge.
+  The flow: charge per time.
+  They're not commensurable, so addition and subtraction are excluded.
+  Exponentiation would require one of the variables to be dimension-less to make sense.
+  No exponentiation excludes logarithms as well.
+  We're left with multiplication and division.
+  Multiplication is also excluded
+  because we know that the two variables grow together.
+  So if one increases so does the other,
+  then so does the product,
+  then R is not constant,
+  which is false by hypothesis.
+  Division it is then.
+  But which one is the numerator, which the denominator?
+  We also know that for the flow to remain constant,
+  the constraints that applied to it and the difference thus far
+  now apply to R and the difference.
+  If R is not the denominator
+  it means that  R  =  flow · difference
+  ——  which has been excluded
+  (we don't know which ratio but we know it's a ratio...
+  well actually now we know).
+
+  If (R is not the denominator) is impossible,
+  then it's false,
+  then R is the denominator,
+  then:
+
+              difference in electric potential
+    R  =  —————————————————————————————————————————
+           rate of the flow of the electric charge
+
+  The flow of the electric charge is called Current.
+  Its rate is called Intensity (of the current).
+  Its usual symbols are I (constant) and  i(t)  (varying).
+  The difference in potential is called Tension or Voltage.
+  Its usual (constant) symbol is V in the English-speaking world,
+  U otherwise —— and  u(t)  if it varies.
+
+  /*
+    I personally tend to prefer U
+    because V already stands for Volt,
+    a common unit for Tension / Voltage.
+    So if we use V for Voltage
+    then the unit of V is V...
+    I say slippery slope.
+    However, I've also said "go play with fire"...
+
+    About "tension" vs. "voltage" ——
+    —— Bon Scott says "High-voltage Rock 'n' Roll"
+    while Stiv Bators is a "high-tension wire"...
+    Whenever in doubt, just ask Rock 'n' Roll.
+
+    Also:
+    i(t)  is the reason why we use j as the imaginary unit
+    and not i like normal people.
+  */
+
+  Ok,
+  now that U and I have been granted convenient symbols
+  maybe we can build some nice-looking set of equations:
+
+    R = U/I    <=>    U = RI    <=>    I = U/R    <=>    UI/R = R/UI = 1
+
+  This set of equations is called Ohm's law.
+  (You can check Wikipedia now.)
+
+  /*
+    More links (since you've asked):
+      https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb      https://en.wikipedia.org/wiki/Luigi_Galvani
+      https://en.wikipedia.org/wiki/Alessandro_Volta                 https://en.wikipedia.org/wiki/André-Marie_Ampère
+      https://en.wikipedia.org/wiki/Georg_Ohm                        https://en.wikipedia.org/wiki/Michael_Faraday
+      https://en.wikipedia.org/wiki/Gustav_Kirchhoff
+
+    (Try not to over-interpret the pair-grouping:
+    I'm just saving lines.
+    The list is ordered by ascending date of birth.)
+  */
+
+  Recalling the imaginary matter from the previous section,
+  we had  R = 0 .
+  That is:  I = U/0 .
+  The undefined result makes sense of the unexpected behaviour (perpetuum mobile).
+
+  Before we move on:
+  using R in Ohm's law's definition is a convention.
+  We could very well write:
+
+    G = I/U    <=>    U = I/G    <=>    I = G·U    <=>    GU/I = I/GU = 1
+
+  //  Amphibology of the current's intensity
+  In English, the word current is usually used as a synonym of its own intensity.
+  You'll often come across "I is the current expressed in Ampères".
+  Basically as if we were measuring "sound" in deciBels
+  for lack of the word "amplitude".
+
+  In French the physical quantity is called "courant"
+  and its measure "intensité"
+  (which can be challenging translation-wise).
+  I've reproduced this semantics.
+  Be aware that most authors won't.
+
+  //  Social norms are here to help
+  By convention, for historical reasons,
+  current flows from positive to negative.
+  Which is the opposite of what electrons actually do.
+  I was tempted to use my own less confusing convention,
+  but unfortunately this would only have been less confusing inside this book.
+  (Assuming it's bound to stick to electronics —— rabbits will be diggin'...)
+  If I give you tools that no one uses,
+  you'll speak a language that no one understands (and vice versa).
+  Not very helpful.
+  What I did instead was allow current to make sense as long as I could.
+  So remember (however impractical it is):
+
+                     Electrons  ——>  minus to plus
+    Current and electric field  ——>  plus to minus
+
+  /*
+    EDIT:
+      This is actually not as arbitrary as it would first seem:
+      this has been developed in EDIT [a].
+      In short: electrons moving is one possibility.
+      Probably the most common one but what do I know?
+      Protons are also urged to move,
+      so are cations ——
+      —— we're only focusing on cases where it's easier for electrons.
+  */
+
+  /*
+    Digression:
+      I've often heard people debate
+      over which of high current and high voltage is more dangerous.
+
+        U = RI
+        I = GU
+
+      They're proportional.
+      They grow together.
+      High current comes with high voltage.
+      High voltage comes with high current.
+      You don't have to choose.
+      You couldn't choose.
+
+      But neither hurts the copper cable.
+      If anything your body's resistance is dangerous.
+  */
+
+  Oops, I almost forgot:
+  if a piece of matter is placed in an electrical system
+  in order to take advantage of its opposition to current (its resistivity)
+  we call the piece of matter a resistor.
+  If you've ever seen a capital R in an electrical schematic,
+  t was a resistor.
+  If not ignore the previous sentence.
+
+  About the last digression ("which is the most dangerous"):
+    Actually all I've just written is true
+    because I assume that there is a current (I ≠ 0).
+    If the current does not exist, it is of course harmless.
+    Is it possible though? (Outside of a vacuum I mean.)
+
+
+===================================================================================================
+#04  Electrical breakdown
+===================================================================================================
+
+  https://en.wikipedia.org/wiki/Electrical_conductor        https://en.wikipedia.org/wiki/Insulator_(electricity)
+  https://en.wikipedia.org/wiki/Dielectric_strength         https://en.wikipedia.org/wiki/Breakdown_voltage
+  https://en.wikipedia.org/wiki/Electrical_breakdown        https://en.wikipedia.org/wiki/Nodal_analysis
+
+  Attention required: easy confusion ahead.
+
+    — Does the Sun revolve around the Earth?
+    — No, of course.
+    — WRONG! In a geocentric frame of reference it does.
+  /*
+    <off-topic>
+      The frame of reference in which Earth is flat does NOT exist.
+      Just look at planispheres from different continents,
+      you'll observe different deformations of the spheroid
+      due to scalar projection.
+      (Assuming you're interested in the truth.)
+    </off-topic>
+  */
+
+  Remember [b]?
+  Of course you don't.
+  "Let's temporarily assume that nothing prevents the electric field from travelling from B to A."
+  We're dropping this assumption right now.
+
+  Some materials are called conductors.
+  If not, they are called insulators.
+  By definition:
+    #  a conductor allows current to flow through it;
+    #  an insulator doesn't.
+
+  What happened to "Conductance is a spectrum"?
+  Either every conductor is an insulator (and vice versa)
+  or this quote is false.
+
+  I cannot argue with that.
+
+  //  Détour
+  Consider lightning.
+  /*
+    EDIT:
+    I thought I had an original idea...
+    Turns out a Wikipedia contributor (not me I swear) had the same one.
+  */
+  Never mind.
+  Consider lightning.
+
+  Some electric potential in the sky.
+  Some different electric potential on Earth (or in a golfer).
+  Air between.
+  Air is an insulator.
+  Suddenly: lightning!
+  =>  air is a conductor...
+  Did Thor, God of Thunder intervene?
+  Sorry if reality contradicts your beliefs, but no.
+
+  With Resistance comes a threshold.
+  The concept of Resistance is continuous.
+  But the threshold is very much discrete.
+  And which material you consider a conductor,
+  which an insulator,
+  depends on where you like your meta-threshold.
+  By which I mean the maximal negligible value of Resistance's threshold.
+  This property of matter is called its dielectric strength.
+  The threshold is called the breakdown voltage.
+  As the name suggests it's a voltage:
+    when matter is applied a voltage inferior to its breakdown voltage,
+    it's an insulator;
+    when matter is applied a voltage superior to its breakdown voltage,
+    it's a conductor.
+
+  Actually "matter" lacks precision: this also applies to vacuum.        //  https://en.wikipedia.org/wiki/Electric_arc
+
+  Back to lightning.
+
+    I = U/R
+
+  Tension between Heaven and Earth
+  but still no current means  I = 0 .
+  Then either  U = 0  which is false by hypothesis;
+  or  R = +∞ .
+
+  But then, lightning strikes.
+  So  I = something .
+
+  Either:
+    (1) U has exceeded infinity... which is unlikely.
+    (2) R has dropped.
+
+  It's (2) of course.
+  The phenomenon is called electrical breakdown.
+  //  https://en.wikipedia.org/wiki/Electrical_breakdown
+
+  If you've ever experienced an autistic breakdown,
+  this will be easy to understand.
+  Instead of:
+    working, working, working  _BAM_  not working
+  Electrical breakdown goes:
+    not working, not working, not working  _BAM_  working
+
+  /*
+    Semantic break:
+      You might have noticed a lexical discontinuity here.
+      When talking physical quantities,
+      Conductance is opposed to Resistance.
+      When talking electrical components,
+      conductors are opposed to insulators ——
+      —— even though resistors do exist.
+      In "Conductance" conductivity is meant as a relative.
+      In "conductor" conductivity is meant as an absolute.
+      That's hardcore faulty logic:
+      categorical mismatch —— Aristotle is yelling "SOPHISTS!".
+  */
+
+  // Why do we care?
+  Usually when we use electricity,
+  it's safe to assume that we want current to flow
+  (more on that at some point).
+  In this regard,
+  resistivity and dielectric weakness (don't quote this one)
+  should be regarded as flaws.
+  Yet we've seen at the end of the previous section
+  that, once we allow ourselves to consider resistivity a feature,
+  we're granted a new toy called a resistor.
+
+  Though we haven't played with it yet...
+  Perhaps it's not very fun on its own.
+  Let's build a second toy!
+  This one will take advantage of its breakdown voltage.
+  So it's a fragile insulator, and if we put it between points A and B,
+  it will only allow any current to flow
+  once their difference in potential is high enough
+  —— the more fragile the sooner.
+
+  Let's imagine that the voltage between A and B
+  is inferior to our new toy's breakdown voltage
+  (we're below the threshold).
+  The system is composed of two points
+  with different electric potentials
+  and an insulator.
+  Nothing moves, no fun.
+  Voltage increases enough and the toy becomes a conductor,
+  current flows through it as if there was no toy.
+  We've basically built a voltage-controlled switch...
+  (Such things exist and this is not how they operate,
+  try to forget this.)
+
+  In its current state, it's not fun.
+  But is it practical?
+  A and B are points in space.
+  There's a distance between them.
+  Does our fragile insulator have to span the whole distance?
+  Then its size would depend upon the distance between A and B.
+  Wouldn't it affect its dielectric strength
+  and make its behaviour unpredictable?
+  Dielectric strength's dimension is voltage per distance
+  so yes it would.
+
+  Our insulator needs to span a fixed distance.
+  It exists in a 3-dimensional space, so it's a volume.
+  The simplest volume there is (mathematically speaking)
+  is the parallelepiped.
+  A parallelepiped is an infinite stack of infinitely small rectangles
+  (try to think "Calculus in god mode").
+  Once the current crosses the longing-for-a-decent-name-new-toy,
+  the electric field will fill each rectangle one by one
+  in the direction of A.
+
+  If we're aiming for predictability,
+  an identical field over the whole individual rectangle seems necessary
+  in order to prevent randomness.
+  So two faces of the fragile insulator must actually be conductors.
+  Then (practically) ideal conducting cables
+  will deal with the distance between A and B.
+
+  Our new toy's been upgraded:
+  it evolved from a fragile insulator to an insulator sandwich.
+  The external slices are made of a conductive material.
+  They're perfectly flat, parallel,
+  and have the same shape as any section of the 3D solid.
+  They don't in fact have to be rectangles.
+  I'm clumsily trying to describe a shape
+  for which I couldn't find any generic name.
+  I'll name it a pseudo-prism and define it as such:
+
+    A solid built by the translation of a start base
+    up to an identical end base
+    along an axis perpendicular to both bases.
+
+  It could be a right prism of any base (trapezoidal, triangular, heptagonal, ...),
+  a circular or oval cylinder,
+  or its bases could be heart-shaped or random ——
+  —— as long as the solid is an infinite stack of this shape
+  along an axis perpendicular to both bases.
+
+  Connecting our pseudo-prismatic sandwich to A and B would look like:
+
+    A o——————————
+                |
+      [ conductive_base_α ]
+      [=====insulator=====]
+      [ conductive_base_β ]
+                |
+    B o——————————
+
+  Let's define:
+     U_A  the electric potential of A
+     U_B  the electric potential of B
+     U_α  the electric potential of base α
+     U_β  the electric potential of base β
+    U_bd  the breakdown voltage of the insulator.
+
+  Initial state  ——>  U_α = U_β
+
+  First case:    U_B — U_A  ≥  U_bd
+    This is the easy one:
+    an electrical breakdown will allow a current to flow through the insulator.
+    The previously infinite Resistance will be broken to some finite value (R)
+    and the system drawn by the schematic
+    would be equivalent to a resistor between A and B.
+    If we know R, Ohm's law gives us  I  =  (U_B — U_A)/R .
+    The electric field travels from B to A, crossing the insulator.
+    Equilibrium is achieved (U_B = U_A),
+    the electrical breakdown ends.
+    The total voltage is zero and the insulator is an insulator again
+    (probably damaged though).
+
+  Second case:    U_B — U_A  <  U_bd
+    In nodal analysis,
+    an ideal cable is considered equivalent to a node (segment ≈ point),
+    because the electric field is so fast
+    that its displacement can be approximated as instantaneous
+    for practical uses.
+    Let's allow this assumption.
+    As soon as we connect our tripartite anonymous toy,
+    the electric field gets (temporarily) dissipated.
+    The potential energy of A is transferred to electrons across the ideal cable.
+    Voltage is not energy, it's energy *per charge*.
+    So  U_A = U_α  will take time.
+
+    In our current example this time is undefined
+    because it relies on I (intensity of the current = charge per time)
+    which is inversely proportional to R
+    and therefore relies (here) on a division by zero (since R = 0).
+    Never mind, let's assume it's ok.
+
+    Remember: if electrons can move, they will.
+    Between A and α they can, so they will.
+    The electric charge will accumulate on α.
+    The initial potential energy at A is now kinetic energy in the ideal cable,
+    progressively converting back into potential energy at α.
+    U_α is increasing.
+
+    Now let's break on through to the other side.
+    Remember:
+    the energy in one charge carrier
+    is dependent upon the other charge carriers that surround it.
+    So α charging will affect β.
+    There will be an electric field across the insulator
+    whose strength is dependent upon α's and β's surface
+    and the distance between them:
+    the more charge carriers are facing each other
+    and the closer they are,
+    the more energy per charge.
+    Or, thinking backwards:
+    the charge required to reach a certain voltage across the insulator
+    grows with the bases' surface and proximity.
+
+    So now there's a vector in α and an identical one in β.
+    "Electrons can move" means
+    (1) they're urged to and
+    (2) the path is clear.
+    The path between β and B satisfies both conditions.
+    Then whatever happens at α will be reflected at B.
+    Then α charging will result in β discharging in equal proportion:
+    electrons will drift towards B.
+    (By "charging" I mean "negatively charging".
+    I could mean "positively charging",
+    then the words "charging" and "discharging" would have to swap places.
+    They're interchangeable concepts based on your test charge ——
+    —— which I took negative,
+    which is not what you're supposed to do...
+    Sorry, I'm bad at following rules.)
+
+    /*
+      Important clarification —— I had a really hard time solving this:
+      Aporia:
+        The description above makes it look
+        like there is a linear causal chain from A to B
+        where α charges ergo β discharges. Period.
+        Working on some later part of this chapter,
+        I realised that this model isn't sufficient.
+        In short:
+        what happens between β and B influences what happens between A and α.
+        It looked like causality went circular ——
+        —— that is: breaking its own laws.
+        A consequence affecting its cause...
+        Zero delay feedback loops —— in a filter? why not —— in my brain? no thanks.
+        It seemed unfair:
+        I do my best to not mention anything that would distract us from the point
+        and Quantum physics strikes unannounced?
+
+      Solution:
+        [SPOILER] There is indeed a circularity,
+        but it's not instantaneous;
+        it just happens really fast. [/SPOILER]
+        The repartition of the charge inside matter is responsible for potential energy.
+        Potential energy creates electric fields.
+        Electric fields make the charge move. REPEAT.
+
+        Also "electric fields" (plural) got me confused.
+        An electric field is a vector. Addition can be performed on vectors.
+        So it would probably be more intuitive to consider the total electric field of the system.
+        Which both reacts to and generates movement,
+        and has a magnitude and a direction
+        but could have its origin anywhere between A and B.
+        Everything starts with particles attracting and repelling each other.
+        Their repartition shapes electricity.
+        So when they move, electricity changes shape.
+
+        The tendency towards equilibrium is constant.
+        So α starts charging, then β starts discharging,
+        this allows α to keep charging,
+        which makes β keep discharging, &c [c].
+
+        The whole confusion came from a universal axiom:
+        α and β always have the same absolute charge and opposite polarities.
+        This is false.
+        There is a back-and-forth causal alternation during the charge.
+        The fact that it's close to the fastest speed we know
+        doesn't make it literally instantaneous.
+
+      If you're neurotypical, you must think I'm stupid right now.
+      The French call this "enculer des mouches",
+      which literally translates to "fucking flies in the arse" —— classy, right?
+      It means nit-picking for its own sake.
+      This "obvious" approximation
+      took a full day of my life that I'm never recovering.
+      Not a game here.
+    */
+
+    Full picture:
+      #  current between A and α
+      #  no current between α and β
+      #  current between β and B
+    Until enough electric charge from A has drifted to α
+    so that  U_A = U_α ;
+    and enough electric charge from β has drifted to B
+    so that  U_B = U_β .
+    Which means that once the charge has finished drifting,
+    U_B — U_A  =  U_β — U_α .
+    Or:
+    the voltage between A and B has decreased,
+    the one between α and β has increased;
+    and now they're equal to one another.
+
+  The bases α and β are called plates.
+  The insulator is called the dielectric.
+  All three together form a condenser
+  (or, more commonly: a capacitor).
+  /*
+    "Condenser" is obsolete in English (except when talking microphones).
+    "Condensateur" is still the French standard.
+  */
+
+  The dielectric has a breakdown voltage U_bd
+  dependent on its composition and its geometry.
+  The plates have a maximum charge Q_max
+  dependent on their geometry ——
+  —— but also on the dielectric's breakdown voltage.
+  /*
+    Indeed, imagine there's room for x Coulombs (charge) on each plate,
+    depending on the overall geometry, this means χ Volts (voltage).
+    If  χ > U_bd  it will never be reached:
+    electrical breakdown will always happen first.
+  */
+  Q_max determines how many charge carriers face each other at once.
+  So a higher Q_max means more potential energy per charge,
+  which means more maximum voltage across the dielectric.
+  ——>  Q_max  =  k·χ
+  But χ might very well be unreachable,
+  so U_bd is a more useful constant.
+  Let's redefine:
+
+    k  =  Q_max / U_bd
+
+  The constant k seems quite useful.
+  What would its dimension be?
+  ——>  Charge per voltage.
+  So "how much charge contributes to voltage"
+  or "how much charge is needed to reach a certain voltage".
+  Its actual name is Capacitance and its usual symbol is C.
+  Q_max and U_bd are extreme cases,
+  the general one is:
+
+    C = Q/U    <=>    Q = C·U    <=>    U = Q/C
+
+  where Q (or  q(t) )
+  is the absolute value of the charge of either of the plates
+  and U is the voltage across the dielectric.
+  (An ideal capacitor has a constant capacitance.)
+  These parenthesis are doing harm,
+  this is important:  C is a constant.
+
+  And it relies on the dielectric's dielectric strength,
+  which relies on composition and geometry.
+  Composition can be paper, ceramic, air, vacuum...
+  anything with a breakdown voltage (preferably not too low).
+  Geometry:
+  C increases with the area of the plates
+  and decreases with the thickness of the dielectric.
+
+  https://en.wikipedia.org/wiki/Capacitor
+  https://en.wikipedia.org/wiki/Capacitance
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "It's a long way to the top if you wanna rock 'n' roll."                             */
+/*                                           ——  Bon Scott (It's a long way to the top)          */
+===================================================================================================
+#05  DC/AC  (not a typo.)
+===================================================================================================
+
+  All our examples so far
+  have made use of a certain type of current called static current:
+
+    initial voltage  ——>  current flow  ——>  equilibrium
+
+  This is what happens when you want to pet your cat
+  and it goes clac clac.
+  Nothing but a simple cosmic balance.
+
+  In electrical circuits there's usually a generator.
+  Generator because it generates a voltage
+  which, under the right conditions,
+  can cause a current.
+  Lithium batteries, nuclear power plants or dynamos
+  are examples of generators.
+
+  /*
+    Idealism strikes back:
+      So far we've used ideal cables ——
+      —— that is: cables that are immune to external disturbances
+      and have infinite conductance (R = 0).
+      Such cables don't seem to exist
+      but they safely approximate "good" cables (i.e. most cables)
+      and are therefore a convenient assumption for circuit analysis.
+      This rigorously translates to generators:
+      an ideal cable is equivalent to a point (node);
+      an ideal generator is a pair of nodes with different electric potentials.
+      (Real generators have a resistance,
+      they get affected by external electromagnetic fields, etc.)
+      ((You might have guessed it but obvious doesn't hurt:
+      same distinction applies to ideal vs. real capacitors.))
+
+      This explains what a high-quality component is
+      and why people sometimes spend a considerable amount of money on them.
+      Circuits are designed with ideal components.
+      What we call the quality of a component (what makes it "good")
+      is how close it is to ideal.
+      So the higher the quality of the components,
+      the closer the circuit is to its theoretical design ——
+      —— and the more predictable its behaviour.
+      (Or: the poorer the quality of components,
+      the more surprises —— note that surprises are not inherently bad.)
+      (Most synthesisers have noise oscillators and random LFOs —— we enjoy chaos!)
+      /*
+        Quality, in the sense used above, is called tolerance,
+        and measured in percentage.
+        E.g.:
+
+          R  =  250 kΩ  ± 10%    means:    247.5 kΩ  ≤  R  ≤  252.5 kΩ
+
+      */
+  */
+
+  Nice guys finish last? —— Edison first it is.        //  https://en.wikipedia.org/wiki/War_of_the_currents
+
+  //  DC
+  A generator which maintains a constant voltage across itself,
+  once connected to one (or several) conductor(s)
+  becomes a direct current (DC) source.
+  /*
+    Note that a capacitor is not a strict conductor.
+    It would be tempting to refer to it as a semi-conductor,
+    but this expression already refers to something distinct.
+    We'll have to accept not-a-strict-conductor as the best label.
+    Do we need labels though?)
+  */
+  Assuming everything is constant in the series of conductors,
+  a direct current will have a constant intensity
+  (I = U/R and U and R are constant by hypothesis).
+  A common example of such generators are lithium batteries.
+  Such generators are usually called DC generators
+  even though they don't necessarily generate current
+  (this could explain why brand new lithium batteries are usually not empty).
+
+  /*
+    Amphibology alert:
+      Sometimes DC (direct current) has the looser meaning of
+      "a current drawn by a voltage that is not necessarily constant
+      but whose polarity never gets inverted,
+      such that said current never changes direction".
+      (My definition is clumsy because it attempts to have no exception.)
+
+      This understanding of DC could apply, for instance, to a dynamo ——
+      —— assuming Albert Hofmann somehow cannot focus on constant speed.
+      Here, I'll always mean "a current drawn by a constant voltage source".
+  */
+
+  Let our points A and B from before become the connectors of a DC generator.
+  If we connect an almost ideal cable (R ≈ 0) between A and B,
+  an infinity of electric fields will constantly move from B to A,
+  transferring an everlasting constant potential energy
+  to the charge carriers across the cable,
+  turning it into kinetic energy.
+  How fast will the charge flow?
+  Well  I = U/R  ——> a constant almost divided by zero.
+  So I is constant and ≈ ∞.
+  Easy home experiment: put scissors in the socket
+  (pull a request if you actually did and somehow survived).
+
+  This is called a short-circuit.
+  We've mentioned the Joule effect earlier.
+  Look at these formulae: https://en.wikipedia.org/wiki/Joule_heating#Direct_current
+  This should help admit the need for fuses
+  (usually thin cables intended to melt when I is over a prescribed threshold
+  in order to disconnect A and B).
+
+  Ok now let's connect a resistor between A and B.
+  R is still constant but no longer negligible.
+  U is still constant.
+  I is still  = U/R , that is still constant
+  but no longer near infinite.
+  The higher R, the slower I,
+  the more energy converted to heat through the Joule effect.
+  (Variable R would mean variable heat.)
+  We've built a radiator!
+  This is how toasters operate for instance.
+
+  But we don't need a toaster, do we?
+  Let's unplug the resistor and replace it with a capacitor.
+  Let U_gen be the voltage between A and B
+  and U_bd the breakdown voltage of the capacitor.
+  If U_gen reaches or exceeds U_bd,
+  the dielectric will become a resistor.
+  It will warm up and probably burn ——
+  —— in fact capacitors sometimes even explode.
+  Yay! We've built a bomb!
+
+  That's all folks. Thanks for reading, like and subscribe.
+
+
+=========================================== END CREDITS ===========================================
+       Writer:  who cares?
+     Producer:  France Travail
+    Copyright:  No, thanks.
+   Meta-jokes:  overrated...
+===================================================================================================
+
+
+  Case 2:  0 < U_gen < U_bd.
+  Let's assume that our capacitor is initially discharged:
+
+    u_α(t₀) = u_β(t₀)    &&    u_C(t₀)  =  u_α(t₀) — u_β(t₀)  =  0
+
+  The difference in potential between A and B
+  will make an electric field try to travel from B to A.
+  Except it will get stuck at α and β.
+  So two electric fields:  α —> A  and  B —> β.
+  At some point τ the charge will have drifted enough
+  so that  u_α(τ) = U_A  and  u_β(τ) = U_B .
+  There will still be potential energy
+  (urge for negative charge carriers to move from α to β)
+  but no connection (opportunity to move)
+  since  u_C(τ) = U_gen < U_bd
+  (the dielectric remains an insulator).
+  From the capacitor's perspective,
+  this is identical to what happens with static current:
+  the current flows during the charge
+  and then stops once  u_C(t) = U_gen .
+  The sole difference is that U_gen has not decreased
+  (it couldn't: DC requires it constant).
+
+  What we've built here has a practical use:
+  it's called a DC blocker (or DC filter) ——
+  —— I suppose the name is self-explanatory enough.
+  When would we need such a tool?
+  At some point this will no longer be off-topic.
+
+  EDIT: not entirely wrong but needs precision, see appendix.
+
+  Gimme an R! Gimme a C! What's that spell? ——
+  —— I guess: this chapter's title.
+  Ok, so what if RC?
+  We know that R reduces intensity
+  and that C charges up until its voltage equals the generator's voltage.
+  C charging means its charge varies over time.
+  The variation of charge over time has been defined as "Intensity of the current".
+  Which is what R reduces.
+  So R slows down C's charge.
+  So RC will have u_C(t) increase until  u_C(t) = U_gen
+  just like C alone;
+  and R is just making it take longer.
+  The higher R the slower C's charge.
+  Voltage is a consequence of the repartition of the electric charge inside matter.
+  So slowing down C's charge is reducing the variation of u_C(t) over time.
+
+  Ok, great. And what about CR?
+  As in:
+
+         α ┌───┐ β   ┌───┐
+    A o────┤ C ├─────┤ R ├────o B
+           └───┘     └───┘
+
+  Remember how,
+  if we approximate the speed of the electric field as instantaneous,
+  u_α(t) = u_β(t) ...
+  Oh, by the way, Intensity is the same everywhere in a closed loop.
+  It's Kirchhoff's current law and can be proven using Maxwell-Faraday's equation.
+  /*
+    https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_current_law
+    https://en.wikipedia.org/wiki/Faraday's_law_of_induction#Maxwell–Faraday_equation
+  */
+  But it's also quite intuitive once you recall statement [c]
+  about the pseudo-circular causality (those flies didn't suffer in vain).
+  Or the "balls in a pipe" parable (electrons all move at once).
+
+  Paradigm:
+    Two people are playing ping-pong.
+    Whoever sends the ball is cause,
+    whoever receives it is consequence.
+    Roles alternate constantly.
+    The charge of a capacitor is causal ping-pong at the speed of light.
+    (Muß es seyn? Es muß seyn! Muß es seyn? Es muß seyn! Muß es seyn? Es muß seyn! ... ad lib.)
+
+  So really the difference between RC and CR
+  is as negligible as  τ₀  =  l_P / c
+  where l_P is the Planck length (10⁻²⁰ times a proton's diameter),
+  c is the speed of light,
+  and therefore τ₀ is the shortest time we know.
+  //  https://en.wikipedia.org/wiki/Planck_units#Planck_length
+
+  In fact, due to my incurable stubborn backward-operating brain,
+  I keep using negative test charges
+  and building A —> B signal paths.
+  So RC in my book is CR pretty much everywhere else (and vice versa).
+
+  //  Analogue signals
+  As far as I know, audio engineering is split in two branches:
+  analogue signal processing and DSP (digital signal processing).
+  Which at best is a sterile contest:
+  they work very well as a team (sorry Youtube).
+  If you've ever listened to Rage against the machine,
+  you've probably enjoyed the sound of a Whammy pedal through a tube amplifier.
+
+  So far we're concerned with analogue signals.
+  We've seen that whenever something happens in a circuit,
+  U and I vary over time.
+  So tension and intensity of the current
+  both seem to be valid candidates
+  in order to describe or interfere with what happens.
+  So we could play with current and let tension be a quiet consequence.
+  But we've seen already that the way we generate and manipulate current
+  is by generating and modifying tension.
+  So from a practical perspective, current is the derivative.
+  Plus it's hard to measure without negligible interferences.
+
+  Then an analogue signal is:
+
+    a voltage varying over time ——
+    —— and its instantaneous value is just a voltage.
+
+  Voltage also has the advantage of existing without current
+  (as potential energy per charge)
+  which is not reciprocal
+  (intensity's a rate, how do you crystallise a car's speed?).
+  (Also the variation of I over time
+  would be the variation over time of the variation of the charge over time...
+  Don't forget that maths will be back at some point.
+  Physicists have fun with second derivatives,
+  engineers not so much.)
+  So voltage can be stored and converted
+  (to magnetism for instance).
+
+  What happens in analogue circuits
+  is that voltage gets copy/pasted
+  and fed just the right amount of current when needed.
+  Almost as if we were just measuring it.
+
+  Magnetic tape, vinyl, and digital data are stored voltage.
+  Basically: live music would be all music if we were to measure current.
+
+  Now how do we do this?
+  That's too far off-topic (for this chapter at least).
+  But the concepts of Resistance and insulator might provide a hint.
+  If your curiosity is as insatiable as it should be,
+  please accept these keywords:
+    #  buffer amplifier
+    #  input impedance
+    #  power supply
+    #  output transformer
+    #  voltage follower
+
+  //  AC
+  Now that we know what an analogue signal is,
+  it makes sense to feed our RC circuit with one.
+  And actually we've already been doing just that:
+  our DC generator produced a DC offset
+  and our RC circuit filtered it out.
+  (EDIT: again, see appendix.)
+  That's signal processing already.
+  /*
+    "I won't apologize for acting outta line."  ——  Keith Morris (Nervous breakdown)
+
+    Allow me to desecrate my methodology
+    and use undefined concepts for a couple lines.
+
+    A DC offset is useful before a waveshaper if you want even harmonics ——
+    —— but it's also a membrane killer if you monitor it.
+    So generating it and filtering it out
+    are both real life practical uses.
+  */
+
+  Depending on how you define DC
+  (constant voltage source vs. constant direction)
+  AC (alternating current) can be one of two things:
+    (1)  a current driven by a varying voltage source
+         (not necessarily to the point of switching polarity);
+    (2)  a current driven by a voltage source of alternating polarity.
+
+  Here, in order to be consistent with ourselves,
+  we'll go with (1)
+  (even though the verb "to alternate" points more easily at (2)...).
+  (Notice how the looser meaning of DC
+  leads to the stricter meaning of AC and vice versa.)
+
+  The current from an AC generator can have pseudo-random variations
+  (e.g. a guitar pickup)
+  or it can be cyclic / periodic
+  (e.g. the electrical grid —— that's where the 50 Hz hum comes from).
+
+  Ok, so we want the voltage feeding RC to vary over time.
+  This means that U_gen is no longer a constant.
+  We could vary U_A or U_B or both.
+  Both would be messy, we would need a reference,
+  this would call for a third point, a zero.
+  C is already the capacitor
+  (both its name and its capacitance, I'll explain why in the next section),
+  so D?
+
+  Instead let's define U_B as our reference potential, our zero.
+  Oh and you know what?
+  Let's call it "ground" from now on.
+  And let's abbreviate it "GND"... I know, so random!    //  https://en.wikipedia.org/wiki/Ground_(electricity)
+
+  Then  U_B = U_GND = 0  (constant and null).
+  So:  U_gen  =  U_A — U_B  =  U_A .
+  And U_A is a function of time
+  whose instantaneous value is  u_A(t) .
+
+  We connect RC:
+  α starts inheriting the potential from A
+  and β the one from GND.
+  We know that it takes time,
+  that R slows the charge;
+  but also that:  q_C(t)  =  C·u_C(t)
+  (where q_C(t) is the absolute value of each plate's charge
+  at the instant t,
+  and u_C(t) is the voltage across the capacitor
+  at the same instant t,
+  i.e. the difference in electric potential between α and β).
+  In terms of u_C(t) that's:  u_C(t)  =  q_C(t)/C .
+  So it's inversely proportional to the capacitor's capacitance.
+  Which means that a higher C will decrease U_C,
+  or in time domain, it will slow down  u_C(t) .
+
+  But  u_A(t)  keeps changing,
+  so  u_C(t)  will always be trying to equal it
+  while remaining late.
+  And the delay grows with R and C.
+
+  That's how far I could go without maths,
+  sorry I just can't hold it any longer:
+
+
+
+===================================================================================================
+#06  Differential equations
+===================================================================================================
+
+  /*
+    SELF-CRITICISM from the future:
+      This section is the noobiest.
+      It deals with concepts addressed in the second part of Chapter I
+      (which didn't exist at that time),
+      only with less agility and confidence
+      and the unavoidable resulting irritating slowness.
+      This + redundancy  =>  why not delete it?
+        (1) This book is not just about signal processing:
+             it's a social-epistemological experiment:
+             a practical treatise on self-teaching.
+             Self-teaching is a slow process
+             involving failures and back-and-forth hesitations.
+             It can be painful to watch and challenging to own in retrospect,
+             aber Geschichtsrevisionismus ganz verboten.
+             If I break my own principles, what's left to respect?
+        (2) Just like Solon (μηδὲν ἄγαν), I abhor the superfluous,
+             if I wrote something, it felt necessary at the time.
+             If I'm now displeased by what I consider
+             overzealous unnecessary cautiousness and lack of self-confidence,
+             it may very well be that I've started developing the expert syndrome.
+             That is: the very motivation behind: learn and document **at the same time**.
+             One thing I've learnt from Vadim's "obviously",
+             is that said syndrome is irreversible:
+             at some point innocence is dead —— I don't believe in resurrection;
+             I don't believe, period (not that anyone cares...).
+             You're allowed to be a noob and might appreciate learning from your peer.
+             Plus (Solon again, γηράσκω δ᾿ αἰεὶ πολλὰ διδασκόμενος):
+             we'll all always be relative noobs —— once learning stops, morons are born.
+        (3) Chapter I addressed archaic Calculus from an abstract mathematical perspective,
+             here, it takes a physical meaning.
+             So not pure redundancy.
+             So not useless.
+  */
+
+  We'll be using ideal components, so:
+    #  our generator is a pure voltage source;
+    #  our resistor is a pure constant Resistance (R);
+    #  our capacitor is a pure constant Capacitance (C);
+    #  our cables are friction-less paths.
+
+   A  o────────┬──────o
+      ↑        │      ↑
+      ┆      ┌─┴─┐    ┆
+      ┆      │ R │   u_R(t)
+      ┆      └─┬─┘    ┆
+      ┆        │      ↓
+     u_A(t)    ├──────o
+      ┆     α  │      ↑
+      ┆      ┌─┴─┐    ┆
+      ┆      │ C │   u_C(t)
+      ┆      └─┬─┘    ┆
+      ↓     β  │      ↓
+  GND o────────┴──────o
+
+  u_A(t)  is our input analogue signal
+  so we'll assume it's known.
+  R and C are the components' specifications
+  so we'll also assume they're known (and constant).
+  Then we'll be looking for  u_R(t)  and  u_C(t) .
+
+  We're going to need Kirchhoff's voltage law.
+
+  //  https://en.wikipedia.org/wiki/Kirchhoff's_circuit_laws#Kirchhoff's_voltage_law
+
+  It basically states that:
+
+    u_A(t)  =  u_R(t) + u_C(t)
+
+  —— which can be intuitive looking at the schematic.
+  I've already mentioned his current law
+  which basically says that the intensity of the current
+  is the same in the whole circuit.
+  /*
+    EDIT:
+      More precisely: Kirchhoff showed that the intensity is identical
+      everywhere inside a loop (or mesh) and that all intensities
+      sum to zero at each node
+      ("circuit" works here because there's only one loop);
+      while voltages sum to zero in each loop.
+      Here:
+             u_A      u_R      u_C
+        GND —————> A —————> α —————> β = GND
+
+        (U_β — U_α)  +  (U_α — U_A)  +  (U_A — U_β)  =  0
+
+         =>    u_C(t) + u_R(t) + u_A(t)  =  0
+
+        <=>    u_A(t)  =  —u_C(t) — u_R(t)
+
+      Why the negative signs?
+      GND (or β) is our zero.
+      If we measure our output towards zero, then of course it's negative.
+      Voltage is energy per charge, so that's measuring dissipation induced by R and C.
+      If we want a relevant comparison of input and output,
+      they need to share the same zero.
+      So we measure U_C and U_R from ground up.
+      It can feel like a mathematical cheating trick,
+      but, physically, it's only a cable-swap.
+      Fix:
+            u_A       u_C      u_R
+        A <————— GND —————> α —————> A
+
+        u_A  =  u_A — u_GND  =  u_A — 0  =  u_A
+
+        u_C  =  u_α — u_GND  =  u_α — 0  =  u_α
+
+        u_R  =  u_A — u_α
+
+        u_R + u_C  =  u_A — u_α + u_α  =  u_A
+
+      Ok.
+  */
+  And Ohm's law gives:  i(t)  =  u_R(t)/R .
+  We also remember:  u_C(t)  =  q_C(t)/C .
+
+  Finally, we've first defined the intensity of the current
+  as the rate of the charge's flow ——
+  —— that is the variation of the charge over time.
+  In Leibnizian Calculus syntax,
+  it's spelled:  i(t) = dq/dt .
+  (Where dt is the theoretical equivalent
+  to our practical τ₀ from before:
+  shortest time we know.)                    .
+  Newton just puts a dot over the symbol q:  q
+  (2 dots for "second derivative", n dots for "nth derivative").
+  /*
+    https://en.wikipedia.org/wiki/Calculus
+    https://en.wikipedia.org/wiki/Derivative
+    https://en.wikipedia.org/wiki/Leibniz's_notation
+    https://en.wikipedia.org/wiki/Notation_for_differentiation
+    https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz
+    https://en.wikipedia.org/wiki/Isaac_Newton
+  */
+
+  My sympathy tends to lean towards Newton and against Leibniz.
+  But Leibniz's notation is more monospace-friendly.
+  So I'll use it despite my bias —— or rather precisely because of it.
+  /*
+    That's Annexe material so I'll try to be quick.
+    Instead of "never meet your idols"
+    I say "never have idols" —— or anti-idols.
+    Dichotomies are convenient for lazy brains.
+    Allegiance is self-slavery.
+
+    Acknowledging Leibniz's genius is hard
+    when you met him through his metaphysics.
+    Newton's dogmatism is hardly conceivable
+    when you met him through his physics.
+
+    My bias is ideological and relying on ignorance.
+    I'll rather cure myself than contaminate you
+    or succumb to polarisation and pollute our conversation.
+
+    So let it be said
+    that the god-fearing clergy-friendly sycophantic Leibniz
+    is also a genius mathematician;
+    and that Newton the genius Faust-like alchemist
+    is also a spineless monotheist.
+    Proofs that they're subject to flaws
+    only make their achievements more remarkable.
+  */
+
+  The intensity is the same across the whole circuit.
+  So:
+
+    i(t)  =  dq_C/dt    (across the capacitor)
+
+  and:
+
+    i(t)  =  u_R(t)/R    (across the resistor)
+
+  are the same  i(t) .
+
+  We can express  q_C(t)  in terms of  u_C(t) :
+
+    q_C(t)  =  C·u_C(t)
+
+  C being a constant,
+  this gives:
+                                      //  Constant factor rule.
+    dq_C/dt  =  C·du_C/dt  =  i(t)    //  More on that in this chapter's appendix,
+                                      //  even more (including proofs) next chapter.
+
+  By re-ordering the expression of  i(t)  across the resistor
+  in terms of  u_R(t) ,
+  we get:
+
+    u_R(t)  =  R·i(t)
+
+  Now we can replace  i(t)  in this expression
+  with its definition in terms of  u_C(t)  and C:
+
+    u_R(t)  =  R·C·du_C/dt
+
+  Finally,
+  replacing  u_R(t)  with this expression in the definition of  u_A(t) ,
+  we get:
+
+                   du_C
+    u_A(t)  =  RC —————— + u_C(t)
+                    dt
+
+  Then:
+                            du_C
+    u_C(t)  =  u_A(t) — RC ——————
+                             dt
+
+  which means that:
+
+                   du_C
+    u_R(t)  =  RC ——————
+                    dt
+  so:
+
+    u_C(t) — u_A(t)  =  —RC·du_C/dt
+
+    <=>    u_A(t) — u_C(t)  =  RC·du_C/dt
+
+            du_C       u_A(t) — u_C(t)
+    <=>    ——————  =  —————————————————    [1]
+             dt              R·C
+
+  /*
+    Or:
+                u_A(t) — u_C(t)
+      du_C  =  ————————————————— dt
+                      R·C
+
+    Dimensional analysis:
+
+      { (voltage minus voltage) over time } times time
+
+      =  voltage.
+
+    Ok.
+  */
+
+  Tricky!
+  We've got the first derivative of a function
+  using said function in its definition...
+  //  https://en.wikipedia.org/wiki/Differential_equation
+
+  Knowing that  exp(x)  is its own derivative,
+  we could intuitively think that a solution is buildable when  u_A(t)  is constant.
+  But it's one special case so I'll leave it for this chapter's appendix.
+
+  Belts off, it's Calculus time!
+  —— Read this slowly (Molto adagio e leggiero) and several times if necessary.
+  /*
+    EDIT from you know when:
+      If you've read Chapter I past section #06,
+      this will feel like a hardcore regression...
+      If so: Presto scherzando.
+  */
+
+  What does  d/dt  actually mean?
+  Well t is time here,
+  so the question should really be: what does "d" mean?
+  I don't know, you tell me.
+  Infinitesimal means "as small as you want" ——
+  —— so "d" is literally what you want.
+  Think of it as the degree of precision you need,
+  or the maximal physical degree of precision.
+  //  https://en.wikipedia.org/wiki/Infinitesimal
+
+  Let's say D is a distance (in metres),
+  and let's say I want to build 1 metre by summing small equal parts of it.
+  I start with  D = 0  and end at  D = δ = 1 metre .
+  The slices are written dD and their sum is equal to δ.
+  The dimension of dD is metres and it's called a differential.
+  Its minimal value is 0⁺ and its maximal one is δ.
+
+  Then:  δ = dD·δ/dD  and:  dD = δ·dD/δ.
+  The tautology can make it confusing,
+  but really it only shows how straightforward it should be.
+  /*
+    EDIT:
+      Recalling the terminology from last chapter's sections #07 and #08:
+
+        δ/dD  =  span / dD  =  nb
+
+      must be an integer.
+      Choose dD accordingly, or, equivalently: choose nb first.
+  */
+
+  E.g.:  δ = 4 metres  and  dD = 1 millimetre.
+  Then:
+
+    δ/dD  =  4/0.001  =  4000
+
+  and:
+
+    δ   =  dD·δ/dD  =  0.001·4000  =  4 metres
+
+  Or:
+
+    dD/δ  =  0.001/4  =  0.00025
+
+  and:
+
+    dD  =  δ·dD/δ  =  4·0.00025  =  0.001 metre
+
+  The smaller dD, the more instances of it you need to build δ.
+  Number compensates for size and vice versa,
+  the end result is always δ.
+  Even the limit case  dD = 0  means δ is an infinite sum.
+  And that's precisely what "infinitesimal" approximates.
+  /*
+    Actually this limit cannot be reached
+    because as proven by Aristotle (Φυσικής ακροάσεως)
+    an instant is not time;
+    for time has a duration by definition
+    and an instant ( dt = 0 ) has none.
+    //  https://archive.org/details/physica0000rpha/mode/2up
+  */
+
+  Now if a snail is moving along δ
+  and we want to know its speed, its rate of change ——
+  —— or variation of distance (D) over time (t).
+  We choose a value for dD
+  and measure how much time the snail takes to travel it.
+  This time is dt.
+  Speed is distance per time so in this case  dD/dt .
+  Or we could choose a fixed measurement-time and let δ be the unknown.
+  Then dt would have a fixed value
+  and measuring dD would still give us the snail's speed.
+
+  Now let's say we know  dD/dt  (its speed)
+  and we've been measuring time (t) since it started moving.
+  We can know δ (where it is when t = now)
+  through a simple multiplication —— which is just a repeated sum.
+
+  E.g.:
+
+    dD/dt  =  0.013 metres per second
+
+  and
+
+    t  =  3 seconds
+
+  Then:
+
+    δ  =  0.013·3  =  0.039 metres  =  39 millimetres
+
+  If the snail's speed is not constant ——
+  —— that is:
+  the acceleration (variation of speed over time) is non-zero:
+
+    d²D/dt² ≠ 0
+
+  —— we can no longer rely on multiplication:
+  indeed dt remains constant but dD is varying,
+  then so is  dD/dt .
+  That's where an infinitesimal dt gives us precision
+  and where an integral shortens the sum's notation
+  (taking the role multiplication previously played).
+
+  In our RC differential equation,
+  instead of distance per time,
+  we're interested in voltage per time.
+  du/dt  reads
+    "the infinitesimal increase in voltage
+    per infinitesimal increase in time".
+  So each time time increases by dt,
+  voltage increases by du.
+  What precedes shows that for a differential to make sense,
+  we need a start-point and an end-point.
+  Since voltage is the unknown, we need a range for time.
+  The obvious end-point is  t = now , so let's go with that.
+  The origin could be  t = —∞  (as in: since forever).
+  But we know that nothing moved in our circuit
+  before we connected RC to A and GND.
+  So it makes sense to call this moment  t₀ = 0
+  (I mean what is time without movement?
+  —— I'm done quoting Aristotle for this chapter).
+
+  Ok, so we start at  t₀ = 0  with  U_C = u_C(0)
+  —— the initial voltage across the capacitor.
+
+  We move one step forward:  t₁ = dt
+  and:
+
+    u_C(t₁)  =  u_C(0) + du_C
+
+                          u_A(t₁) — u_C(t₁)
+             =  u_C(0) + ——————————————————— dt
+                                 R·C
+
+  We move one step forward:  t₂  =  2·dt
+  and:
+
+                          u_A(t₁) — U_C(t₁)          u_A(t₂) — u_C(t₂)
+    u_C(t₂)  =  u_C(0) + ——————————————————— dt  +  ——————————————————— dt
+                                 R·C                        R·C
+
+  We keep moving forward:  t_n = n·dt
+  and:
+
+                          u_A(t₁) — u_C(t₁)                  u_A(t_n) — u_C(t_n)
+    u_C(tn)  =  u_C(0) + ——————————————————— dt  +  ...  +  ————————————————————— dt
+                                 R·C                                 R·C
+
+  /*
+    EDIT from the future:
+      Re-reading this, I realise that 1/RC could have been factored out at this point.
+      That is: it never had to appear inside the integral.
+
+      Oh, by the way: spoiler.
+  */
+
+  So each  u_C(t)  is equal to  u_C(0)
+  plus the sum of all previous infinitesimal:
+
+     u_A(t) — u_C(t)
+    ————————————————— dt
+           R·C
+
+  Such a pseudo-continuous sum of infinitesimal quantities
+  is, by definition, an integral.
+
+  In order to aggregate  u_C(t)  by small increments,
+  we need to define "increment" ——
+  —— or: our integral needs a differential.
+  Since we're solving the differential equation for voltage, it's the unknown.
+  Therefore we have to integrate over time.
+  But each value "t" of time has its own integral.
+  So we cannot integrate with respect to t,
+  since it has to be a constant for each of its values (inside its integral).
+  Then "t" needs an alias,
+  a variable which also means "time" (using the same unit)
+  but with a different name,
+  so that we know which value of time is constant
+  and which varies inside the integral.
+  Greeks to the rescue: let dτ be our differential.
+  Then for each value of t,
+  u_C(t)  is equal to  u_C(0)
+  plus the sum of all:
+
+     u_A(τ) — u_C(τ)
+    ————————————————— dτ
+           R·C
+
+  from  τ = 0  to  τ = t .
+
+  As Lemmy Kilmister would say: "shut up, you talk too much".
+
+                           t
+                          ⌠  u_A(τ)  —  u_C(τ)
+    u_C(t)  =  u_C(0)  +  | ——————————————————— dτ
+                          ⌡         R·C
+                           0
+
+  Ok. Beautiful.
+  What to do with that? —— In the current chapter? Nothing.
+
+  Except maybe a tiny dimensional analysis.
+  (By now you should know how much I enjoy those...)
+
+  What would  1/RC 's dimension be?
+
+    I  =  q/t
+    R  =  U/I  =  U/( q/t )  =  (U·t)/q
+    C  =  q/U
+
+                 U·t·q
+  So:    RC  =  ———————  =  t
+                  q·U
+
+  RC is time and  1/RC  is the inverse of time.
+  So it's a frequency.
+  But we know two units for frequency: radians per second and Hertz.
+  They're related by the factor 2π which is dimension-less.
+  So both units have the same dimension: s⁻¹
+  (assuming we measure time in seconds —— could be centuries⁻¹...).
+
+  How do we know if  1/RC  is angular or regular frequency?
+
+  What are Hertz? What are radians?
+
+  Quite counter-intuitively, Hertz are the secondary unit,
+  radians per second are the primary one.
+  But it actually makes sense:
+  radians are based on cosmic phenomena such as Geometry and the number π.
+  They notably measure the period of trigonometric functions: 2π rad.
+  ("Notably" because of circle circumferences, disk areas, sphere volumes, etc.)
+
+  While seconds are a purely conventional unit for time.
+  So when we say "radians per second",
+  we're actually mixing constants of the universe with artificial measuring tools.
+
+  Electricity is a natural phenomenon,
+  it doesn't obey the Système international d'unités.
+
+  Then Hertz are a normalisation that allows to count cycles (periods)
+  by making them equal to 1.
+  Indeed:  2π/2π = 1 .
+
+  /*
+    https://en.wikipedia.org/wiki/International_System_of_Units        https://en.wikipedia.org/wiki/Second
+    https://en.wikipedia.org/wiki/Radian_per_second                    https://en.wikipedia.org/wiki/Hertz
+  */
+
+  So  1/RC  is in radians per second ——
+  —— and if we want to express it in Hz,
+  it becomes:
+
+       1
+    ———————
+     2π RC
+
+  ╭─────────────────────────────────────────────────────────────╮
+  │  ↓↓↓  _S_U_P_E_R_ _F_U_N_D_A_M_E_N_T_A_L_ _S_T_U_F_F_  ↓↓↓  │
+  │                                                             │
+  │    This frequency has a (likely familiar) name:             │
+  │                                                             │
+  │      cutoff frequency.                                      │
+  │                                                             │
+  │    Its usual symbols are:                                   │
+  │                                                             │
+  │      #  ωc (rad./s)                                         │
+  │                                                             │
+  │      #  fc (Hz)                                             │
+  │                                                             │
+  │    (where "c" stands for "cutoff" I guess?)                 │
+  │                                                             │
+  │  ↑↑↑  _S_U_P_E_R_ _F_U_N_D_A_M_E_N_T_A_L_ _S_T_U_F_F_  ↑↑↑  │
+  ╰─────────────────────────────────────────────────────────────╯
+
+  Why do we care?
+
+  If  1/RC  is the inverse of time,
+  then  dτ/RC  is dimension-less
+  and the dimension of  u_C(t)  is voltage on both sides of the equation.
+  Which doesn't prove the formula is true ——
+  —— but a wrong dimension would have proven it wasn't.
+
+  //  Now what about  u_R(t) ?
+  It's been given by 2 equations:
+
+    u_R(t)  =  u_A(t) — u_C(t)
+                                  t
+                                 ⌠  u_A(τ) — u_C(τ)
+            =  u_A(t) — u_C(0) — | ————————————————— dτ    [2]
+                                 ⌡        R·C
+                                  0
+  and:
+                   du_C
+    u_R(t)  =  RC ——————    [3]
+                    dt
+
+  Let's interpret [3].
+  It means:
+  RC times the infinitesimal increase (or decrease) of  u_C(t)  (i.e. du_C )
+  per infinitesimal increase in time (i.e. dt).
+  What is  du_C ?
+  ——>  Exactly what we're stacking inside the integral in the formula for  u_C(t) .
+
+  So:
+                ╭                 ╮
+    du_C  =  ωc │ u_A(τ) — u_C(τ) │ dτ
+                ╰                 ╯
+  with:
+    #  ωc = 1/RC
+    #  τ (and dτ) being an alias for t (and dt).
+
+  Then:
+                RC                       dt
+    u_R(t)  =  ———— { u_A(t) — u_C(t) } ————
+                RC                       dt
+
+            =  u_A(t) — u_C(t)
+
+  So [2] and [3] are equivalent;
+  which, again, fails at disproving our results.
+  But also illustrates that integration is to differentiation
+  what logarithm is to exponentiation,
+  or division to multiplication,
+  or subtraction to addition,
+  or the inverse function to itself:
+  the reciprocal operation.
+
+  It's been in the fundamental theorem of calculus for centuries,
+
+  //  https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus
+
+  which doesn't come with an author,
+  nor a date of publication,
+  nor a definitive formula
+  because, in a way,
+  the author and the date are one and the same:
+  le Siècle des Lumières.
+
+  //  https://en.wikipedia.org/wiki/Age_of_Enlightenment
+
+  So I could have taken a shortcut here.
+  Except: if you want shortcuts, go read something else.
+
+  Chapter I was about complex trigonometry and integral transforms.
+  Chapter II has been about electronics and Calculus.
+  Chapter III is going to be the Great Melting-Pot
+  that makes sense out of all this nonsense.
+
+
+
+===================================================================================================
+APPENDIX:  DC + RC
+===================================================================================================
+
+  /*
+    EDIT:
+      In what follows we'll be using some of the rules of differentiation.
+      If you want proofs that they're valid, hold your breath until next chapter.
+
+      //  https://en.wikipedia.org/wiki/Differentiation_rules
+      //  https://en.wikipedia.org/wiki/Chain_rule
+      //  https://en.wikipedia.org/wiki/Linearity_of_differentiation
+  */
+
+  Let's simplify the nomenclature of our equation by making the substitutions:
+
+    ƒ(x)  <——  u_C(t)
+      ƒ₀  <——  u_C(0)
+       k  <——  u/RC
+       a  <——  u_A(t)
+               /*
+                 Later: U_A
+                 (a constant over time doesn't need to be expressed as a function of time).
+               */
+
+  Then:    dƒ/dx  =  k( a — ƒ(x) )
+
+  (That's just equation [1] after the substitutions.)
+
+  Let  g(x)  =  a — ƒ(x) .
+  Then:
+
+    dg/dx  =  d(a — ƒ)/dx  =  (da — dƒ)/dx
+
+  a is a constant so  da = 0 .
+  Then:
+
+    dg/dx  =  —dƒ/dx    <=>    dƒ/dx  =  —dg/dx
+
+  So:
+
+    —dg/dx  =  kg(x)    <=>    dg/dx  =  —kg(x)
+
+  We know that  exp(x)  is its own derivative,
+  then according to the chain rule:
+
+    d{ exp(—kx) }/dx  =  —k·exp(—kx)
+
+  which is equivalent to:
+
+    dg/dx  =  —k·g(x)
+
+  if we let:
+
+    g(x)  =  exp(—kx)
+
+  So:
+
+    a — ƒ(x)  =  exp(—kx)    <=>    ƒ(x)  =  a — exp(—kx)
+
+  Reversing the substitutions:
+
+    u_C(t)  =  U_A — exp(—t/RC)
+
+  This gives:  u_C(0)  =  U_A — 1
+  while it should be ƒ₀
+  which should be independent from U_A.
+
+  Back to " dg/dx  =  —kg(x)  if we let  g(x)  =  exp(—kx) " ...
+  We might have been a bit quick to conclude from "this is a solution"
+  to "this is the only solution".
+
+  Indeed, according to the constant factor rule:
+
+    d{ C exp(—kx) }/dx  =  —kC·exp(—kx)
+
+  which also satisfies:    dg/dx  =  —k·g(x)
+
+  Then we need to give a known value to the constant C.
+  Instead of hoping for it to provide ƒ₀,
+  let's make it a condition.
+
+  Then:
+
+    C·exp(—k·0)  =  a — ƒ₀    <=>    C  =  a — ƒ₀
+
+  Then:
+
+    g(x)  =  (a — ƒ₀)exp(—kx)
+
+  Then:
+
+    a — ƒ(x)  =  (a — ƒ₀)exp(—kx)
+
+    <=>    ƒ(x)  =  a — (a — ƒ₀)exp(—kx)
+
+  Reversing the substitutions (again):
+
+    u_C(t)  =  U_A — ( U_A — u_C(0) )exp(—t/RC)
+
+  then:    u_C(0)  =  u_C(0)    ——>  check.
+   and:    u_C(∞)  =  U_A       ——>  check.
+
+  So we start at  u_C(0)  and end at  U_A ,
+  at which point  q_C  =  C·U_A
+  —— it's constant so  i(t) = dq_C/dt = 0 .
+
+  If  u_C(0) = 0 ,
+  then:
+
+    u_C(t)  =  U_A( 1 — exp(—t/RC) )
+
+  In plain Frenglish:
+  a DC generator connected to an RC circuit
+  will draw current until the voltage across the capacitor
+  equals the voltage across the generator.
+  This never strictly happens:
+  there's an asymptote in U_A ad infinitum
+  and the curve is exponential.
+
+  Or maybe it's logarithmic...
+  Hard —— pointless? —— to say
+  with all the negative signs.
+  Better look at it (and play with the parameters):
+
+  [DC + RC:  u_C(t)]  https://www.desmos.com/calculator/d08bipkpd1
+
+  What does this mean in terms of analogue signal?
+  First of all, we've silenced  u_R(t)  ——
+  —— but:
+
+    u_A(t)  =  u_C(t) + u_R(t)
+
+  means:
+
+    u_R(t)  =  { U_A — u_C(0) }exp(—t/RC)
+
+  At  t = ∞  this gives zero.
+  Which makes sense:  u_R(t)  =  RC·du_C/dt  (remember?),
+  so once  u_C(t)  equals U_A and becomes constant,
+  its rate of change becomes  du_C/dt  =  0 ,
+  so  u_R(t)  =  RC times zero ... so zero.
+  Another way to get this result was:
+
+    u_C(∞)  =  U_A
+
+  and:
+
+    u_R(t)  =  U_A — u_C(t)
+
+  so:
+
+    U_R(∞)  =  U_A — U_A  =  0
+
+  Ok.
+  Now an analogue signal being a voltage measure,
+  if our output signal is u_C(t) (the voltage across the capacitor),
+  it will converge very fast to our constant input signal (U_A).
+  The greater the value of RC, the slower the convergence.
+  Indeed:  —t/RC  is inversely proportional to RC.
+  A constant voltage is a DC offset.
+  u_C(t)  will not block DC:
+  it will progressively rebuild it: a fade-in with an exponential curve.
+
+  Next: what if we take the output across the resistor?
+
+    u_R(t)  =  { U_A — u_C(0) }·exp(—t/RC)
+
+    #  —t/RC  =  —ωc·t
+    #  U_A — u_C(0)  is constant,
+
+  so the chain rule and the constant factor rule give:
+
+    du_R/dt  =  —ωc·{ U_A — u_C(0) }·exp(—ωc t)
+
+             =  { u_C(0) — U_A }·ωc·exp(—ωc t)
+
+  The rate of change is exponentially decaying.
+  Not a crucial information but I guess I like Calculus now.
+
+  What actually matters:
+
+    u_R(0)  =  { U_A — u_C(0) }·exp(—0/RC)  =  U_A — u_C(0)
+
+  (or  U_A  if  U_C(0) = 0 )
+
+  We already know that  u_R(∞)  =  0 .
+  So we start with an initial voltage  U_A — u_C(0)
+  and converge very fast to zero.
+  Again: how fast grows with ωc (same reason as before).
+
+  [DC + RC:  u_R(t)]  https://www.desmos.com/calculator/toiiqvpnij
+
+  We've filtered out DC: a fade—out with an exponential curve.
+
+  So earlier, when I wrote (section #05):
+  "What we've built here has a practical use: it's called a DC blocker (or DC filter)",
+  it was true.
+  But only on the condition that we measure our output signal
+  across the resistor.
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "To the average standard the norm supplies                                           */
+/*           But where am I?"                                                                    */
+/*                                           ——  Roky Erickson (Thru the rhythm)                 */
+===================================================================================================
+BONUS:  Hieroglyphs
+===================================================================================================
+
+  The schematic I've drawn earlier uses archaic symbols:
+  letters inside rectangular boxes.
+  In civilised societies,
+  people use sophisticated pictograms because reading is so lame.
+
+  In case you live in a civilised society,
+  here's how what we've used so far gets encrypted:
+
+    C:  ———||———                       sometimes one plate is curved towards the outside:  ———)|———
+                                       this means it's polarised.
+
+    R:  __/\  /\  /\  __               or just a rectangle with the longer sides parallel to the wires.
+            \/  \/  \/                 If it's combined with an arrow, then it's variable.
+
+    GND:    |        or:       |       or sometimes just GND.
+          —————              —————
+         / / /                ———
+                               —
+
+  Hey, wait, I've got a new complaint.
+  Some norms I quite like.
+  I miss the colour code on capacitors.
+  Those tiny letters look like unintelligible ink spots.
+  Never mind. Chapter III?

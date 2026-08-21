@@ -1,0 +1,4067 @@
+_I_N_ _P_R_O_G_R_E_S_S_
+
+  TO DO:
+
+    #  overall check.
+         Shorten lines when possible and relevant.
+         Double space around inline math when needed.
+         Typos, symmetry, OCD 1, OCD 2, ... , OCD N.
+         TRY NOT ADDING COMMENTS AND EDITS IN THE PROCESS
+           especially in sections that already have a HTML counterpart...
+         EASY ON THE GREEK
+           You're trying to make Aristotle and Empedocles likeable,
+           not the exact opposite...
+
+    #  Update Desmos when needed.
+
+    #  section #02 (Nyquist frequency + aliasing: build intuition)
+    #  section #03 (Nyquist-Shannon Sampling theorem):
+         Re-build from scratch, then read the sources and compare.
+         Also: ZOH (S&H): test + fix + told ya! (96kHz = brighter)
+         Refer freely to Dirac δ, Heaviside step and the concept of convolution,
+           just point at Chapter V if so.
+    #  section #04 (inverse z-transform)
+         Should be quick and intuitive after #03 & #04.
+         Just don't rush over the differential adjustment
+           (fix Vadim's expert blind-spot... (use the O-word only as a joke)).
+
+    #  sections #07 & #08
+         Finish deriving magnitude and phase.
+         Bode plots...
+
+    #  Add bode plot to MOFO-filter (#13 All shall pass)
+         ——> Figure out whether the transfer function should appear here or be left to the reader as an exercise...
+
+    #  appendix:
+         Fix  1 — cos ...
+         Maybe re-do all coeffs (1-pole AND 2-pole).
+         Maybe in optimised algorithmic form...
+         Contact RBJ:
+         -- Offer a place for any comment, joke, correction, off-topic statement, &c.
+         -- Ask permission to host the original Cookbook
+         -- Ask permission to publish "RBJ's EQ Cookbook —— Working-class edition"
+            (cosine fix, 1-pole coeffs, TDF2)
+         -- Maybe send this exact version —— right level of meta?
+
+    #  bonus section
+         Investigate 2's complement (apparently an alternative to sign bit)
+         Go full autism on quantisation noise.
+         (easy Spinoza drop...)
+
+
+
+###################################################################################################
+###################################################################################################
+                                    WORKING CLASS FILTER DESIGN
+###################################################################################################
+###################################################################################################
+
+###################################################################################################
+                                   Chapter VII:  Ones and zeroes
+###################################################################################################
+#                                                                                                 #
+#  WARNING:                                                                                       #
+#    This chapter is ridiculously long.                                                           #
+#    The preface (README.md) says:  "download a chapter, edit it locally, make it yours".         #
+#    This header adds:                                                                            #
+#      "if a section seems fundamental to you, and infinite scroll makes you sick...              #
+#       maybe split the chapter?".                                                                #
+#                                                                                                 #
+###################################################################################################
+/*          "No 9000 computer has ever made a mistake or distorted information."                 */
+/*                                               ——  HAL 9000 (2001: A Space Odyssey)            */
+===================================================================================================
+#01  Machina ex deus (sive Natura)
+===================================================================================================
+
+  In Ionian Ancient Greek, "μηχᾰνή" refers to any mean to an end ——
+  —— be it a device, a set of devices, a routine, a methodology;
+  anything, material or not,
+  that connects the causa finalis with the expected effect.
+  It gave the English "mechanics" for instance.
+  The Dorian variant of μηχᾰνή is μᾱχᾰνᾱ́ .
+  It gave the Latin: machina ——
+  —— which preserves the Greek meaning
+  but has a slightly more technological connotation.
+  Machina gave the French "machine". English borrowed it from French.
+  Machine means:
+
+    "a thermodynamic system that uses power
+     to apply forces and control movement
+     to perform an action."
+
+  //  https://en.wiktionary.org/wiki/machine#English
+  //  https://en.wikipedia.org/wiki/Machine
+
+  Notice that this definition applies to you and me.
+
+  In Latin, "purus" or "putus" is an adjective meaning "pure" or "clean".
+  It gave the verb "puto, putare" meaning "to trim",
+  or less frequently, but etymologically consistent:
+  "to cleanse", "to purify".
+  Puto, putare then acquired several figurative meanings;
+  one of which: "to reckon".
+  The preposition "cum" means "with".
+  It gave the prefixes "co-", "con-" and "com-" (same meaning).
+  Com- and puto, putare form the verb "computo, computare",
+  meaning "to reckon together", "to calculate".
+  It gave the English verb "to compute"
+  (same meaning: basically "to solve an equation").
+  Which gave the substantive:
+
+    computer —— meaning "someone or something that computes".
+    A computing machine.
+
+  //  https://en.wiktionary.org/wiki/computer#English
+
+  The oldest known one is called: "brain".
+  /*
+    It's a sub-system in a complex machine
+    with convoluted and nested feedback loops.
+    The digestive and respiratory sub-systems
+    form a generator that converts potential energy
+    into electro-chemical energy.
+    The cardiovascular sub-system is a power supply
+    that uses mechanical energy to feed peripherals.
+    One of them is the brain.
+    It uses the electro-chemical energy
+    to process data from interfaces
+    called sensory organs.
+    The brain is part of the nervous sub-system
+    which sends movement instructions
+    to peripherals called muscles.
+    The movement of the muscles
+    notably allows to refuel the generator.
+  */
+
+  The semantics of radicalism...
+  Let's agree on:
+  from now on, computer implies "artificial",
+  as in "human-made" ——
+  —— but not the way babies are made —— game over,
+  try again.
+  The radicalism of semantics...
+  Let's agree on:
+  from now on, computer implies "manufactured" ——
+  —— from Latin "manus": "hand".
+
+  The invention of computers happened at a vertiginous celerity.
+  19th century's most advanced computer was mechanical and hand-activated.
+  Barely a hundred years later,
+  computers would have evolved to electrical analogue computers,
+  to electrical digital tube computers,
+  to electrical digital solid-state computers.
+
+  This period of History is too fascinating to be ignored ——
+  —— and too dense for this chapter.
+  Let me drop a few names and trust your curiosity.
+
+  Ada Lovelace & Charles Babbage,
+  Alan Turing,
+  Grace Hopper
+  and of course legion others.
+  /*
+    https://en.wikipedia.org/wiki/Ada_Lovelace        https://en.wikipedia.org/wiki/Charles_Babbage
+    https://en.wikipedia.org/wiki/Alan_Turing         https://en.wikipedia.org/wiki/Grace_Hopper
+    https://en.wikipedia.org/wiki/List_of_pioneers_in_computer_science
+  */
+
+   George Boole, Harry Nyquist and Claude Shannon
+   are not on the list.
+   Let's talk about George Boole.
+  /*
+    https://en.wikipedia.org/wiki/George_Boole
+    https://www.antoineportes.com/workingClassFilterDesign/sources/Boole_George__The_Mathematical_analysis_of_logic__1847.pdf
+  */
+  I've finished Aristotle's Organon and thought
+  "this could only happen once —— and it's over."
+  Then I met George Boole. (Let's ignore Francis Bacon.)
+  He published "The Mathematical Analysis of Logic" in 1847.
+  Read it. It's amazing. Do what you want. But you want to read it.
+  He found a way to express the axioms of logic
+  and the rules of syllogistic
+  in mathematical form.
+  Instead of inventing symbols
+  like Leibniz did for Calculus,
+  he used extant algebraic ones
+  and reduced their set to the very minimum.
+  He opens the first chapter with
+  "Let us employ the symbol 1, or unity, to represent the Universe".
+  So 1 is everything and 0 is nothing.
+  Then, for instance:
+  1 + 0 = 1  is the principle of excluded middle.
+  Isn't it pure genius?
+  A full chapter of Aristotle in the simplest possible equation!
+  He calls "election"
+  what I would call something like "set intersection"
+  and represents it with multiplication.
+  Then  x·y  means all members of X that are also members of Y.
+  Then  x·1  means all X in the universe.
+  Or  1 — x  means everything that is not X... so  NOT X  or  !X .
+  Or  y(1 — x)  means all Y that are not X.
+  Then:  y(1 — x)  =  0  means { [Y that are not X] is [nothing] },
+  so no Y is not X, so all Y are X.
+
+    y(1 — x)  =  0    <=>    y — yx  =  0    <=>    y  =  yx
+
+    <=>    all Y in everything are all Y in X, so all Y are X indeed.
+
+  For this last expression not to break logic,
+  division must be forbidden.
+  Otherwise  y = yx  <=>  x = 1
+  which is not necessary.
+  Just because a set contains a smaller set
+  doesn't mean the bigger one is everything
+  (all pigeons are birds, yet not everything is a bird).
+
+  Then  x²  =  xx  means all X that are X,
+  a tautology that reduces to all X,
+  so  xx = x  and by extension:  xⁿ = x .
+  Then  v = xy  means V are the X that are Y or the Y that are X;
+  if we assume v is not zero
+  then it means some X are Y or some Y are X.
+  We can express syllogisms this way:
+
+     x  =  xy  ——>  all X are Y
+    zy  =  0   ——>  Z that are Y or Y that are Z is nothing:
+                    no Z is Y or no Y is Z
+
+   Then  zyx  means X that are Y and Z.
+   But no Y is Z,
+   so X that are nothing.
+   So  zyx = 0 .
+   Then:
+
+     yx = x    <=>    zyx  =  zx
+     <=>    zx  =  0
+
+   therefore no Z is X.
+
+  Ignore my comments,
+  just apply traditional arithmetic rules,
+  you'll get the same conclusion.
+  In Aristotelian plain-word syntax:
+
+    Lacedaemonians are men.                 //  Lacedaemonian is X,
+    No god is a man.                        //  man is Y,
+    Therefore no god is a Lacedaemonian.    //  god is Z.
+  /*
+    or:
+      Men can trip on airplanes.
+      Islands cannot.
+      No man is an island.
+  */
+
+  I'm not reproducing the full book (unless you insist).
+  So check the source or trust me:
+  the full Organon can be re-written with:
+  plus, minus, times, equals, zero, one ——
+  —— and arbitrary symbols for subjects and predicates.
+
+  The very same week,
+  Augustus De Morgan published "Formal logic".
+  It shares Boole's attempt: turn logic into algebra.
+  Boole's elegant radicalism prevailed.
+  But De Morgan, thanks to the De Morgan's law,
+  still contributed to modern Boolean algebra.
+  /*
+    https://en.wikipedia.org/wiki/Augustus_De_Morgan
+    https://www.antoineportes.com/workingClassFilterDesign/sources/de_Morgan_Augustus__Formal_logic__1847.pdf
+    https://en.wikipedia.org/wiki/De_Morgan's_laws        https://en.wikipedia.org/wiki/Boolean_domain
+  */
+
+  The Boolean domain is basically what George Boole built in 1847.
+  It can express the logical operator AND with multiplication, and NOT with  (1 — x) .
+  De Morgan, using his own notation, found OR.
+  As in X or Y or both.
+  X or Y but not both is called XOR (exclusive OR).
+  How did he do?
+
+  Let's define Z as everything that is neither Y nor X
+  —— that is: { (NOT Y) AND (NOT X) }:
+
+    z  =  (1 — y)(1 — x)
+
+  Now the negation of Z is
+  { everything that is either Y or X or both }
+  (no extra case) ——
+  —— which is what we're looking for.
+  Let's call it W:
+
+    W  =  1 — z  =  1 — (1 — y)(1 — x)
+
+  W is:
+
+    {
+      everything that is not
+      [
+        (
+          everything that is not Y
+        )
+        AND
+        (
+          everything that is not X
+        )
+      ]
+    }
+
+  Apparently this is equivalent to: W is Y or X...
+  Funny how uncertainty becomes impractical
+  in a language optimised for truth.
+  Let's say Y is Farfisa Compact,
+  then  1 — y  is everything that is not Farfisa Compact,
+  including Vox Continental.
+  But now X is Vox Continental,
+  then  1 — x  is everything that is not Vox Continental.
+  Now  (1 — y)(1 — x)  is the intersection of these two sets,
+  so it can be anything
+  as long as it's neither Farfisa Compact
+  nor Vox Continental (nor both).
+  So W is
+  { NOT (NEITHER Farfisa Compact NOR Vox Continental NOR both) } .
+  Negation of negation is affirmation,
+  so  {NOT NEITHER} = {EITHER}
+  and  {NOT NOR} = {OR} .
+  So W is
+  { EITHER Farfisa Compact  OR Vox Continental  OR both } .
+  /*
+    In this example, "both" is an empty set.
+    An empty set is a set.
+    Use e.g. mammal and able to fly (or swim or whatever)
+    if you don't like empty sets.
+  */
+
+    w  =  1 — (1 — y)(1 — x)          //  This reads:
+                                      //  { all X }  plus  { all Y }
+       =  1 — (1 — x — y + xy)        //  minus  { all X that are Y }
+                                      //  (or Y that are X),
+       =  1 — 1 + x + y — xy          //
+                                      //  xy is part of x and y
+       =  x + y — xy                  //  ——> remove it once or get it twice.
+
+  Now if O is Compact Organ,
+  then all Y are O and all X are O;
+  and we should find that all W are O too.
+
+    xo  =  x
+    yo  =  y
+    wo  =  (x + y — xy)o  =  xo + yo — xyo
+        =  x + y — xy  =  w
+
+  Ok.
+  Powerful, no doubt.
+  But a bit convoluted.
+  Modern Boolean algebra kept 0 and 1,
+  but instead of everything and nothing,
+  they now typically mean (respectively) false and true
+  (although not necessarily).
+  And the operators AND, NOT and OR
+  are used explicitly or with the symbols:
+
+    ∧ (AND)  ¬ (NOT)  ∨ (OR)
+
+  These operators can be combined to obtain new ones
+  like XOR, NOR, &c.
+
+  Now how do we make a machine with this?
+  It turns out that the dichotomy  0||1
+  (or  false||true )
+  has a counterpart in electronics.
+  It's called a switch, or an interrupter.
+  There's one on your phone.
+  It has two positions:  off/on  or  open/closed .
+      open:  disconnects the circuit.
+    closed:  allows current to flow.
+
+  It also turns out that most tubes and transistors
+  can act as voltage-controlled,
+  or current-controlled, interrupters.
+  Also, as we've seen,
+  capacitors can store voltage.
+  So a network of transistors,
+  each paired with a capacitor,
+  can route and store voltage.
+  The discharge of a capacitor is exponential,
+  so zero is never actually reached.
+  We need a threshold.
+  Then a low enough voltage means 0,
+  otherwise it's 1.
+  Serial wiring gives AND,
+  parallel wiring gives OR,
+  and NOT is simply an inverter.
+  When a transistor receives the prescribed current or voltage,
+  it switches.
+  And its capacitor charges or discharges accordingly.
+  The electrical signal becomes a binary discrete signal.
+  The manier instances of transistor/capacitor pairs,
+  the more binary data.
+  But the charge and the discharge of a capacitor
+  are not instantaneous.
+  So computing this data takes a non-negligible time
+  (no more speed of light).
+  (Keep that in mind.)
+  /*
+    I've written this paragraph relying on intuition more than sources.
+    I might have let imprecision or even error slip in.
+    If so, please correct me.
+  */
+
+  Ok wonderful:
+  we have a convoluted polycephalous interlacement
+  of true and false qualifying...
+  Qualifying what exactly?
+
+  //  When all is one and one is all
+  Enter Gottfried Leibniz
+  (again —— this guy's all over the place).
+
+  https://www.antoineportes.com/workingClassFilterDesign/sources/Leibniz_Gottfried__Explication_de_l_arithmetique_binaire__1703.pdf
+
+  I've never met him.
+  But I feel relatively safe writing: he liked numbers.
+  He also liked god very very much.
+  In fact he thought god was literally number 1.
+  (All this time wasted being a sucker at metaphysics...
+  maths could be two centuries in the future right now.)
+  "Omnibus ex nihilo ducendis sufficit unum"...
+  There's zero, and there's one ——
+  —— ergo god created the Cosmos ex-nihilo.
+  Makes sense now. Thanks Gottfried.
+  So god is the Heaviside step function.
+  Then the Dirac δ function created god.
+  Then Paul Dirac created the creator of god?
+  Or step is opus dei and δ is god?
+  Then Paul Dirac created god?
+  Next time: maybe think twice before inventing Calculus...
+  /*
+    Also:
+     "ἔκ τε γὰρ οὐδάμ’ ἐόντος ἀμήχανόν ἐστι γενέσθαι
+      καί τ’ ἐὸν ἐξαπολέσθαι ἀνήνυστον καὶ ἄπυστον·
+      αἰεὶ γὰρ τῆι γ’ ἔσται, ὅπῃι κέ τις αἰὲν ἐρείδηι."
+
+    ... right?
+  */
+  How about we stick to mathematics?
+  I guess you find inspiration in whatever inspires you.
+  There probably wouldn't be a Passacaglia & Fuge c-moll BWV 582
+  if not for the logical fallacy known as "holy trinity" (3 = 1)...
+
+  https://www.antoineportes.com/workingClassFilterDesign/sources/Bach_Johann_Sebastian__Passacaglia_c-moll__BWV_582.pdf
+
+  (( I also guess "mysterious ways" means "contradiction in the terms". ))
+
+  /*
+    ... or maybe you knew all along exactly what you were doing...
+
+    Principle of sufficient reason:
+      #  accept it OR reject all science;
+      #  accept it AND reject free will.
+
+    I mean, it's not like you were dumb, you naughty Saint-Judas.
+  */
+
+  How about we stick to mathematics?
+
+  Leibniz came to question the legitimacy of base 10:
+  the fact that we use ten symbols to write numbers:
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+  With a spirit reminiscent of what his predecessor René Descartes
+  had done to knowledge,
+  or announcing what his successor George Boole
+  would do to logic,
+  he sought the irreducible principle of numbers.
+  Turns out one symbol is not enough.
+  But you can express any integer with just zeroes and ones
+  (or any pair of symbols).
+
+  We'll expand on binary arithmetic in this chapter's appendix.
+  What matters here
+  is that we've found a utility
+  to our network of automated interrupters:
+  they can store and process numbers.
+  These numbers are arrays of binary states.
+  Each instance in the array is called a binary digit,
+  often shortened as bit.
+  Bits are sometimes called shannons (Sh)
+  to emphasise their quality of measuring unit.
+
+  Many many many things can be represented with numbers,
+  so guess what: computers are powerful.
+  Amongst these things: voltage.
+  Devices called analogue to digital converters (ADC)
+  receive an analogue signal (voltage)
+  and quantize it as a series of bits.
+  How many bits does this process require?
+  Ideally: an infinity (Quantum physics might argue).
+  Remember Calculus:
+  the more infinitesimal the differential gets,
+  the more accurate the integration.
+  Try building a circle with straight lines.
+  The smaller the lines, the rounder the circle,
+  but also the manier the lines.
+  More bits doesn't mean higher quantized voltages
+  (amplitudes are normalised to 1 —— in code at least),
+  it means more precise quantization.
+  The number of bits available
+  to quantize an analogue signal
+  or process a digital signal
+  is called resolution, or bit-depth.
+  It's usually a compromise between
+  human hearing capabilities
+  and machine computing capabilities
+  (early 2000's mp3 players were computing machines...).
+
+  For instance,
+  in IEEE 754 double-precision 64-bit floating-point,
+  there are 11 exponent bits
+  (allowing order of magnitude switch and therefore floating point),
+  1 sign bit (basically simplifying arithmetic with negative numbers) ——
+  —— so 52 bits are left,
+  plus one "hidden bit":
+  the leading one being always 1,
+  it can be assumed and leave its place.
+  So 53.
+  So 2⁵³ possible values to divide  0 dBFS = 1 .
+  So:
+                          —20                —1060
+     20 log₁₀(1/2⁵³)  =  —————— 53 ln(2)  = ——————— ln(2)
+                         ln(10)              ln(10)
+
+                      ≈  —319.091795404 dB
+
+  The human hearing ranges from 0 dB SPL
+  to the pain threshold around 130 dB SPL.
+  So 64-bit FP reduces the noise floor
+  to more than twice as quiet as we can hear.
+  We need this extra headroom for dynamic mixes.
+  Not in the final bounce.
+  Which is why 24-bit is sometimes labelled "HD audio" ——
+  —— it's not fraud:
+                                              //  Pretty much our ears' dynamic range.
+     — 20                                     //  You'll be annoyed by physical pain
+    ——————— 23 ln(2)  ≈  —138.473798005 dB    //  before (digital) background noise.
+     ln(10)                                   //  As HD as makes sense...
+
+  Back on topic.
+  We now have a discrete approximation of our amplitude.
+  But, as we've seen, computing data takes time.
+  So our signal cannot be continuous (time-wise I mean).
+  A voltage comes in, its values get discretised,
+  and once the discretisation is complete,
+  a new voltage can be re-built.
+  Each step builds what is called a sample.
+  The process is called sampling.
+  Between samples, information is lost.
+  If we want to be able to reconstruct
+  an analogue signal at some point,
+  we need to measure the time between samples.
+  That's extra processing.
+  Even though Claude Shannon has proven that it is possible,
+  there's a more efficient approach.
+  If this time is fixed, the interval constant,
+  then we don't need to measure it,
+  we just store it once.
+  The sampling becomes periodic.
+  Its rate is called sampling rate,
+  or sample rate,
+  or sampling frequency.
+
+  It acts on the analogue signal as an amplitude modulator
+  whose waveform is an impulse, a periodic trigger.
+  (That's the ideal theoretical model.
+  In practice the samples are held.
+  So not an impulse, but a step.)
+  ((Don't worry: details are coming.))
+
+  Digital time is discrete and periodic.
+  This is the information we needed.
+
+  /*
+    https://en.wikipedia.org/wiki/Digital_electronics
+    //  This article is light as a source on its own, but it's full of links.
+    https://en.wikipedia.org/wiki/Logic_gate                      https://en.wikipedia.org/wiki/Binary_number
+    https://en.wikipedia.org/wiki/Bit                             https://en.wikipedia.org/wiki/Analog-to-digital_converter
+    https://en.wikipedia.org/wiki/IEEE_754                        https://en.wikipedia.org/wiki/Threshold_of_pain#Hearing
+    https://en.wikipedia.org/wiki/Sampling_(signal_processing)
+  */
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "ἐν δὲ Κότωι διάμορφα καὶ ἄνδιχα τε και πάντα πέλονται,                              */
+/*           σὺν δ' ἔβη ἐν Φιλότητι καὶ ἀλλήλοισι ποθεῖται."                                     */
+/*                                                       ——  Ἐμπεδοκλῆς (fragment 21)            */
+/*                                                                                               */
+/*          "Purple phaze all around,                                                            */
+/*           don't know if I'm coming up or down."                                               */
+/*                                         ——  Jimi Phendrix (multiverse 42-zeta-027)            */
+===================================================================================================
+#02  Περιπλομένοιο χρόνοιο
+===================================================================================================
+
+  [...]
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "τὸ μὲν γὰρ αὐτοῦ γέγονε καὶ οὐκ ἔστιν,                                              */
+/*           τὸ δὲ μέλλει καὶ οὔπω ἔστιν.                                                        */
+/*           ἐκ δὲ τούτων καὶ ὁ ἄπειρος καὶ ὁ ἀεὶ λαμβανόμενος χρόνος σύγκειται."                */
+/*                                         ——  Αριστοτέλης (Φυσικής ἀκρόασις, IV, 10)            */
+/*                                                                                               */
+/*          "τὸ δὲ νῦν οὐ μέρος·                                                                 */
+/*           μετρεῖ τε γὰρ τὸ μέρος, καὶ συγκεῖσθαι δεῖ τὸ ὅλον ἐκ τῶν μερῶν·                    */
+/*           ὁ δὲ χρόνος οὐ δοκεῖ συγκεῖσθαι ἐκ τῶν νῦν."                                        */
+/*                                                                         —— ad loc.            */
+/*                                                                                               */
+/*          "ἔστω γὰρ ἀδύνατον ἐχόμενα εἶναι ἀλλήλων τὰ νῦν, ὥσπερ στιγμὴν στιγμῆς."             */
+/*                                                                         —— ad loc.            */
+/*          "οὐδενὸς γὰρ διαιρετοῦ πεπερασμένου ἓν πέρας ἔστιν,                                  */
+/*           οὔτε ἂν ἐφ' ἓν ᾖ συνεχὲς οὔτε ἂν ἐπὶ πλείω·                                         */
+/*           τὸ δὲ νῦν πέρας ἐστίν, καὶ χρόνον ἔστι λαβεῖν πεπερασμένον."                        */
+/*                                                                         —— ad loc.            */
+===================================================================================================
+#03  Vaticinium ex eventu
+===================================================================================================
+
+  //  No such thing as discrete time
+
+  [...]
+
+
+
+===================================================================================================
+#04  Yet another integral transform
+===================================================================================================
+
+  [...]
+
+
+
+===================================================================================================
+#05  One pill makes you larger
+===================================================================================================
+
+  We now have a discrete input signal. We want to apply a filter to it.
+  We have block diagrams to help us see equations as signal paths.
+  Additions and multiplications are pretty straightforward.
+  But there are integrators sometimes.
+
+  We've seen (Chapters I & III)
+  that integrating a function's rate of change
+  rebuilds the function.
+  But if we integrate the function itself,
+  we get something else.
+  (Antiderivative obviously, but that's not my target here.)
+
+  /*
+    In what follows I loosely use "function"
+    to mean "function's output value".
+    It's not semantically rigorous
+    but it works around the confusion
+    between function output and output signal.
+    I.e.: if we integrate our input signal over time,
+    the function's input (t) is time
+    and its output ( x(t) ) is the input signal...
+  */
+
+  Think graphical.
+  At each infinitesimal step,
+  we multiply the function by a small increment in its variable (differential).
+  On a graph, the differential is a horizontal (infinitesimal) segment;
+  the function's value is a vertical segment.
+  This figure is called a rectangle.
+  And multiplying one side by the other
+  is how we measure the area of a rectangle.
+
+  So each step of an integral is the area of a rectangle.
+  And the integration itself is the sum of all the rectangles.
+
+  This produces an approximation of the area under the curve.
+  And it's as precise as the differential is small.
+
+  Except here our variable is time and our differential is T
+  (the sampling period,
+  the time interval between two consecutive samples).
+  It's measurable and therefore not really infinitesimal.
+
+  So the rectangle is a nice start,
+  but it could easily benefit from some optimisation.
+
+  What follows is very simple,
+  on the sine qua non condition that you think graphical.
+  Did I mention THINK GRAPHICAL?
+
+  [Trapezoids]  https://www.desmos.com/calculator/cv1da4kefc
+
+  Between samples, information is lost.
+  But we can do better than hard-stepped jumps:
+  the shortest path between two points is a straight line.
+  And two points are all a straight line requires to be defined.
+
+  So, knowing the previous amplitude (which we do),
+  we would better approximate the lost curve
+  by drawing a straight line to the current amplitude.
+
+  The figure which previously was a rectangle
+  is now a right triangle on top of a rectangle.
+  (If you cannot picture it, see last Desmos graph.)
+  This figure is called a TRAPEZOID.
+  The method of integration we're using
+  is called the trapezoidal rule.
+
+  //  https://en.wikipedia.org/wiki/Trapezoidal_rule
+
+  The integrator we're building
+  is called a TRAPEZOIDAL INTEGRATOR.
+
+  /*
+    It might sound like I'm contradicting
+    the Calculus system I'm working very hard on building here.
+    This relates to a controversy which, as far as I know,
+    started with Ἀναξαγόρας [Anaxagoras] vs. Ἐμπεδοκλῆς [Empedocles] ——
+    /*
+      my personal historical culture starts at Ὅμηρος [Homer];
+      it's likely older than that: Babylonians, Egyptians, &c.
+
+      I didn't come up with the opposition Ἐμπεδοκλῆς / Ἀναξαγόρας,
+      my source is Φυσικής ἀκρόασις [Physics] by Αριστοτέλης [Aristotle].
+    */
+    —— which quickly became Atomism vs. divisibility ad infinitum,
+    and which still survives as Materialism vs. Idealism.
+    I'm team Planck, but it's irrelevant here:
+    whatever dt means physically,
+    as long as  T > 2dt , no contradiction;
+    no πολεμικός [polemic].
+  */
+
+  A right triangle is half a rectangle.
+  Second easiest area to calculate:  (opposite·adjacent)/2 .
+  We don't need the hypotenuse.
+  So we already have all the sides we need.
+  Sorry Πυθαγόρας [Pythagoras], maybe next time.
+
+  Let's name stuff:
+    #  T is the sampling period ( 1/f_s )
+    #  x[n]  is our current amplitude
+    #  x[n—1]  is our previous amplitude
+
+  The rectangle's horizontal side is T,
+  its vertical side is  x[n—1] .
+  The triangle's adjacent and opposite sides
+  are interchangeable depending on which angle we consider.
+  Let's be arbitrary and not rot like a rat in a rut:
+  adjacent is T, opposite is  x[n] — x[n—1] .
+
+  So the area of the rectangle is:
+
+    T x[n—1]
+
+  and the area of the right triangle is:
+
+     T ( x[n] — x[n—1] )
+    —————————————————————
+              2
+
+  then the area of the trapezoid is:
+
+                          x[n] — x[n—1]        2x[n—1] + x[n] — x[n—1]
+    A  =  T x[n—1]  +  T ——————————————  =  T ————————————————————————
+                               2                         2
+           T              T
+       =  ——— x[n—1]  +  ——— x[n]
+           2              2
+
+  If the signal has decreased,
+  x[n] — x[n—1]  will be negative,
+  so will the area of the triangle.
+  Then the triangle will be subtracted from the rectangle.
+  Still a trapezoid, just expressed weirdly.
+  (In fact we could get the same result
+  by taking the big rectangle  T x[n]
+  and subtracting the triangle ——
+  —— visualise it: same trapezoid.)
+  Increase works, decrease works, no third option: alles gut.
+
+  /*
+    Wait! Wait, wait, wait...
+    What if the input signal crosses zero? ——
+    —— Wouldn't the trapezoid become two successive triangles?
+    Do we need an input DC offset compensated at the output?
+    Or is there a clean solution?
+    Or... is there even a need for a solution?
+
+    The zero—crossing would happen
+    somewhere between  t[n—1]  =  (n — 1)T
+    and  t[n]  =  nT .
+    Or at  t[n—1+δ] = (n — 1 + δ)T
+    with:  δ < 1 .
+
+    To find δ,
+    we need to draw a straight line between  x[n—1]  and  x[n]
+    and find where it crosses the horizontal axis.
+    All we need, to define a straight line on a Cartesian plane,
+    is a constant slope and a constant offset:
+
+      α(t)  =  a₁t + a₀
+
+    (By the way, that's why 1st-order polynomials are called "linear".)
+    The slope is the rate of change,
+    or how much  α(t)  grows in proportion of t,
+    or:  dα/dt ...
+
+       dα       α(t + dt) — α(t)      a₁(t + dt) + a₀ — a₁t — a₀      a₁t + a₁dt — a₁t
+      ————  =  —————————————————  =  ———————————————————————————  =  —————————————————
+       dt             dt                         dt                         dt
+
+            =  a₁ dt/dt  =  a₁    //  ok.
+    /*
+      Limits are only required for non-linear functions
+      (i.e. non-constant rate of change).
+    */
+
+      Here, dt is:    nT — (n — 1)T  =  T(n — n + 1)  =  T
+        and dα is:    x[n] — x[n—1]
+    So:
+              dα       x[n] — x[n—1]
+      a₁  =  ————  =  ———————————————
+              dx             T
+
+    Now we need a₀:
+
+      α(t)  =  a₁t + a₀    <=>    a₀  =  α(t) — a₁t
+
+    We now know a₁, and we have two values for  α(t) :
+
+      x[n—1]  and  x[n]
+
+    and for t:
+
+      (n — 1)T  and  nT .
+
+    One unknown, two equations ——
+    —— the gods of maths are generous sometimes!
+
+                              x[n] — x[n—1]
+      (1)  a₀  =  x[n—1]  —  ——————————————— (n — 1)T
+                                    T
+
+               =  x[n—1] — ( x[n] — x[n—1] )(n — 1)
+
+               =  x[n—1] — (n — 1)x[n] + (n — 1)x[n—1]
+
+               =  x[n—1] — nx[n] + x[n] + nx[n—1] — x[n—1]
+
+               =  x[n] + n( x[n—1] — x[n] )
+
+                            x[n] — x[n—1]
+      (2)  a₀  =  x[n]  —  ——————————————— nT
+                                  T
+
+               =  x[n] — n( x[n] — x[n—1] )
+
+               =  x[n] — nx[n] + nx[n—1]
+
+               =  x[n] + n( x[n—1] — x[n] )    //  ok.
+
+      Now, to find δ,
+      we need to solve:
+
+        α( (n — 1 + δ)T )  =  0 .
+
+      Go:
+
+        a₁ (n — 1 + δ) T  +  b₀  =  0
+
+                x[n] — x[n—1]
+        <=>    ——————————————— (n — 1 + δ)T + x[n] + n( x[n—1] — x[n] )  =  0
+                      T
+
+        <=>    ( x[n] — x[n—1] )(n — 1 + δ) + x[n] + nx[n—1] — nx[n]  =  0
+
+        <=>    x[n](n — 1 + δ) — x[n—1](n — 1 + δ) + x[n] + nx[n—1] — nx[n]  =  0
+
+        <=>    nx[n] — x[n] + δx[n] — nx[n—1] + x[n—1] — δx[n—1] + x[n] + nx[n—1] — nx[n]  =  0
+
+        <=>    δx[n] + x[n—1] — δx[n—1]  =  0
+
+        <=>    δ( x[n] — x[n—1] )  =  —x[n—1]
+
+                            x[n—1]             x[n—1]
+        <=>    δ  =  —  ——————————————  =  ——————————————
+                         x[n] — x[n—1]      x[n—1] — x[n]
+
+      Ok.
+      Now the left right triangle's horizontal side ranges from  (n — 1)T  to  (n — 1 + δ)T .
+      So its length is:
+
+        (n — 1 + δ)T  —  (n — 1)T  =  T(n — 1 + δ — n + 1)  =  δT
+
+      Its vertical side is  x[n—1] .
+      So its area is:
+
+                 δTx[n—1]         T
+        A_l  =  ——————————  =  δ ——— x[n—1]
+                    2             2
+
+                    x[n—1]        T                 x[n—1]²
+             =  —————————————— · ——— x[n—1]  =  ——————————————— T/2
+                 x[n—1] — x[n]    2              x[n—1] — x[n]
+
+      The right right triangle——
+      /*
+        meaning the triangle located on the right, one of whose angles is a right angle...
+      */
+      ——'s horizontal side ranges from  (n — 1 + δ)T  to  nT .
+      So its length is:
+
+         nT — (n — 1 + δ)T  =  T(n — n + 1 — δ)  =  (1 — δ)T
+
+      Its vertical side is  x[n] .
+      So its area is:
+
+                 (1 — δ)Tx[n]               T           ╭         x[n—1]     ╮  T
+        A_r  =  ——————————————  =  (1 — δ) ——— x[n]  =  │ 1 — —————————————— │ ——— x[n]
+                      2                     2           ╰      x[n—1] — x[n] ╯  2
+
+                 x[n—1] — x[n] — x[n—1]     T                —x[n]         T
+             =  ———————————————————————— · ——— x[n]  =  ——————————————— · ——— x[n]
+                      x[n—1] — x[n]         2            x[n—1] — x[n]     2
+
+                     —x[n]²
+             =  ——————————————— T/2
+                 x[n—1] — x[n]
+
+      So the total area is:
+
+                          x[n—1]²               —x[n]²              x[n—1]² — x[n]²
+        A_l + A_r  =  —————————————— T/2 + ——————————————— T/2  =  ————————————————— T/2
+                       x[n—1] — x[n]        x[n—1] — x[n]           x[n—1]  — x[n]
+
+      Let's consider  x[n—1]²/( x[n—1] — x[n] )
+      a polynomial division whose variable is  x[n—1] .
+
+          x[n—1]²               :  x[n—1] — x[n]  =  x[n—1] + x[n]
+        — x[n—1]² + x[n] x[n—1]            ╭────────────────────────────────────────────────────╮
+        ———————————————————————            │ So:                                                │
+                    x[n] x[n—1]            │      x[n—1]²                            x[n]²      │
+                  — x[n] x[n—1] + x[n]²    │   —————————————  =  x[n—1] + x[n] + —————————————  │
+                  —————————————————————    │   x[n—1] — x[n]                     x[n—1] — x[n]  │
+                                  x[n]²    ╰────────────────────────────────────────────────────╯
+
+      Now let's consider  x[n]² / ( x[n—1]  —  x[n] )
+      a polynomial division whose variable is  x[n] .
+
+          x[n]²               :  —x[n] + x[n—1]  =  —x[n] — x[n—1]
+        — x[n]² + x[n—1] x[n]              ╭─────────────────────────────────────────────────────╮
+        —————————————————————              │ So:                                                 │
+                  x[n—1] x[n]              │       x[n]²                             x[n—1]²     │
+                — x[n] x[n—1] + x[n—1]²    │   —————————————  =  —x[n] — x[n—1] + —————————————  │
+                ———————————————————————    │   x[n—1] — x[n]                      x[n—1] — x[n]  │
+                                x[n—1]²    ╰─────────────────────────────────────────────────────╯
+      Then:
+
+             x[n—1]²          x[n]²
+        —————————————— — ——————————————
+         x[n—1] — x[n]    x[n—1] — x[n]
+
+                                x[n]²                           x[n—1]²
+        =  x[n—1] + x[n] + —————————————— + x[n] + x[n—1] — ——————————————
+                            x[n—1] — x[n]                    x[n—1] — x[n]
+
+                    x[n—1]²         x[n—1]²           x[n]²            x[n]²
+        <=>    —————————————— + —————————————— — —————————————— — ——————————————
+                x[n—1] — x[n]    x[n—1] — x[n]    x[n—1] — x[n]    x[n—1] — x[n]
+
+               =  x[n—1] + x[n] + x[n] + x[n—1]
+
+                      x[n—1]²                  x[n]²
+        <=>    2 ————————————————  —  2 ————————————————  =  2 x[n—1]  +  2 x[n]
+                  x[n—1]  —  x[n]        x[n—1]  —  x[n]
+
+                  x[n—1]² — x[n]²
+        <=>    2 —————————————————  =  2( x[n—1] + x[n] )
+                  x[n—1]  — x[n]
+
+                x[n—1]² — x[n]²
+        <=>    ————————————————  =  x[n—1] + x[n]
+                x[n—1]  — x[n]
+
+                                x[n—1] + x[n]    //  You might not remember the question by now ——
+         =>    A_l + A_r  =  T ——————————————    //  —— but this is the answer.
+                                      2          //  The trapezoidal rule can handle a zero—crossing.
+
+    Of course we could have used the known identity:
+
+      (a + b)(a — b)  =  a² — ab + ba — b²  =  a² — b²
+
+    and eliminate the denominator in one move...
+    but would it have been the same amount of fun?
+
+    Or you could just keep thinking graphically.
+    Let's say  x[n—1]  is positive and  x[n]  is negative.
+    The rectangle has one side  x[n—1]  (vertical, positive)
+    and one side T (a horizontal segment of the zero axis).
+    Then it sits on top of the horizontal axis.
+    The triangle has one horizontal side T,
+    parallel to the zero axis,
+    located at  x[n—1]  (positive),
+    and one horizontal side:
+
+      x[n] — x[n—1]  =  |x[n]| sgn( x[n] ) — x[n—1]
+
+                     =  —|x[n]| — x[n—1]
+
+    negative and crossing zero at  t[n]  =  nT .
+    So the positive part of the triangle
+    is contained in the rectangle.
+    And its area is negative.
+    So when we add areas together,
+    we actually subtract the triangle's area.
+    So whatever is common to the triangle and the rectangle
+    will cancel out.
+    What will remain
+    is the part of the rectangle
+    that's outside of the triangle
+    (a right triangle with head up and right angle on the left);
+    and the negative part of the triangle
+    (a right triangle with head down and right angle on the right).
+    These are the two successive right triangles
+    that unduly made the trapezoidal rule seem fragile.
+  */
+
+  Ok. That's the  ƒ(x)dx  part.
+  Mathematically, it's very similar to an arithmetic mean:
+  the one you use to calculate your average score in school.
+  (Sum all items, divide the sum by the number of items.)
+
+  //  https://en.wikipedia.org/wiki/Pythagorean_means
+
+  But integration is a permanent sum.
+  The area of the trapezoid (A) is what happens inside the integral,
+  it must be added to what happened previously.
+
+  Let's name stuff:
+
+    #  y[n]  is the current output of the integrator
+    #  y[n—1]  is the previous output of the integrator
+
+  Then:
+                         T              T
+    y[n]  =  y[n—1]  +  ——— x[n—1]  +  ——— x[n]
+                         2              2
+
+  We're almost ready to turn this into a block diagram.
+  Except we need 1-sample delays.
+
+  Let's say:
+
+    x[n]  =  exp(sTn)  =  zⁿ
+
+  then:
+
+    x[n—δ]  =  exp( sT( n — δ ) )  =  exp(sTn — sTδ)
+
+              =  exp(sTn)/exp(sTδ)
+
+              =  x[n]/zᵟ  =  x[n]·z⁻ᵟ
+  /*
+    That's right:
+    just like Laplace turns integration into division by s
+    and differentiation into multiplication by s,
+    the inverse z-transform turns a delay of n (or δ) samples
+    into a division by zⁿ (or zᵟ).
+
+    A multiplication by zⁿ would be a jump in the future.
+    This is not currently technologically possible.
+    But we can work around it using latency.
+    Delay everything except one thing,
+    and the one thing is in the future of its own referential.
+    In such a case,
+    jumps in the future
+    would be a considerable simplification of notation,
+    so why not?
+    We won't need this digression.
+    But anywhere else, it would have been even more off-topic.
+
+    Due to the fact that delays are more frequent
+    than jumps in the future,
+    z traditionally receives negative exponents.
+    I'm using 1/z for now.
+    Don't be surprised if it becomes z⁻¹
+    once it becomes more convenient.
+  */
+
+  Now, is  y[n—1]  also a complex sinusoid?
+  Re-read Chapter III if you crave insane nit-picking. In short:
+  Any sinusoid can be expressed using the sine function.
+  Integrating a function's first derivative gives the initial function.
+  Sine's first derivative is cosine.
+  Cosine's first derivative is minus sine.
+  That'll do.
+
+  Let's drop the indexing brackets:
+
+      x    <——    x[n]
+    x/z    <——    x[n—1]
+      y    <——    y[n]
+    y/z    <——    y[n—1]
+
+  then:             T                            T
+                   ——— x                  y  +  ——— x
+           y        2           T                2          T
+    y  =  ———  +  ————————  +  ——— x  =  —————————————  +  ——— x
+           z         z          2              z            2
+
+  Let's define:
+    #  α  =  xT/2     //
+    #  β  =  y + α    //  I've skipped γ because it looks like y.
+    #  δ  =  β/z      //
+
+  then:    y  =  α + δ
+
+  or:                //  or:                //  or:
+                     //                     //         ┌─────┐ α
+    α ──>(+)──> y    //    α ──>(+)──> y    //    x ──>│ T/2 ├───>(+)───> y
+           ↑ +       //          ↑ +        //         └─────┘     ↑ +
+           │         //        δ │          //                   δ │
+           δ         //       ┌──┴──┐       //                  ┌──┴──┐
+  or:                //       │ 1/z │       //                  │ 1/z │
+                     //       └──┬──┘       //                  └──┬──┘
+                     //          ↑          //                   β ↑
+                     //          β          //                     │
+                     //                     //              α ───>(+)<─── y
+                     //                     //                  +     +
+
+  Looks like we can close the loop:
+
+         ┌─────┐
+    x ──>│ T/2 ├──>o────>(+)────>o──> y
+         └─────┘   │      ↑ +    │
+                   │   ┌──┴──┐   │
+                   │   │ 1/z │   │
+                   │   └──┬──┘   │
+                   │      ↑      │
+                   └────>(+)<────┘
+                       +     +
+
+  This is a **trapezoidal integrator**.
+  Probably not the last one you'll see.
+  I suck at small talk.
+  But I'm trying to force a pause here.
+  Because this is fundamental.
+
+  There are basically two schools of digital filter design.
+  More on that later.
+  This humble piece of block diagram
+  is the core element of one of them.
+  (It's notably on the front page of Vadim Zavalishin's
+  "The Art of V.A. Filter Design".)
+
+  It comes in (at least?) 4 different forms.
+  This is Transposed Direct Form II (TDF2).
+
+  //  https://en.wikipedia.org/wiki/Digital_biquad_filter#Transposed_direct_form_2
+
+  The name suggests that it's the less straightforward form...
+  I must be wired in opposite polarity
+  because the formula always leads me to this form.
+  I easily get to Direct Form I (DF1)
+  by not simplifying the equation at all (but why would you do that?).
+  But Direct Form II (DF2) and Transposed Direct Form I (DF1)
+  are mysteries to me:
+  show me the solution, I get the math.
+  But how to seek this solution in the first place?
+  Either I'm twisted or everyone else is.
+
+  So I'll stick to TDF2
+  because for knowledge to be shared,
+  it has to be knowledge.
+  Look at Wikipedia and make your own choice.
+  DF1 and TDF1 have two [ 1/z ] elements.
+  DF2 and TDF2 factorise them out.
+  (The article deals with 2nd-order systems.)
+
+  We could replace [ 1/s ] elements in our block diagrams
+  with trapezoidal integrators,
+  and obtain digital filters right away.
+  But I've already done the end credits joke.
+
+  Trapezoidal integrator has an input.
+  Trapezoidal integrator has an output.
+  Trapezoidal integrator has a transfer function.
+
+         ┌─────┐   α                        //
+    x ──>│ T/2 ├──>o────>(+)────>o───> y    //
+         └─────┘   │      ↑ +    │          //  y  =  α + δ
+                   │    δ │      │          //
+                   │   ┌──┴──┐   │          //  δ  =  β/z
+                   │   │ 1/z │   │          //
+                   │   └──┬──┘   │          //  β  =  α + y
+                   │    β ↑      │          //
+                   │      |      │          //  α  =  x T/2
+                   └────>(+)<────┘          //
+                       +     +              //
+
+    β/z  =  y — α    <=>    (α + y)/z  =  y — α
+
+    <=>    α/z + y/z  =  y — α    <=>    α/z + α  =  y — y/z
+
+    <=>    y (1 — 1/z)  =  α (1/z + 1)
+
+                    1 + 1/z         T     1 + 1/z
+    <=>    y  =  α —————————  =  x ——— · —————————
+                    1 — 1/z         2     1 — 1/z
+
+                     T     1 + 1/z
+    <=>    H(z)  =  ——— · —————————
+                     2     1 — 1/z
+
+  /*
+    Equations involving feedback
+    can loop in your brain up to self-oscillation.
+    There's no magic trick around this risk.
+    Be sharp, hurry not.
+    One tip though:
+    when several paths lead to a single node,
+    said single node has several expressions.
+    In this example: α, β and y are such nodes.
+    So ignore x until you absolutely need it
+    and get rid of δ as soon as you can.
+    Then get rid of all non x or y terms one by one.
+    Here α is just x with a constant factor,
+    so I got rid of β first.
+    (Bonus tip: name all nodes ——
+    —— useless names won't hurt,
+    arithmetic will automatically collapse them;
+    unnamed junctions, on the other hand,
+    will make your equations crowded,
+    like when you use long Homeric
+    periphrases to talk of someone whose name you don't know,
+    they will be harder to solve,
+    harder to understand for your readers,
+    and more error-prone.)
+  */
+
+  //  Trapezoidal differentiator
+  This piece of block diagram
+  can be injected in bigger block diagrams
+  by replacing [ 1/s ] elements.
+  Fine.
+  But what if we want to directly discretise a filter's transfer function?
+  We need to replace s.
+
+  Differentiation is the reciprocal to integration.
+  So we need the reciprocal to a trapezoidal integrator.
+  A function maps x to y.
+  Its reciprocal maps y to x.
+  So we need to treat x as the unknown
+  and express it in terms of y.
+
+  I chose this method because I find it easier.
+  But reading the block diagram backwards
+  is as valid a solution.
+
+             T     1 + 1/z                     T     1 + 1/z
+    H(z)  = ——— · —————————    <=>    y  =  x ——— · —————————
+             2     1 — 1/z                     2     1 — 1/z
+
+              2         1 + 1/z                     2     1 — 1/z
+    <=>    y ———  =  x —————————    <=>    x  =  y ——— · —————————
+              T         1 — 1/z                     T     1 + 1/z
+
+  Ok, so the reciprocal is the inverse.
+  Laplace's magic is still operating.
+  Good.
+
+  Then, if  H_a(s)  is an analogue filter's transfer function,
+  and  H_d(z)  is its trapezoidal discretised counterpart,
+  the substitution:
+
+    H_a(s)  <——  H_d(z)
+
+  requires the substitution:
+
+             2     1 — 1/z
+    s  <——  ——— · —————————
+             T     1 + 1/z
+
+  Our trapezoidal differentiator is a ratio:
+
+     2     1 — 1/z       2 — 2/z       2z — 2
+    ——— · —————————  =  —————————  =  ————————
+     T     1 + 1/z       T + T/z       Tz + T
+
+    The numerator is:  2z — 2
+  The denominator is:  Tz + T
+
+  They're both affine functions of z.
+  Affine functions are linear.
+  So a trapezoidal differentiator
+  is a ratio of linear functions of z.
+
+  Hence this transformation being commonly called
+  BILINEAR TRANSFORM (BLT).
+
+  /*
+    Beware of confusion.
+      This is our fourth transform now.
+      But this one is not inverse.
+      Inverse Fourier transform,
+      inverse Laplace transform
+      and inverse z-transform
+      modify the variable to simplify the equation.
+      But equality persists.
+      The bilinear transform is a substitution,
+      not an equation.
+
+      Of course there's an inverse bilinear transform,
+      which is simply the reciprocal substitution,
+      and therefore restores the original equality.
+
+    Also:
+      A ratio is as linear as an affine function.
+      So why not simply "Linear transform" (LT)?
+      Too generic? Already taken? Not catchy enough?
+      /*
+        EDIT:
+          Probably as in "linear polynomial".
+          (Not linear as in LTI.)
+          Meaning "a ratio of linear polynomials".
+          The ratio itself not being a linear polynomial.
+          This would fit with "biquadratic"
+          when meant as "ratio of quadratic polynomials".
+          (Not as "quartic without odd exponents".)
+      */
+      Never mind.
+      When people talk of Bilinear transform or BLT,
+      depending on context,
+      they're talking about our trapezoidal differentiator
+      or about our trapezoidal integrator.
+      Assuming they know what they're talking about...
+
+      For reasons that I'll probably never figure out,
+        some people like using words bigger than themselves.
+      Maybe they believe talking nonsense makes them look clever.
+      Maybe looking clever matters more than being clever.
+      Maybe looking matters more than being.
+      Maybe they seek authority and don't mind cheating.
+      Maybe they believe everybody cheats anyway
+        —— and somehow it's not a problem.
+      Maybe they're easily impressed.
+      Maybe they feel dominated when they're impressed.
+      Maybe they want to dominate.
+      Maybe their lazy brain cannot conceive social interactions
+        outside of the dominant / dominee dichotomy.
+      Maybe they don't mind if truth becomes an infinitesimal datum
+        buried amidst noise pollution.
+      Maybe I'm asking offensive questions.
+      Maybe questioning social performance
+        is a hate crime against ordinary denial.
+      Maybe all of the above...
+
+    Definitions:
+      *Bilinear transform*
+      is a substitution of variable
+      that makes use of the trapezoidal rule
+      to approximate Calculus in discrete time domain.
+      It relies on the (inverse) z-transform.
+      It provides trapezoidal integrators
+      AND trapezoidal differentiators.
+      It can be injected in a block diagram
+      AS WELL AS in a transfer function.
+
+      https://en.wikipedia.org/wiki/Bilinear_transform
+
+      *Biquad*
+      is short for Biquadratic.
+      Just like bilinear means linear over linear,
+      biquadratic means quadratic over quadratic.
+      That is: a ratio of second-order polynomials.
+      That is: a mathematical formula.
+      The word equivocally means:
+      special case of quartic (no odd exponents).
+
+      https://en.wikipedia.org/wiki/Quartic_function#Biquadratic_equation
+
+      *Biquad filter*
+      refers to a filter whose transfer function is biquadratic.
+      Except no.
+      The term actually gets applied
+      as soon as the denominator is quadratic.
+      Therefore it's just another alias for 2-pole
+      or second-order filter.
+      It's not inherently digital.
+      And if it is,
+      it's not stuck with one method over an other.
+      It resists the equivocation:
+      the amplitude response is the square root
+      of a ratio of quartic polynomials
+      with no odd exponents.
+
+      https://en.wikipedia.org/wiki/Electronic_filter_topology#Biquad_filter_topology
+
+      *SVF*
+      means State-Variable Filter.
+      It's an analogue prototype:
+      a multimode 2-pole (biquad) filter.
+      It can be discretised.
+      (We've built one in Chapter III.)
+
+      https://en.wikipedia.org/wiki/State_variable_filter
+
+      *ZDF*
+      means Zero Delay Feedback.
+      A ZDF filter has (an) instantaneous feedback loop(s).
+      As long as you don't introduce [ z⁻¹ ] elements
+      in your feedback loops: you're doing ZDF.
+
+      *TPT*
+      means Topology-Preserving transform.
+      It's a design philosophy
+      which promotes the primary use of block diagrams in filter design.
+      This is meant to remain as true as possible
+      to the analogue prototype's signal path.
+      It relies on injecting BLT in block diagrams
+      rather than in transfer functions.
+      It relies on trapezoidal integrators
+      rather than trapezoidal differentiators.
+
+      I guess: https://www.discodsp.net/VAFilterDesign_2.1.2.pdf ?
+  */
+
+  //  Du passé faisons table rase.
+  Ok.
+  I've given you the somehow consensual BLT framework.
+  EXCEPT.
+  I stand by the point I've made in Chapter V about substitutions.
+  Basically: I don't like them.
+  Equivocity in maths is brain poison.
+
+╭┬────────────────────────────────────────────────────────────────────────┬╮
+├┼────────────────────────────────────────────────────────────────────────┼┤
+││  //  Working-class BLT ®                                               ││
+││  Fourier, Laplace, z-...                                               ││
+││  Transforms can operate without substitutions.                         ││
+││  This even allows them to be linked to their inverse transforms        ││
+││  by a set of equalities,                                               ││
+││  not back and forth substitutions.                                     ││
+││  E.g.:                                                                 ││
+││                 +πι                         //                         ││
+││                ⌠                            //                         ││
+││    L{x(t)}  =  | x(t)exp(—st)dt  =  X(s)    //  ι  =  lim 1/dω         ││
+││                ⌡                            //       dω—>0             ││
+││                 -πι                         //                         ││
+││                                                                        ││
+││    L⁻¹{X(s)}  =  L⁻¹{L{x(t)}}  =  x(t)                                 ││
+││                                                                        ││
+││  Taking inspiration from this notation:                                ││
+││                                                                        ││
+││                2     z — 1       2     exp(sT) — 1                     ││
+││    BLT{s}  =  ——— · ———————  =  ——— · —————————————                    ││
+││                T     z + 1       T     exp(sT) + 1                     ││
+││                                                                        ││
+││            =  2·tanh(sT/2)/T  =  S(z)                                  ││
+││                                                                        ││
+││  //  https://en.wikipedia.org/wiki/Hyperbolic_functions#Definitions    ││
+││                                                                        ││
+││  Then, e.g.:                                                           ││
+││                                                                        ││
+││    BLT{H_a(s)}  =  H_a( S(z) )  =  H_d(z)                              ││
+││                                                                        ││
+││  ////  Inverse transform:                                              ││
+││                                                                        ││
+││              2     z — 1             T            z — 1                ││
+││    S(z)  =  ——— · ———————    <=>    ——— S(z)  =  ———————               ││
+││              T     z + 1             2            z + 1                ││
+││                                                                        ││
+││    <=>    T·S(z)·(z + 1)/2  =  z — 1                                   ││
+││                                                                        ││
+││    <=>    z·T·S(z)/2 + T·S(z)/2 — z + 1  =  0                          ││
+││                                                                        ││
+││    <=>    z( T·S(z)/2 — 1 )  =  —1 — T·S(z)/2                          ││
+││                                                                        ││
+││    <=>    z( 1 — T·S(z)/2 )  =  1 + T·S(z)/2                           ││
+││                                                                        ││
+││                  1 + T·S(z)/2       2 + T·S(z)                         ││
+││    <=>    z  =  ——————————————  =  ————————————                        ││
+││                  1 — T·S(z)/2       2 — T·S(z)                         ││
+││                                                                        ││
+││                    ╭  2 + T·S(z)  ╮                                    ││
+││                  ln│ ———————————— │                                    ││
+││                    ╰  2 — T·S(z)  ╯                                    ││
+││    <=>    s  =  ————————————————————  =  BLT⁻¹{S(z)}                   ││
+││                           T                                            ││
+││                                                                        ││
+││  or simply:                                                            ││
+││                                                                        ││
+││    2·tanh(sT/2)/T  =  S(z)    <=>    tanh(sT/2)  =  T·S(z)/2           ││
+││                                                                        ││
+││    <=>    sT/2  =  arctanh( S(z)T/2 )                                  ││
+││                                                                        ││
+││    <=>    s  =  2·arctanh( S(z)T/2 )/T  =  BLT⁻¹{S(z)}                 ││
+││                                                                        ││
+││  #  one extra variable:  S(z)                                          ││
+││  #  zero substitution                                                  ││
+││  #  zero ambiguity                                                     ││
+││                                                                        ││
+││  I'm using this from now on.                                           ││
+││  Do what you want.                                                     ││
+├┼────────────────────────────────────────────────────────────────────────┼┤
+╰┴────────────────────────────────────────────────────────────────────────┴╯
+
+  Now.
+  The bilinear transform's expression is linear.
+  But is the frequency mapping resulting from it linear as well?
+
+             2     1 — 1/z     //                          1 — 1/z     //
+    s  <——  ——— · —————————    //    Let's define:  ζ  =  —————————    //    And let's focus on ζ.
+             T     1 + 1/z     //                          1 + 1/z     //
+
+                                   1 — 1/exp(jωT)       1 — exp(—jωT)
+    z  =  exp(jωT)    =>    ζ  =  ————————————————  =  ———————————————
+                                   1 + 1/exp(jωT)       1 + exp(—jωT)
+
+
+  Let's define:
+
+           T              T     2     1 — 1/z       1 — 1/z
+    ζ  =  ——— · S(z)  =  ——— · ——— · —————————  =  —————————
+           2              2     T     1 + 1/z       1 + 1/z
+
+           1 — 1/exp(jωT)       1 — exp(—jωT)
+       =  ————————————————  =  ———————————————
+           1 + 1/exp(jωT)       1 + exp(—jωT)
+
+  It suspiciously looks like a trigonometric identity.
+  Consider:
+                  _____________        //  If you're wondering
+    cos(x)  =  ± √ 1 — sin²(x)         //  wherefrom do these formulae come,
+                  _____________        //  you'll find answers
+    sin(x)  =  ± √ 1 — cos²(x)         //  in the next chapter's appendix.
+                                       //  The ones involving the exponential function
+                exp(jx) + exp(—jx)     //  are derived from Euler's formula.
+    cos(x)  =  ———————————————————     //  (Chapter I)
+                        2              //  If you want to recover
+                                       //  the other ones by yourself,
+                exp(jx) — exp(—jx)     //  all you need is Pythagoras' theorem
+    sin(x)  =  ————————————————————    //  and "Some Old Hippie Caught Another Hippie
+                        2j             //  Tripping On Acid".
+
+                sin(x)       ± √{ 1 — cos²(x) }
+    tan(x)  =  ————————  =  ————————————————————
+                cos(x)       ± √{ 1 — sin²(x) }
+
+  We cannot possibly ignore this many patterns.
+  (Even if, for some petty chronological motives,
+  we're pretending to ignore the hyperbolic tangent identity we've just noticed.)
+  We haven't tried so far to express  tan(x)
+  in terms of complex sinusoids,
+  using Euler's formula...
+
+                 exp(jx) — exp(—jx)
+                ————————————————————
+                         2j                1     exp(jx) — exp(—jx)
+    tan(x)  =  ——————————————————————  =  ——— · ————————————————————
+                 exp(jx) + exp(—jx)        j     exp(jx) + exp(—jx)
+                ———————————————————
+                         2
+
+                1     exp(jx)/exp(jx) — exp(—jx)/exp(jx)
+            =  ——— · ————————————————————————————————————
+                j     exp(jx)/exp(jx) + exp(—jx)/exp(jx)
+
+                         1 — exp(—jx)exp(—jx)       1 — exp(—jx)²
+    <=>    j·tan(x)  =  ——————————————————————  =  ———————————————
+                         1 + exp(—jx)exp(—jx)       1 + exp(—jx)²
+
+                         1 — exp(—2jx)
+                     =  ———————————————
+                         1 + exp(—2jx)
+
+                           1 — exp(—jx)
+    <=>    j·tan(x/2)  =  ——————————————
+                           1 + exp(—jx)
+
+    =>    ζ  =  j·tan(ωT/2)
+
+  Ok then.
+  Remember:
+
+    BLT{s}  =  BLT{jω}  =  S(z)  =  2·ζ/T  =  2·j·tan(ωT/2)/T
+
+    =>    BLT{H(jω)}  =  H( S(z) )  =  H( j·2·tan(ωT/2)/T )
+
+  So our analogue transfer function,
+  if discretised using the trapezoidal rule,
+  will respond to ω
+  as if it were:  2·tan(ωT/2)/T .
+
+  About the question: "is the frequency mapping linear?" ——
+  —— we're about to address it;
+  but you can get an initial intuition
+  by looking at a plot of  tan(x) :
+
+  [tan(x)]  https://www.desmos.com/calculator/cunyxkjdtf
+
+  As you can see:
+  when x is close to zero,  tan(x)  is almost linear;
+  but when x tends to π/2,  tan(x)  tends to +∞;
+  when x tends to —π/2,  tan(x)  tends to —∞.
+  This is because  tan = sin/cos
+  and  cos(± π/2)  =  0 .
+
+  What it actually means:
+  If our discrete-time system receives  X(z)zⁿ ,
+  it will output:
+
+    Y(z)zⁿ  =  H( S(z) )X(z)zⁿ
+
+  Same  z = exp(sT) ,
+  so same  s = jω ,
+  so same  ω = 2πf ,
+  so same frequency;
+  only: different complex amplitude.
+
+  Just like before: 1 kHz in, 1 kHz out.
+  Only the complex amplitude (magnitude and phase) differs.
+  What changed: how it differs.
+  In other —— better —— words: different frequency **response**.
+
+  The discretised trapezoidal filter reacts to ω
+  like its analogue prototype would react to  tan(ωT/2)·2/T .
+  This is what mapping means.
+
+  /*
+    //  Newbies don't need this paragraph: you don't wash what's already clean.
+      I've often read that BLT
+      "maps the frequency from [...] to [...]".
+      But this is imprecise and misleading phrasing.
+      Trapezoidal integration / differentiation
+      doesn't turn filters into pitch shifters, or waveshapers.
+      LTI before, LTI after.
+      The frequency **response** is mapped.
+
+      Mathematically, it's super simple:
+      because Fourier's angular frequency (ω)
+      is nothing but the imaginary part Laplace's Calculus operator (s),
+      if we tweak our system's operational Calculus
+      (its integrators and its differentiators),
+      we automatically tweak its frequency response.
+
+      Send a test sinusoid through the analogue prototype
+      or through its digital counterpart,
+      you'll get the same test sinusoid,
+      only with magnitude and phase altered in two distinct ways.
+  */
+
+  Ok let's decrypt this mapping.
+  Name stuff first:
+
+    #  f_s is the sampling rate in Hertz
+    #  ω_s = 2π·f_s  is the sampling rate in rad/s
+    #  Nyquist frequency is  f_s/2  in Hz,
+         and  ω_s/2 = 2π·f_s/2 = π·f_s  in rad/s
+    #  T = 1/f_s = 2π/ω_s  is the sampling period in seconds
+    #  ω is our input's frequency
+    #  the range of ω is  ]—Nyquist , +Nyquist[
+         if we use a complex input ——
+         —— let's be real for once:
+         then it's [0 , Nyquist[  ——
+         —— in rad/s that's  [0 , π·f_s[
+    #  w (double-u, not omega)
+         is the phantom frequency
+         whose frequency response
+         in the analogue prototype
+         will be applied to ω
+         by the discretised system.
+         We could call it "how BLT interprets ω".
+
+  This has gotten me confused for a while.
+  So I'll insist.
+  We'll never hear w in our tests.
+  But if we were to inject  X(jw)exp(jwt)
+  it in our analogue transfer function  H_a(s) ,
+  it would be altered as ω sent through:
+
+    H_d(z)  =  BLT{H_a(s)}  =  H_a( BLT{s} )  =  H_a( S(z) )
+
+  the bilinear transform of  H_a(s) .
+  That is:
+                         2     1 — 1/z
+    w  =  BLT{jω}/j  =  ——— · —————————
+                         T     j + j/z
+
+           2      1 — exp(—jωT)
+       =  ——— · —————————————————  =  tan(ωT/2)·2/T
+           T     j + j·exp(—jωT)
+
+    <=>    H_a(jw)  =  H_a( j·BLT{jω}/j )  =  H_a( j·tan(ωT/2)·2/T )
+
+
+    H_d( exp(jωT) )  =  BLT{ H_a(jω) }  =  H_a( BLT{jω} )
+
+                     =  H_a( j·tan(ωT/2)·2/T )  =  H_a(jw)
+
+  We know the range of ω.
+  We have two values to test.
+  /*
+    Why not 3? Test —Nyquist as an exercise if you need to.
+    But  tan(x)  is odd:  tan(—x)  =  —tan(x) .
+    So...
+  */
+
+  //  DC
+
+    ω = 0    <=>    w  =  tan( 0·T/2 )·2/T  =  tan(0)·2/T
+
+    tan = sin/cos
+    sin(0) = 0
+    cos(0) = 1
+
+    =>    tan(0) = 0/1 = 0
+
+    <=>    tan(0)·2/T  =  0    =>    ω = w
+
+  When the input's frequency tends to zero,
+  the digital frequency response
+  tends to the analogue frequency response.
+
+  //  Nyquist
+
+    ω  =  Nyquist  =  π·f_s  =  π/T
+
+                    ╭  π     T  ╮
+    <=>    w  =  tan│ ——— · ——— │·2/T  =  tan(π/2)·2/T
+                    ╰  T     2  ╯
+
+    tan = sin/cos
+    sin(π/2) = 1
+    cos(π/2) = 0
+
+    =>    tan(π/2) = 1/0    oops.
+
+  When the input frequency tends to Nyquist,
+  the digital frequency response
+  tends to the analogue response at infinity.
+  The full infinity of output values is compressed,
+  bent to fit inside Nyquist.
+  This phenomenon is called FREQUENCY WARPING.
+
+  Fascinating!
+  Assuming the Nyquist frequency is not ultrasonic,
+  you get to listen to infinity.
+  Take that, laws of physics!
+
+  Except not really.
+  The frequency warping is often described as
+  BLT mapping the j axis onto the unit-circle
+  (or the other way around).
+  It's visually appealing
+  but never helped me understand the phenomenon.
+  Probably because it's imprecise:
+  s is evaluated on the j axis,
+  z is evaluated on the unit-circle,
+  ok,
+  but neither s nor z are the frequency.
+  The frequency is always ω: a purely real number.
+  And it's never touched.
+  Frequency warping should be called frequency *response* warping.
+  Ok we could consider that the spectrum
+  gets stretched out before entering the trapezoidal integrator
+  and bent back afterwards.
+  But I personally don't find these allegories helping.
+  The range of the analogue prototype's frequency response
+  is compressed so that its value at infinity
+  becomes the value at Nyquist.
+  The transfer function is altered
+  and the expression of the warping
+  tells us how magnitude and phase react to this alteration.
+  But ω remains ω.
+  It's been constant since Chapter I.
+
+  Karl Marx studied capitalism from the commodity's perspective.
+  It made mechanisms clear and intuitive.
+  I suggest we keep studying filters from the partial's perspective.
+
+  Ok now how bad is the deformation?
+
+  [NEEDS FIXING]  https://www.desmos.com/calculator/iovrqw8y1v
+
+  As you can see,
+  the mapping is almost linear where the frequency is small enough
+  and gets very distorted when approaching Nyquist.
+  It makes sense then that a higher sampling rate
+  (i.e. higher Nyquist frequency)
+  would extend the quasi-linear range of the warping.
+  Note though that it's technically nowhere perfectly linear.
+  Quasi-linear or almost linear
+  mean that the non-linearity is negligible (inaudible).
+
+
+
+===================================================================================================
+#06  But wait! That's a problem...
+===================================================================================================
+
+  You bet it is.
+  And it's harder to fix than you might expect.
+
+  The non-linearity of the frequency response warping
+  is as negligible as the frequency is far from Nyquist.
+  So high sampling rates help.
+  But telling the average consumer:
+  "work at high sampling rates because [MATHS]"
+  takes economic courage ——
+  —— not every dev gets to be Chris "Airwindows" Johnson...
+
+  Applying the inverse mapping to the whole system would make it non-linear,
+  that is: no longer LTI —— so not a solution.
+
+  As far as I know, two people came up with open-source solutions:
+
+    # Martin Vicanek (2016)
+      //  https://vicanek.de/articles/BiquadFits.pdf
+
+    # Yuriy Ivanstov (2025 & 2026)
+      //  https://ivantsovy.com/research/paper1.pdf
+      //  https://ivantsovy.com/research/paper2.pdf
+
+  Of course I'll try to come up with my own fix in some future chapter.
+
+  Right now we'll use the most common workaround,
+  which at decent sampling rate (88.2 kHz or 96 kHz),
+  produces very negligible artefacts.
+  In fact if you've ever used a digital filter
+  (in a synth, an equaliser, a compressor's side chain, a virtual channel strip,
+  a car's radio, a HiFi system, a phone......) ——
+  —— and didn't get annoyed
+  by how the high frequency response was being cramped ——
+  —— you've already approved this workaround.
+
+  The technique is called PRE-WARPING.
+  It consists in applying the inverse mapping
+  to one frequency of interest,
+  and re-express the cutoff accordingly.
+  The cutoff remains a constant linear gain:
+  its non-linear transformation happens in the parameters update,
+  not in the signal path.
+  This way we have complete control
+  over the exact gain and phase shift
+  of one partial.
+  This partial is usually at the cutoff frequency,
+  because usually,
+  there's a user-facing parameter labelled "Cutoff (Hz)"
+  and we want it to make sense.
+  But it's a common practice regarding a design decision.
+  Nothing mandatory.
+  For instance my old Fender Super Reverb
+  #notMyFender
+  has a knob that says "Treble" ranging from 1 to 10
+  (no Stairway to Heaven, no Spinal Tap jokes).
+  If I were to model its tone-stack's circuit
+  (which might happen in a future chapter)
+  I wouldn't need a precise cutoff
+  and could experiment with pre-warping to optimise the curve ——
+  —— if the cutoff happens to be the best pre-warping point,
+  at least it wouldn't be chosen arbitrarily.
+
+  So I suggest we find a general pre-warping formula for an undefined point.
+  Of course the only parameter directly related to frequency
+  in our block diagrams and transfer functions
+  is the cutoff,
+  so it would have to be re-expressed according to our transformation.
+  This suggests that for the special case
+  where the pre-warping point is the cutoff,
+  the formula should become simpler.
+  We'll see.
+
+  If our digital filter receives a partial at  0 < ω₀ < Nyquist .
+  It will give it the frequency response
+  the analogue prototype would give to:
+
+    0  <  w₀  =  tan( ω₀T/2 )·2/T  <  +∞
+
+  Compared to the analogue prototype,
+  the digital implementation interprets frequency as being too high ——
+  —— so its frequency response is
+  (non-linearly)
+  shifted towards the low-end.
+
+  We know that varying the cutoff shifts the curve horizontally.
+  A higher cutoff shifts it towards the high-end
+  —— that's what we want.
+
+  So we want a higher digital cutoff.
+  Let's call it wc.
+  (As in "worst-case", "water closed",
+  or, I don't know... "working-class"?)
+
+  We also know (from the concept of unit-cutoff normalisation)
+  that every frequency's response
+  is dictated by its distance to the cutoff.
+
+  So what we want is to preserve a proportionality.
+  So we want:
+
+    ω₀/ωc  =  w₀/wc
+                                 2     ╭     T  ╮  ωc
+    <=>    wc  =   ωc·w₀/ω₀  =  ——— tan│ ω₀ ——— │ ————
+                                 T     ╰     2  ╯  ω₀
+
+  If we use wc instead of ωc as our cutoff,
+  ω₀ will preserve its frequency response
+  despite the bilinear transform's response warping.
+  If  ω₀ = ωc , then:  ω₀/ωc = 1
+  —— then:
+
+            2     ╭     T  ╮
+    wc  =  ——— tan│ ωc ——— │
+            T     ╰     2  ╯
+
+  That's our general formula —— and it's actually rather clean:
+    #  to pre-warp at cutoff:
+        anticipate the mapping on the analogue cutoff.
+    #  to pre-warp at <whatever>:
+        anticipate the mapping on <whatever>,
+        and multiply by the ratio of the analogue cutoff over <whatever>.
+        (Avoid DC...)
+  In both cases you get your digital cutoff.
+
+  Jolly good.
+  Let's make a digital high-pass filter.
+
+
+
+===================================================================================================
+#07  Muß es seyn?
+===================================================================================================
+
+  //  Method 1: HP, Trapezoidal differentiation
+
+                             //                                  //
+  ////  Transfer function    //  ////  Bilinear transform        //  ////  Cutoff pre-warping
+                             //                                  //
+                  s          //                2     1 — 1/z     //            2     ╭     T  ╮
+    H_a(s)  =  ————————      //    BLT{s}  =  ——— · —————————    //    wc  =  ——— tan│ ωc ——— │
+                s + ωc       //                T     1 + 1/z     //            T     ╰     2  ╯
+
+
+                                2     1 — 1/z                                1 — 1/z
+                               ——— · —————————                              —————————
+                                T     1 + 1/z                                1 + 1/z
+    H_a( S(z) )  =  —————————————————————————————————————  =  —————————————————————————————————————
+                      2     1 — 1/z     2     ╭     T  ╮        1 — 1/z     tan(ωc T/2) (1 + 1/z)
+                     ——— · ————————— + ——— tan│ ωc ——— │       ————————— + ———————————————————————
+                      T     1 + 1/z     T     ╰     2  ╯        1 + 1/z            1 + 1/z
+
+                                1 — 1/z
+                 =  ————————————————————————————————  =  H_d(z)
+                     1 — 1/z + tan(ωc T/2)(1 + 1/z)
+
+  //  Let's clean up  tan(ωc·T/2)
+
+    ωc  =  2π·fc  ╮                    2π·fc        π            fc
+                  ├  =>    ωc T/2  =  ———————  =  ————— fc  =  ——————
+     T  =  1/f_s  ╯                    2·f_s       f_s          f_s/π
+
+  Let's define:
+
+    SRATE_PI  =  f_s/π
+
+  and:
+
+    Ω  =  tan(ωc T/2)
+
+  then:
+
+    tan(ωc·T/2)  =  tan(fc/SRATE_PI)  =  Ω
+
+  //  ok then.
+
+                       1 — 1/z                    1 — 1/z                1 — 1/z
+    H_d(z)  =  ———————————————————————  =  ———————————————————  =  ————————————————————
+                1 — 1/z + Ω·(1 + 1/z)       1 — 1/z + Ω + Ω/z       1 + Ω + (Ω — 1)/z
+
+
+     =>    y( 1 + Ω + (Ω — 1)/z )  =  x( 1 — 1/z )
+
+    <=>    y + yΩ + y(Ω — 1)/z  =  x — x/z
+
+    <=>    y(1 + Ω)  =  x — x/z — y(Ω — 1)/z
+
+                  x — ( x + y(Ω — 1) )/z
+    <=>    y  =  ————————————————————————
+                          Ω + 1
+
+  Let's define:
+    #   ζ  =  x + y(Ω — 1)
+    #  g₁  =  Ω — 1
+    #  g₂  =  1/(Ω + 1)
+
+  Then:
+
+    y[n]  =  ( x[n] — ζ[n—1] )·g₂
+
+  and:
+
+    ζ[n]  =  x[n] + y[n]·g₁
+
+  We need  y[n]  to get  ζ[n] .
+  And  y[n]  requires  ζ[n—1] .
+  If we update ζ after we compute y,
+  ζ will still be  ζ[n—1]  in the expression of y ——
+  —— and y will be  y[n]  in the expression of ζ.
+  Perfect.
+
+  //  Copy/paste this...
+
+@init
+  SRATE_PI  =  SRATE / $PI;      //  srate is f_s (the sampling rate).
+      zeta  =  0;                //  $PI is π.
+
+@slider
+  tmp  =  tan( Hz/SRATE_PI );    //  Hz is  fc = ωc/2π (the cutoff in Hertz).
+   g1  =  tmp - 1;               //  "g" as in "g"ain.
+   g2  =  1 / (tmp + 1);
+
+@sample
+   out  =  (in - zeta) * g2;
+  zeta  =  in  +  out * g1;
+
+  //  Tested, working.
+
+  Bode plot:    https://www.desmos.com/calculator/d3gsuggjrr  [[NEEDS_UPDATE_OR__FIXING__I_FORGOT__BUT_DEFINITELY_ONE_OF_THE_TWO]]
+
+  Jolly good.
+  Let's make a digital low-pass filter.
+
+
+
+===================================================================================================
+#08  Es muß seyn!
+===================================================================================================
+
+  //  Method 2: LP, Trapezoidal integration
+
+                                            //
+  ////  Analogue block diagram              //  ////  Trapezoidal integrator
+                                            //
+               ┌────┐   ┌─────┐             //         ┌─────┐
+    x ──>(+)──>│ wc ├──>│ 1/s ├──>o──> y    //    x ──>│ T/2 ├──>o───>(+)───>o──> y
+          ^ —  └────┘   └─────┘   │         //         └─────┘   │     ↑ +   │
+          │                       │         //                   │  ┌──┴──┐  │
+          └───────────────────────┘         //                   │  │ 1/z │  │
+                                            //                   │  └──┬──┘  │
+                                            //                   │   + ↑ +   │
+                                            //                   └───>(+)<───┘
+  ////  Merging
+
+               ┌────┐   ┌─────┐               ψ    ξ         //
+    x ──>(+)──>│ wc ├──>│ T/2 ├──>o───>(+)───>o───>o──> y    //  Possible improvements:
+          ↑ —  └────┘   └─────┘   │     ↑ +   |    │         //
+          │                       │  ┌──┴──┐  |    │         //  ψ and ξ are both y
+          │                       │  │ 1/z │  |    │         //  ——> they can merge.
+          │                       │  └──┬──┘  |    │         //
+          │                       │   + ↑ +   |    │         //  wc and T/2 are linear factors
+          │ ξ                     └───>(+)<───┘ ψ  │         //  ——> they can merge.
+          └────────────────────────────────────────┘         //
+
+  ////  Fixing
+
+             α  ┌───────┐   β
+    x ──>(+)───>│ wcT/2 ├──>o───>(+)───>o──> y
+          ^ —   └───────┘   │     ↑ +   │
+          │                 │  ┌──┴──┐  │
+          │                 │  │ 1/z │  │
+          │                 │  └──┬──┘  │
+          │                 │   + ↑ +   ↓
+          │                 └───>(+)<───o
+          │                       ζ     │
+          └─────────────────────────────┘
+
+    #  α  =  x — y
+    #  β  =  α·wc·T/2
+    #  ζ  =  β + y
+
+    y[n]  =  β[n] + ζ[n—1]
+
+    <=>    β[n]  =  y[n] — ζ[n—1]
+
+    ζ[n]  =  β[n] + y[n]  =  y[n] — ζ[n—1] + y[n]  =  2y[n] — ζ[n—1]
+
+    y[n]  =  β[n] + ζ[n—1]  =  α[n]·wc·T/2 + ζ[n—1]
+          =  ( x[n] — y[n] )wc·T/2 + ζ[n—1]
+
+  Apparently, we can drop the discrete-time indexes
+  on the condition that we update ζ after y.
+  Go:
+
+    y  =  (x — y)wc·T/2 + ζ
+       =  x·wc·T/2 — y·wc·T/2 + ζ
+
+    <=>    y + y·wc·T/2  =  x·wc·T/2 + ζ
+
+    <=>    y( 1 + wc·T/2 )  =  x·wc·T/2 + ζ
+
+                  x·wc·T/2 + ζ     //  knowing y, we can update ζ:
+    <=>    y  =  ——————————————    //
+                   1 + wc·T/2      //    ζ  =  2y — ζ
+
+
+  We now have a 1-pole low-pass 2-line algorithm.
+  But it's using  wc·T/2 ,
+  which we still haven't defined.
+  Let's not innovate and pre-warp at cutoff.
+  As usual: ωc is the analogue cutoff,
+  wc is the pre-warped cutoff.
+  Then (using the results from #06):
+
+            2                 //  f_s  =  1/T  is the sampling rate.
+    wc  =  ——— tan(ωc·T/2)    //
+            T                 //  fc   =  ωc/2π  is the analogue cutoff in Hertz.
+
+  Then:
+                2     ╭  2π·fc  ╮  T         ╭      π   ╮
+    wc·T/2  =  ——— tan│ ——————— │ ———  =  tan│ fc ————— │
+                T     ╰  2·f_s  ╯  2         ╰     f_s  ╯
+
+                  ╭    fc   ╮
+            =  tan│ ——————— │
+                  ╰  f_s/π  ╯
+
+  //  Copy/paste this...
+
+@init
+  SRATE_PI  =  SRATE / $PI;            //  srate is f_s (the sampling rate).
+      zeta  =  0;                      //  $PI is π.
+
+@slider
+  g1  =  tan( Hz/SRATE_PI );           //  Hz is fc (the cutoff in Hertz).
+  g2  =  1 / (1 + g1);                 //  "g" as in "g"ain...
+
+@sample
+   out  =  (in * g1  +  zeta) * g2;
+  zeta  =  2 * out  -  zeta;
+
+  //  Tested, working.
+
+  Before plotting this digital filter,
+  we need to figure out its transfer function in terms of z.
+  From the block diagram:
+
+    (x — y)wc·T/2 + ( (x — y)wc·T/2 + y )z⁻¹  = y
+
+    <=>    y  =  x·wc·T/2 — y·wc·T/2 + ( x·wc·T/2 — y·wc·T/2 + y )z⁻¹
+
+    <=>    y + y·wc·T/2  =  x·wc·T/2 + x·wc·T/2·z⁻¹ — y·wc·T/2·z⁻¹ + yz⁻¹
+
+    <=>    y + y·wc·T/2 + y·wc·T/2·z⁻¹ — y·z⁻¹  =  x·wc·T/2 + x·wc·T/2·z⁻¹
+
+    <=>    y( 1 + wc·T/2 + wc·T/2·z⁻¹ — z⁻¹ )  =  x( wc·T/2 + wc·T/2·z⁻¹ )
+
+            y            wc·T/2 + wc·T/2·z⁻¹
+    <=>    ———  =  ———————————————————————————————
+            x       1 + wc·T/2 + wc·T/2·z⁻¹ — z⁻¹
+
+                         wc·T/2 + wc·T/2·z⁻¹
+                =  ———————————————————————————————  =  H_d(z)
+                    (1 + wc·T/2) + (wc·T/2 — 1)z⁻¹
+
+  Bode plot:    https://www.desmos.com/calculator/cncscutjbc
+
+  //  Magnitude response:
+
+    num  =  wc·T/2 + wc·T/2·z⁻¹  =  g₁ + g₁exp(—sT)
+
+         =  g₁ + g₁{ cos(—ωT) + j·sin(—ωT) }
+
+         =  g₁ + g₁·cos(ωT) — j·g₁·sin(ωT)
+
+       ╭ Re(num)  =  g₁( 1 + cos(ωT) )
+    => ┤
+       ╰ Im(num)  =  —g₁·sin(ωT)
+
+    |num|²  =  ( g₁ + g₁·cos(ωT) )² + g₁²·sin²(ωT)
+
+            =  g₁² + 2g₁²cos(ωT) + g₁²cos²(ωT) + g₁²sin²(ωT)
+
+            =  g₁² + 2g₁²cos(ωT) + g₁²( cos²(ωT) + sin²(ωT) )
+
+            =  g₁² + 2g₁²cos(ωT) + g₁²
+
+            =  2g₁² + 2g₁²cos(ωT)
+
+            =  2g₁²( 1 + cos(ωT) )
+
+    den  =  (1 + wc·T/2) + (wc·T/2 — 1)z⁻¹
+
+         =  1 + g₁ + (g₁ — 1)exp(—sT)
+
+         =  1 + g₁ + (g₁ — 1){ cos(—ωT) + j·sin(—ωT) }
+
+         =  1 + g₁ + (g₁ — 1)cos(ωT) — j(g₁ — 1)sin(ωT)
+
+       ╭ Re(den)  =  (g₁ + 1) + (g₁ — 1)cos(ωT)
+    => ┤
+       ╰ Im(den)  =  —(g₁ — 1)sin(ωT)  =  (1 — g₁)sin(ωT)
+
+    Re(den)²  =  ( (1 + g₁) + (g₁ — 1)cos(ωT) )²
+
+              =  (1 + g₁)² + 2(1 + g₁)(g₁ — 1)cos(ωT) + (g₁ — 1)²cos²(ωT)
+
+              =  1 + 2g₁ + g₁² + 2(g₁ — 1 + g₁² — g₁)cos(ωT) + (g₁ — 1)²cos²(ωT)
+
+              =  1 + 2g₁ + g₁² + 2(g₁² — 1)cos(ωT) + (g₁² — 2g₁ + 1)²cos²(ωT)
+
+    Im(den)²  =  (1 — g₁)²sin²(ωT)  =  (1 — 2g₁ + g₁²)(1 — cos²(ωT))
+
+              =  1 — 2g₁ + g₁² — (1 — 2g₁ + g₁²)cos²(ωT)
+
+    |den|²  =  1 + 2g₁ + g₁² + 2(g₁² — 1)cos(ωT) + (g₁² — 2g₁ + 1)²cos²(ωT)
+               + 1 — 2g₁ + g₁² — (1 — 2g₁ + g₁²)cos²(ωT)
+
+            =  1 + 1 + 2g₁ — 2g₁ + g₁² + g₁² + 2(g₁² — 1)cos(ωT)
+               + (g₁² — 2g₁ + 1)²cos²(ωT) — (g₁² — 2g₁ + 1)cos²(ωT)
+
+            =  2 + 2g₁² + 2(g₁² — 1)cos(ωT)  =  2(g₁² + 1) + 2(g₁² — 1)cos(ωT)
+
+                      2g₁²( 1 + cos(ωT) )
+    |H_d(z)|²  =  ———————————————————————————————
+                 2(g₁² + 1) + 2(g₁² — 1)cos(ωT)
+
+  ////  Notable values:
+
+    # DC
+
+      ω = 0
+
+      |num|²  =  2g₁² + 2g₁²cos(0)  =  4g₁²
+
+      |den|²  =  2(g₁² + 1) + 2(g₁² — 1)cos(0)
+
+              =  2g₁² + 2 + 2g₁² — 2  =  4 g₁²
+                    __________      ___
+      |H_d(z)|  =  √ 4g₁²/4g₁²  =  √ 1   =  1  =  0 dB
+
+    # cutoff
+
+      ω  =  ωc  =  arctan( wc·T/2 )·2/T
+
+      <=>    ωT  =  2·arctan(g₁)
+
+      |num|²  =  2g₁² + 2g₁²cos( 2·arctan(g₁) )
+
+    /*
+      Double angle formula, demonstrated in section #11:
+
+        cos(2x)  =  2·cos²(x) — 1    //  Basically:  Euler + Pythagoras.
+
+      Then:  cos²( arctan(x) )
+                                                    sin(φ)
+        arctan(x)  =  φ    <=>    x  =  tan(φ)  =  ————————
+                                                    cos(φ)
+                       1 — cos²(φ)
+        <=>    x²  =  —————————————    <=>    x²cos²(φ)  =  1 — cos²(φ)
+                         cos²(φ)
+                                                                        1
+        <=>    cos²(φ)(x² + 1)  =  1    <=>    cos²( arctan(x) )  =  ————————
+                                                                      x² + 1
+      So:
+
+        cos( 2·arctan(g₁) )  =  2·cos²( arctan(g₁) ) — 1
+
+               2              2 — g₁² — 1       1 — g₁²
+        =  ————————— — 1  =  —————————————  =  —————————
+            g₁² + 1             g₁² + 1         1 + g₁²
+
+    */
+                                  1 — g₁²       2g₁² + 2g₁⁴ + 2g₁² — 2g₁⁴         4g₁²
+      |num|²  =  2 g₁²  +  2 g₁² —————————  =  ———————————————————————————  =  —————————
+                                  1 + g₁²                1 + g₁²                1 + g₁²
+
+
+      |den|²  =  2(g₁² + 1) + 2(g₁² — 1)cos( 2arctan(g₁) )
+
+                                          1 — g₁²
+              =  2(g₁² + 1) + 2(g₁² — 1) —————————
+                                          1 + g₁²
+
+                  2(g₁² + 1)² + 2(g₁² — 1)(1 — g₁²)
+              =  ———————————————————————————————————
+                               1 + g₁²
+
+                    g₁⁴ + 2g₁² + 1 + g₁² — g₁⁴ — 1 + g₁²
+              =  2 ——————————————————————————————————————
+                                  1 + g₁²
+
+                    2g₁² + g₁² + g₁²         8g₁²
+              =  2 ——————————————————  =  —————————
+                         1 + g₁²            1 + g₁²
+                    __________      _____      _____
+      |H_d(z)|  =  √ 4g₁²/8g₁²  =  √ 4/8   =  √ 1/2   =  (1/2)⁽¹ᐟ²⁾
+
+                ≈  0.7071067811865475244008443621048490392848359376884740365883398689...
+
+                ≈  —3.010299956639811952137388947244930267681898814621085413104274611... dB
+
+    # Nyquist
+
+      ω  =  2π·f_s/2  =  2π/2T  =  π/T
+
+      <=>    ωT  =  π
+
+      |num|²  =  2g₁² + 2g₁²cos(π)  =  2g₁² — 2g₁²  =  0
+
+      |den|²  =  2(g₁² + 1) + 2(g₁² — 1)cos(π)
+
+              =  2(g₁² + 1) — 2(g₁² — 1)
+
+              =  2g₁² + 2 — 2g₁² + 2  =  4
+                    _____
+      |H_d(z)|  =  √ 0/4   =  0/2  =  0  =  —∞ dB
+
+  //  Phase response:
+
+  [IN PROGRESS]
+
+
+
+###################################################################################################
+###################################################################################################
+                   Hello, good evening, and welcome to the middle of the chapter
+###################################################################################################
+
+  We now have two 1-pole filters: 1 HP and 1 LP.
+  We've seen that BLT can be injected:
+    #  in the transfer function
+       (what I've called trapezoidal differentiation),
+    #  in the block diagram
+       (what is typically called trapezoidal integration).
+  If you've tested the code,
+  you now know that both methods work.
+
+  Notice that both methods produced the same denominator:
+  compare:    wc·T/2  (#08)
+     with:    Ω  (#07) .
+
+  What I would strongly suggest:
+  try solving the two remaining options on your own:
+  trapezoidal integration for HP
+  and trapezoidal differentiation for LP.
+  Even null test each implementation against each other.
+  (Same input, same cutoff, same level, parallel routing, opposite polarity)
+
+  HP and LP are not all we can do with one pole.
+  You'll find an all-pass in section #13,
+  before the appendix.
+  /*
+   Not that I consider all-passes contingent:
+   they're a tragically overlooked stereo making tool for instance ——
+   —— hint: mid/side processing;
+   but I will address them in an unconventional way.
+   I'm not pushing AP away: I'm giving it a special place.
+  */
+  And we'll deal with parallel designs in a future chapter.
+
+  Actual higher orders
+  will start appearing in the next chapter: "Stephen Butterworth".
+  But before moving on,
+  we'll address some generalities about time discretisation,
+  which should happen here.
+  In what follows,
+  we'll be using generic second- (or higher-) order transfer functions.
+  We've studied polynomials,
+  it shouldn't be excessively confusing.
+  But if it happens to be,
+  don't get stuck, move on.
+  Maybe come back later.
+  The next three sections are mainly here
+  for the sake of exhaustivity:
+  the next chapters won't rely on them.
+  Everything, starting now,
+  is for the curious reader.
+  /*
+    Maybe give a chance to section #11...
+  */
+
+###################################################################################################
+
+
+
+===================================================================================================
+#09  Is the bilinear transform stable?
+===================================================================================================
+
+  Yes, no, maybe... we don't know.
+  The analogue prototype is stable
+  when all its poles have negative real parts.
+  A pole is a root of the denominator,
+  which is a polynomial in s.
+  So a pole p is a value of  s  =  σ + jω .
+  So  Re(p) < 0  means  σ < 0 .
+  Since  z = exp(sT) = exp(σT + jωT) = exp(σT) exp(jωT) ,
+  |z| = exp(σT)  and  arg(z) = ωT  (Chapter I).
+  And since T is always positive
+  and  exp(x)  is strictly positive and strictly increasing
+  for all real x:
+
+    σ < 0    <=>   σT < 0
+
+    <=>    exp(σT) < 1
+
+    <=>    |z| < 1
+
+  According to the stinky-self-quote theorem,
+  the Working-class BLT gives:
+
+                         2     1 — 1/z
+    BLT{s}  =  S(z)  =  ——— · —————————
+                         T     1 + 1/z
+
+  We want to know whether:
+
+    Re(s) < 0    <=>    Re( S(z) ) < 0
+
+  or, equivalently, whether:
+
+    Re( S(z) ) < 0    <=>    |z| < 1
+
+  Go:
+
+     T            z — 1             T
+    ——— S(z)  =  ———————    <=>    ——— S(z)(1 + z)  =  z — 1
+     2            z + 1             2
+
+            T          T
+    <=>    ——— S(z) + ——— S(z)·z + 1 — z  =  0
+            2          2
+
+            T                    T
+    <=>    ——— S(z) + 1  =  z — ——— z
+            2                    2
+
+    <=>    1 + TS(z)/2  =  z( 1 — TS(z)/2 )
+
+                   1 + TS(z)/2       2 + TS(z)
+    <=>    z  =  ——————————————  =  ——————————
+                   1 — TS(z)/2       2 — TS(z)
+
+  /*
+    //  Another brick in the 4th wall
+      That's just  BLT⁻¹{ S(z) } ...
+      One more shortcut we didn't take.
+      Reasons:
+        #  I wrote the draft for this section
+           long before I decided to patent BLT
+           under the WTF public license;
+        #  I cannot remember if I purposely derived the inverse BLT
+           or if it was a happy accident...
+           Considering my incurable propension to over-explain
+           each semicolon with several levels of nested comments
+           to ensure all the questions no one will ever ask get answered...
+           My bet is on the happy accident...
+        #  Don't read what precedes, it's boring.
+  */
+
+  Let's define:
+    #  σ₂  =  Re( S(z) )
+    #  ω₂  =  Im( S(z) )
+
+           2/T + ( σ₂ + jω₂ )       2/T + σ₂ + jω₂
+    z  =  ————————————————————  =  ————————————————
+           2/T — ( σ₂ + jω₂ )       2/T — σ₂ — jω₂
+
+                   │  2/T + σ₂ + jω₂  │      | 2/T + σ₂ + jω₂ |
+    <=>    |z|  =  │ ———————————————— │  =  ————————————————————
+                   │  2/T — σ₂ — jω₂  │      | 2/T — σ₂ — jω₂ |
+  /*
+    Absolute values are real and positive,
+    so |z| and |z|² have the same sign
+    and the same lack of imaginary part;
+    ergo: no need to bother ourselves with a gigantic square root.
+  */
+                     ( 2/T + σ₂ )² + ( +ω₂ )²
+    <=>    |z|²  =  —————————————————————————
+                     ( 2/T — σ₂ )² + ( —ω₂ )²
+
+                     4/T² + 4σ₂/T + σ₂² + ω₂²
+    <=>    |z|²  =  —————————————————————————
+                     4/T² — 4σ₂/T + σ₂² + ω₂²
+  /*
+    We want the square root of this expression
+    to be less than one.
+    So we want this expression to be less than one.
+    So we want the numerator inferior to the denominator.
+  */
+
+    4/T² + 4σ₂/T + σ₂² + ω₂²  <  4/T² — 4σ₂/T + σ₂² + ω₂²
+
+    //  (Subtract redundant terms from both sides)
+
+    <=>   +4σ₂/T  <  —4σ₂/T    //  (Divide both sides by T/4)
+
+    <=>    +σ₂  <  —σ₂    <=>    σ₂ + σ₂  <  0
+
+    <=>    2σ₂  <  0    <=>    σ₂  <  0/2  =  0
+
+  Notice that this demonstration survives
+  if you flip the inequality
+  or replace it with an equality.
+  Therefore:
+    #  Re(s) < 0    <=>    Re(s_BLT) < 0
+    #  Re(s) > 0    <=>    Re(s_BLT) > 0
+    #  Re(s) = 0    <=>    Re(s_BLT) = 0
+
+  So: is the bilinear transform stable?
+  Yes, no, maybe. Depends on the analogue prototype.
+  Bilinear transform preserves stability, instability and marginal stability.
+  All this from failing at drawing a proper trapeze...
+
+  Jolly good, jolly good.
+  But what about cutoff pre-warping?
+  Moving the cutoff moves the poles.
+  Indeed.
+  But if your cutoff is strictly positive,
+  there's nothing  tan(x)  can do about it.
+
+  Unless  x ≥ π/2 ...
+
+    ωc·T/2  ≥  π/2    <=>    2π·fc/2·f_s  ≥  π/2
+
+    <=>    2·fc/f_s  ≥  1    <=>    fc  ≥  f_s/2  =  Nyquist
+
+  Basically: do not try to filter out frequencies that are not there.
+  (Unless you seek chaos of course.)
+
+  And what if there's no analogue prototype?
+  Then I will slowly pronounce:
+  bi_li_ne_ar _ TRA_NS_FO_RM
+  (emphasis on "transform").
+  In that case, your starting point should likely be a function of z.
+  Then check  |z| < 1  and you're good ——
+  —— that is if you want stability,
+  otherwise just flip the inequality.
+
+
+
+===================================================================================================
+#10  Transposed Direct Form II (TDF2)
+===================================================================================================
+
+  We've seen that TDF2 happens when you factorise the z⁻ⁿ elements ——
+  —— which makes the name "transposed" a bit obscure.
+  We'll decrypt the nomenclature
+  and address the other direct forms in section #12.
+  Right now we're considering
+  a generic second-order discretised (BLT) transfer function
+  and deriving a base algorithm to implement TDF2.
+  Since parameters are undefined,
+  we'll only deal with the sample-processing loop.
+
+              b₀ + b₁z⁻¹ + b₂z⁻²      b₀/a₀ + (b₁/a₀)z⁻¹ + (b₂/a₀)z⁻²
+    H(z)  =  ———————————————————  =  ————————————————————————————————
+              a₀ + a₁z⁻¹ + a₂z⁻²          1 + (a₁/a₀)z⁻¹ + (a₂/a₀)z⁻²
+
+     =>    y + (a₁/a₀)z⁻¹y + (a₁/a₀)z⁻²y  =  (b₀/a₀)x + (b₁/a₀)z⁻¹x + (b₂/a₀)z⁻²x
+
+    <=>    y  =  (b₀/a₀)x + (b₁/a₀)z⁻¹x — (a₁/a₀)z⁻¹y + (b₂/a₀)z⁻²x — (a₂/a₀)z⁻²y
+
+              =  (b₀/a₀)x + { (b₁/a₀)x — (a₁/a₀)y }z⁻¹ + { (b₂/a₀)x — (a₂/a₀)y }z⁻²
+
+  Lets' define:
+
+    ζ₀  =  { (b₁/a₀)x — (a₁/a₀)y }z⁻¹ + { (b₂/a₀)x — (a₂/a₀)y }z⁻²
+     α  =  { (b₁/a₀)x — (a₁/a₀)y }
+     β  =  { (b₂/a₀)x — (a₂/a₀)y }
+
+  Then:
+
+    y  = ( b₀/a₀)x + ζ₀
+
+  and:
+
+    ζ₀  =  αz⁻¹ + βz⁻²  =  ( α + βz⁻¹ )z⁻¹
+
+  Let's also define:
+
+    ζ₁  =  α + βz⁻¹    <=>    ζ₀  =  ζ₁z⁻¹
+
+  So:                                        //  and:
+                      β                      //         ┌───────┐         ┌───────┐
+                      ↑                      //    x ──>│ b₁/a₀ ├──>(+)<──┤ a₂/a₀ │<── y
+         ┌───────┐ +  │  — ┌───────┐         //         └───────┘ +  │  — └───────┘
+    x ──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<── y    //                      ↓
+         └───────┘         └───────┘         //                      α
+
+  also:                          //  then:
+               α                 //         ┌───────┐ +  α  — ┌───────┐
+               │                 //    x ──>│ b₁/a₀ ├──>(+)<──┤ a₁/a₀ │<── y
+             + ↓                 //         └───────┘    │    └───────┘
+              (+)  ——> ζ₁        //                    + ↓
+               ↑ +               //                     (+)  ——> ζ₁
+            ┌──┴──┐              //                      ↑ +
+            │ 1/z │              //                   ┌──┴──┐
+            └──┬──┘              //                   │ 1/z │
+               ↑                 //                   └──┬──┘
+               β                 //         ┌───────┐ +  ↑  — ┌───────┐
+                                 //    x ──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<── y
+                                 //         └───────┘    β    └───────┘
+
+  Merging the (+) elements and joining redundant instances of x and y:
+
+                     ζ₁                    //
+    x                ↑                y    //  Looks like α has become irrelevant.
+    ↓   ┌───────┐ +  |  — ┌───────┐   ↓    //  It disappeared on its own.
+    o──>│ b₁/a₀ ├──>(+)<──┤ a₁/a₀ │<──o    //  Let's keep it that way.
+    │   └───────┘    ↑ +  └───────┘   │    //  With α gone,
+    │             ┌──┴──┐             │    //  β looks like an intruder.
+    │             │ 1/z │             │    //  For the sake of harmony,
+    │             └──┬──┘             │    //  I suggest the substitution:
+    │   ┌───────┐ +  ↑  — ┌───────┐   │    //
+    └──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<──┘    //    β  <——  ζ₂
+        └───────┘    β    └───────┘        //
+
+  Then:                          //  and:                      //  so:
+         ┌───────┐               //          ┌─────┐           //         ┌───────┐
+    x ——>│ b₀/a₀ ├──>(+)──> y    //    ζ₁ ──>│ 1/z ├──> ζ₀     //    x ──>│ b₀/a₀ ├──>(+)───> y
+         └───────┘    ↑ +        //          └─────┘           //         └───────┘    ↑ +
+                      │          //                            //                   ┌──┴──┐
+                      ζ₀         //                            //                   │ 1/z │
+                                 //                            //                   └──┬──┘
+                                 //                            //                      ↑
+                                 //                            //                  ζ₁ ─┘
+
+  //  Pick up all the pieces and make an island:
+
+             ┌───────┐
+      x ────>│ b₀/a₀ ├──>(+)────> y
+             └───────┘    ↑ +
+                       ┌──┴──┐
+                       │ 1/z │
+                       └──┬──┘
+                          ↑  ζ₁
+             ┌───────┐ +  │  — ┌───────┐
+    x ──>o──>│ b₁/a₀ ├──>(+)<──┤ a₁/a₀ │<──o<── y
+         │   └───────┘    ↑ +  └───────┘   │
+         │             ┌──┴──┐             │
+         │             │ 1/z │             │
+         │             └──┬──┘             │
+         │                ↑  ζ₂            │
+         │   ┌───────┐ +  │  — ┌───────┐   │
+         └──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<──┘
+             └───────┘         └───────┘
+
+  //  Closing the loop and embedding the +/— signs directly in the coefficients:
+
+             ┌────────┐                                //
+    x ──>o──>│ +b₀/a₀ ├──>(+)───────────────>o──> y    //
+         │   └────────┘    ↑                 │         //
+         │              ┌──┴──┐              │         //  Before flattening this equation
+         │              │ 1/z │              │         //  in horizontal layout,
+         │              └──┬──┘              │         //  let's define:
+         ↓   ┌────────┐    ↑ ζ₁ ┌────────┐   ↓         //
+         o──>│ +b₁/a₀ ├──>(+)<──┤ —a₁/a₀ │<──o         //    β₀  =  b₀/a₀
+         │   └────────┘    ↑    └────────┘   │         //    β₁  =  b₁/a₀
+         │              ┌──┴──┐              │         //    β₂  =  b₂/a₀
+         │              │ 1/z │              │         //    α₁  =  a₁/a₀
+         │              └──┬──┘              │         //    α₂  =  a₂/a₀
+         │   ┌────────┐    ↑ ζ₂ ┌────────┐   │         //
+         └──>│ +b₂/a₀ ├──>(+)<──┤ —a₂/a₀ │<──┘         //
+             └────────┘         └────────┘             //
+
+  //  Almost there
+
+     y[n]  =  β₀x[n] + ζ₁[n—1]
+    ζ₁[n]  =  β₁x[n] + α₁y[n] + ζ₂[n—1]
+    ζ₂[n]  =  β₂x[n] + α₂y[n]
+
+  Ok.
+  Now imagine this is an algorithm.
+  When we define  y[n] ,
+  ζ₁[n]  has not been updated ——
+  —— so it's still  ζ₁[n—1] .
+  Idem for  ζ₂[n—1]  when defining  ζ₁[n] .
+  So we can simply drop the indexes,
+  and that's it: this is an algorithm.
+
+  //  Copy/paste this?..                              //  If, for some reason
+                                                      //  you need to reset the filter's state
+@sample                                               //  (init, sample rate change, preset load,
+    out  =  beta0 * in  +  zeta1;                     //  order change, type change...),
+  zeta1  =  beta1 * in  +  alpha1 * out  +  zeta2;    //  just set zeta1 and zeta2 to 0.
+  zeta2  =  beta2 * in  +  alpha2 * out;              //  Notice that, in the sample loop,
+                                                      //  with TDF2,
+                                                      //  a 2-pole filter is just three lines.
+  /*
+    Remarks:
+      #  The above algorithm is theoretically valid for first-order filters:
+          you'll have  β₂ = α₂ = ζ₂ = 0 ...
+      #  The variables ζ₁ and ζ₂ are typically named s1 and s2
+          (probably for "s"tate).
+          But I tend to reject this convention.
+          Because s is the variable in the Laplace domain,
+          and I use it for integrators in analogue prototypes' block diagrams.
+          I use ζ because it's the Greek equivalent to the Latin z,
+          which we associate with sample(s) delay.
+          That's just me though.
+          I'm happy to use a consensual convention when there's one,
+          and even happier to use a custom one when not.
+          Beware that ζ is sometimes used
+          for the parameter that I called "D"
+          in the filter "Epikouros" (Chapter III).
+          Try not relying too much on nomenclature: it's unstable.
+          In my biased opinion, memorising patterns is safer.
+      #  Chapter V mentioned Laurent polynomials.
+          You might have noticed that we've started using them:
+          our polynomials in z have negative exponents.
+          Laurent polynomials are not defined when the variable is zero.
+          So theoretically,
+          we should specify  z ≠ 0  for our transfer functions in z.
+          but  exp(sT) ≠ 0  is tautological enough so that we don't.
+          Just because we don't mention the rules we're not breaking,
+          doesn't mean we break them.
+          This might be obvious to some —— but obvious doesn't hurt.
+  */
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Not all cookbooks are anarchist.                                                    */
+/*           Not all anarchists are cookbook."                                                   */
+/*                                       ——  Anonymous graffiti (some public toilets)            */
+===================================================================================================
+#11  Yet another Working-class hero
+===================================================================================================
+
+  //  Alternative pre-warping
+  Disclaimer: I didn't come up with the following idea.
+  It's Robert Bristow-Johnson's technique ——
+  —— and it's exposed at the end of his famous cookbook.
+  That is: *after* the copy/paste-ready closed formulae,
+  RBJ shows us where they come from:
+  not black magic,
+  only Calculus and trigonometry ——
+  —— ok, maybe that's what black magic refers to.
+  This means:
+  his cookbook didn't have to be one ——
+  —— had people read it in full.
+
+  //  https://www.musicdsp.org/en/latest/_downloads/3e1dc886e7849251d6747b194d482272/Audio-EQ-Cookbook.txt
+
+  (As you can see,
+  I didn't come up with the pseudo-code monospace aesthetic either ——
+  —— "opposite of a cookbook"...
+  more like "Through the Looking-Glass".)
+  ((Monospace block diagrams are 100% Working-class block diagrams though.))
+
+  Robert injects BLT into the transfer function
+  in unit-cutoff normalisation.
+  So the substitution is not operated on s,
+  but rather on  s' = s/ωc .
+  For it to work properly,
+  we need s and ωc to be commensurable.
+  We need to rescale  0 < ωc·T < Nyquist  as  0 < ωc < +∞ .
+  So:
+        lim   =  lim
+      wc—>π/T   ωc—>+∞
+
+  We've already found the formula (#05 and #06):
+
+    wc  =  BLT{j·ωc}/j  = tan( ωc·T/2 )·2/T
+
+  In case you're reading RBJ's cookbook in parallel
+  and wonder why there is no T in his formula:
+  we're using ωc and wc,
+  he's using w0 ——
+  —— which is defined around the beginning
+  ("Then compute a few intermediate variables"),
+  as:
+
+    "  w0 = 2*pi*f0/Fs  "
+
+  which here corresponds to:
+
+    2π·fc/f_s  =  ωc/f_s  =  ωc·T
+
+  then  w0/2  corresponds to  ωc·T/2 .
+  Alles gut.
+
+  What we want is:
+
+    H_d(z)  =  H_a( S(z)/wc )    //  ... double-u, not omega (i.e. pre-warped)
+
+  So:
+
+    RBJ{s}  =  j·BLT{s} / BLT{j·ωc}  =  S(z)/wc
+
+                   2     1 — z⁻¹
+                  ——— · ————————
+                   T     1 + z⁻¹             1           1 — z⁻¹
+            =    —————————————————  =  —————————————— · ————————
+                   2                     tan(ωc·T/2)     1 + z⁻¹
+                  ——— tan(ωc·T/2)
+                   T
+                              1 — z⁻¹
+            =  cot(ωc·T/2) · ————————
+                              1 + z⁻¹
+
+  Ok, clean.
+  Except the function  tan(x)  tends to infinity when x tends to π/2,
+  so  cot(ωc·T/2)  will give very bad approximations
+  when the cutoff tends to Nyquist.
+  Luckily there are legions of trigonometric identities.
+  So we can likely re-express  cot(x/2)  in terms of cosine and sine.
+  Except...
+                sin(x)                      cos(x)
+    tan(x)  =  ———————    so    cot(x)  =  ———————
+                cos(x)                      sin(x)
+
+  and  sin(0) = 0  means also very bad approximations
+  when the cutoff tends to DC.
+  So the ideal solution should only rely on cosine.
+  Easy:  sin(x)  =  cos(x — π/2)  ... which doesn't fix the DC issue.
+  Looking back at RBJ's solution, he didn't bother with the sine issue.
+  I guess when people accuse traditional BLT of quantisation noise at DC,
+  they do in fact know their shit...
+  Or at least they trust people who do.
+  /*
+    EDIT:
+    As we're about to find out,
+    it's more complicated than that
+    (spoiler: denominators can cancel out...).
+  */
+
+  Never mind.
+
+                  cos(x/2)
+    cot(x/2)  =  —————————
+                  sin(x/2)
+
+  Euler to the rescue.
+  Let's define:
+
+    ξ = x/2  <=>  x = 2ξ
+
+  Let's be bold and try solving both equations at once,
+  using:  exp(jx) = cos(x) + j·sin(x) = ζ .
+  So:
+
+    ζ  =  exp(2jξ)  =  exp(jξ)²
+
+    <=>    cos(2ξ) + j·sin(2ξ)  =  ( cos(ξ) + j·sin(ξ) )²
+
+    <=>    cos(2ξ) + j·sin(2ξ)  =  cos²(ξ) + j·2·cos(ξ)sin(ξ) — sin²(ξ)
+
+  so:
+
+    Re(ζ)  =  cos(2ξ)  =  cos²(ξ) — sin²(ξ)
+    Im(ζ)  =  sin(2ξ)  =  2·cos(ξ)sin(ξ)
+
+  Then:
+
+    — sin²(x/2)  =  cos(x) — cos²(x/2)
+
+    <=>    sin²(x/2)  =  cos²(x/2) — cos(x)
+
+    <=>    1 — cos²(x/2)  =  cos²(x/2) — cos(x)
+
+    <=>    1  —  2 cos²(x/2)  =  — cos(x)
+
+    <=>    2 cos²(x/2)  =  cos(x) + 1
+                           ┌─────────────
+                           │  cos(x) + 1
+    <=>    cos(x/2)  =  ±  │ ———————————    [2]
+                          ╲│      2
+
+  and:
+
+    cos²(x/2)  =  cos(x) + sin²(x/2)
+
+    <=>    1 — sin²(x/2)  =  cos(x) + sin²(x/2)
+
+
+    <=>    2 sin²(x/2)  =  1 — cos(x)
+                           ┌─────────────
+                           │  1 — cos(x)
+    <=>    sin(x/2)  =  ±  │ ———————————    [3]
+                          ╲│      2
+
+  We know that  tan(x)  is positive
+  when  0 < x < π/2  and:
+
+    ωc·T/2  =  π·fc/f_s
+
+  and:
+
+    fc  <  Nyquist  =  f_s/2
+
+  so:
+
+    fc/f_s  <  1/2    <=>    π·fc/f_s  <  π/2
+
+  so we can drop the +/— sign.
+  Then:
+                 ┌───────────────                   //  Same denominator: 2 —— cancels out.
+                 │   1 + cos(x)                     //  Good.
+                 │  ———————————                     //  Getting rid of the square
+                 │       2                          //  root would be very nice.
+    cot(x/2)  =  │ —————————————    ∀  0 < x ≤ π    //  Same factor applied to num. and denom.
+                 │   1 — cos(x)                     //  doesn't break the equality.
+                 │  ———————————                     //  If said factor is num. or denom.
+                ╲│       2                          //  half the sqrt is gone.
+
+  /*
+    Why the range ]0 , π] ?
+
+      1 — cos(0)  =  1 — 1  =  0
+
+    and:
+
+      tan(0/2)  =  tan(0)  =  0    =>    cot(0)  =  1/0
+
+    so both sides of the equation are undefined
+    (because division by zero)
+    at  x = 0 .
+
+    Tangent has a modulus of π, centred at zero;
+    it's strictly increasing inside each period.
+    So between —π and zero,
+    tan(x/2)  is negative,
+    then so is  cot(x/2)  (its inverse).
+    The terms inside our square root cannot go negative
+    because  cos(x)  is bounded inside [—1 , +1].
+    Then the right-hand terms are always positive and real.
+
+    At  x = π/2 ,
+    tan(x)  reaches the end of a period,
+    it's still increasing (in fact it's always increasing),
+    but it exceeds +∞ and comes back from —∞.
+    So it's negative.
+    Therefore so is  cot(x) .
+    /*
+      Fun fact:
+
+        tan(π/2)  =  sin(π/2)/cos(π/2)  =  1/0  =  +∞    //  ... undefined
+
+      yet:
+
+        cot(π/2)  =  cos(π/2)/sin(π/2)  =  0/1  =  0    //  ...  1/∞  ... defined?
+
+    */
+    If you happen to be interested in a dirty fix
+    that makes this identity hold for all x,
+    I found this (geeking on Desmos):
+
+                   ┌─────────────                                //  Then I realised that
+                   │  1 + cos(x)    ╭                       ╮    //  the convoluted extra term
+      cot(x/2)  =  │ ——————————— sgn│ mod( x — π , 2π ) — π │    //  is equivalent to:
+                  ╲│  1 — cos(x)    ╰                       ╯    //    sgn( sin(x) ) ...
+  */
+
+  Let's multiply the numerator with the denominator
+  and see what happens:
+
+    { 1 — cos(x) }{ 1 + cos(x) }  =  1² + cos(x) — cos(x) — cos²(x)
+
+    =  1 — cos²(x)  =  sin²(x)    —— Perfect.
+
+  This means:
+
+                   sin(x)       1 + cos(x)
+    cot(x/2)  =  ——————————  =  ——————————
+                 1 — cos(x)       sin(x)
+
+  also:
+                 1 + cos(x)
+    cot²(x/2) =  ——————————
+                 1 — cos(x)
+
+  So there's a way of squaring the ratio
+  and yet keeping the denominator intact.
+  When s'² shows up, this'll be good news.
+  That's all we need.
+
+  The analogue transfer function       //  The digital transfer function
+  has the form:                        //  should have the form:
+                                       //
+                 b₂s'² + b₁s' + b₀     //                β₀ + β₁z⁻¹ + β₂z⁻²
+    H_a(s')  =  ———————————————————    //    H_d(z)  =  ———————————————————
+                 a₂s'² + a₁s' + a₀     //                 1 + α₁z⁻¹ + α₂z⁻²
+
+  Since  RBJ{s}  (our variable) is a ratio,
+  we will need all 3 exponentiations to have the same denominator.
+  RBJ addressed this before injecting BLT in  H_a(s') ...
+  Just for fun, let's not:
+
+                  ╭              1 — z⁻¹ ╮²                 1 — z⁻¹
+                b₂│ cot(ωc·T/2) ———————— │ + b₁cot(ωc·T/2) ———————— + b₀
+                  ╰              1 + z⁻¹ ╯                  1 + z⁻¹
+    H_d(z)  =  ——————————————————————————————————————————————————————————
+                  ╭              1 — z⁻¹ ╮²                 1 — z⁻¹
+                a₂│ cot(ωc·T/2) ———————— │ + a₁cot(ωc·T/2) ———————— + a₀
+                  ╰              1 + z⁻¹ ╯                  1 + z⁻¹
+
+
+            { 1 + cos(ωc·T) }( 1 — 2z⁻¹ + z⁻² )          sin(ωc·T)(1 — z⁻¹)
+        b₂ ———————————————————————————————————— + b₁ —————————————————————————— + b₀
+                { 1 — cos(ωc·T) }(1 + z⁻¹)²          { 1 — cos(ωc·T) }(1 + z⁻¹)
+    =  ——————————————————————————————————————————————————————————————————————————————
+            { 1 + cos(ωc·T) }( 1 — 2z⁻¹ + z⁻² )          sin(ωc·T)(1 — z⁻¹)
+        a₂ ———————————————————————————————————— + a₁ —————————————————————————— + a₀
+                { 1 — cos(ωc·T) }(1 + z⁻¹)²          { 1 — cos(ωc·T) }(1 + z⁻¹)
+
+
+           1 — 2z⁻¹ + z⁻² + cos(ωcT) — 2cos(ωcT)z⁻¹ + cos(ωcT)z⁻²        { sin(ωcT) — sin(ωcT)z⁻¹ }(1 + z⁻¹)        { 1 — cos(ωcT) }(1 + z⁻¹)²
+        b₂ ——————————————————————————————————————————————————————  +  b₁ ———————————————————————————————————  +  b₀ ——————————————————————————
+                         { 1 — cos(ωcT) }(1 + z⁻¹)²                           {1 — cos(ωcT)} (1 + z⁻¹)²             { 1 — cos(ωcT) }(1 + z⁻¹)²
+    =  ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+           1 — 2z⁻¹ + z⁻² + cos(ωcT) — 2cos(ωcT)z⁻¹ + cos(ωcT)z⁻²        { sin(ωcT) — sin(ωcT)z⁻¹ }(1 + z⁻¹)        { 1 — cos(ωcT) }(1 + z⁻¹)²
+        a₂ ——————————————————————————————————————————————————————  +  a₁ ———————————————————————————————————  +  a₀ ——————————————————————————
+                         { 1 — cos(ωcT) }(1 + z⁻¹)²                           {1 — cos(ωcT)} (1 + z⁻¹)²             { 1 — cos(ωcT) }(1 + z⁻¹)²
+
+  Things are getting out of sight.
+  Let's define:
+
+    Γ  =  cos(ωc·T)    //  (capital γ —— Gamma)
+    Λ  =  sin(ωc·T)    //  (capital λ —— Lambda)
+
+                b₂{ (1 + Γ)z⁻² — (2 + 2Γ)z⁻¹ + 1 + Γ } + b₁{ Λ + Λz⁻¹ — Λz⁻¹ — Λz⁻² } + b₀{ (1 — Γ)(1 + 2z⁻¹ + z⁻²) }
+    H_d(z)  =  ——————————————————————————————————————————————————————————————————————————————————————————————————————
+                a₂{ (1 + Γ)z⁻² — (2 + 2Γ)z⁻¹ + 1 + Γ } + a₁{ Λ + Λz⁻¹ — Λz⁻¹ — Λz⁻² } + a₀{ (1 — Γ)(1 + 2z⁻¹ + z⁻²) }
+
+
+        b₂(1 + Γ)z⁻² — b₂(2 + 2Γ)z⁻¹ + b₂(1 + Γ) + b₁Λ — b₁Λz⁻² + b₀{ 1 + 2z⁻¹ + z⁻² — Γ — 2Γz⁻¹ — Γz⁻² }
+    =  ——————————————————————————————————————————————————————————————————————————————————————————————————
+        a₂(1 + Γ)z⁻² — a₂(2 + 2Γ)z⁻¹ + a₂(1 + Γ) + a₁Λ — a₁Λz⁻² + a₀{ 1 + 2z⁻¹ + z⁻² — Γ — 2Γz⁻¹ — Γz⁻² }
+
+
+        { b₂(1 + Γ) — b₁Λ }z⁻² — b₂(2 + 2Γ)z⁻¹ + b₂(1 + Γ) + b₁Λ + b₀ + 2b₀z⁻¹ + b₀z⁻² — b₀Γ — 2b₀Γz⁻¹ — b₀Γz⁻²
+    =  ————————————————————————————————————————————————————————————————————————————————————————————————————————
+        { a₂(1 + Γ) — a₁Λ }z⁻² — a₂(2 + 2Γ)z⁻¹ + a₂(1 + Γ) + a₁Λ + a₀ + 2a₀z⁻¹ + a₀z⁻² — a₀Γ — 2a₀Γz⁻¹ — a₀Γz⁻²
+
+
+        { b₂(1 + Γ) — b₁Λ + b₀ — b₀Γ }z⁻² + { 2b₀ — 2b₀Γ — b₂(2 + 2Γ) }z⁻¹ + { b₂(1 + Γ) + b₁Λ + b₀ — b₀Γ }
+    =  ————————————————————————————————————————————————————————————————————————————————————————————————————
+        { a₂(1 + Γ) — a₁Λ + a₀ — a₀Γ }z⁻² + { 2a₀ — 2a₀Γ — a₂(2 + 2Γ) }z⁻¹ + { a₂(1 + Γ) + a₁Λ + a₀ — a₀Γ }
+
+
+        { b₂(1 + Γ) — b₁Λ + b₀(1 — Γ) }z⁻² + {2b₀(1 — Γ) — 2b₂(1 + Γ) }z⁻¹ + { b₂(1 + Γ) + b₁Λ + b₀(1 — Γ) }
+    =  —————————————————————————————————————————————————————————————————————————————————————————————————————
+        { a₂(1 + Γ) — a₁Λ + a₀(1 — Γ) }z⁻² + {2a₀(1 — Γ) — 2a₂(1 + Γ) }z⁻¹ + { a₂(1 + Γ) + a₁Λ + a₀(1 — Γ) }
+
+
+        { b₀(1 — Γ) + b₁Λ + b₂(1 + Γ) } + { 2b₀(1 — Γ) — 2b₂(1 + Γ) }z⁻¹ + {b₀(1 — Γ) — b₁Λ + b₂(1 + Γ) }z⁻²
+    =  —————————————————————————————————————————————————————————————————————————————————————————————————————
+        { a₀(1 — Γ) + a₁Λ + a₂(1 + Γ) } + { 2a₀(1 — Γ) — 2a₂(1 + Γ) }z⁻¹ + {a₀(1 — Γ) — a₁Λ + a₂(1 + Γ) }z⁻²
+
+
+        b₀(1 — Γ) + b₁Λ + b₂(1 + Γ)         b₀(1 — Γ) — b₂(1 + Γ)             b₀(1 — Γ) — b₁Λ + b₂(1 + Γ)
+        ——————————————————————————— + 2 —————————————————————————————— z⁻¹ + ————————————————————————————— z⁻²
+        a₀(1 — Γ) + a₁Λ + a₂(1 + Γ)     a₀(1 — Γ) + a₁Λ  +  a₂(1 + Γ)         a₀(1 — Γ) + a₁Λ + a₂(1 + Γ)
+    =  ———————————————————————————————————————————————————————————————————————————————————————————————————————
+                                 a₀(1 — Γ) — a₂(1 + Γ)          a₀(1 — Γ) — a₁Λ + a₂(1 + Γ)
+                       1 + 2 ——————————————————————————— z⁻¹ + ———————————————————————————— z⁻²
+                             a₀(1 — Γ) + a₁Λ + a₂(1 + Γ)        a₀(1 — Γ) + a₁Λ + a₂(1 + Γ)
+
+  I don't see how we could simplify more
+  without committing to a less generic analogue prototype ——
+  —— which Robert Bristow-Johnson did.
+  We might come back at this equation and finish the job
+  once we have resonating filters and parallel processing.
+  In the mean time,
+  the following cheat sheet extends RBJ's topology to any 2-pole prototype:
+
+                                                                      //  This can look messy at first sight.
+                              fc              Hz                      //  But many recurring terms can be pre-computed.
+    ωc·T  =  2π·fc/f_s  =  ————————  =  2 ——————————                  //
+                            f_s/2π         SRATE_PI                   //  Cosine and sine can be set first.
+                                                                      //  Then  1 — cos  and  1 + cos .
+  /*                                                                  //
+    (see #07 and #08)                                                 //  I've normalised α₀ to 1,
+  */                                                                  //  so all coefficients share the same denominator.
+                                                                      //
+                                                                      //  The analogue prototype's transfer function uses
+                                                                      //  the unit-cutoff normalisation,
+            b₀{ 1 — cos(ωcT) } + b₁sin(ωcT) + b₂{ 1 + cos(ωcT) }      //  so there's a strong probability
+    β₀  =  —————————————————————————————————————————————————————      //  that several analogue coefficients
+            a₀{ 1 — cos(ωcT) } + a₁sin(ωcT) + a₂{ 1 + cos(ωcT) }      //  will be equal to 1.
+                                                                      //
+                    b₀{ 1 — cos(ωcT) } — b₂{ 1 + cos(ωcT) }           //  The α coefficients have common terms
+    β₁  =  2 —————————————————————————————————————————————————————    //  in their numerator.
+              a₀{ 1 — cos(ωcT) } + a₁sin(ωcT) + a₂{ 1 + cos(ωcT) }    //
+                                                                      //  For LP filters, you'll likely have:
+            b₀{ 1 — cos(ωcT) } — b₁sin(ωcT) + b₂{ 1 + cos(ωcT) }      //  b₀ = 1  and  b₁ = b₂ = 0 . Etc.
+    β₂  =  —————————————————————————————————————————————————————      //
+            a₀{ 1 — cos(ωcT) } + a₁sin(ωcT) + a₂{ 1 + cos(ωcT) }      //  β₀ = β₂  ...
+                                                                      //
+                    a₀{ 1 — cos(ωcT) } — a₂{ 1 + cos(ωcT) }           //  Looking back at RBJ's cookbook,
+    α1  =  2 —————————————————————————————————————————————————————    //  it seems that he divided the numerator
+              a₀{ 1 — cos(ωcT) } + a₁sin(ωcT) + a₂{ 1 + cos(ωcT) }    //  and the denominator by 2 ——
+                                                                      //  —— probably to get rid of the factor 2
+            a₀{ 1 — cos(ωcT) } — a₁sin(ωcT) + a₂{ 1 + cos(ωcT) }      //  in β₁ and α₁,
+    α₂  =  —————————————————————————————————————————————————————      //  and to avoid a factor 4 in α₁,
+            a₀{ 1 — cos(ωcT) } + a₁sin(ωcT) + a₂{ 1 + cos(ωcT) }      //  due to the topology he's implementing.
+                                                                      //  This is pure normalisation:
+                                                                      //  it doesn't break the equality
+                                                                      //  (perhaps better approximation?).
+
+  NEEDS TESTING ——
+    ——  but only if you don't trust maths:
+    I've checked each RBJ type against the cheat sheet,
+    and the sole difference (if any) was always the 2/2 normalisation.
+    For Low- and High-shelves,
+    RBJ bypasses the normalisation, and our cheat sheet applies verbatim.
+    So I feel relatively safe stating: tested, working.
+
+  /*
+    Normalising every coefficient according to α₀
+    is one possible optimisation —— the one used by RBJ.
+    But we could also normalise the numerator and the denominator separately
+    by factoring out  β₀/α₀ ,
+    and using:  β₁/β₀  and  β₂/β₀  in the denominator,
+    and:  α₁/α₀  and  α₂/α₀  in the numerator.
+    Just make sure that β₀ is non-zero.
+    EDIT:
+      In fact, I've re-re-read the cookbook
+      and RBJ makes this very suggestion in the beginning.
+  */
+  /*
+    About the bad approximation at DC:
+      Apparently, DC wasn't meant as "low-frequency input signal";
+      rather: "low cutoff-frequency".
+      Indeed:
+
+        ωc —> 0    =>    cos(ωcΤ) —> 1    =>    1 — cos(ωcT) —> #$&?¤§ ~ ε
+
+      Now look at our coefficients and appreciate the disaster.
+      EDIT:
+        While deriving  cot(x/2)  in terms of cosine ans sine,
+        we've already come across what we need to fix this:
+        equations [2] and [3].
+
+        The goal here is to retrieve RBJ's coefficients,
+        so we'll leave them as is.
+        If this doesn't meet your expectations,
+        then I'm deeply sorry.
+
+        To inform you that it happens in two sections.
+  */
+
+  Robert says:
+  " The most straight forward implementation would be the 'Direct Form 1' ".
+  Maybe.
+  DF1 is indeed the raw formula you get after unpacking the transfer function.
+  (Factorise out the z⁻¹ and z⁻² elements and you get TDF2 ——
+  —— see the beginning of #10
+  or, better yet: #12
+  if you're interested in DF1).
+  But straightforward for humans
+  means twice the number of previous states in memory for CPUs.
+
+  I'm not interested in the DF1 vs TDF2 controversy.
+  (Although you'll notice that I chose TDF2 ——
+  —— for practical, not ideological reasons:
+  3-line-2-pole filters are convenient and I'm happy with their sound.)
+  RBJ says "most straight forward".
+  Not "mandatory", let alone "eternal"...
+  /*
+    In fact, he adds:
+      "probably both the best and the easiest method
+       to implement in the 56K and other fixed-point
+       or floating-point architectures
+       with a double wide accumulator" ...
+     Meaning: if you're in the late 90's early 00's, use DF1.
+     He provided free open-source tools to the people.
+     Please, let's not blame him for not walking them
+     through the 4 direct forms in detail.
+     (What kind of weirdo would do that anyway?)
+  */
+  Traditional BLT doesn't inherently come with DF1.
+  RBJ's "cookbook" does.
+  This fake association is the result of massive pavlovian copy/pasting of his work.
+  He gave all the details required to make sense of his formulae ——
+  —— yet people took the name "cookbook" seriously.
+
+  Compare sections #10 and #11.
+  You already know how to implement RBJ filters using TDF2.
+  I'm very happy with TDF2.
+  I strongly doubt this book will use any different direct form.
+  Therefore I cannot move on to the next chapter
+  before covering the direct forms we won't be using.
+  Otherwise "never" is the time when you'll get to meet them.
+  (Or "elsewhere" is the place...)
+
+  People have made money out of this cookbook for a decade or two,
+  then they turned to a different fashion trend
+  and started ungratefully bashing Robert Bristow-Johnson.
+  It's properly disgusting.
+  My first filter was an RBJ filter.
+  (Two generations could wear this T-shirt.)
+  Robert is a working-class hero.
+
+  Look at the denominator of RBJ's transfer functions.
+  What is the coefficient a₀,
+  if not the instantaneous feedback gain?
+  Ready for blasphemy?
+
+  RBJ filters are ZDF filters.
+
+
+
+===================================================================================================
+#12  DF2, DF1 & TDF1
+===================================================================================================
+
+  //  DF2
+  Direct Form II is occult to me.
+  https://en.wikipedia.org/wiki/Digital_biquad_filter#Direct_form_2
+  I understand the math.
+  But it starts with "assume the substitution..." —— why the fuck would I do that?
+  To me it feels like solving the problem requires knowing the solution in advance ——
+  —— top-down thinking trickery, I suppose.
+  It reduces the number of delay blocks.
+  Which is beneficial of course.
+  But why use a convoluted pre-assumption
+  when you have access to simple tools like factorisation?
+  DF2 is presented as a "natural" equation from which TDF2 gets derived.
+  You've seen (#10) how obtaining TDF2 straight from DF1 takes two lines
+  (and doesn't require [n—4] intermediate steps).
+  "Factorised Direct Form I" —— of that I could make sense.
+
+  Ok, I think I've got it.
+  Pardon the anger: I hate not understanding.
+  The idea behind DF2 is: separate the poles from the zeroes:
+
+              b₀ + b₁z⁻¹ + b₂z⁻²              1
+    H(z)  =  ———————————————————  =  —————————————————— ( b₀ + b₁z⁻¹ + b₂z⁻² )
+               1 + a₁z⁻¹ + a₂z⁻²      1 + a₁z⁻¹ + a₂z⁻²
+
+  then:
+                     x
+    y_p  =  ——————————————————
+             1 + a₁z⁻¹ + a₂z⁻²
+
+  and:
+                                        //
+    y  =  y_p ( b₀ + b₁z⁻¹ + b₂z⁻² )    //  "p" for "p"oles.
+                                        //
+  whence:
+
+    y_p ( 1  +  a₁ z⁻¹  +  a₂ z⁻² )  =  x
+
+    <=>    y_p  =  x — a₁·y_p·z⁻¹ — a₂·y_p·z⁻²
+
+                =  x + ( —a₁·y_p·z⁻¹ + —a₂·y_p·z⁻² )
+
+  So:
+                                                      //  Just add x to the output
+                                                      //  and we can close the loop:
+    ╭─────────────╮                                   //
+    │ —a₁ y_p z⁻¹ │                          y_p      //    x ──>(+)────────────>o──> y_p
+    │      +      │                           ↓       //          ↑              ↓
+    │ —a₂ y_p z⁻² │                        ┌──┴──┐    //          │           ┌──┴──┐
+    ╰─────────────╯                        │ 1/z │    //          │           │ 1/z │
+           ↑                               └──┬──┘    //          │           └──┬──┘
+           │  —a₁ y_p z⁻¹  ┌─────┐   y_p z⁻¹  ↓       //          │    ┌─────┐   ↓
+          (+)<─────────────┤ —a₁ │<───────────o       //         (+)<──┤ —a₁ │<──o
+           ↑               └─────┘            ↓       //          ↑    └─────┘   ↓
+           │                               ┌──┴──┐    //          │           ┌──┴──┐
+           │                               │ 1/z │    //          │           │ 1/z │
+           │                               └──┬──┘    //          │           └──┬──┘
+           │  —a₂ y_p z⁻²  ┌─────┐   y_p z⁻²  ↓       //          │    ┌─────┐   ↓
+           └───────────────┤ —a₂ │<───────────o       //          └────┤ —a₂ │<──o
+                           └─────┘                    //               └─────┘
+
+  Jolly good, that's half of it.
+  Now:
+
+    y  =  b₀ y_p  +  b₁ y_p z⁻¹  +  b₂ y_p z⁻²
+
+  or:
+
+    y_p ──>o─────────>│ +b₀ ├────────────>(+)——> y
+           ↓          └─────┘ +b₀ y_p      ↑
+        ┌──┴──┐                            │
+        │ 1/z │                            │
+        └──┬──┘                            │
+           ↓ y_p z⁻¹  ┌─────┐ +b₁ y_p z⁻¹  │
+           o─────────>│ +b₁ ├────────────>(+)
+           ↓          └─────┘              ↑
+        ┌──┴──┐                            │
+        │ 1/z │                            │
+        └──┬──┘                            │
+           ↓ y_p z⁻²  ┌─────┐ +b₂ y_p z⁻²  │
+           o─────────>│ +b₂ ├──────────────┘
+                      └─────┘
+  Merging:
+                            y_p    ┌─────┐
+    x ──>(+)──────────>o───────>o─>│ +b₀ ├─>(+)──> y
+          ↑            ↓        ↓  └─────┘   ↑
+          │         ┌──┴──┐  ┌──┴──┐         │
+          │         │ 1/z │  │ 1/z │         │
+          │         └──┬──┘  └──┬──┘         │
+          │   ┌─────┐  ↓        ↓  ┌─────┐   │
+         (+)<─┤ —a₁ │<─o δ    ξ o─>│ +b₁ ├─>(+)
+          ^   └─────┘  ↓        ↓  └─────┘   ^
+          │         ┌──┴──┐  ┌──┴──┐         │
+          │         │ 1/z │  │ 1/z │         │
+          │         └──┬──┘  └──┬──┘         │
+          │   ┌─────┐  ↓        ↓  ┌─────┐   │
+          └───┤ —a₂ │<─o ζ    λ o─>│ +b₂ ├───┘
+              └─────┘              └─────┘
+
+  The points δ and ξ are equivalent (y_p z⁻¹);
+  the points ζ and λ are also equivalent (y_p z⁻²).
+  We can merge more:
+                                               //  y[n]  =  b₀ ψ[n]  +  b₁ ψ[n—1]  +  b₂ ψ[n—2]
+                       ψ  ┌─────┐              //
+    x ──>(+)──────────>o─>│ +b₀ ├─>(+)——> y    //  ψ[n]  =  x[n]  —  a₁ ψ[n—1]  —  a₂ ψ[n—2]
+          ↑            ↓  └─────┘   ↑          //
+          │         ┌──┴──┐         │          //  ψ[n]  needs to be defined before  y[n] :
+          │         │ 1/z │         │          //  otherwise  ψ[n]  in the expression
+          │         └──┬──┘         │          //  of  y[n]  will still be  ψ[n—1] ;
+          │   ┌─────┐  ↓  ┌─────┐   │          //  also  x[n]  is absent from  y[n] 's expression ——
+         (+)<─┤ —a₁ │<─o─>│ +b₁ ├─>(+)         //  —— our output cannot ignore our input.
+          ↑   └─────┘  ↓  └─────┘   ↑          //  When updating  ψ[n] , we use  ψ[n—1] ,
+          │         ┌──┴──┐         │          //  which, at this point, is still equivalent to  ψ[n] .
+          │         │ 1/z │         │          //  So if we write:  ψ₀  =  x  —  a₁ ψ₀  —  a₂ ψ₁,
+          │         └──┬──┘         │          //  ψ₀ on the left hand will mean  ψ[n] ,
+          │   ┌─────┐  ↓  ┌─────┐   │          //  and  ψ[n—1]  on the right hand.
+          └───┤ —a₂ │<─o─>│ +b₂ ├───┘          //  So ψ₀ will take the value of  ψ[n]
+              └─────┘     └─────┘              //  and  ψ[n—1]  will be lost.
+
+  If we write:  ψ₀  =  x — a₁ψ₁ — a₂ψ₂
+  we don't loose information but we also don't update ψ₁ and ψ₂.
+  In fact this expression only means something
+  if they have already been updated.
+  So...
+
+  //  Copy/paste this...
+
+@sample
+  psi2  =  psi1;
+  psi1  =  psi0;
+  psi0  =  in  -  a1 * psi1  -  a2 * psi2;
+   out  =  b0 * psi0  +  b1 * psi1  +  b2 * psi2;
+
+
+  Direct Form II makes sense now.
+  Only the name remains confusing (for me I mean).
+  So I've done some digging and came up with this hypothesis:
+  The numbers 1 and 2 simply mean "came first" and "came second".
+  Then "transposed" means:
+  "obtained by swapping input and output and making the necessary adjustments".
+  /*
+    the name "TDF2" got me confused
+    because I look at discrete differential equations
+    with the z-transform in mind.
+    Therefore I see one-sample delays as multiplications (by z⁻¹).
+    From this perspective,
+    TDF2 is just a cleaned-up (simplified, factorised) DF1...
+  */
+  Necessary adjustments meaning:
+    #  arrows change direction
+    #  nodes become plus signs
+    #  plus signs become nodes
+    #  minus signs are problematic,
+       that's why they're embedded in the gains
+
+  //  https://ccrma.stanford.edu/~jos/fp/Transposed_Direct_Forms.html
+
+  We've got the recipe for turning DF1 into TDF1.
+  Ok, let's do just that.
+
+              b₀ + b₁z⁻¹ + b₂z⁻²
+    H(z)  =  ————————————————————
+               1 + a₁z⁻¹ + a₂z⁻²
+
+    <=>    y( 1 + a₁z⁻¹ + a₂z⁻² )  =  x( b₀ + b₁z⁻¹ + b₂z⁻² )
+
+    <=>    y  +  a₁ y z⁻¹  +  a₂ y z⁻²  =  b₀ x  +  b₁ x z⁻¹  +  b₂ x z⁻²
+
+    <=>    y  =  b₀ x  +  b₁ x z⁻¹  +  b₂ x z⁻²  —  a₁ y z⁻¹  —  a₂ y z⁻²
+
+  Ok, this is Direct Form I.
+  The associated algorithm is basically equivalent to the formula
+  (just come up with clever names for previous inputs and outputs) ——
+  —— for instance (copy/paste this...):
+
+@sample
+  out   =  b0 * in  +  b1 * xn_1  +  b2 * xn_2  +  a1 * yn_1  +  a2 * yn_2;
+  xn_2  =  xn_1;
+  xn_1  =  in;
+  yn_2  =  yn_1;
+  yn_1  =  out;
+
+
+  For TFD1 we need a block diagram to swap.
+  Since different time delays have different coefficients,
+  we need to apply the delays before the coefficients.
+  DF1 is the raw, non-simplified form.
+  So if we see four powers of z in the equation,
+  we'll have four 1/z elements in the block diagram.
+
+              ┌─────┐
+    x ───>o──>│ +b₀ ├──> +b₀x       //                         o───> y
+          ↓   └─────┘               //                         ↓
+       ┌──┴──┐                      //                      ┌──┴──┐
+       │ 1/z │                      //                      │ 1/z │
+       └──┬──┘                      //                      └──┬──┘
+    xz⁻¹  ↓   ┌─────┐               //               ┌─────┐   ↓  yz⁻¹
+          o──>│ +b₁ ├──> +b₁xz⁻¹    //    —a₁yz⁻¹ <──┤ —a₁ │<——o
+          ↓   └─────┘               //               └─────┘   ↓
+       ┌──┴──┐                      //                      ┌──┴──┐
+       │ 1/z │                      //                      │ 1/z │
+       └──┬──┘                      //                      └──┬──┘
+    xz⁻²  │   ┌─────┐               //               ┌─────┐   │  yz⁻²
+          └──>│ +b₂ ├──> +b₂xz⁻²    //    —a₂yz⁻² <──┤ —a₂ │<──┘
+              └─────┘                                └─────┘
+
+  We have the five terms of the right—hand equation.
+  We just need to sum them all:
+
+              ┌─────┐
+    x ———>o——>│ +b₀ ├──>(+)────────────>o———> y    //
+          ↓   └─────┘    ↑              ↓          //  So this is Direct Form I's equation in 2D.
+       ┌──┴──┐           │           ┌──┴──┐       //
+       │ 1/z │           │           │ 1/z │       //  Now, in order for us to obtain its transposed form,
+       └──┬──┘           │           └──┬──┘       //  we have to:
+          ↓   ┌─────┐    │    ┌─────┐   ↓          //
+          o──>│ +b₁ ├──>(+)<──┤ —a₁ │<──o          //    #  move x to the right and y to the left;
+          ↓   └─────┘    ↑    └─────┘   │          //
+       ┌──┴──┐           │           ┌──┴──┐       //    #  swap (+) signs and nodes;
+       │ 1/z │           │           │ 1/z │       //
+       └──┬──┘           │           └──┬──┘       //    #  flip every arrow's direction.
+          │   ┌─────┐    │    ┌─────┐   │          //
+          └──>│ +b₂ ├──>(+)<──┤ —a₂ │<──┘          //
+              └─────┘         └─────┘              //
+  Go:
+               ┌─────┐   ψ                         //
+    y <──(+)<──┤ +b₀ │<——o<────────────(+)<── x    //    y  =  b₀ ψ  +  ( ( +b₂ ψ z⁻¹  +  +b₁ ψ ) z⁻¹ )
+          ↑    └─────┘   |              ↑          //
+       ┌──┴──┐           |           ┌──┴──┐       //       =  b₀ ψ  +  b₁ ψ z⁻¹  +  b₂ ψ z⁻²
+       │ 1/z │           |           │ 1/z │       //
+       └──┬──┘           |           └──┬──┘       //    ψ  =  x  +  ( ( —a₂ ψ z⁻¹  +  —a₁ ψ ) z⁻¹ )
+          ↑    ┌─────┐   ↓   ┌─────┐    ↑          //
+         (+)<──┤ +b₁ │<──o──>┤ —a₁ ├──>(+)         //       =  x  —  a₂ ψ z⁻²  —  a₁ ψ z⁻¹
+          ↑    └─────┘   |   └─────┘    ↑          //
+       ┌──┴──┐           |           ┌──┴──┐       //  This equation is strictly equivalent to DF2.
+       │ 1/z │           |           │ 1/z │       //  Apparently, the difference is that we're supposed
+       └──┬──┘           |           └──┬──┘       //  to store four states ——
+          ↑    ┌─────┐   ↓   ┌─────┐    ↑          //  —— one per delay element.
+          └────┤ +b₂ │<──o──>│ —a₂ ├────┘          //  So the coefficients are applied destructively,
+               └─────┘       └─────┘               //  so to speak (I mean write).
+
+  Let's flip the block diagram horizontally
+  and use ζ₁, ζ₂, ζ₃ and ζ₄ instead of ψ:
+
+                             ┌─────┐
+    x ──>(+)────────────>o──>│ +b₀ ├──>(+)──> y    //
+          ↑              │   └─────┘    ↑          //  y  =  ( x + ζ₁z⁻¹ ) · +b₀ + ζ₃z⁻¹
+       ┌──┴──┐           │           ┌──┴──┐       //
+       │ 1/z │           │           │ 1/z │       //  <=>    y[n]  =  b₀( x[n] + ζ₁[n—1] ) + ζ₃[n—1]
+       └──┬──┘           │           └──┬──┘       //
+      ζ₁  ↑    ┌─────┐   ↓   ┌─────┐    |  ζ₃      //  ζ₁  =  ( x + ζ₁z⁻¹ ) · —a₁ + ζ₂z⁻¹
+         (+)<──┤ —a₁ │<──o──>│ +b₁ ├──>(+)         //
+          ↑    └─────┘   │   └─────┘    ↑          //  <=>    ζ₁[n]  =  ζ₂[n—1] —  a₁( x[n] + ζ₁[n—1] )
+       ┌──┴──┐           │           ┌──┴──┐       //
+       │ 1/z │           │           │ 1/z │       //  ζ₂  =  ( x + ζ₁z⁻¹ ) · —a₂
+       └──┬──┘           │           └──┬──┘       //
+      ζ₂  ↑    ┌─────┐   ↓   ┌─────┐    ↑  ζ₄      //  <=>    ζ₂[n]  =  —a₂( x[n] + ζ₁[n—1] )
+          └────┤ —a₂ │<──o──>│ +b₂ ├────┘          //
+               └─────┘       └─────┘
+
+  ζ₂[n]  needs  ζ₁[n—1]  and  ζ₁[n]  needs  ζ₂[n—1] .
+  We need to store one of them in a temporary variable before updating it,
+  so that the other keeps access to its previous state.
+  x[n]  +  ζ₁[n—1]  is present in three expressions.
+  If we start the algorithm by storing  x + ζ₁ ,
+  we'll have  x[n]  +  ζ₁[n—1]  available for all three formulae ——
+  —— if we use a temporary variable, we can update it safely.
+
+    ζ₃  =  ( x + ζ₁z⁻¹ ) · +b₁ + ζ₄z⁻¹
+
+    <=>    ζ₃[n]  =  b₁( x[n] + ζ₁[n—1] ) + ζ₄[n—1]
+
+    ζ₄  =  ( x + ζ₁z⁻¹ ) · +b₂    <=>    ζ₄[n]  =  b₂( x[n] + ζ₁[n—1] )
+
+  The temporary variable just discussed will allow to compute ζ₃ and ζ₄ without issue,
+  as long as ζ₃ gets computed first:
+  indeed ζ₃ requires ζ₄'s previous state, but not vice versa.
+
+  //  Copy/paste this...
+
+@sample
+  tmp    =  in + zeta1;
+  out    =  b0 * tmp  +  zeta3;
+  zeta1  =  zeta2  -  a1 * tmp;
+  zeta2  =  -a2 * tmp;
+  zeta3  =  b1 * tmp  +  zeta4;
+  zeta4  =  b2 * tmp;
+
+
+  Is it even valid?
+
+    y  =  b₀( x + ζ₁z⁻¹ ) + ζ₃z⁻¹    <=>    y — ζ₃z⁻¹  =  b₀( x + ζ₁z⁻¹ )
+
+            y — ζ₃z⁻¹                          y — ζ₃z⁻¹
+    <=>    ——————————  =  x + ζ₁z⁻¹    <=>    —————————— — x  =  ζ₁z⁻¹
+               b₀                                 b₀
+
+                      y — ( b₁(x + ζ₁z⁻¹) + ζ₄z⁻¹ )z⁻¹ — b₀x
+    <=>    ζ₁z⁻¹  =  ————————————————————————————————————————
+                                        b₀
+
+                      y — ( b₁(x + ζ₁z⁻¹) + { b₂(x + ζ₁z⁻¹) }z⁻¹ )z⁻¹ — b₀x
+    <=>    ζ₁z⁻¹  =  ———————————————————————————————————————————————————————
+                                                b₀
+
+    <=>    b₀ζ₁z⁻¹  =  y — { b₁x + b₁ζ₁z⁻¹ + (b₂x + b₂ζ₁z⁻¹)z⁻¹ }z⁻¹ — b₀x
+
+    <=>    b₀ζ₁z⁻¹  =  y — ( b₁x + b₁ζ₁z⁻¹ + b₂xz⁻¹ + b₂ζ₁z⁻² )z⁻¹ — b₀x
+
+    <=>    b₀ζ₁z⁻¹  =  y — b₁xz⁻¹ — b₁ζ₁z⁻² — b₂xz⁻² — b₂ζ₁z⁻³ — b₀x
+
+    <=>    b₀ζ₁z⁻¹ + b₁ζ₁z⁻² + b₂ζ₁z⁻³  =  y — b₀x — b₁xz⁻¹ — b₂xz⁻²
+
+    <=>    ζ₁z⁻¹( b₀ + b₁z⁻¹ + b₂z⁻² )  =  y — x( b₀ + b₁z⁻¹ + b₂z⁻² )
+
+                      y — x( b₀ + b₁z⁻¹ + b₂z⁻² )              y
+    <=>    ζ₁z⁻¹  =  ————————————————————————————  =  ——————————————————— — x
+                          b₀ + b₁z⁻¹ + b₂z⁻²           b₀ + b₁z⁻¹ + b₂z⁻²
+
+
+    ζ₁z⁻¹  =  { ζ₂z⁻¹ — a₁(x + ζ₁z⁻¹) }z⁻¹  =  ζ₂z⁻² — a₁xz⁻¹ — a₁ζ₁z⁻²
+
+    <=>    ζ₁z⁻¹ + a₁ζ₁z⁻²  =  ζ₂z⁻² — a₁xz⁻¹
+
+    <=>    ζ₁z⁻¹( 1 + a₁z⁻¹ )  =  { —a₂(x + ζ₁z⁻¹) }z⁻² — a₁xz⁻¹
+
+                               =  —a₂xz⁻² — a₂ζ₁z⁻³ — a₁xz⁻¹
+
+    <=>    ζ₁z⁻¹( 1 + a₁z⁻¹ ) + a₂ζ₁z⁻³  =  —x( a₁z⁻¹ + a₂z⁻² )
+
+    <=>    ζ₁z⁻¹( 1 + a₁z⁻¹ + a₂z⁻² )  =  —x( a₁z⁻¹ + a₂z⁻² )
+
+                        x( a₁z⁻¹ + a₂z⁻² )
+    <=>    ζ₁z⁻¹  =  — ———————————————————
+                        1 + a₁z⁻¹ + a₂z⁻²
+
+                    y                     x( a₁z⁻¹ + a₂z⁻² )
+     =>    ——————————————————— — x  =  — ———————————————————
+            b₀ + b₁z⁻¹ + b₂z⁻²            1 + a₁z⁻¹ + a₂z⁻²
+
+                     y                   x( a₁z⁻¹ + a₂z⁻² )
+    <=>    ————————————————————  =  x — ———————————————————
+            b₀ + b₁z⁻¹ + b₂z⁻²           1 + a₁z⁻¹ + a₂z⁻²
+
+                                     x( 1 + a₁z⁻¹ + a₂z⁻² ) — x( a₁z⁻¹ + a₂z⁻² )
+                                 =  ————————————————————————————————————————————
+                                                 1 + a₁z⁻¹ + a₂z⁻²
+
+                    y               x + a₁xz⁻¹ + a₂xz⁻² — a₁xz⁻¹ — a₂xz⁻²
+    <=>    ———————————————————  =  ——————————————————————————————————————
+            b₀ + b₁z⁻¹ + b₂z⁻²               1 + a₁z⁻¹ + a₂z⁻²
+
+                                           x
+                                =  ——————————————————
+                                    1 + a₁z⁻¹ + a₂z⁻²
+
+                      1                        1
+    <=>    y ———————————————————  =  x ——————————————————
+              b₀ + b₁z⁻¹ + b₂z⁻²        1 + a₁z⁻¹ + a₂z⁻²
+
+            y       b₀ + b₁z⁻¹ + b₂z⁻²
+    <=>    ———  =  ————————————————————  =  H(z)
+            x        1 + a₁z⁻¹ + a₂z⁻²
+
+  What was the question again?
+  Oh yeah: is it even valid? —— Yep.
+  BUT: TDF1 is a nightmare.
+  It could be split in two halves (left and right) just like DF2.
+  Which means:
+  it also separates the poles from the zeroes ——
+  —— the numerator from the denominator.
+  I wouldn't recommend using Transposed Direct Form I
+  or Direct Form II.
+  The pass-band amplitude is usually a factor 1.
+  Which means that the numerator and the denominator
+  compensate each other to find equilibrium at unity.
+  If you split them,
+  you'll likely multiply a very big number with a very small number
+  (or the other way around)
+  just to get a factor 1...
+  Unless your design somehow has a numerator and a denominator
+  both close to equality across the whole spectrum ——
+  —— I don't see how this can be good for numeral approximation.
+
+
+  Nomenclature reform proposition
+  (working-class "Form reform act"):
+
+     DF1  <———  "Raw form"
+    TDF2  <———  "Factorised raw form"
+    TDF1  <———  "Split form"
+     DF2  <———  "Factorised split form"
+
+  Now THAT makes sense!
+  Don't worry: I'll stick to TDF2 and keep calling it TDF2.
+
+
+
+===================================================================================================
+#13  All shall pass
+===================================================================================================
+
+  You have reached the end of the chapter with no end.
+  Your tenacity is about to get rewarded:
+  I've promised you an All-pass filter...
+  We're doing a multimode filter.
+  Remember (Chapter VI) how there are actually two possible AP?
+  Our filter will have both, and LP, and HP.
+
+                 ┌────────────────────>(+)──> y₄    //
+                 │                      ↑ —         //  y₁ is the High—pass output.
+                 o───> y₁               │           //
+                 ↑                      │           //  y₂ is the Low—pass output.
+                 │   ┌────┐   ┌─────┐   │           //
+    x ───>(+)───>o——>│ ωc ├──>│ 1/s ├──>o───> y₂    //  y₃  =  LP — HP
+           ↑ —   |   └────┘   └─────┘   │           //  is the "regular" All—pass output.
+           │     ↓ —                    │           //
+           o───>(+)──> y₃               │           //  y₄  =  HP — LP
+           ↑                            │           //  is the "working—class" All—pass output.
+           │                            │           //
+           └────────────────────────────┘           //
+
+  Let's trapezoide this MOFO (Mixture-Optimised-Four-Output).
+
+                ┌──────────────────────────>(+)──> y₄    //  ζ  =  y₁·ωc·T/2 + y₂
+                │                            ↑ —         //
+                o———> y₁                     │           //  <=>    ζ — y₂  =  y₁·ωc·T/2
+                ↑                            │           //
+                │   ┌────────┐               │           //  y₂  =  y₁·ωc·T/2 + ζz⁻¹
+    x ──>(+)───>o──>│ ωc T/2 ├──>o───>(+)<───o───> y₂    //
+          ↑ —   │   └────────┘   │     ↑     │           //  <=>    y₂ — ζz⁻¹  =  y₁·ωc·T/2
+          │     ↓ —              │  ┌──┴──┐  │           //
+          o────>o──> y₃          │  │ 1/z │  │           //   =>    ζ — y₂  =  y₂ — ζz⁻¹
+          ↑                      │  └──┬──┘  │           //
+          │                      │     |     ↓           //  <=>    ζ  =  y₂ — ζz⁻¹ + y₂
+          │                      └───>(+)<───o           //
+          │                            ζ     │           //  <=>    ζ  =  2y₂ — ζz⁻¹
+          └──────────────────────────────────┘           //
+
+    y₁  =  x — y₂    <=>    x  =  y₁ + y₂
+
+    <=>   y₂  =  (x — y₂)ωc·T/2 + ζz⁻¹  =  x·ωc·T/2 — y₂·ωc·T/2 + ζz⁻¹
+
+    <=>    y₂ + y₂·ωc·T/2  =  x·ωc·T/2 + ζz⁻¹
+
+    <=>   y₂( 1 + ωc·T/2 )  =  x·ωc·T/2 + ζz⁻¹
+
+                   x·ωc·T/2 + ζz⁻¹
+    <=>    y₂  =  ————————————————
+                     1 + ωc·T/2
+
+    y₃  =  y₂ — y₁  =  y₂ — (x — y₂)  =  y₂ — x + y₂
+
+        =  2y₂ — x
+
+    y₄  =  y₁ — y₂  =  —( y₂ — y₁ )  =  —y₃
+
+
+  //  Copy/paste this...
+
+@init
+  SRATE_PI  =  SRATE / $pi;
+
+@slider
+  g1  =  tan(Hz / SRATE_PI);            //  Hz is the cutoff in Hertz.
+  g2  =  1 / (1 + g1);
+
+@sample
+   yLP  =  (g1 * in  +  delta) * g2;
+   tmp  =  2 * yLP;
+  zeta  =  tmp  -  zeta;
+   yHP  =  in  -  yLP;
+  yAP1  =  tmp  -  in;                  //  or:  yAP1  =  yLP  -  yHP;
+  yAP2  =  -1 * yAP1;                   //  or:  yAP2  =  yHP  -  yLP;
+
+  [needs bode plots]
+
+
+
+===================================================================================================
+APPENDIX:  1-pole RBJ
+===================================================================================================
+
+  [NEEDS INTRO]
+  [NEEDS 1—cos FIX... maybe reboot..?]
+
+                        1         1 — z⁻¹                    sin(ωcT)(1 — z⁻¹)
+                b₁ ——————————— · ———————— + b₀       b₁ —————————————————————————— + b₀
+                    tan(ωcT/2)    1 + z⁻¹                { 1 — cos(ωcT) }(1 + z⁻¹)
+    H_d(z)  =  ————————————————————————————————  =  ————————————————————————————————————
+                        1         1 — z⁻¹                    sin(ωcT)(1 — z⁻¹)
+                a₁ ——————————— · ———————— + a₀       a₁ —————————————————————————— + a₀
+                    tan(ωcT/2)    1 + z⁻¹                { 1 — cos(ωcT) }(1 + z⁻¹)
+
+
+                     sin(ωcT) — sin(ωcT)z⁻¹         { 1 — cos(ωcT) }(1 + z⁻¹)
+                b₁ —————————————————————————— + b₀ ——————————————————————————
+                    { 1 — cos(ωcT) }(1 + z⁻¹)       { 1 — cos(ωcT) }(1 + z⁻¹)
+    H_d(z)  =  ———————————————————————————————————————————————————————————————
+                     sin(ωcT) — sin(ωcT)z⁻¹         { 1 — cos(ωcT) }(1 + z⁻¹)
+                a₁ —————————————————————————— + a₀ ——————————————————————————
+                    { 1 — cos(ωcT) }(1 + z⁻¹)       { 1 — cos(ωcT) }(1 + z⁻¹)
+
+
+                b₁sin(ωcT) — b₁sin(ωcT)z⁻¹ + b₀( 1 + z⁻¹ — cos(ωcT) — cos(ωcT)z⁻¹ )
+    H_d(z)  =  —————————————————————————————————————————————————————————————————————
+                a₁sin(ωcT) — a₁sin(ωcT)z⁻¹ + a₀( 1 + z⁻¹ — cos(ωcT) — cos(ωcT)z⁻¹ )
+
+
+                b₁sin(ωcT) — b₁sin(ωcT)z⁻¹ + b₀ + b₀z⁻¹ — b₀cos(ωcT) — b₀cos(ωcT)z⁻¹
+    H_d(z)  =  ——————————————————————————————————————————————————————————————————————
+                a₁sin(ωcT) — a₁sin(ωcT)z⁻¹ + a₀ + b₀z⁻¹ — a₀cos(ωcT) — a₀cos(ωcT)z⁻¹
+
+
+                { b₀ — b₀cos(ωcT) + b₁sin(ωcT) } + { b₀ — b₀cos(ωcT) — b₁sin(ωcT) }z⁻¹
+    H_d(z)  =  ————————————————————————————————————————————————————————————————————————
+                { a₀ — a₀cos(ωcT) + a₁sin(ωcT) } + { a₀ — a₀cos(ωcT) — a₁sin(ωcT) }z⁻¹
+
+
+                b₀{ 1 — cos(ωcT) } + b₁sin(ωcT) + { b₀( 1 — cos(ωcT) ) — b₁sin(ωcT) }z⁻¹
+    H_d(z)  =  —————————————————————————————————————————————————————————————————————————
+                a₀{ 1 — cos(ωcT) } + a₁sin(ωcT) + { a₀( 1 — cos(ωcT) ) — a₁sin(ωcT) }z⁻¹
+
+
+                 b₀{ 1 — cos(ωcT) } + b₁sin(ωcT)     b₀{ 1 — cos(ωcT) } — b₁sin(ωcT)
+                ———— ———————————— ——————————————— + ———— ———————————— ——————————————— z⁻¹
+                 a₀{ 1 — cos(ωcT) } + a₁sin(ωcT)     a₀{ 1 — cos(ωcT) } + a₁sin(ωcT)
+    H_d(z)  =  ———————————————————————————————————————————————————————————————————————————
+                                     a₀{ 1 — cos(ωcT) } — a₁sin(ωcT)
+                                1 + ————————————————————————————————— z⁻¹
+                                     a₀{ 1 — cos(ωcT) } + a₁sin(ωcT)
+
+
+            b₀{ 1 — cos(ωcT) } + b₁sin(ωcT)         //
+    β0  =  —————————————————————————————————        //
+            a₀{ 1 — cos(ωcT) } + a₁sin(ωcT)         //
+                                                    //
+                                                    //
+            b₀{ 1 — cos(ωcT) } — b₁sin(ωcT)         //
+    β1  =  —————————————————————————————————        //
+            a₀{ 1 — cos(ωcT) } + a₁sin(ωcT)         //
+                                                    //
+                                                    //
+            a₀{ 1 — cos(ωcT) } — a₁sin(ωcT)         //
+    α1  =  —————————————————————————————————        //
+            a₀{ 1 — cos(ωcT) } + a₁sin(ωcT)         //
+
+
+  [ IN PROGRESS]
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Let's move to the rhythm of a crazy [bit]."                                         */
+/*                                                          ——  Gene ["typo"] Vincent            */
+===================================================================================================
+BONUS:  1 + 1 = 1
+===================================================================================================
+
+  Define the number one.
+
+  It's  ln(e) .
+  It's  cos(0) .
+  It's the solution to:
+
+    x/x  =  x    or    x⁽ʷʰᵃᵗᵉᵛᵉʳ⁾  =  x    or    (whatever)ˣ  =  (whatever)
+
+    or     (whatever)·x  =  (whatever)    or    (whatever)/x  =  (whatever)
+
+  It's  ξ⁰    or    ξ/ξ  [!]     or    cos²(ξ) + sin²(ξ)    where ξ is any ([!] non—zero) complex number.
+
+               sin(x)               exp(x) — 1    //  Ok, stop:
+  It's    lim ———————    or    lim ———————————    //  I've just used a concept in its own definition...
+          x—>0   x             x—>0     x         //  Sorry Aristotle, it won't happen again.
+
+  Now define zero.
+  This would be a full chapter.
+
+  We get accustomed to things and we forget how marvellous they are.
+  Imagine if we combine them.
+
+  1 bit:   0 or 1
+  2 bits:  00 or 01 or 10 or 11
+  3 bits:  000 or 001 or 010 or 011 or 100 or 101 or 110 or 111
+  4 bits:  0000 or 0001 or 0010 or 0011 or 0100 or 0101 or 0110 or 0111 or 1000
+                or 1001 or 1010 or 1011 or 1100 or 1101 or 1110 or 1111
+
+  Let's say we have 5 bits:
+
+    First bit has 2 possible values,
+    so does second bit ——
+    —— both combined have 2 values per each other's value,
+    so:  2·2  =  2²  =  4 .
+    Third bit has 2 possible values,
+    so three first bits have 2 values per value of the two first,
+    so:  2·2·2  =  2³  =  8 .
+    Fourth bit,
+    same process:  2·2·2·2  =  2⁴  =  16 .
+    Finally,
+    fifth bit:  2·2·2·2·2  =  2⁵  =  32 .
+
+  If we add a sixth bit,
+  the possible values will again be doubled:  32·2  =  2⁵·2  =  2⁶  =  64 .
+  We can keep going.
+  Each new bit doubles the possible values.
+
+  If we start with 1 bit: 2 values —— or 2¹;
+  and add n bits (so  n + 1  in total)
+  the number of possible values is 2¹ doubled n times.
+  Which means 2¹ times 2 multiplied n times by itself,
+  or:  2¹·2ⁿ  =  2¹⁺ⁿ .
+  Let's define:
+
+    N  =  1 + n
+
+  Then  2¹⁺ⁿ  =  2ᴺ .
+
+  Therefore N bits have 2ᴺ possible values
+  for any positive integer N.
+
+  [...] [?]
+
+  Base 10:
+
+    1848  =  8·10⁰ + 4·10¹ + 8·10² + 1·10³
+
+          =  8·1 + 4·10 + 8·100 + 1·1000
+
+          =  8 + 40 + 800 + 1000  =  1848
+
+  Base 2:
+
+    1011  =  1·2⁰ + 1·2¹ + 0·2² + 1·2³
+
+          =  1·1 + 1·2 + 0·4 + 1·8
+
+          =  1 + 2 + 8  =  11
+
+  /*
+    This decomposition of a number
+    in exponentiations of its base with coefficients
+    is called a polynomial.
+    Ok, not exactly:
+    the base is constant and the coefficients are the variables,
+    instead of the other way around...
+    But still, the pattern:
+
+      SUM { coeff · baseᵉˣᵖᵒⁿᵉⁿᵗ }
+
+    is shared identically ——
+    —— so much that I'm tempted to call it the quintessence of Algebra.
+    /*
+      I haven't done my homework: maybe this is a common truism...
+      Learn by yourself and get to wonder at everything ——
+      —— but also be prepared for permanent:
+
+        "
+          [average human]  ——  No shit! Everybody knows that...
+                               D'you live in a cave?
+
+            [inner voice]  ——  You don't know what "knowing" means.
+                               (Also: yes —— I do live in a cave, fuck you.)
+                                                                             "
+      Who is to tell which side of the bars is the cage?
+    */
+  */
+
+  Conversion:
+
+    1917 for example.
+
+    Divide it by 2,
+    you get 958 and a remainder of 1.
+    This remainder is our first bit's value.
+    Notice that the remainder of an integer divided by 2
+    can only be 1 or 0.
+    More symbolically:
+    if n is a positive integer,
+    then  n  mod 2  =  (0 || 1) .
+
+    Now divide 958 by 2,
+    you get 479 and a remainder of 0.
+    So our first (or last if you read left to right) two bits are:  01 .
+
+    Now divide 479 by 2,
+    you get 239 and a remainder of 1.
+    So:  101.
+
+    Now divide 239 by 2,
+    you get 119 and a remainder of 1.
+    So:  1101.
+
+    Now divide 119 by 2,
+    you get 59 and a remainder of 1.
+    So:  11101.
+
+    Now divide 59 by 2,
+    you get 29 and a remainder of 1.
+    So:  111101.
+
+    Now divide 29 by 2,
+    you get 14 and a remainder of 1.
+    So:  1111101.
+
+    Now divide 14 by 2,
+    you get 7 and a remainder of 0.
+    So:  01111101.
+
+    Now divide 7 by 2,
+    you get 3 and a remainder of 1.
+    So:  101111101.
+
+    Now divide 3 by 2,
+    you get 1 and a remainder of 1.
+    So:  1101111101.
+
+    Now divide 1 by 2,
+    you get 0 and a remainder of 1.
+    So:  11101111101.
+
+    Now you can keep dividing zero by two
+    and add as many leading zeroes as you want.
+    But 11 bits are sufficient to express 1917 in base 2.
+
+    This routine demonstrates how any positive number
+    in base 10
+    can be expressed in base 2.
+    What about zero?
+    Well:  0/2  =  0  so zero remains zero.
+    In 8-bit resolution, that's 00000000, etc.
+
+  Minimal resolution:
+
+    Let's say we have a positive integer Z,
+    and we want to know how many bits it needs in binary form.
+    Let's call N this number of bits,
+    then:
+
+      Z  ≤  2ᴺ    <=>    exp( ln(Z) )  ≤  exp( ln(2ᴺ) )
+
+                  <=>    ln(Z)  ≤  Nln(2)
+
+                  <=>    N  ≥  ln(Z)/ln(2)  =  log₂(Z)
+
+                   =>    N  =  ceil( log₂(Z) )
+
+    Actually, nope!
+    I forgot zero.
+    Z is the value number  Z + 1 .
+    So:
+
+      Z + 1  ≤  2ᴺ    <=>    ...    =>    N  =  ceil( log₂(Z + 1) )
+
+    /*
+      Online double-check revealed that the classical formula is:
+
+        N  =  floor( log₂(Z) ) + 1
+
+      then,
+      trying to figure out what was wrong with the ceil formula
+      revealed that they're equivalent
+      as long as Z remains an integer.
+    */
+
+  /*
+    We could generalise the formula
+    and find out the order of the polynomial defining any positive integer,
+    given a base.
+    We could also re-use its logic to build a formula
+    that extracts the order of magnitude of any real positive variable:
+
+      10ᴹ  ≤  x  <  10⁽ᴹ⁺¹⁾    <=>    ln(10ᴹ)  ≤  ln(x)     <  ln(10⁽ᴹ⁺¹⁾)
+
+                               <=>    Mln(10)  ≤  ln(x)     <  (M + 1)ln(10)
+
+                               <=>          M  ≤  log₁₀(x)  <  M + 1
+
+                                =>    M  =  floor( log₁₀(x) )
+
+    Feed this to a semi-logarithmic plot,
+    you'll get an evenly distributed staircase.
+
+    Orders of magnitude use base 10 because ten fingers.
+    We could choose any other arbitrary base —— let's call it "a":
+
+      Mₐ  =  floor( logₐ(x) )
+
+    Or!
+    We could emancipate our abstract reasoning
+    from the contingencies of its flesh-based interface
+    and measure the Cosmos using its inherent constants ——
+    —— reading primary sources in their native language:
+
+      Mₑ  =  floor( ln(z) )
+  */
+
+  What about negative numbers?
+
+    Let's say we have ±5 V and 8 bits to sample our signal.
+    The range [—5 , +5] spans 10 V
+    and 8 bits give  2⁸  =  256 values.
+
+    So we sample by increments of  10/256 = 0.0390625 V .
+
+    Except we can be more clever than that.
+    Plus or minus is a binary datum.
+    Is there a third option?
+    Yes: zero is neither positive nor negative
+    (except as a limit in Calculus —— let's ignore Calculus).
+    Ah. So it's not negative.
+    And the plus sign is facultative:
+    if I write 0.7071 everybody understands +0.7071.
+    So the answer to the binary question: minus sign?
+    is 0 for negative numbers and 1 for zero and positive numbers.
+
+    (Important clarification:
+    this may not be how things get done ——
+    —— it's just me thinking out loud.)
+
+    Let's say one of our 8 bits
+    is dedicated to answering this very question.
+    Then we're left with 7 bits to represent 5 V.
+
+      5/2⁷  =  5/128  =  (2·5)/256  =  10/256  =  0.0390625...
+
+    Same difference... so much for clever.
+    I didn't expect that.
+    I guess there's no cheating out of
+    "double precision requires an extra bit".
+    (Disclaimer:
+    *not* what double precision typically means:
+    it usually stands for double bit-depth.)
+
+    Anyway this convention exists.
+    I assume there's a reason why.
+    Maybe it simplifies arithmetic?
+    Absolute value becomes "ignore sign bit"
+    instead of "square root of square".
+    Undeniable improvement.
+    Multiplication can ignore sign bit and bring it back afterwards...
+
+    This article:  https://en.wikipedia.org/wiki/Sign_bit
+    will tell you a lot about how it's implemented —— and nothing about why.
+
+    Don't mistake my speculations for checked facts.
+
+    In any case we've just proven that extra resolution is not the reason why.
+    But it also doesn't hurt.
+    So any potential advantage out of the sign bit method comes for free.
+
+  [[ IN PROGRESS ]]
+
+

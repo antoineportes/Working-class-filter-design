@@ -1,0 +1,2517 @@
+SCHEDULED FIX:
+
+  #  Limits are limits, you approximative lazy-ass punk. ("You don't want no money, you don't want no bread")
+
+  #  Also: check your definitions, Captain semantics:
+    input   ——>  domain
+    output  ——>  range
+
+  #  Also:  domain discontinuity  !=  curve discontinuity
+
+  #  "I don't teach, I learn..." —— yeah, no shit.
+
+###################################################################################################
+###################################################################################################
+                                    WORKING CLASS FILTER DESIGN
+###################################################################################################
+###################################################################################################
+
+###################################################################################################
+                                      Chapter III:  =  I + II
+###################################################################################################
+/*          "So schreitet in dem engen Breterhaus                                                */
+/*           Den ganzen Kreis der Schöpfung aus                                                  */
+/*           Und wandelt, mit bedächtger Schnelle,                                               */
+/*           Vom Himmel, durch die Welt, zur Hölle."                                             */
+/*                                                                 ——  Goethe (Faust I)          */
+===================================================================================================
+#01  More Calculus (yay!)
+===================================================================================================
+
+  /*
+    EDIT:
+      This section is me starting to learn Calculus.
+      It's one of the earliest pieces I've written for this book...
+      long before the second half of Chapter I.
+      Not that I'm mature now... but back then it was even worse.
+
+      I'm not explaining like you're dumb: I'm dumb and trying to understand.
+      Please don't take it the wrong way.
+
+      (I've fixed what was borderline false or highly misleading ——
+      —— while trying my best to go easy on revisionism...)
+
+      If you've read the full Chapter I and this feels like regression,
+      it's because you're assuming time is linear.
+  */
+
+  Let's say:  y  =  ƒ(x) .
+
+  Then let's say we increase x by an infinitesimal amount dx;
+  y will receive a corresponding variation dy
+  (increase or decrease or stagnation, depending on ƒ).
+
+  Then:
+
+    ƒ(x + dx)  =  y + dy  =  ƒ(x) + dy
+
+    <=>    dy  =  ƒ(x + dx) — ƒ(x)
+
+  Let's call back our snail from Chapter II.
+  If x is time and y is distance,
+  then dy is:
+
+    how much distance the snail has covered during the time dx.
+
+  So dy is a distance.
+  Its value is dependent upon the duration of dx.
+  So if we want the rate of change of y (the speed of the snail),
+  we need to normalise dy relatively to dx.
+  That is: we don't want dy, we want dy per dx
+  —— whose shortened notation is:  dy/dx .
+  The differential operator "d" is both in the numerator and the denominator,
+  so it kind of cancels out... (?)
+  Except: integrals...
+  So, better yet: it's dimension-less.
+  (Which is why we're allowed to define speed as "distance over time"
+  without mention of infinitesimal change.)
+  /*
+    Read my book if you have to, but really: don't quote it...
+  */
+
+  If:
+
+    dy  =  ƒ(x + dx) — ƒ(x)
+
+  then:
+
+     dy       ƒ(x + dx) — ƒ(x)
+    ————  =  ——————————————————
+     dx              dx
+
+  /*
+    Or, rather, since dx is infinitesimal:    //  The limit was implied already
+                                              //  in the word "infinitesimal",
+       dy             ƒ(x + dx) — ƒ(x)        //  but adding such redundancy to the formula
+      ————  =   lim  ——————————————————       //  frees it from needing
+       dx     dx —> 0        dx               //  an explanatory paragraph.
+                                              //  (... he wrote... in an explanat—SHHH!)
+  */
+
+  Now let's define  g(x)  so that  ƒ(x)  =  α·g(x) ,
+  α being a constant.
+  Let's also define  dƒ = dy
+  so that we can distinguish it from dg
+  (the variation of  g(x)  corresponding to an increase of x by dx).
+
+  Then:
+
+     dy       dƒ           α·g(x + dx) — α·g(x)
+    ————  =  ————  =  lim ——————————————————————
+     dx       dx     dx—>0         dx
+
+                     g(x + dx) — g(x)
+          =  lim  α ——————————————————
+            dx—>0          dx
+
+                    g(x + dx) — g(x)
+          =  α·lim ——————————————————  =  α·dg/dx
+              dx—>0        dx
+
+  In what precedes,
+  I've been taking for granted that  ƒ(x)  and  g(x)  have no discontinuity
+  and share the same domain of definition.
+  It's actually not necessarily granted.
+  If it's not true, this will break our equations.
+  Which is another way of saying that continuity and equal domain of definition
+  are the conditions for our equations to be true
+  (otherwise they would require explicit domain restrictions).
+  /*
+    By the way:
+    I had a wrong concept of these terms for a while;
+    clarification won't hurt.
+      #  The *domain* of a function is the set of its input (its variable).
+           E.g.:  ƒ(x)  =  1/x  is defined for all non-zero complex x.
+           So:  x  ϵ  ℂ — 0 .
+      #  The *range* of a function is the set of its output.
+           E.g.:  ƒ(z)  =  exp( Re(z) )  is real and strictly positive.
+           So:  ƒ(z)  ϵ  ℝ > 0 .
+      #  A *discontinuity* (without further explanation)
+         means a **curve** discontinuity.
+           E.g. (1):
+             ƒ(x)  =  └ x ┘  (meaning: " floor(x) ")
+             has a continuous domain and a discontinuity at each integer.
+           E.g. (2):
+             ƒ(x)  =  tan(x π/2)  is not discontinuous per se,
+             because even though (or rather: precisely because)
+             its curve jumps from +∞ to —∞ at each odd integer,
+             these points are not in its domain:
+             if you travel from 2 to 1 on  tan(x π/2) 's curve,
+             you'll end up at —∞;
+             if you come from zero, you'll end up at +∞.
+             Left limit ≠ right limit
+             (unless Riemann sphere...).
+             The point is multivalued, ergo not in the domain.
+             It's a **domain** discontinuity,
+             not a stricto sensu discontinuity.
+             You don't have a discontinuity outside of your domain.
+             You don't have [whatever] where you don't exist.
+             I won't "meet you on the dark side of the moon"
+             if "there is no dark side of the moon really".
+  */
+  These equations prove the constant factor rule.
+  This paragraph describes the conditions under which said rule is valid.
+
+  //  Chain rule
+  Ok, let's start over and have:  h(x)  =  ƒ( g(x) ) .
+
+  /*
+    ////  Actually, no.
+      One thing I really appreciate about the Leibnizian notation:
+      it embeds most differentiation rules in the form of algebraic relations.
+      E.g.:  d(α ƒ)/dx  =  α dƒ/dx  ...
+      Not intended as actual algebraic equivalence,
+      more like encoded mnemonics
+      —— not operational Calculus yet (embryonic perhaps?),
+      but very useful and clever in that regard.
+
+      The down side: not exactly swift nor lightweight —— can be cumbersome.
+      E.g.:  right now,
+      when the composition of two functions requires defining a third one.
+      In this very case, ok.
+      But if you're trying to generalise to an undefined number of compositions,
+      Leibnizian notation becomes pretty much inapt.
+
+      So let's use Lagrange's notation (see Chapter I, #08).
+      And the ring composition operator:  ∘
+      //  https://en.wikipedia.org/wiki/Function_composition
+      (I couldn't find who came up with it,
+      but I've seen it in papers from the 1940s
+      and noticed its absence in 1930s papers...)
+      ((I'll use ° in multiline equations because monospace.))
+
+      Now  (ƒ ∘ g)(x)  means  ƒ( g(x) )
+      and  (ƒ ∘ g)'(x)  is its first derivative with respect to x.
+      No need for  h(x) .
+  */
+
+  //  Chain rule
+  Ok, let's start over and ask:  (ƒ ∘ g)'(x)  ?
+
+                         ƒ( g(x + dx) ) — ƒ( g(x) )
+    (ƒ ° g)'(x)  =  lim ————————————————————————————
+                   dx—>0            dx
+
+  Since:                             //  (also):
+                             bar     //
+    foo  =  foo·1  =  foo · —————    //    dg  =  g(x + dx) — g(x)
+                             bar     //
+
+  and:
+
+    dx —> 0    =>    dg —> 0
+
+  (since  g(x)  is continuous —— otherwise it's not differentiable with these classical tools.)
+
+  Then:
+                          ƒ( g(x) + dg ) — ƒ( g(x) )     dg
+    (ƒ ° g)'(x)  =  lim ————————————————————————————— · ————
+                   dx—>0             dx                  dg
+
+                         ƒ( g(x) + dg ) — ƒ( g(x) )    g(x + dx) — g(x)
+                 =  lim ——————————————————————————— · —————————————————
+                   dx—>0            dg                       dx
+
+                 =  ƒ'( g(x) ) · g'(x)
+
+  /*
+    Ok.
+    Except: by dividing by dg, we're assuming it's non-zero.
+    What if not?
+    (Meaning "not non-zero"... so zero.)
+    E.g. (1):
+
+      g(x)  =  sin( ln(x) )
+
+      x —> 0⁺
+
+    Since:
+
+      ln(1)  =  0
+
+    and:
+
+      ln(0)  =  —∞
+
+    as x decreases from 1 to 0,
+    ln(x)  falls down to —∞;
+    and not linearly (that straight line would be vertical...).
+    We're falling down with an increasing velocity ——
+    —— in fact, we can express this movement mathematically:
+
+      y = ln(x)    =>    exp(y) = x
+
+          x = 1    =>    exp(y) = 1    =>    y = 0
+
+          x = 0    =>    exp(y) = 0    =>    y = —∞
+
+    The vertical and horizontal axis switch places,
+    right to left becomes up to down,
+    up to down becomes right to left.
+    The curves are symmetrical with respect to the  x = y  axis.
+    /*
+      Slope:
+        x = y  ——>  sin = cos  ——>  tan = 1  ——>  ± π/4
+        ——>  diagonal of a square
+        (+ or — means "choose your favourite direction")
+    */
+    So we're shrinking the left infinite semi-plane of  exp(x)  inside ]0 , 1].
+    So moving x towards zero from the right (from 1)
+    and feeding sine with x's natural logarithm
+    will output all values of  sin(—x)  inside  0 ≤ x < +∞ ,
+    with —x decreasing exponentially so that ]—∞ , 0] fits inside ]0 , 1].
+    Which means that the frequency of sine's oscillations is exponentially growing.
+    So when we're very close to zero,
+    these oscillations happen so fast that there's a chance that:
+
+      g(x)  =  g(x ± dx)
+      =>    dg  =  0
+      =>    dg/dg  =  0/0
+
+    Ok, we can always take a smaller dx to land between these oscillations ——
+    —— the issue has slipped to the left, it's not solved.
+    We've entered cognitive oscillation,
+    and the exponentially growing speed has our brain facing implosion.
+
+    When this (dg = 0) happens,
+    ƒ's variable ——  g(x)  —— is virtually constant,
+    so we don't need the chain rule,
+    we can bypass it temporarily so that our algebra remains legal,
+    using a piecewise function:
+
+                                ƒ( g(x) + dg ) — ƒ( g(x) )
+      FIX(dg)  =  (dg ≠ 0)  ?  ———————————————————————————  :  ƒ'( g(x) )  ;
+                                            dg
+
+    When dg tends to zero,
+    the "if" expression becomes the expression of  (ƒ' ∘ g)(x) ,
+    which is the "else" expression.
+    So  FIX(dg)  is continuous at zero.
+    And:
+
+      ƒ( g(x) + dg ) — ƒ( g(x) )  =  FIX(dg)·dg
+
+    /*
+      Which is obvious for the "if" part;
+      regarding the "else" part:
+
+        dg = 0
+
+        =>  (1)  FIX(dg)·dg  =  0
+
+        =>  (2)  ƒ( g(x) + dg ) — ƒ( g(x) )  =  ƒ( g(x) ) — ƒ( g(x) ) =  0
+
+        (1) + (2)  =>  alles gut.
+    */
+    Then:
+                       ╭   ƒ( g(x) + dg ) — ƒ( g(x) )     dg
+                       │  ———————————————————————————— · ————    if  dg ≠ 0
+               dg      │               dg                 dx
+      FIX(dg) ————  =  ┤
+               dx      │                                  dg
+                       │                    ƒ'( g(x) ) · ————    if  dg = 0
+                       ╰                                  dx
+    so:
+                    dg
+      lim  FIX(dg) ————  =  (ƒ' ∘ g)(x) · g'(x)
+     dx—>0          dx
+
+                         =  (ƒ ∘ g)'(x)  ∀ dg
+    Ok.
+
+    E.g. (2):
+
+      g(x)  =  max(x , 0)
+
+      x  <<  0
+
+      =>   lim  { max(x + dx , 0) — max(x , 0) }  =  0 — 0  =  0
+          dx—>0
+
+    In this case,
+    our derivative has a piecewise expression ( x < 0  ?  0  :  1 );
+    and in the zone of interest,
+    g(x)  is constant,
+    so we don't really need a chain rule here.
+    But still: constant functions do exist
+    and we'd like our chain rule general formula to apply to them.
+  */
+
+  How about an example?
+  Ok, let  ƒ(x) = exp(x)  and  g(x) = k·x  (k being constant).
+  Then:
+
+    (ƒ ∘ g)(x)  =  exp(kx)
+
+  Let's find  g'(x)  first:
+
+                   k·(x + dx) — k·x           k·(x + dx — x)
+    g'(x)  =  lim ——————————————————  =  lim ————————————————
+             dx—>0        dx            dx—>0       dx
+
+           =  k · lim dx/dx  =  k
+                 dx—>0
+
+  Then,  exp(x)  being its own derivative (by definition),
+  ƒ'(x)  =  ƒ(x) .
+  So:
+
+    (ƒ ∘ g)'(x)  =  g'(x)·ƒ'( g(x) )  =  k·exp(kx)
+
+  Let's define:  h(x) = (ƒ ∘ g)(x) = exp(kx)
+  then:
+
+    h'(x)  =  dh/dx  =  k exp(kx)
+
+  Let's imagine we want to build  h(x) 's curve
+  by successively aggregating each of its values
+  corresponding to an infinitesimal successive increase in its input,
+  from  x = a  to  x = b .
+  I hope it's clear.
+  Basically, each x is the previous one plus dx,
+  then each  h(x)  is the previous one plus dh.
+  We'd get a pseudo-continuous sum starting at  h(a)
+  and adding dh up to  h(b) .
+  I'm obviously describing an integral.
+  But what is dh?
+
+    ——>  dh  =  (dh/dx)·dx  =  h'(x)·dx
+
+    So in our example:  dh  =  k·exp(kx)·dx
+
+  Then the integral form of  h(x)  in the range ]a , b]
+  would be:
+                     b                                          b
+                    ⌠                                          ⌠
+    h(b)  =  h(a) + | k·exp(kx)·dx    <=>    h(b) — h(a)  =  k·| exp(kx)·dx
+                    ⌡                                          ⌡
+                     a                                          a
+                                    b
+            exp(kb) — exp(ka)      ⌠
+    <=>    ———————————————————  =  | exp(kx)·dx
+                    k              ⌡
+                                    a
+  /*
+    EDIT:
+      I've re-written, this comment twice now!
+      Chapter I's been revised since
+      and it shouldn't confuse you as much as it could confuse me:
+      I had a hard time making sense of why  h(a)  appears twice in the equation ——
+      —— I thought: it's computed redundantly, Calculus has it all wrong...
+      Don't worry: Calculus is fine.
+
+      If you want to draw 11 consecutive segments,
+      you'll need 12 points.
+      a is point number zero.
+      The first rectangle under the curve has an area of  h(a + dx) dx , not  h(a) dx  ——
+      —— otherwise there would be 12 rectangles and 13 points,
+      or  h(b)  would not be reached
+      (we would stop at  h(b — dx) ).
+      Hence the span:  ]a , b]
+      and not:  [a , b]
+      (hopefully fixed everywhere...).
+
+      (See Chapter I, #07 "Ewige Wiederkunft", Desmos: "Calculus 101".)
+      //  https://www.desmos.com/calculator/8cnsrnpc7i
+  */
+
+  Now let's be ridiculously random
+  and suppose we were to meet an integral in the form:
+
+     t
+    ⌠
+    | exp(sτ) dτ
+    ⌡
+     t₀
+
+  we would know it's equal to:
+
+     exp(st) — exp(st₀)
+    ———————————————————    [1]
+             s
+
+  Why do we care?
+  Perhaps we don't.
+
+
+
+===================================================================================================
+#02  What is sound?
+===================================================================================================
+
+  Sound is a variation of pressure propagating through matter.
+  When this matter (usually air or water) is in contact with our ears
+  and our brain notices it,
+  it's called hearing.
+
+  We've seen, with Fourier,
+  that this phenomenon is always decomposable in an infinite sum of partials,
+  called "spectrum".
+  Each partial corresponds to a sinusoid.
+  So every time a variation of pressure propagates through matter,
+  the phenomenon can be expressed as periodic oscillations ——
+  —— infinite sum means all frequencies are always present
+  if we admit that their amplitude can be zero.
+
+  We don't necessarily hear identical repeated patterns
+  and yet that's all we ever hear.
+  Unless their frequency is too low (infrasonic) or too high (ultrasonic).
+  Random sounds are deterministic:
+  digital white noise is generated by randomising each sample
+  and yet it produces all frequencies,
+  that is: oscillations of fixed period.
+  Spinoza wrote (Ethics) that everything has a cause
+  and that "random" only means "of ignored cause".
+  Reject this principle and no science is left.
+
+  If there's movement, there's energy.
+  Energy takes many forms and is always convertible
+  (although modern physics is currently stuck with entropy).
+  Taking advantage of this convertibility is what analogue circuits do:
+  variations of pressure become electromagnetic variations.
+  But the movement is reproduced,
+  hence the name "analogue",
+  meaning equivalent in a different form.
+
+  Therefore Fourier's decomposition applies to analogue signals.
+  Any voltage has a spectrum.
+  If it's a pure DC offset (constant voltage),
+  then all partials have an amplitude of zero
+  except the one whose frequency is zero.
+  But the integral is valid.
+  We've seen (Chapter I)
+  that the inverse Fourier transform
+  is a special case of the inverse Laplace transform
+  —— so not all Laplace is Fourier, but all Fourier is Laplace.
+  Then the inverse Laplace transform can describe any analogue signal.
+  Whatever we feed our circuit,
+  and whatever comes out,
+  will oscillate at all frequencies (remember: zero is a number).
+
+  So if we focus on one isolated partial at the input,
+  we know it will be present at the output.
+  Phase and amplitude might not be the same
+  (amplitude might be zero)
+  but all frequencies are always everywhere.
+  Even absolute silence is just all amplitudes equal to zero.
+  That's right: silence is sound ——
+  —— sometimes music even: ever listened to Franz Schubert?
+  (In French, a crotchet rest is called a "soupir". It means "sigh".)
+  A black picture is a picture.
+  Silence is black sound.
+
+
+
+===================================================================================================
+#03  Where were we?
+===================================================================================================
+
+  So!
+  At the end of Chapter I #06,
+  we had a magical formula that represents pretty much any spectrum,
+  i.e. any audio signal.
+  It's called the inverse Laplace transform
+  and looks like this:
+
+                   σ+j∞               //
+               1   ⌠                  //  Ain't it beautiful?
+    ƒ(t)  =  ————— | F(s)exp(st)ds    //  Just pause,
+              2πj  ⌡                  //  watch and enjoy.
+                   σ-j∞               //
+
+  where:
+    #  s  =  σ + jω
+    #  σ and ω are purely real numbers
+    #  σ is constant for all values of s AND over time.
+
+  If (1)
+    σ = 0 ,
+    then  s = jω
+    and  F(s) exp(st)  is a complex sinusoid
+    whose complex amplitude is  F(s) .
+  If (2)
+    σ = [anything else]
+    then the real amplitude is exponentially growing or decaying.
+
+  We want an analytic signal.
+  So we want (1).
+  We want AN analytic signal —— not an infinity of them.
+  So the full spectrum, however beautiful, is not practical.
+  The clever move here is to test our circuit with one steady partial
+  and deal with the rest of the spectrum later.
+  Plus if we leave s = jω undefined, ω can be anything.
+  So if we're lucky, the results of the test might hold for any frequency...
+
+  Oh yeah I forgot to mention: we're testing RC now.
+
+  //  Across the capacitor
+  At the end of Chapter II,
+  we had a schematic and a half-solved differential equation.
+  The voltage across the resistor had two distinct equations
+  but both relied on the voltage across the capacitor.
+  So it seems we're bound to solve the latter first.
+  Then the voltage across the capacitor will be our output signal
+  until further notice.
+  The voltage across the generator remains the input.
+  We'll be very original
+  and name the input  x(t)  [formerly  u_A(t) ]
+  and the output  y(t)  [formerly  u_C(t) ].
+
+  Then the schematic becomes:
+              ┌───┐
+    x(t)  o───│ R │───┬───o  y(t)
+              └───┘ ┌─┴─┐
+                    │ C │
+                    └─┬─┘
+                      ┴
+                     0 V
+
+  And the differential equation:
+
+                     t
+                    ⌠    ╭             ╮
+    y(t)  =  y(0) + | ωc │ x(τ) — y(τ) │ dτ
+                    ⌡    ╰             ╯
+                     0
+
+  where:  ωc = 1/RC
+
+  Now if we feed the circuit with an analytic signal (i.e. a complex sinusoid),
+  we want:
+
+    x(t)  =  X(s)exp(st)
+
+  where:
+
+    #  X(s)  is the *constant* complex amplitude
+        ("constant" meaning "not a function of time (t)"),
+
+    #  s = jω
+         ( σ + jω  with  σ = 0 ),
+            ____
+    #  j = √ —1
+         (another constant then),
+
+    #  ω is a constant frequency
+         (in rad./s),
+
+    #  t is time
+         (the only variable in the expression).
+
+  Nice.
+  But first thing in the equation is:  x(τ) — y(τ) ...
+  so:  X(s)exp(st) — ???
+  We know that  y(t)  is an analogue audio signal.
+  So it has a spectrum —— an array of partials.
+  So  Y(s)exp(st)  exists in the output.
+  But is it  y(t)  from the differential equation?
+  RC could very well shift  x(t) 's frequency (ω)
+  or generate new partials with non-zero real amplitude.
+  So the best we can affirm is that  y(t)  is a Laplace integral ——
+  —— which, again, is beautiful ——
+  —— but a bit overwhelming.
+  Since  Y(s)exp(st)  exists,
+  if we go back to the original differential equation (before the integral came in),
+  and assume it's the only partial in  y(t) 's spectrum,
+  then, according to the chain rule,
+  we get:
+
+    dy/dt  =  ωc ( x(t) — y(t) )
+
+    <=>    sY(s)exp(st)  =  ωc { x(t) — Y(s)exp(st) }
+
+            sY(s)exp(st)
+    <=>    ——————————————  +  Y(s)exp(st)  =  x(t)
+                 ωc
+
+                    ╭  s         ╮
+    <=>    x(t)  =  │ ————  +  1 │ Y(s) exp(st)
+                    ╰  ωc        ╯
+
+                     s + ωc
+    <=>    x(t)  =  ———————— y(t)
+                       ωc
+
+                       ωc
+    <=>    y(t)  =  ———————— x(t)
+                     s + ωc
+
+  Ok, let's decrypt this.
+  First of all, notice the equivalence signs "<=>".
+  Everything here reads in both directions.
+  Let's define:
+
+                ωc
+    H(s)  =  ————————
+              s + ωc
+
+  then:
+
+    y(t)  =  H(s)x(t)
+
+  (assuming y(t) is one exponential sinusoid)
+
+  Then notice that  H(s)  is a function of s, but not of time (t).
+  So for a fixed frequency,  H(s)  is constant.
+  All the above is just different arrangements of one equality.
+  Another arrangement could be:
+                                             Y(s)
+    y(t)  =  Y(s)exp(st)    <=>    x(t)  =  —————— exp(st)
+                                             H(s)
+
+  If we define:  X(s)  =  Y(s)/H(s)
+  then we've proven that  x(t) = X(s)exp(st)
+  is equivalent to  y(t) = Y(s)exp(st)
+  So in short: one partial in, one partial out.
+  Only with different complex amplitude.
+  The complex amplitude embeds the real amplitude and the phase (Chapter I).
+
+  Now let's say ψ is a frequency in rad./s
+  defined by:  ψ ≠ ω .
+  And  ζ = jψ .
+  Then  X(ζ)exp(ζt)  is a complex sinusoid
+  and it's distinct from  X(s)exp(st) .
+  If:
+
+    x(t)  =  X(s) exp(st)  +  X(ζ) exp(ζt)
+
+  —— a signal whose spectrum has two partials,
+  we're allowed to hope that:
+
+    y(t) = Y(s)exp(st) + Y(ζ) exp(ζt)
+
+  aren't we?
+
+  Hoping? Yes. Assuming? No.
+  Some intermodulation could happen.
+  //  https://en.wikipedia.org/wiki/Intermodulation
+  Let's run that reductio ad absurdum noch ein Mal (come on, it was fun).
+  (I'll be skipping steps because the following demonstration
+  is very similar to the previous one.)
+
+  I'm about to use the sum rule (Calculus).
+  It's easy to demonstrate and I suggest you try.
+  But I'll do it in the bonus section at the end of the current chapter.
+  Let  y(t)  =  Y(s)exp(st) + Y(ζ)exp(ζt) .
+  Then:
+
+    dy/dt  =  sY(s)exp(st) + ζY(ζ)exp(ζt)    //  That's the sum rule.
+
+  Then according to the differential equation:
+
+    sY(s)exp(st) + ζY(ζ)exp(ζt)  =  ωc{ x(t) — Y(s)exp(st) — Y(ζ)exp(ζt) }
+
+                      s                                  ζ
+    <=>    x(t)  =  ————— Y(s)exp(st) + Y(s)exp(st) +  ————— Y(ζ)exp(ζt) + Y(ζ)exp(ζt)
+                     ω_c                                ω_c
+
+                    ╭   s       ╮               ╭   ζ       ╮
+    <=>    x(t)  =  │ ————— + 1 │ Y(s)exp(st) + │ ————— + 1 │ Y(ζ)exp(ζt)
+                    ╰  ω_c      ╯               ╰  ω_c      ╯
+
+                     Y(s)exp(st)    Y(ζ)exp(ζt)
+    <=>    x(t)  =  ———————————— + ————————————  =  X(s)exp(st) + X(ζ)exp(ζt)
+                        H(s)           H(ζ)
+
+  Ok, great.
+  Any two sinusoids enter RC, they come out with different amplitude and phase.
+  What if there are more than two?
+  Maybe there's a maximum number of partials, an intermodulation threshold?
+  Right! Let's test more partials.
+  How about 3?
+  How about ∞?
+  How about twice that?
+  Let:
+                   +j∞                 //  Don't act surprised:
+               1   ⌠                   //  you knew it was coming.
+    y(t)  =  ————— | Y(s)exp(st) ds    //
+              2πj  ⌡                   //  By the way, σ is gone because
+                   -j∞                 //  σ = 0  by hypothesis.
+
+  Remember: an integral is just a (pseudo-continuous) sum.
+  So, according to the sum rule (again),
+  and assuming  Y(s)  is constant over time for all s,
+  we get:
+                    +j∞
+                1   ⌠
+    dy/dt  =  ————— | s Y(s) exp(st) ds
+               2πj  ⌡
+                    -j∞
+  Then:
+          +j∞                                  +j∞
+      1   ⌠                               ω_c  ⌠
+    ————— | sY(s)exp(st)ds  =  ωc·x(t) — ————— | Y(s)exp(st)ds
+     2πj  ⌡                               2πj  ⌡
+          -j∞                                  -j∞
+
+                 +j∞                                    +j∞
+             1   ⌠   s                              1   ⌠
+    <=>    ————— | ————— Y(s)exp(st)ds  =  x(t) — ————— | Y(s)exp(st)ds
+            2πj  ⌡  ω_c                            2πj  ⌡
+                 -j∞                                    -j∞
+
+                          +j∞                           +j∞
+                      1   ⌠   s                     1   ⌠
+    <=>    x(t)  =  ————— | ————— Y(s)exp(st)ds + ————— | Y(s)exp(st)ds
+                     2πj  ⌡  ω_c                   2πj  ⌡
+                          -j∞                           -j∞
+
+  Before moving on: (a + b) + (c + d)  =  (d + b + c + a) .
+  With sums, order doesn't matter and two sums are just a bigger sum.
+  It's called (respectively) commutativity and associativity.
+  //  https://en.wikipedia.org/wiki/Addition#Properties
+  So we could combine both integrals.
+  But only if they're commensurable
+  (we can multiply resistance with intensity but  R + I  makes no sense).
+  Also an integral has a span of integration.
+  How would we express an integral with two distinct spans of integration?
+  Answer: we would write two integrals.
+  Same goes with the differential:
+  its possible values are the span of integration,
+  therefore one span means one differential.
+  So we can combine them
+  if and only if
+  //  https://en.wikipedia.org/wiki/If_and_only_if
+  they have the same dimension,
+  the same differential
+  and the same span.
+  Differential and span are the same
+  (respectively ds and  [—j∞ , +j∞] ).
+  About the dimension: s is an imaginary angular frequency,
+  ωc is a real angular frequency.
+  So s/ωc is purely imaginary and dimension-less
+  (j being dimension-less as well).
+  Then s being the inverse of time,
+  st is dimension-less,
+  then  exp(st)  is valid (about time to check!)
+  and it's just a 2-dimension (real + imaginary) oscillating gain.
+  Y(s)  is the amplitude and the phase.
+  The phase has been defined (Chapter I) as  φ = —ωt₀
+  ——>  time multiplied by the inverse of negative time —— also dimension-less.
+  It's embedded as  exp(jφ)
+  so it could be combined with  exp(st)  and give  exp( j(ωt + φ) ) .
+  Ok, everything is dimension-less except the real amplitude:
+  voltage in, voltage out.
+  Perfect.
+                   +j∞
+               1   ⌠ ╭   s                             ╮
+    x(t)  =  ————— | │ ————— Y(s)exp(st) + Y(s)exp(st) │ds
+              2πj  ⌡ ╰  ω_c                            ╯
+                   -j∞
+
+                   +j∞
+               1   ⌠ ╭   s       ╮
+          =  ————— | │ ————— + 1 │Y(s)exp(st)ds
+              2πj  ⌡ ╰  ω_c      ╯
+                   -j∞
+
+                    +j∞
+                1   ⌠  s + ωc
+           =  ————— | ———————— Y(s)exp(st)ds
+               2πj  ⌡    ωc
+                    -j∞
+
+                    +j∞
+                1   ⌠  Y(s)
+           =  ————— | —————— exp(st)ds
+               2πj  ⌡  H(s)
+                    -j∞
+
+                    +j∞
+                1   ⌠
+           =  ————— | X(s)exp(st)ds
+               2πj  ⌡
+                    -j∞
+
+  Or, if we reverse the equivalence:
+
+                   +j∞                                      +j∞
+               1   ⌠                                    1   ⌠
+    x(t)  =  ————— | X(s)exp(st)ds    <=>    y(t)  =  ————— | H(s)X(s)(s)exp(st)ds    [2]
+              2πj  ⌡                                   2πj  ⌡
+                   -j∞                                      -j∞
+
+  Ok, so no matter how many sinusoids we feed RC,
+  they come out across the capacitor with only their complex amplitude modified.
+  So frequency doesn't get shifted and no new sinusoid gets generated ——
+  —— only the phase and magnitude are affected.
+  Plus if  X(s)  is constant over time,
+  so is  Y(s) ... Wait! What if not?
+  What good is a circuit that only deals with constant magnitude and phase
+  over the whole spectrum?
+  Does it even happen in real life?
+  What if our input is Aristotle's farting turtle dove
+  (History of animals, Book IX 633b)
+  or Anton Webern's Passacaglia?
+
+  In such a case,
+  X(s)  becomes  X(s , t)
+  —— i.e. a function of frequency *and* time.
+  Or, if we focus on one partial,
+  there's only one value of s,
+  so  X(t)  would temporarily do.
+  So we want:
+
+    y(t)  =  Y(t)exp(st)
+
+  /*
+    DIGRESSION: The Product rule
+
+    Let's define:  h(x) = ƒ(x)g(x) .
+    (everybody continuous and differentiable...)
+    Then:
+
+       dh           h(x + dx) — h(x)          ƒ(x + dx)g(x + dx) — ƒ(x)g(x)
+      ————  =  lim —————————————————  =  lim ——————————————————————————————
+       dx     dx—>0       dx            dx—>0             dx
+
+    Looks stuck... We're going to need to cheat a little.
+    The subtraction in the numerator is begging for a factorisation
+    —— but there is no common factor.
+    We could introduce one.
+    But how do we do this without breaking the equality?
+    The obvious solution is to compensate for any modification we make.
+    The reciprocal to addition is subtraction.
+    Indeed:  a + b — b  =  a.
+    So we can add anything we'd like as long as we also remove it.
+    Ok.
+    So, in order to mix the terms of the subtraction
+    and manufacture a common factor ——
+    —— two possibilities:
+
+      (1)  ƒ(x + dx)g(x)
+
+      (2)  ƒ(x)g(x + dx)
+
+    Going with (2) would be plagiarising
+    [SPOILER] Wikipedia:  https://en.wikipedia.org/wiki/Product_rule#Proofs [/SPOILER]
+
+    So let's go with (1):
+
+       dh           ƒ(x + dx)g(x + dx) — ƒ(x)g(x) + ƒ(x + dx)g(x) — ƒ(x + dx)g(x)
+      ————  =  lim ——————————————————————————————————————————————————————————————
+       dx     dx—>0                              dx
+
+                    { ƒ(x + dx) — ƒ(x) }·g(x)  +  { g(x + dx) — g(x) }·ƒ(x + dx)
+            =  lim ——————————————————————————————————————————————————————————————
+              dx—>0                              dx
+
+                    ƒ(x + dx) — ƒ(x)              g(x + dx) — g(x)
+            =  lim —————————————————— g(x) + lim —————————————————— ƒ(x + dx)
+              dx—>0        dx               dx—>0        dx
+
+                dƒ          dg
+            =  ———— g(x) + ———— · lim ƒ(x + dx)
+                dx          dx   dx—>0
+
+                dƒ            dg
+            =  ———— g(x)  +  ———— ƒ(x)
+                dx            dx
+
+    Or:
+
+      (ƒ·g)'(x)  =  ƒ'(x)g(x) + ƒ(x)g'(x)
+
+  */
+                                   dy       dY
+    y(t)  =  Y(t)exp(st)    =>    ————  =  ———— exp(st) + Y(t)·s·exp(st)
+                                   dt       dt
+
+            dy      ╭  dY          ╮              ╭                    ╮
+    <=>    ————  =  │ ———— + Y(t)s │exp(st)  =  ωc│ x(t) — Y(t)exp(st) │
+            dt      ╰  dt          ╯              ╰                    ╯
+
+             dY
+            ———— + Y(t)s
+             dt
+    <=>    —————————————— exp(st) + Y(t)exp(st)  =  x(t)
+                 ωc
+
+             x(t)            Y       s + ωc
+    <=>    —————————  =  d——————— + ———————— Y(t)
+            exp(st)        ωc dt       ωc
+
+  We don't know how much  ( dY/dt )/ωc  is.
+  But it's voltage over time, over the inverse of time —— so voltage.
+  Frequency untouched as before,
+  and sum rule generalises to the full spectrum,
+  so we can move on.
+  But it's actually quite an interesting result (I didn't expect that):
+
+                 Y(s , t)       dY             dY        ╭             Y(s , t) ╮
+    X(s, t)  =  ————————— + RC ————    <=>    ————  =  ωc│ X(s , t) — ————————— │
+                   H(s)         dt             dt        ╰               H(s)   ╯
+
+  This looks suspiciously close to the original differential equation.
+  Almost as if we could ignore the frequency
+  and only consider amplitude and phase (complex amplitude).
+  Except there's  H(s) .
+  Which is dependent upon s and ωc.
+  Which are constant for each partial.
+  But s is different across all partials.
+  So in a way,
+  each partial has its own differential equation
+  that only affects its complex amplitude (i.e. not the frequency).
+
+  I kept talking about a potential frequency shift (or pitch shift),
+  but actually it doesn't make sense in Fourier or Laplace representation:
+  there are always infinite partials of constant frequencies.
+  A pitch shift would be one partial having its amplitude downed to zero,
+  and another one inheriting (part of) it.
+  So, instead of a partial moving in the spectrum,
+  a partial affecting another partial.
+  In Laplace and Fourier representation,
+  pitch shift is equivalent to overtone(s) generation
+  (which means adding to a higher partial, not creating it).
+  And a frequency sweep is an infinity of successive crossfades.
+
+  Anyway, here each partial is independent from every other
+  and, knowing that,
+  we can finally try to solve the differential equation
+  in its integral form (Chapter II, #06)
+  for one partial ——
+  —— or rather, for any partial (analytic signal).
+  We'll assume that the complex amplitudes  X(s)  and  Y(s)
+  are constant over time again.
+
+                      t
+                     ⌠   ╭                           ╮
+    y(t)  =  y(t₀) + | ωc│ X(s)exp(sτ) — Y(s)exp(sτ) │dτ
+                     ⌡   ╰                           ╯
+                      t₀
+
+  I've replaced  t₀ = 0  with  t₀ = [undefined]
+  because we're not solving for special cases.
+  ////  Constants:
+    #  s is our single partial's frequency (evaluated on the imaginary axis)
+         it's part of what defines the partial
+         and is as constant as a definition
+    #  t₀ already happened —— unless time travel or negationism
+         ——> constant
+    #  y(t₀)  ——>  idem
+    #  Y(s)  is constant by hypothesis
+    #  X(s)  is constant by corollary
+         (we've proven it a bunch of times already)
+    #  ωc has been constant since last chapter,
+         let's keep it that way
+
+  So:
+                              t                     t
+                             ⌠                     ⌠
+    y(t)  =  y(t₀) + ωc·X(s) | exp(sτ)dτ — ωc·Y(s) | exp(sτ)dτ
+                             ⌡                     ⌡
+                              t₀                    t₀
+
+  Remembering equation [1] from #01:
+
+                              exp(st) — exp(s t₀)             exp(st) — exp(s t₀)
+    y(t)  =  y(t₀) + ωc·X(s) ————————————————————— — ωc·Y(s) —————————————————————
+                                       s                               s
+
+                       ωc·X(s)             ωc·X(s)              ωc·Y(s)             ωc·Y(s)
+           =  y(t₀) + ————————— exp(st) — ————————— exp(st₀) — ————————— exp(st) + ————————— exp(st₀)
+                          s                   s                    s                   s
+
+                          X(s) — Y(s)                Y(s) — X(s)
+           =  y(t₀) + ωc ————————————— exp(st) + ωc ————————————— exp(st₀)
+                               s                          s
+
+  Something's off.
+  There is a constant term ——
+  —— i.e. a DC offset ——
+  —— i.e. a second partial with  s = 0 :
+
+                                         Y(s) — X(s)
+    [unexpected DC term]  =  y(t₀) + ωc ————————————— exp(st₀)
+                                              s
+
+  Let's pause and notice this:
+  any partial contributes to some kind of DC offset?
+  Quite counter-intuitive...
+  Also: our unexpectedDC term is complex.
+  What could it mean?
+  Remember Chapter I:
+  an analytic signal (complex sinusoid) is half a real sinusoid.
+  The other half is its complex conjugate.
+  So their sum doubles the real part and cancels the imaginary one.
+  We can feed our equations complex sinusoids, not our circuit.
+  So a complex DC means nothing empirical:
+  it's a reminder that we're using simplifying tools
+  (namely the Laplace integral).
+
+  We've already solved the DC case (Chapter II, Appendix):
+  y(t₀)  converges exponentially to  x(t₀) .
+  If  x(t₀) = 0  then  y(t₀)  becomes negligible very fast.
+
+  Knowing that  y(t)  has two partials
+  (one being the unexpected DC term),
+  we can define it:
+
+    y(t)  =  Y(s)exp(st) + [unexpected DC term]
+
+  (Implied here:  ω₀ = 0  =>  jω₀ = 0  =>  s₀ = 0  =>  s₀t = 0  =>  exp(s₀t)  =  1 )
+  /*
+    EDIT:
+      These paragraphs are not false per se.
+      But they're motivated by an urge to move on
+      and not wander too long off-topic.
+      This unexpected constant term is a lot more than just some DC bleed.
+      We'll come back to it in Chapter V.
+      Two arguments here:
+        (1)  it's a different partial, ergo not our concern ——> borderline
+        (2)  it's been solved at the end of the previous chapter ——> true
+
+      Let's agree on: it quickly becomes negligible,
+      so assuming t₀ was a long enough time ago,
+      we're allowed to clean up our equation.
+      Temporarily of course.
+
+    EDIT 2:
+      I've removed some downright faulty statements
+      (and dead references to the unrevised Chapter I).
+      Owning my failures, keeping track of my mistakes, ok ——
+      —— but not misleading you with unnecessary confusion has the priority.
+  */
+  Then:
+                        X(s) — Y(s)
+    Y(s)exp(st)  =  ωc ————————————— exp(st)
+                             s
+
+  With  exp(st)  on both sides of the equation,
+  of course we want to remove it.
+  But hurry not: this implies a division (well two actually).
+  We wouldn't want to divide by zero, would we?
+  Ok  ∞ = ∞  is true, but is it useful?
+  Let's solve  exp(st)  =  0 .
+
+    exp(st)  =  0    <=>    exp(jωt)  =  0
+
+                     <=>    cos(ωt) + j·sin(ω t)  =  0
+
+                     <=>    cos(ωt)  =  —j·sin(ω t)
+
+                     <=>    cos(ωt)  =  —j·cos( ωt — π/2 )
+
+  One side is purely real, the other is purely imaginary.
+  The only possible equality is zero on both sides, which leads to:
+
+    1  =  1 — π/2
+
+  which shouldn't happen very soon.
+  So we're good.
+
+  Except:  σ = 0  right now but what if not?
+  Well when calling it "constant" we quietly implied "finite",
+  so  σ ϵ ]—∞ , +∞[  then  exp(σt) ϵ ]0 , +∞[ .
+  And since  exp(x)  is continuous and strictly increasing,
+  we'll never have:
+
+    exp(σ)  =  0
+
+  nor:
+
+    exp(jωt)  =  0
+
+  nor (therefore):
+
+    exp(st)  =  0
+
+  Ok, we're still good.
+
+                 X(s) — Y(s)
+    Y(s)  =  ωc —————————————
+                      s
+
+            sY(s)
+    <=>    ——————  =  X(s) — Y(s)
+             ωc
+
+            sY(s)
+    <=>    —————— + Y(s)  =  X(s)
+             ωc
+
+            sY(s) + ωc·Y(s)
+    <=>    ————————————————  =  X(s)
+                  ωc
+
+            s + ωc
+    <=>    ———————— Y(s)  =  X(s)
+              ωc
+
+                       ωc
+    <=>    Y(s)  =  ———————— X(s)
+                     s + ωc
+
+  Once again:  Y(s) = H(s)X(s) .
+
+  This  H(s)  keeps popping up.
+  It's likely important.
+  We'll deal with it at some point.
+  But first let's re-define everything.
+
+  //  Across the resistor
+  We've found (Chapter II, #05)
+  that the difference between RC and CR is a matter of Quantum physics
+  —— not electronics.
+  That is,
+  this won't break our equations:
+
+             ┌───┐
+    x(t) o───┤ C ├───┬───o y(t)
+             └───┘ ┌─┴─┐
+                   │ R │
+                   └─┬─┘
+                     ┴
+                    GND
+
+  other than redefining  y(t)  as the voltage across the resistor
+  (instead of the capacitor).
+  But we now know how to express  u_C(t)  easily in terms of the input signal
+  —— thanks to Pierre-Simon Laplace.
+  We'll keep trusting him and assuming  x(t) = X(s)exp(st) .
+  With  X(s)  constant over time.
+  Two equations define  y(t)  (the voltage across the resistor):
+
+  ╭─────────────────────────────────────────────────╮
+  │  (1):                                           │
+  │                              ωc                 │
+  │    y(t)  =  X(s)exp(st) — ———————— X(s)exp(st)  │
+  │                            s + ωc               │
+  ╰─────────────────────────────────────────────────╯
+  ╭─────────────────────────────────────────╮
+  │  (2):              ωc                   │
+  │                 ———————— X(s)exp(st)    │
+  │                  s + ωc                 │
+  │              d ——————————————————————   │
+  │                          dt             │
+  │    y(t)  =  ——————————————————————————  │
+  │                         ωc              │
+  ╰─────────────────────────────────────────╯
+
+  Of course we'll solve both.
+  Let's start with (2) —— it looks really fun.
+  The top-most factor (ωc)
+  and the bottom-most denominator (ωc)
+  cancel out.
+  Let's save some space:
+
+               X(s)      d exp(st)
+    y(t)  =  ———————— · ———————————
+              s + ωc        dt
+
+                s                    //
+          =  ———————— X(s)exp(st)    //  (constant factor rule, then chain rule)
+              s + ωc                 //
+
+  Since we're re-defining everything,
+  let's re-define:
+
+                s
+    H(s)  =  ————————
+              s + ωc
+
+  and:
+
+    Y(s)  =  H(s)X(s)
+
+  then:
+
+    y(t)  =  Y(s)exp(st)
+
+  (1)?
+  (1):
+             ╭        ωc    ╮
+    y(t)  =  │ 1 — ———————— │ X(s)exp(st)
+             ╰      s + ωc  ╯
+
+              (s + ωc) — ωc
+          =  ——————————————— X(s)exp(st)
+                 s + ωc
+
+                s
+          =  ———————— X(s)exp(st)
+              s + ωc
+
+          =  H(s)X(s)exp(st)
+
+          =  Y(s)exp(st)  =  y(t)
+
+  Different  H(s)  —— but still popping up.
+  It's definitively important.
+  We really should deal with it at some point.
+  But first let me introduce an alternative path to reach it.
+
+  /*
+    Actually there's a digression I shouldn't delay any longer.
+    All our demonstrations are valid
+    because the factor  H(s)  is not a function of time.
+
+    We used its symbol to solve the equations ——
+    —— its formula could have been anything.
+    As long as it remains time-invariant
+    and a factor (or a sum of factors),
+    our demonstrations can be generalised.
+
+    A function only defined by additions and/or multiplications
+    is called "linear".
+    (Subtractions are additions.
+    Divisions are multiplications)
+
+    So we've shown that any **linear time-invariant** circuit
+    doesn't generate partials
+    nor does it shift the frequency of extant ones
+    —— which, inside a spectral integral,
+    would be equivalent to generating new partial(s).
+    It only affects their complex amplitude (magnitude and phase).
+    I didn't just coin the term "linear time-invariant":
+    it's usually abbreviated "LTI"
+    and defined by what we've been demonstrating.
+    //  https://en.wikipedia.org/wiki/Linear_time-invariant_system
+
+    Notice that if the cutoff frequency (ωc, fc)
+    or any parameter varies over time,
+    LTI no longer applies.
+  */
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Look out honey 'cause I'm using technology."                                        */
+/*                                                    ——  Iggy Pop (Search and Destroy)          */
+===================================================================================================
+#04  Pasghetti
+===================================================================================================
+
+  Some silly people do not enjoy hardcore mathematics.
+  If you're one of them,
+  you can breathe now: we're about to doodle our path around.
+
+  Back to the capacitor.
+  Let's simplify the notation:
+
+    #  x  =  X(s)exp(st)    [input]
+    #  y  =  Y(s)exp(st)    [output: voltage across C]
+
+  Then:
+
+          ⌠
+    y  =  | ωc( x — y )
+          ⌡
+
+  where we got rid of the annoying terms (t₀ and  y(t₀) ).
+  The integration starts whenever and always ends right now.
+  The differential is time (dt or dτ)
+  but now it's implied.
+  THIS IS NOT A VALID EXPRESSION.
+  But it helps reduce the signal path to its core elements.
+
+  Let's decompose the formula:
+    #  α  =  x — y
+    #  β  =  ωc α
+    #  γ  =  ∫ β
+
+  Almost there.
+  But ∫ ?
+  Chain rule and the fact that  exp(x)  is its own derivative
+  give:  d exp(st) / dt  =  s exp(st) .
+  So if our input is a complex sinusoid,
+  multiplying by s is differentiating ——
+  —— or: s is a differentiator.
+  (I didn't just coin the term:  https://en.wikipedia.org/wiki/Differentiator )
+
+  ╭──────────────────────────────────────────────────────────────╮
+  │  ////  Non-negotiable revisionist fix...                     │
+  │  If  exp(x)  is its own derivative,                          │
+  │  then it's also its own antiderivative.                      │
+  │  Then, chain rule and constant factor rule give:             │
+  │                                                              │
+  │    ∫ exp(st)  =  exp(st)/s + c₀                              │
+  │                                                              │
+  │  (Where c₀ is a *time domain* constant                       │
+  │  determined by initial conditions.)                          │
+  │                                                              │
+  │  So, in the Laplace domain,                                  │
+  │  dividing by s (or multiplying by  1/s ) is integrating.     │
+  │                                                              │
+  │  Then the sum rule ensures it remains true                   │
+  │  across the signal's full spectrum,                          │
+  │  assuming it's expressed as an inverse Laplace transform.    │
+  │  /*                                                          │
+  │    Integrals are pseudo-continuous sums.                     │
+  │    Nested integrals are nested pseudo-continuous sums.       │
+  │    /*                                                        │
+  │      Or pseudo-continuous nested sums?                       │
+  │      Is meta-commutativity a thing?                          │
+  │      /*                                                      │
+  │        Guido Fubini says yes.                                │
+  │        //  https://en.wikipedia.org/wiki/Guido_Fubini        │
+  │        //  https://en.wikipedia.org/wiki/Fubini's_theorem    │
+  │      */                                                      │
+  │    */                                                        │
+  │  */                                                          │
+  │                                                              │
+  │  How  ∫{ dy/dt }dt = y  is analogous to how  kx/k = x ...    │
+  │  Here, the analogy becomes an algebraic equivalence.         │
+  │  Meet operational Calculus.                                  │
+  │  //  https://en.wikipedia.org/wiki/Operational_calculus      │
+  ╰──────────────────────────────────────────────────────────────╯
+
+  So 1/s is an integrator.
+  (Again: I didn't just coin the term:  https://en.wikipedia.org/wiki/Integrator )
+  Then,
+  assuming our input is one step in the inverse Laplace integral
+  AND the circuit is LTI,
+  we can safely substitute integrals with divisions by s.
+
+  That's right:
+  our friend Laplace turned Calculus into basic arithmetic.
+  I guess his integral is not just beautiful.
+  /*
+    EDIT:
+      I hadn't heard of Oliver Heaviside yet
+      when I first wrote this chapter...
+
+    Also:
+      This all derives from the properties of the exponential function.
+      So, as pretty much always: thanks Leonhard.
+      Don't forget to pray Euler's name  exp(jπ) + 1  times a day.
+  */
+
+  Wait! What if s is zero?
+  Then we cannot divide by it, true (good catch).
+  But s being zero means the frequency is zero,
+  so DC voltage.
+  We've solved this case last chapter: RC + DC.
+  (Also: integrating a constant quickly blows up:
+  you basically permanently and continuously
+  stack the same value over itself,
+  Laplace's division by zero kind of reflects this explosion.)
+
+  Ok, let's start over:
+    #  α  =  x — y
+    #  β  =  ωc α
+    #  γ  =  β / s
+
+  Now let's draw our signal path in an even more symbolic fashion. Starting with α:
+
+                       //  I.e.: x travels forward minding its own business,
+                       //  at some point y joins the party,
+    x ───>(+)───> α    //  only travelling backward.
+           ↑ —         //  (+) means "it joins",
+           │           //  the "—" sign means "backward".
+           y           //  Ok, it's a weird way to write a subtraction.
+                       //  But  A — B  =  A + (—B) , so subtraction is addition.
+                       //  This notation generalises cases
+                       //  to reduce the number of symbols involved.
+                       //  You could directly use (—).
+                       //  I won't. But you could. But I won't.
+
+  Moving on to β:
+                                     //  I use rectangular boxes for gains
+                                     //  because monospace.
+          ┌────┐                     //  Embedding the gain factor inside a triangle
+    α ───>│ ωc ├───> β               //  pointing in the same direction as the arrows
+          └────┘                     //  would be more conventional.
+                                     //  In fact, in that case, usually,
+  or, if we combine both doodles:    //  you don't see the arrow before the gain block.
+                                     //  It would be redundant.
+             (α)  ┌────┐             //  I hope it helps show that convention
+    x ──>(+)─────>│ ωc ├──> β        //  is here to reduce noise and simplify the message
+          ↑ —     └────┘             //  without losing data.
+          │                          //  Use the custom convention you like
+          y                          //  (create your own by all means).
+                                     //  But if it's redundant in some way,
+                                     //  you can probably do better.
+
+  Step 3: γ.
+                           //  You often see the integral symbol (∫)
+          ┌─────┐          //  instead of 1/s.
+    β ───>│ 1/s ├───> γ    //  I prefer this way,
+          └─────┘          //  you'll see why right away.
+                           //  There's also a good reason not to imitate me,
+                           //  you'll see why in a Chapter V.
+
+  Full path:
+
+             (α)  ┌────┐ (β)  ┌─────┐
+    x ──>(+)─────>│ ωc ├─────>│ 1/s ├──> γ
+          ↑ —     └────┘      └─────┘
+          │
+          y
+
+  Nit-pick: γ looks too much like y.
+  That's poor editorial design.
+  Is it?
+
+                             ⌠
+    γ  =  ∫ β  =  ∫ ωc α  =  | ωc (x — y)  =  y
+                             ⌡
+
+  Poor design indeed:
+  they should look infinitely more alike: they're one and the same.
+  Literal closure:
+
+             (α)  ┌────┐ (β)  ┌─────┐
+    x ──>(+)─────>│ ωc ├─────>│ 1/s ├──>o──> y
+          ↑ —     └────┘      └─────┘   │
+          │                             │
+          └─────────────────────────────┘
+
+  Before moving on any further:
+  could we do the same for the voltage across the resistor?
+  Let's call it y₂.
+  Then the differential equation gives:
+
+    y₂  =  x — y    —— hey, wait... that's α!
+
+  Full RC circuit:
+
+               y₂  ( u_R(t) )
+               ↑
+               │   ┌────┐   ┌─────┐
+    x ──>(+)──>o──>│ ωc ├──>│ 1/s ├──>o──> y  ( u_C(t) )
+          ↑ —      └────┘   └─────┘   │
+          │                           │
+          └───────────────────────────┘
+
+  Amazing. What is it good for?
+  Well first of all,
+  next time you hear someone say
+  "RC circuit has a negative feedback loop",
+  you get to answer "I know, I've seen it".
+
+  Anything actually useful?
+  Imagine this is Chapter I, section #01.
+  Let's assume we started with this:
+
+    x ──>(+)────────────────────>o──> y    //
+          ↑ —                    │         //  U_R first for a change.
+          │  ┌─────┐    ┌────┐   │         //  It's not upside—down:
+          └──┤ 1/s │<───┤ ωc │<──┘         //  you are.
+           C └─────┘  B └────┘  A          //
+
+  Just follow the signal path.
+  I guess you could go from input (x),
+  but I often go the other way around.
+  So:
+
+    y  =  x — C                             //  And that's why I prefer
+    C  =  B/s     so    y  =  x — B/s       //  1/s over ∫.
+    B  =  A·ωc    so    y  =  x — A·ωc/s    //  That's just me though,
+    A  =  y       so    y  =  x — y·ωc/s    //  do as you like.
+
+    <=>    y + y·ωc/s  =  x
+
+    <=>    y( 1 + ωc/s )  =  x
+
+    <=>    y( s/s + ωc/s )  =  x
+
+              s + ωc
+    <=>    y ————————  =  x
+                s
+                    s
+    <=>    y  =  ———————— x  =  H(s)·x
+                  s + ωc
+  /*
+    I personally start with y whenever I can,
+    I find it less error-prone.
+    But it's a loop,
+    choose any point and complete the loop.
+    Adding upper-case Latin letters
+    or lower-case Greek letters
+    (depends on the mood)
+    is my thing too.
+    I'd advise doing so because it helps split the problem
+    and forces to write every step down (less error-prone).
+    I didn't always proceed as such though.
+    I had to play with fire first.
+    That's my thing, do yours.
+  */
+
+  Et voilà, ganz einfach, isn't it?
+  U_C?
+
+             A  ┌────┐ B  ┌─────┐
+    x ──>(+)───>│ ωc ├───>│ 1/s ├──>o──> y
+          ↑ —   └────┘    └─────┘   │
+          │                         │
+          └─────────────────────────┘
+
+    y  =  B/s     ╮                                                                      s + ωc
+    B  =  ωc A    │==>    y  =  ωc (x — y) / s    <=>    y s/ωc  +  y  =  x    <=>    y ————————  =  x
+    A  =  x — y   ╯                                                                        ωc
+
+                    ωc
+    <=>    y  =  ———————— x  =  H(s) x
+                  s + ωc
+
+  Wonderful. Cute little trick. Decent time saver.
+  Was it worth interrupting the differential equation?
+  Well first: this got us to the same place as Calculus did.
+  Only quickly and easily.
+  And now that we have it,
+  and that we know how easily solvable it is...
+  What's preventing us from modifying it?
+
+  That's right: meet our very first design tool.
+  It's called a Block Diagram ——
+  —— and it's a lot more fundamental than it appears.
+  You know what? Let me prove it.
+  Yep: we're designing a filter.
+
+  Allegro con brio.
+
+  We still don't know what H(s) exactly does to amplitude and phase,
+  so it'll have to stand by for a while.
+  But the book has "filter design" in its title
+  and it's Chapter III already...
+  Oh so we're 2 designs late.
+  Let's design 3 filters then.
+  They'll need names in case we call them back later.
+
+    (1)  "Holbach"     will be 2  u_C(t)  in series;
+    (2)  "La Mettrie"  will be 2  u_R(t)  in series;
+    (3)  "Diderot"     will be  u_R(t)  followed by  u_C(t) .
+
+  //  HOLBACH:
+
+             A  ┌────┐ B  ┌─────┐   C       D  ┌────┐ E  ┌─────┐
+    x ──>(+)───>│ ωc ├───>│ 1/s ├──>o──>(+)───>│ ωc ├───>│ 1/s ├──>o——> y
+          ↑ —   └────┘    └─────┘   │    ↑ —   └────┘    └─────┘   │
+          │                         │    │                         │
+          └─────────────────────────┘    └─────────────────────────┘
+
+    y = E/s  ;  E = ωc·D  ;  D = C — y
+
+              C — y
+    y  =  ωc ———————    <=>    y s/ωc  =  C — y
+                s
+
+    <=>    y (s/ωc + 1)  =  C
+
+              s + ωc
+    <=>    y ————————  =  C
+                ωc
+
+    C = B/s  ;  B = ωc·A  ;  A = x — C
+
+              x — C
+    C  =  ωc ———————    <=>    C·s/ωc  =  x — C
+                s
+                                                  ωc
+    <=>    C( s/ωc + 1 )  =  x    <=>    C  =  ———————— x
+                                                s + ωc
+       s + ωc         ωc
+    y ————————  =  ———————— x
+         ωc         s + ωc
+
+                   ωc          ωc
+    <=>    y  =  ———————— · ———————— x
+                  s + ωc     s + ωc
+
+                         ωc²
+    <=>    y  =  ——————————————————— x
+                  s² + 2·ωc·s + ωc²
+
+  Ok. Let's re-arrange that:
+
+    s²y + 2·ωc·s·y + ωc²y  =  ωc²x
+
+  now let's divide both sides by ωc²:
+
+    ( s²/ωc² )y + 2( s/ωc )y + y  =  x
+
+    <=>    y  =  x — { ( s²/ωc² )y + 2( s/ωc )y }
+
+  Let's define:
+
+    α  =  ( s/ωc )y
+
+  and:
+
+    β  =  ( s²/ωc² )y
+
+  Then:
+
+    y  =  x — (β + 2α)
+
+  And:
+           ωc·α                 ┌────┐   ┌─────┐
+    y  =  ——————    so:    α ──>│ ωc ├──>│ 1/s ├──> y
+            s                   └────┘   └─────┘
+
+  and:
+            ωc·β                                        α
+           —————— ωc                                    ↑
+             s                       ┌────┐   ┌─────┐   │   ┌────┐   ┌─────┐
+    y  =  ———————————    so:    β ──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──> y
+               s                     └────┘   └─────┘       └────┘   └─────┘
+
+  The loop is open...
+  We need to know more about β:
+
+    β  =  x — (2α + y)
+
+  Ok, so:
+         ┌────┐   ┌─────┐   α   ┌────┐   ┌─────┐             //
+    β ──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──>o──> y    //
+         └────┘   └─────┘   ↓   └────┘   └─────┘   │         //  Loop still open...
+                          ┌───┐                    │         //  but there are two instances of β.
+                          │ 2 │                    │         //
+             β            └─┬─┘                    │         //  Let's merge them.
+             ↑              │ (2α)                 │         //
+             │    (2α + y)  ↓                      │         //
+       x ──>(+)<───────────(+)<────────────────────┘         //
+                —
+  Then:
+               ┌────┐   ┌─────┐       ┌────┐   ┌─────┐
+    x ──>(+)──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──>o──> y
+          ↑ —  └────┘   └─────┘   ↓   └────┘   └─────┘   │
+          │                     ┌───┐                    │
+          │                     │ 2 │                    │
+          │                     └─┬─┘                    │
+          │                       ↓                      │
+          └──────────────────────(+)<────────────────────┘
+
+  Now would be a good time to pause and analyse Holbach.
+  But we won't. We'll move on.
+  "I don't teach, I learn and document along the way." ——
+  —— Yeah... not so much right now. Guilty as charged.
+  I know exactly where we're heading —— and I'm eager to get there.
+  Please follow me.
+  If you feel like I'm rushing,
+  don't worry: we'll go back to these designs with more tools to deal with them.
+  For the moment my point is:
+  the apparent triviality of block diagrams is the opposite of a weakness.
+
+  //  LA METTRIE
+
+             A
+    x ──>(+)────────────────────>o——>(+)────────────────────>o──> y
+          ↑ —                    │    ↑ —                    │
+          │ C ┌─────┐  B ┌────┐  │    │ E ┌─────┐  D ┌────┐  │
+          └───┤ 1/s │<───┤ ωc │<─┘    └───┤ 1/s │<───┤ ωc │<─┘
+              └─────┘    └────┘           └─────┘    └────┘
+
+    y = A — E  ;  E = D/s  ;  D = ωc·y
+
+               ωc·y                 ωc·y
+    y  =  A — ——————    <=>    y + ——————  =  A
+                s                    s
+                                            s + ωc
+    <=>    y( 1 + ωc/s )  =  A    <=>    y ————————  =  A
+                                              s
+
+    A  = x — C  ;  C = B/s  ;  B  =  ωc·A
+
+               ωc·A                 ωc·A
+    A  =  x — ——————    <=>    A + ——————  =  x
+                s                    s
+                                                  s
+    <=>    A( 1 + ωc/s )  =  x    <=>    A  =  ———————— x
+                                                s + ωc
+
+       s + ωc         s                          s          s
+    y ————————  =  ———————— x    <=>    y  =  ———————— · ———————— x
+         s          s + ωc                     s + ωc     s + ωc
+
+                           s²
+    <=>    y  =  ——————————————————————— x
+                  s²  +  2 ωc s  +  ωc²
+
+  Denominator looks familiar... Who cares?
+  Let's re-arrange that:
+
+    s²y + 2·ωc·s·y + ωc²y  =  s²x
+
+  now let's divide both sides by s²:
+
+    y + 2( ωc/s )y + ( ωc²/s² )y  =  x
+
+    <=>    y  =  x — { 2( ωc/s )y + ( ωc²/s² )y }
+
+  Let's define:
+
+    α = ( ωc/s )y
+
+  and:
+
+    β = ( ωc²/s² )y
+
+  Then:
+
+    y  =  x  —  (2α + β)
+
+  And:
+           ωc y                 ┌────┐   ┌─────┐
+    α  =  ——————    so:    y ──>│ ωc ├──>│ 1/s ├──> α
+            s                   └────┘   └─────┘
+
+  and:
+            ωc·y                                        α
+           —————— ωc                                    ↑
+             s                       ┌────┐   ┌─────┐   │   ┌────┐   ┌─────┐
+    β  =  ———————————    so:    y ──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──> β
+               s                     └────┘   └─────┘       └────┘   └─────┘
+
+  The loop is open...
+  But we have α and β.
+  Double α,
+  add β to it,
+  subtract this to x,
+  get y:
+
+         ┌────┐   ┌─────┐   α   ┌────┐   ┌─────┐ β
+    y ──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──┐
+         └────┘   └─────┘   ↓   └────┘   └─────┘  │
+                          ┌─┴─┐                   │
+                          │ 2 │                   │
+             y            └─┬─┘                   │
+             ↑              │ (2α)                │
+             │    (2α + β)  ↓                     │
+       x ──>(+)<───────────(+)<───────────────────┘
+                —
+
+  Or, if we close the loop:
+
+               y
+               ↑
+               │   ┌────┐   ┌─────┐       ┌────┐   ┌─────┐
+    x ──>(+)──>o──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├─┐
+          ↑ —      └────┘   └─────┘   ↓   └────┘   └─────┘ │
+          │                         ┌─┴─┐                  │
+          │                         │ 2 │                  │
+          │                         └─┬─┘                  │
+          │                           ↓                    │
+          └──────────────────────────(+)<──────────────────┘
+
+  Block diagram looks familiar... Shut up!
+
+  // DIDEROT
+             A                           D  ┌────┐ E  ┌─────┐
+    x ──>(+)────────────────────>o——>(+)───>│ ωc ├───>│ 1/s ├──>o──> y
+          ↑ —                    │    ↑ —   └────┘    └─────┘   │
+          │ C ┌─────┐  B ┌────┐  │    │                         │
+          └───┤ 1/s │<───┤ ωc │<─┘    └─────────────────────────┘
+              └─────┘    └────┘
+
+    y = E/s  ;  E = ωc·D  ;  D = A — y
+
+              A — y
+    y  =  ωc ———————    <=>    ys/ωc  =  A — y
+                s
+                                           s + ωc
+    <=>    y (s/ωc + 1)  =  A    <=>    y ————————  =  A
+                                             ωc
+
+    A = x — C  ;  C = B/s  ;  B = ωc·A
+
+               ωc·A                 ωc·A
+    A  =  x — ——————    <=>    A + ——————  =  x
+                s                    s
+
+    <=>    A( 1 + ωc/s )  =  x
+
+                    s
+    <=>    A  =  ———————— x
+                  s + ωc
+
+       s + ωc         s
+    y ————————  =  ———————— x
+         ωc         s + ωc
+
+                    ωc         s
+    <=>    y  =  ———————— · ———————— x    [!]
+                  s + ωc     s + ωc
+
+                        ωc·s
+    <=>    y  =  ——————————————————— x
+                  s² + 2·ωc·s + ωc²
+
+  Denominator loo——SHHH!
+
+  /*
+    Step [!] shows that U_R first or U_C first are equivalent:
+    H_C(s) H_R(s) x  =  H_R(s) H_C(s) x .
+  */
+
+  Re-arrange etc.:
+
+    s²y + 2·ωc·s·y + ωc²y  =  ωc·s·x
+
+  now let's divide both sides by ωc s:
+
+    ( s/ωc )y + 2y + ( ωc/s )y  =  x
+
+    <=>    2y  =  x — { ( s/ωc )y + ( ωc/s )y }
+
+  Let's define:
+
+    α  =  ( s/ωc )y
+
+  and:
+
+    β  =  ( ωc/s )y
+
+  Then:
+
+    2y  =  x — (α + β)
+
+  And:
+
+           ωc·α                 ┌────┐   ┌─────┐
+    y  =  ——————    so:    α ──>│ ωc ├──>│ 1/s ├──> y
+            s                   └────┘   └─────┘
+
+  and:
+                       ωc·α                                        y
+                      —————— ωc                                    ↑
+           ωc·y         s                       ┌────┐   ┌─────┐   │   ┌────┐   ┌─────┐
+    β  =  ——————  =  ———————————    so:    α ──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──> β
+            s             s                     └────┘   └─────┘       └────┘   └─────┘
+
+  The loop is open... We need to know more about α:
+
+    α  =  x — ( 2y + β )
+
+  Ok, so:
+                            y
+                            ↑
+         ┌────┐   ┌─────┐   │   ┌────┐   ┌─────┐ β
+    α ──>│ ωc ├──>│ 1/s ├──>o——>│ ωc ├──>│ 1/s ├──┐
+         └────┘   └─────┘   ↓   └────┘   └─────┘  │
+                          ┌─┴─┐                   │
+                          │ 2 │                   │
+            α             └─┬─┘                   │
+            ↑               │ (2 y)               │
+            │    (2 y + β)  ↓                     │
+      x ──>(+)<────────────(+)<───────────────────┘
+               —
+
+  Shall we close the loop?
+                                  y
+                                  ↑
+               ┌────┐   ┌─────┐   │   ┌────┐   ┌─────┐
+    x ──>(+)──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──┐
+          ↑ —  └────┘   └─────┘   ↓   └────┘   └─────┘  │
+          │                     ┌─┴─┐                   │
+          │                     │ 2 │                   │
+          │                     └─┬─┘                   │
+          │                       ↓                     │
+          └──────────────────────(+)<───────────────────┘
+
+  // BLOCK DIAGRAM LOOKS FAMILIAR
+
+  Ok, so Holbach, La Mettrie and Diderot
+  are three outputs in the same loop.
+  And their  y/x  factors have thrice the same denominator,
+  only different numerators.
+
+  Crap. More is less: attempt 3, get 1...
+  Or 4?
+  Success beyond expectations.
+  Or epic fail.
+  Both views are valid.
+  In any case this "one filter to rule them all" needs a name too.
+
+  Obviously: Ἐπίκουρος [Epikouros]        //  https://en.wikisource.org/wiki/Letter_to_Menoeceus
+
+          La Mettrie               Diderot                Holbach
+               ↑                      ↑                      ↑
+               │   ┌────┐   ┌─────┐   │   ┌────┐   ┌─────┐   │
+    x ──>(+)──>o──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──>o
+          ↑ —      └────┘   └─────┘   ↓   └────┘   └─────┘   │
+          │                         ┌─┴─┐                    │
+          │                         │ 2 │                    │
+          │                         └─┬─┘                    │
+          │                           ↓                      │
+          └──────────────────────────(+)<────────────────────┘
+
+  Wait.
+  We were supposed to modify a block diagram.
+  This is not Epikouros.
+  This is Working-class filter Frankenstein. Refund!
+
+  How about:
+  the [ 2 ] gain element is a bit static, is it not?
+  We could replace it with a variable.
+  Or add a second gain before or after it.
+  Or something half-way:
+  let's say D is a variable gain that multiplies 2.
+  This way Epikouros gets an extra parameter
+  without forgetting that it came out of 2 RC circuits in series.
+  Why "D"?
+  Because it's my book and it's Ahuda abu Tayi's pleasure ——
+  —— I mean this section is called "Pasghetti"...
+  Serious answer will come with serious analysis.
+
+  Instead of 3 switchable outputs,
+  we could have a variable gain for each
+  and make our mixture.
+  How about "m" as in "mixture"?
+
+          La Mettrie               Diderot                Holbach
+               ↑                      ↑                      ↑
+            ┌──┴──┐                ┌──┴──┐                ┌──┴──┐
+            │ m_₀ │                │ m_₁ │                │ m_₂ │
+            └──┬──┘                └──┬──┘                └──┬──┘
+               ↑   ┌────┐   ┌─────┐   ↑   ┌────┐   ┌─────┐   ↑
+    x ──>(+)──>o──>│ ωc ├──>│ 1/s ├──>o──>│ ωc ├──>│ 1/s ├──>o
+          ↑ —      └────┘   └─────┘   ↓   └────┘   └─────┘   │
+          │                        ┌──┴──┐                   │
+          │                        │ 2 D │                   │
+          │                        └──┬──┘                   │
+          │                           ↓                      │
+          └──────────────────────────(+)<────────────────────┘
+
+  Now that's Epikouros.
+  Five parameters:
+    (1)  ωc
+    (2)  D
+    (3)  m₀
+    (4)  m₁
+    (5)  m₂
+
+  Amazing. How does it sound? —— How would we know?
+  Better moving on then.
+  Let's forget about Epikouros until further notice.
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Toto, I'm afraid we're not in Kansas anymore."                                      */
+/*                                                                      ——  Pink Floyd?          */
+===================================================================================================
+#05  H(s)
+===================================================================================================
+
+  Andante moderato.
+
+  H(s)  is the standard notation
+  for what is called a TRANSFER FUNCTION.
+  Sometimes G(s).
+  Why H? Or G?
+  I couldn't find any serious explanation.
+  /*
+    My undocumented gratuitous unnecessary uncalled for off-topic hypothesis:
+      F is sometimes used for Laplace.
+      It's also the initial of Fourier.
+      Could be messy.
+      Next in the Latin alphabet: G.
+      But it's the initial of "gain".
+      Ok, next: H.
+
+    My *updated* undocumented gratuitous unnecessary uncalled for off-topic hypothesis:
+      Before we made the connection with Laplace's 1785 memoir
+      and validated it mathematically,
+      the closest thing to the Laplace transform as we know it now
+      was likely Oliver Heaviside's heretical operational Calculus ——
+      —— he was an engineer in signal processing
+      who noticed that it worked and didn't feel the urge
+      to wait for mathematicians' approval,
+      famously justifying his empirical approach in these words:
+      "Shall I refuse my dinner because I do not fully understand the process of digestion?" ——
+      —— had Fourier known how to make such a beautiful use of the middle finger,
+      perhaps there wouldn't have been fifteen years
+      between 1807 and 1822...
+
+      Anyway: "Heaviside", big H... Who knows?
+  */
+  Sometimes the variable is not s.
+  Also it's often called  H(jω)  to make explicit that  σ = 0 .
+
+  The transfer function of a system
+  is a mathematical expression which binds any input
+  to a deterministic output.
+
+  https://en.wikipedia.org/wiki/Transfer_function        https://en.wikipedia.org/wiki/Determinism
+
+  As we've shown:
+  for LTI filters its value depends on the frequency.
+  But for each partial it's a complex factor,
+  constant over time,
+  and equal to the ratio of the output over the input:
+
+    Y(s)exp(st)/X(s)exp(st)  =  H(s)
+
+  Back in Chapter I (#03),
+  using Euler's formula,
+  we've demonstrated that:
+
+  "
+    [...] any complex sinusoid in the form:
+
+      ƒ(t)  =  X(s)exp(st)
+
+    can be considered the positive-frequency-component of a real sinusoid with:
+
+      Amplitude:    α  =  2 |X(s)|
+          Phase:    φ  =  arg( X(s) )
+      Frequency:    ω  =  s/j  rad/s    or    f  =  s/2πj  Hz
+    "
+
+  Except it could be the negative component,
+  depending on the value of s ——
+  —— in which case  φ  =  —arg( X(s) )  rad.
+  It's ok, we were young and stupid back then.
+
+  Also this was before we knew Laplace.
+  So  s = jω  or  σ = 0.
+  But this is also our hypothesis
+  when feeding our RC filter with analytic signals.
+  So what precedes stands.
+  And the transfer function  H(s)
+  describes the system's response to signals of constant magnitude and phase.
+  Which explains why the equation involving a time-varying complex amplitude
+  never provided a fully satisfying result.
+
+  Ok back to business.
+  So:
+  magnitude is twice the absolute value of the complex amplitude
+  and phase is its argument.
+  So if  y = Y(s)exp(st) = H(s)X(s)exp(st),
+  its magnitude is:
+
+    2|Y(s)|  =  2|H(s)X(s)|  =  |H(s)|·2|X(s)|
+
+  In plain English ——
+  —— and THIS IS FUNDAMENTAL ——
+  —— the magnitude of the output
+  is the real amplitude of the input
+  multiplied by the absolute value of the transfer function
+  ( |H(s)|  or  |H(jω)| ).
+
+  //  Example:
+  ωc = 1  rad/s
+  ω  = 2  rad/s
+              ωc
+  H(s)  =  ————————
+            s + ωc
+
+  Then:
+                │     ωc    │        |ωc|
+    |H(jω)|  =  │ ————————— │  =  ———————————
+                │  jω + ωc  │      |jω + ωc|
+
+                                  ┌───────────
+                   √(ωc²)         │    ωc²
+             =  —————————————  =  │ —————————
+                 √(ω² + ωc²)     ╲│  ω² + ωc²
+
+  Some steps are useless right now.
+  Except this shows that  |H (jω)|  is the square root of a ratio.
+  Hence the notation:
+
+    |H(jω)|²
+
+  which just means: "let's temporarily ignore the square root".
+  Don't get confused if you stumble upon it:
+  it's precisely meant to reduce distraction.
+  /*
+    (Actually, squared amplitude is also a proper physical quantity
+    when measuring power instead of voltage.)
+  */
+
+  So:
+                _____    __________
+    |H(jω|  =  √ ωc²  / √ ω² + ωc² 
+                     __________
+            =  ωc / √ ω² + ωc²
+
+  With  ωc = 1  and  ω = 2,
+  that's:
+                     _________
+    |H(2j)|  =  1 / √ 2² + 1² 
+            _______          ___
+    =  1 / √ 4 + 1   =  1 / √ 5
+
+  So if  x  =  5·cos(2t)
+
+  then:
+                             ___
+    y  =  5·cos( 2t ± k ) / √ 5
+           ___
+       =  √ 5  · cos( 2t ± k )
+
+  (where k is the yet undefined phase shift.)
+
+  /*
+    More generally:
+      If we normalise the input's real amplitude to 1,
+      the output's real amplitude is  |H(jω)| .
+      Such normalisation reveals the absolute value of the transfer function
+      as a linear, frequency-dependant, time-invariant, factor
+      applied to the input's magnitude,
+      regardless of its actual value.
+      We'll wait for the next chapter before properly dealing with it,
+      but we're in the frequency domain now.
+  */
+
+  Now what about the phase?
+  Let's simplify notation:
+
+    y  =  H(s)X(s)exp(st)
+
+  and let φ be y's phase.
+
+  then:
+                               ╭                           ╮         //  See Chapter I's bonus section
+    φ  =  arg{ H(s)X(s) }  =  M│ arg{ H(s) } + arg{ X(s) } │         //  for  arg(z₁·z₂) .
+                               ╰                           ╯         //
+            ╭                                                   ╮    //  And next chapter (IV),
+            │╭                                             ╮    │    //  for  M(φ)
+       =  π ││{ arg( H(s) )/π + arg( X(s) )/π — 1 }  mod —2│ + 1│    //  (Working-class modulus fix),
+            │╰                                             ╯    │    //  and unit-π vs. radians.
+            ╰                                                   ╯    //
+
+  Again, if we normalise the input's phase to zero,
+  the output's phase is  arg( H(s) ) .
+
+  E.g.:  ω = ωc = 1  and  arg( X(s) ) = 0
+
+    arg( H(j) )  =  arg{ 1/( j + 1 ) }
+
+    =  M{ arg(1) — arg( j + 1 ) }
+
+    =  M( 0 — arctan(1) )
+
+    arctan(1) = x    <=>    tan(x) = 1
+
+    <=>    sin(x)/cos(x)  =  1
+
+    <=>    sin(x)  =  cos(x)
+
+    <=>    isosceles right triangle (NE or SW)
+
+     =>    |x|  =  ( π — π/2 )/2    =>    ± π/4
+
+    1 > 0    =>    arctan(1) > 0
+
+     =>    x > 0    //  (because odd + strictly increasing)
+
+    —π/2  <  arctan  <  π/2    =>    0 < x < π/2
+
+     =>    x  =  + π/4
+
+     =>    arg(j + 1)  =  π/4
+
+    <=>    arg( 1 / (j + 1) )  =  0 — π/4
+
+    <=>    φ  =  —π/4
+
+  Oops, sorry.
+  I got carried away.
+  Another pro-trigonometry / anti-calculator stupid statement.
+  Pardon my stubbornness.
+  If you didn't follow, either:
+    (1)  you don't care
+    (2)  check out the bonus section in Chapter VIII
+
+  I am, in fact, making a not so gratuitous point:
+  many calculators have the argument function implemented (Desmos at least),
+  so there's no imperative call for twisted moduli
+  or multiline first-principles-trigonometry.
+  (Although, you're not reading the Working-class calculator user manual...)
+
+  But evaluating partials one by one
+  while there's an infinity of them
+  isn't exactly practical.
+  We need to build better tools.
+  We need Chapter IV.
+
+
+
+===================================================================================================
+BONUS:  Calculus cheat sheet
+===================================================================================================
+
+  When I started to write this book,
+  I didn't yet realise how ubiquitous Calculus happens to be in signal processing.
+  So I started demonstrating fundamental formulae sparsely and randomly
+  across several chapters.
+  The point was:
+  if you're used to finding derivatives on the fly,
+  ideally in more than one way,
+  you'll be able to deallocate brain memory,
+  and you'll become less and less intimidatable by unknown cases.
+  I keep standing by this state of mind, of course ——
+  —— basically: don't rely on tools ——
+  —— rather become the tool (yeah, I hear it...);
+  but the more you treat differentiation as an active process,
+  not relying on static memory,
+  the more helpless you turn out once integration shows up.
+  As I wrote somewhere in Chapter I:
+  you're given a solution and must find the problem ——
+  —— it requires knowing as many problems as possible.
+  A bottom-up thinker's nemesis:
+  an inquiry requiring foreseeing —— maths for the oracle ——
+  —— the answer assumes the question,
+  which assumes the answer... ad infinitum...
+  Logical self-oscillation, cognitive instability, brain explosion.
+  Integration is haunted by this undeniable truth:
+  there are an infinity of possible differential equations,
+  so the only safe method for solving integrals
+  requires an infinity of premises.
+  No algorithmic safe path, no routine...
+  Just fatal sempiternal uncertainty.
+  There's a reason why engineer is an extant job with a potential constant pay-rate ——
+  —— and why reverse-engineer is not...
+  We need a patch, a workaround,
+  a brain soft-clipper in the logical feedback loop.
+
+  So I'll try to sum up all I can about differentiation here.
+  This way, we'll have a space where patterns are stored,
+  and an (incomplete) routine on which to rely.
+  I'll divide this bonus section in two halves:
+    (1)  differentiation compendium
+    (2)  integration applications
+
+  For the sake of exhaustivity,
+  there will be redundancies and spoilers in what follows.
+
+  Why here? Because why not.
+  Seriously, why here?
+  Because this chapter was short and pretty much all about Calculus.
+  Because the sooner the better.
+  Because Chapter I already had a bonus section.
+  Because Chapter II is about electronics.
+  Because, even though a standalone file
+  gathering all the bonus sections would make a friendly companion...
+  Fuck you, voice in my head! Can we move on please?
+
+
+  (1)  DIFFERENTIATION COMPENDIUM
+
+  Let's re-state the general formula (it cannot hurt):
+
+     dƒ            ƒ(x + dx) — ƒ(x)
+    ————  =  lim ————————————————————
+     dx     dx—>0        dx
+
+  Also: a function's rate of change is unique.
+  So if two expressions are equal,
+  so are their respective first derivatives.
+  (The reciprocal doesn't hold:
+  one same rate of change has as many antiderivatives
+  as the infinity of possible constant terms.)
+
+  Then let's start by gathering composition cases.
+
+  ===============================================================================================
+  //  Sum rule:  ƒ(x)  =  g(x) + h(x)
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+     dƒ           g(x + dx) + h(x + dx) — g(x) — h(x)
+    ————  =  lim —————————————————————————————————————
+     dx     dx—>0                 dx
+
+                  ╭  g(x + dx) — g(x)     h(x + dx) — h(x)  ╮
+          =  lim  │ —————————————————— + —————————————————— │
+            dx—>0 ╰         dx                   dx         ╯
+
+             g(x + dx) — g(x)          h(x + dx) — h(x)       dg     dh
+     =  lim —————————————————— +  lim ——————————————————  =  ———— + ————
+       dx—>0        dx           dx—>0        dx              dx     dx
+
+  Generalisation
+  (since the derivative of a sum is the sum of the derivatives):
+
+             N                  dƒ      N  dg_n
+    ƒ(x)  =  ∑ g_n(x)    =>    ————  =  ∑ ——————
+            n=1                 dx     n=1  dx
+
+  ===============================================================================================
+  //  Difference rule:  ƒ(x)  =  g(x) — h(x)
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+     dƒ           g(x + dx) — h(x + dx) — g(x) + h(x)
+    ————  =  lim —————————————————————————————————————
+     dx     dx—>0                  dx
+
+                  ╭  g(x + dx) — g(x)     h(x) — h(x + dx)  ╮
+          =  lim  │ —————————————————— + —————————————————— │
+            dx—>0 ╰         dx                   dx         ╯
+
+                  g(x + dx) — g(x)         h(x + dx) — h(x)       dg     dh
+          =  lim —————————————————— — lim ——————————————————  =  ———— — ————
+            dx—>0        dx          dx—>0        dx              dx     dx
+
+  Generalisation
+  (since the derivative of a difference is the difference of the derivatives):
+
+                      N                  dƒ       dg_1    N  dg_n
+    ƒ(x)  =  g_1(x) — ∑ g_n(x)    =>    ————  =  —————— — ∑ ——————
+                     n=2                 dx        dx    n=2  dx
+
+  ===============================================================================================
+  //  Quotient rule:  ƒ(x)  =  g(x)/h(x)
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+                   g(x + dx)     g(x)             h(x)g(x + dx) — g(x)h(x + dx)
+                  ——————————— — ——————           ———————————————————————————————
+     dƒ            h(x + dx)     h(x)                     h(x + dx)h(x)
+    ————  =  lim ——————————————————————  =  lim —————————————————————————————————
+     dx     dx—>0          dx              dx—>0               dx
+
+                   h(x)g(x + dx) — g(x)h(x + dx)
+                  ——————————————————————————————
+                                dx
+          =  lim ———————————————————————————————
+            dx—>0         h(x + dx)h(x)
+
+                    h(x)g(x + dx) — g(x)h(x + dx)
+               lim ———————————————————————————————
+              dx—>0              dx
+          =  ——————————————————————————————————————
+                              h(x)²
+
+                    h(x)g(x + dx) — g(x)h(x + dx) + h(x)g(x) — h(x)g(x)
+               lim —————————————————————————————————————————————————————
+              dx—>0                        dx
+          =  ————————————————————————————————————————————————————————————
+                                       h(x)²
+
+               ╭       g(x + dx) — g(x)          h(x + dx) — h(x)  ╮
+           lim │ h(x) —————————————————— — g(x) —————————————————— │
+          dx—>0╰              dx                        dx         ╯
+      =  ————————————————————————————————————————————————————————————
+                                     h(x)²
+
+          h(x)dg/gx — g(x)dh/dx
+      =  ———————————————————————
+                   h(x)²
+
+  ===============================================================================================
+  //  Product rule:  ƒ(x)  =  g(x)h(x)
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+     dƒ           g(x + dx)h(x + dx) — g(x)h(x)
+    ————  =  lim ———————————————————————————————
+     dx     dx—>0              dx
+
+                  g(x + dx)h(x + dx) — g(x)h(x) — g(x)h(x + dx) + g(x)h(x + dx)
+          =  lim ———————————————————————————————————————————————————————————————
+            dx—>0                              dx
+
+                 ╭            g(x + dx) — g(x)          h(x + dx) — h(x)  ╮
+          =  lim │ h(x + dx) —————————————————— + g(x) —————————————————— │
+            dx—>0╰                   dx                        dx         ╯
+
+                            dg          dh
+          =  lim h(x + dx) ———— + g(x) ————
+            dx—>0           dx          dx
+
+                   dg          dh
+          =  h(x) ———— + g(x) ————
+                   dx          dx
+
+  What if:  g(x)  =  γ(x)μ(x) ?
+  Then:                               //  and:
+                                      //
+     dg            dμ          dγ     //    ƒ(x)  =  γ(x)μ(x)h(x)
+    ————  =  γ(x) ———— + μ(x) ————    //
+     dx            dx          dx     //
+
+  Then:
+
+     dƒ          ╭       dμ          dγ  ╮             dh
+    ————  =  h(x)│ γ(x) ———— + μ(x) ———— │ + γ(x)μ(x) ————
+     dx          ╰       dx          dx  ╯             dx
+
+                       dμ              dγ              dh
+          =  h(x)γ(x) ———— + h(x)μ(x) ———— + γ(x)μ(x) ————
+                       dx              dx              dx
+
+  What if:  h(x)  =  λ(x)η(x) ?
+  Then:                               //  and:
+                                      //
+     dh            dη          dλ     //    ƒ(x)  =  γ(x)μ(x)λ(x)η(x)
+    ————  =  λ(x) ———— + η(x) ————    //
+     dx            dx          dx     //
+
+  Then:
+
+     dƒ                    dμ                  dγ                  dη                  dλ
+    ————  =  λ(x)η(x)γ(x) ———— + λ(x)η(x)μ(x) ———— + γ(x)μ(x)λ(x) ———— + γ(x)μ(x)η(x) ————
+     dx                    dx                  dx                  dx                  dx
+
+  Ok, there's a pattern.
+  We've already shown that:
+                                            ╭                    ╮
+             N                   dƒ      N  │  du[ν]   N         │
+    ƒ(x)  =  ∏ u[n](x)    =>    ————  =  ∑  │ ———————  ∏ u[n](x) │
+            n=1                  dx     ν=1 │   dx    n≠ν        │
+                                            ╰         n=1        ╯
+  for all integers:  1 < N < 4
+
+  Now, what if:
+                        N
+    ƒ(x)  =  u[N+1](x)  ∏ u[n](x)    ?
+                       n=1
+
+  The product rule gives:
+                           ╭                   ╮
+     dƒ                 N  │ du[ν]   N         │      d u[N+1]   N
+    ————  =  u[N+1](x)  ∑  │———————  ∏ u[n](x) │  +  ——————————  ∏ u[m](x)
+     dx                ν=1 │  dx    n≠ν        │         dx     m=1
+                           ╰        n=1        ╯
+
+  [...]
+
+  ===============================================================================================
+  //  Special case: Power chain rule:  ƒ(x)  =  g(x)ᴺ
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+  [...]
+
+  ===============================================================================================
+  //  Special case: Power rule:  ƒ(x)  =  xᴺ
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+  [...]
+
+  ===============================================================================================
+  //  Special case: Constant factor rule:  ƒ(x)  =  k g(x)
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+  [...]
+
+  ===============================================================================================
+  //  Generalisation: Polynomials
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+             N            //                                //
+    ƒ(x)  =  ∑ A[n](x)    //    A[n](x)  =  a[n]·p[n](x)    //    p[n](x)  =  xⁿ
+            n=0           //                                //
+
+  Power rule:                //  Constant factor rule:
+                             //
+     d p[n]                  //     d A[n]            d p[n]
+    ————————  =  n·x⁽ⁿ⁻¹⁾    //    ————————  =  a[n] ————————  =  n·a[n]·x⁽ⁿ⁻¹⁾
+       dx                    //       dx                dx
+
+  Whence (sum rule):
+
+     dƒ      N
+    ————  =  ∑ n a[n] x⁽ⁿ⁻¹⁾
+     dx     n=0
+
+  [...]
+
+  ===============================================================================================
+  //  Chain rule:  ƒ(x)  =  g( h(x) )
+  ———————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
