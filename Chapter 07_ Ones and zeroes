@@ -1798,6 +1798,21 @@ _I_N_ _P_R_O_G_R_E_S_S_
   Quasi-linear or almost linear
   mean that the non-linearity is negligible (inaudible).
 
+  /*
+    Fun fact —— ok: fact:
+
+      y  =  arctan(xπ/2)·π/2
+
+    is a pretty common waveshaper,
+    used to implement harmonic distortion,
+    when tanh is not soft enough...
+    (At least I've used it.
+    Long before I understood BLT.)
+
+    It's the transposition (in and out swapped)
+    of the frequency warping formula with  T = π .
+  */
+
 
 
 ===================================================================================================
@@ -2594,19 +2609,19 @@ _I_N_ _P_R_O_G_R_E_S_S_
     x ──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<── y    //                      ↓
          └───────┘         └───────┘         //                      α
 
-  also:                          //  then:
-               α                 //         ┌───────┐ +  α  — ┌───────┐
-               │                 //    x ──>│ b₁/a₀ ├──>(+)<──┤ a₁/a₀ │<── y
-             + ↓                 //         └───────┘    │    └───────┘
-              (+)  ——> ζ₁        //                    + ↓
-               ↑ +               //                     (+)  ——> ζ₁
-            ┌──┴──┐              //                      ↑ +
-            │ 1/z │              //                   ┌──┴──┐
-            └──┬──┘              //                   │ 1/z │
-               ↑                 //                   └──┬──┘
-               β                 //         ┌───────┐ +  ↑  — ┌───────┐
-                                 //    x ──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<── y
-                                 //         └───────┘    β    └───────┘
+  also:                      //  then:
+               α             //         ┌───────┐ +  α  — ┌───────┐
+               │             //    x ──>│ b₁/a₀ ├──>(+)<──┤ a₁/a₀ │<── y
+             + ↓             //         └───────┘    │    └───────┘
+              (+)  ——> ζ₁    //                    + ↓
+               ↑ +           //                     (+)  ——> ζ₁
+            ┌──┴──┐          //                      ↑ +
+            │ 1/z │          //                   ┌──┴──┐
+            └──┬──┘          //                   │ 1/z │
+               ↑             //                   └──┬──┘
+               β             //         ┌───────┐ +  ↑  — ┌───────┐
+                             //    x ──>│ b₂/a₀ ├──>(+)<──┤ a₂/a₀ │<── y
+                             //         └───────┘    β    └───────┘
 
   Merging the (+) elements and joining redundant instances of x and y:
 
@@ -2873,7 +2888,6 @@ _I_N_ _P_R_O_G_R_E_S_S_
                            │  cos(x) + 1
     <=>    cos(x/2)  =  ±  │ ———————————    [2]
                           ╲│      2
-
   and:
 
     cos²(x/2)  =  cos(x) + sin²(x/2)
@@ -3634,7 +3648,7 @@ _I_N_ _P_R_O_G_R_E_S_S_
            │                            │           //
            └────────────────────────────┘           //
 
-  Let's trapezoide this MOFO (Mixture-Optimised-Four-Output).
+  Let's trapezoise this MOFO (Mixture-Optimised-Four-Output).
 
                 ┌──────────────────────────>(+)──> y₄    //  ζ  =  y₁·ωc·T/2 + y₂
                 │                            ↑ —         //

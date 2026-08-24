@@ -1,0 +1,1462 @@
+###################################################################################################
+###################################################################################################
+                                    WORKING CLASS FILTER DESIGN
+###################################################################################################
+###################################################################################################
+
+###################################################################################################
+                                    Chapter I: Analytic signals
+###################################################################################################
+/*          "Want two heads on your body                                                         */
+/*           And you've got two mirrors in your hand."                                           */
+/*                                                          ——  Grace Slick (Two heads)          */
+===================================================================================================
+#07  Ewige Wiederkunft
+===================================================================================================
+
+  I had to heavily edit this section
+  because I had the (regular —— not inverse) Fourier transform wrong.
+  Mainly because I erroneously thought that integration (a pseudo-constant sum)
+  could output an average value.
+  I've searched the internet about Fourier, and it looks like a common confusion.
+  Let's fix that.
+                           b
+                          ⌠
+    What does:    int  =  | ƒ(x)dx    actually mean?
+                          ⌡
+                           a
+
+  Let's say we're in a Cartesian plane,
+  with x on the horizontal axis and  ƒ(x)  on the vertical one.
+  The range is  ]a , b]  —— a and b are values of x:
+  the first and the last values x will take during the integration.
+  /*
+    Actually  x = a  doesn't happen inside the integral.
+    It's the starting point. The point number zero.
+
+    A graduated ruler shows 1 millimetre at the second marker,
+    because a distance needs two extremities.
+    So n millimetres on the ruler will always be at marker  n + 1 .
+  */
+  So the integration horizontally spans from a to b.
+  So:
+
+    span  =  b — a
+
+  Now what is the differential (dx)?
+  It's also a value of x: the constant increment in x,
+  a horizontal segment stacked by the integration
+  over all its previous selves up to  x = b .
+  So  ƒ(x)dx  is the area of a rectangle
+  with two horizontal sides dx
+  and two vertical sides  ƒ(x) .
+  (Which is why integration is used to compute the area under curves ——
+  —— special areas that can be negative.)
+  ƒ(x)dx  is also stacked like dx, except in 2-D.
+
+  How many slices do we stack?
+  It depends on how many times you can fit dx inside span.
+  Let's call this number of slices nb.
+  Then:
+                        b — a
+    nb  =  span/dx  =  ———————
+                         dx
+
+    <=>    dx  =  span/nb
+
+    <=>    span  =  nb·dx
+
+  /*
+    nb must remain an integer,
+    so even though it never appears in integral notation,
+    it's defining dx, not the other way around.
+  */
+
+  Then, what's an average value?
+  Usually: an arithmetic mean.
+  E.g.: 2, 3, 5 and 7
+  —— four values (that's our nb).
+  Add all values together and divide by nb:
+
+   sum  =  2 + 3 + 5 + 7
+
+                       2 + 3 + 5 + 7
+   avg  =  sum/nb  =  ———————————————
+                             4
+
+        =  17/4  =  16/4 + 1/4  =  4.25
+
+  Now what would sum be in our integral?
+
+    sum  =  ƒ(a + dx) + ƒ(a + 2dx) + ... + ƒ(b — dx) + ƒ(b)
+
+  The only difference compared to the integral is that we don't multiply each term by dx.
+  Instead of stacking rectangles, we're stacking vertical segments.
+  So:
+
+    int  =  sum·dx    <=>    sum  =  int/dx
+
+  Then:
+                                     int/dx
+    avg  =  sum/nb    =>    avg  =  —————————  =  int/span
+                                     span/dx
+
+  So an integral is not averaging,
+  but it provides all the terms required to average:
+
+                     b
+               1    ⌠
+    avg  =  ——————— | ƒ(x)dx
+             b — a  ⌡
+                     a
+
+  Now what if  ƒ(x)  is a constant?
+  Let's say  ƒ(x) = 1 , a = 0 , and  b = 5 .
+  Then:
+                        //
+             5          //                        5 — 0
+            ⌠           //    nb  =  span/dx  =  ———————
+    int  =  | dx        //                         dx
+            ⌡           //
+             0          //    <=>    nb·dx  =  5
+                        //
+
+  So, no matter the values of nb and dx, their product is always 5.
+
+  If  dx = 0.01 , then  nb = 5/0.01 = 5·100 = 500 .
+  Then we'll add dx 500 times to itself and get:
+
+    int  =  500·dx  =  500·0.01  =  5  =  span
+
+  (In fact, if you don't mind heresy,
+  dx being constant, it could be factored out of the integral.)
+  Now let's say  ƒ (x)  =  k  where k is some constant.
+
+             b            b
+            ⌠            ⌠
+    int  =  | k·dx  =  k | dx  =  k·span  =  k·(b — a)
+            ⌡            ⌡
+             a            a
+
+  /*
+    This is *important*.
+    It's what I got wrong and why I re-wrote this section.
+
+    Integrating a constant doesn't output the constant,
+    it multiplies it by the integration span.
+  */
+
+  If we want k:
+
+    int  =  k·span    <=>    k  =  int/span
+
+  in our example:
+
+    k  =  int/(b — a)
+
+  /*
+    Geometrical approach:
+    Remember how each step of the integral
+    is the area of an infinitesimal rectangle of area  ƒ(x) dx.
+    If we remove  ƒ(x)  and only keep dx,
+    then the rectangles loose their vertical sides
+    and become horizontal segments.
+    Then the whole integral becomes a segment
+    of length  span  =  b — a .
+    We add dx to itself  (nb — 1)  times:
+
+              nb
+      int  =  ∑ dx  =  dx·span/dx  =  span  =  b — a
+             n=1
+  */
+
+  [Calculus 101]  https://www.desmos.com/calculator/8cnsrnpc7i
+
+  //  Sinusoids
+  Sinusoids have a modulus (period) of 2π ——
+  —— their curve is a unique motif repeated identically ad infinitum.
+
+  Sine starts at zero;
+  it rises up to 1 between zero and π/2;
+  then it falls down to zero between π/2 and π.
+  This is the first half-period,
+  it has a vertical axis of symmetry at π/2.
+  So the area under the curve, during this half-period,
+  is split in two equal halves by this axis.
+  So the areas under the curve of the two first quarter-periods
+  are equal to each other.
+  Then the second half-period is identical to the first one,
+  except mirrored across the abscissa (horizontal) axis.
+  So the two last quarter-periods are also symmetrical,
+  and also have equal area under the curve;
+  and the full period has a centre of symmetry at (0 , π) ——
+  —— and the two half-periods have complementary areas under the curve.
+  So the area under the curve of each full period cancels to zero.
+  Which means that integrating sine over a full period outputs zero.
+
+  Cosine starts at one,
+  falls down to to zero (π/2),
+  then to minus one (π),
+  then rises up to zero (3π/2),
+  then back to one (2π).
+  So it has an axis of symmetry at the middle of its full period
+  and a centre of symmetry at the middle of each half-period.
+  So the areas under the curve of the two first quarter-periods
+  cancel to zero ——
+  —— idem for the two last quarter-periods.
+  So the area under the curve of a full period adds zero to zero.
+  Which means that integrating cosine over a full period outputs zero.
+
+  Complex sinusoids in the form:  exp(jx)
+  have a magnitude (absolute value) of 1
+  and an argument of x.
+  So, in the complex plane,
+  they run along the unit-circle at a constant angular speed.
+  When  x = π  the argument is half a circle.
+  The half-circle is above the real axis.
+  Each quarter is on one side of the imaginary axis,
+  so the real area cancels out,
+  and the imaginary area is strictly positive.
+  When  x = 2π  the argument is a full circle.
+  The second half-circle is below the real axis
+  and also split in the middle by the imaginary axis.
+  So the last two quarter-circles also cancel the real area.
+  The two half-circles have the same absolute imaginary area,
+  but the first one is positive and the second one is negative;
+  so integrating the full circle outputs zero.
+  Complex sinusoids reset at 2π ——
+  —— they have the same modulus (period) as real sinusoids.
+
+  Sine has a specificity:
+  between zero and π, it's positive;
+  between zero and —π, it's negative.
+  So its full infinite curve
+  has a centre of symmetry at the origin of the Cartesian plane.
+  Which means that its right semi-plane and its left semi-plane are complementary.
+  So integrating sine from  —k  to  +k  (where k is any real positive number)
+  will always output zero.
+  Therefore, integrating a complex sinusoid from  —k  to  +k
+  (i.e. in both directions)
+  will always output a real number.
+
+  If k is an integer factor of π  ( k = nπ , n ∊ ℤ ),
+  the span:  k —  —k  =  2k  =  n2π
+  is an integer factor of 2π,
+  then:  2k  mod 2π  =  0 .
+
+  Therefore:
+    *integrating phasors over a bilateral window
+    spanning an integer factor of π
+    on both sides of the origin
+    outputs *zero**.
+
+  /*
+    In fact, cosine also has a symmetry ——
+    —— except axial:
+    the ordinate (vertical) axis cuts its bi-directional infinite range in half.
+    Cosine's and sine's respective symmetries can be expressed as such:
+
+      cos(—x) = cos(x)    &&    sin(—x) = —sin(x)
+
+    or: cosine is an *even* function;
+    sine is an *odd* function.
+    https://en.wikipedia.org/wiki/Even_and_odd_functions
+
+    /*
+      Sine being odd means that bilateral integration,
+      as long as it's symmetrical around zero,
+      always outputs zero ——
+      —— not necessarily over an integer multiple of π.
+      Think of Penelope unweaving her shroud at night.
+      Forward time is day. Backward time is night.
+      You know the day destroys the night.
+      Bilateral integration synchronises:
+
+        night + day  =  night — night  =  day — day  =  zero.
+    */
+  */
+
+  [Integrating sinusoids]  https://www.desmos.com/calculator/d48phf8pfv
+
+  //  Back to Fourier!
+  What if we want to retrieve the complex amplitude of a partial?
+  Let's start with a simple case: the signal is only one complex sinusoid,
+  and its amplitude and phase are constant:
+
+    ƒ(t)  =  X(ω) exp(jωt)
+
+    <=>    X(ω)  =  ƒ(t)/exp(jωt)
+
+                 =  ƒ(t) exp(—jωt)
+
+  Let's expand Euler's formula and see what it means in terms of cosine and sine:
+
+    exp(jωt)exp(—jωt)  =  { cos(ωt) + j·sin(ωt) }{ cos(ωt) — j·sin(ωt) }
+
+                       =  cos²(ωt) — j·cos(ωt)·sin(ωt) + j·cos(ωt)·sin(ωt) — j²·sin²(ωt)
+
+                       =  cos²(ωt) + sin²(ωt)
+
+  (Remember Pythagoras:  opposite² + adjacent²  =  hypotenuse²    <=>    cos² + sin²  =  1 )
+
+     exp(jωt) exp(—jωt)  =  1        //  ok.
+
+  /*
+    This, by the way, is a special case of:
+
+      z·conj(z)  =  ( Re(z) + j·Im(z) )( Re(z) — j·Im(z) )
+
+                 =  Re(z)² — j·Re(z)Im(z) + j·Re(z)Im(z) + Im(z)²
+
+                 =  Re(z)² + Im(z)²  =  |z|²
+  */
+
+  Now let's assume that our spectrum contains several partials in a harmonic relationship,
+  all constant over time in amplitude and phase.
+  Harmonic means that their frequencies are related by integer factors:
+
+                                         //  where ω₀ is the fundamental frequency (in rad./s),
+             N                           //  N is the number of harmonics,
+    ƒ(t)  =  ∑ α[n]cos( nω₀t + φ[n] )    //  N — 1  is the number of overtones,
+            n= 1                         //  α[n]  are the real amplitudes,
+                                         //  φ[n]  are the phases.
+
+  ω₀ is an angular frequency in radians per second.
+  Its value in Hertz is  f₀ = ω₀/2π .
+  Its corresponding period is  T₀ = 1/f₀ = 2π/ω₀ .
+  Each partial has an angular frequency  n ω₀ ,
+  which, in Hertz gives:  f_n  =  nω₀/2π
+  and a period:  T_n = 2π/nω₀ .
+  If we integrate  ƒ(t)  with respect to t over the range [0 , T₀],
+  the fundamental will have reached a full cycle
+  and its positive and negative half will cancel out.
+  If we integrate over a time window that is an integer multiple of T₀
+  (say  μT₀ , where μ is a strictly positive integer),
+  the fundamental will have reached μ full cycles and cancel out as well.
+  Since T₀ is an integer multiple of T_n, all overtones will also cancel out.
+  /*
+    Let's check:
+
+      α[n]cos( nω₀t + φ[n] )  =  α[n]cos( nω₀·( t — t₀[n] ) )
+
+    at  t = μT₀ :
+                                                ╭     ╭    2π           ╮ ╮
+      α[n]cos( nω₀·( μT₀ — t₀[n] ) )  =  α[n]cos│ nω₀·│ μ ———— —  t₀[n] │ │
+                                                ╰     ╰    ω₀           ╯ ╯
+      =  α[n]cos( nμ2π — nω₀t₀[n] )
+
+    n and μ are integers, so:
+
+      nμ2π  mod 2π  =  0
+
+      <=>    nμ2π — nω₀t₀[n]  mod 2π  =  —nω₀t₀[n]
+
+    so:
+
+      α[n]cos( nω₀t + φ[n] )  =  α[n]cos( —nω₀t₀[n] )
+
+                              =  α[n]cos( φ[n] )
+
+    Now, at  t = 0 :
+
+      α[n]cos( nω₀( 0 — t₀[n] ) )  =  α[n]cos( 0 — nω₀t₀[n] )
+
+                                   =  α[n]cos( —nω₀t₀[n] )
+
+                                   =  α[n]cos( φ[n] )
+    Ok.
+  */
+  So integrating  ƒ(t)  during an integer multiple of T₀
+  will always output zero ——
+  —— even when N tends to infinity:
+
+             μT₀          μT₀
+            ⌠            ⌠  N
+    int  =  | ƒ(t)dt  =  |  ∑ α[n]cos( nω₀t + φ[n] )dt  =  0
+            ⌡            ⌡ n=1
+             0            0
+
+  Now let's say we want to find α[κ] (where  1 ≤ κ ≤ N  is a strictly positive integer).
+
+  We can seek inspiration in what we did a few lines ago for  X(ω) :
+  multiply  int  with  exp( —j κ ω₀ t ) .
+  We've just found that every other partial will cancel out,
+  so let's isolate  α[κ] cos( κ ω₀ t  +  φ[κ] ) :
+
+
+    α[κ]cos( κω₀t + φ[κ] ) exp( —jκω₀t )
+
+             exp{ +j( κω₀t + φ[κ] ) } + exp{ —j( κω₀t + φ[κ] ) }
+    =  α[κ] ————————————————————————————————————————————————————— exp( —jκω₀t )
+                                      2
+
+             exp{ +jκω₀t + jφ[κ] — jκω₀t }            exp{ —jκω₀t + jφ[κ] — jκω₀t }
+    =  α[κ] ———————————————————————————————  +  α[κ] ———————————————————————————————
+                           2                                       2
+
+        α[κ]                 α[κ]                          //  Let's clean up
+    =  ————— exp( jφ[κ] ) + ————— exp( jφ[κ] — 2jκω₀t )    //  the right-most term
+         2                    2                            //  in isolation first.
+
+    exp( jφ[κ] — 2jκω₀t )  =  cos( —2κω₀t + φ[κ] ) + j·sin( —2κω₀t + φ[κ] )
+
+                           =  cos( 2κω₀(t — t₀[κ]) ) — j·sin( 2κω₀·(t — t₀[κ]) )
+
+  2κ  is an integer,
+  so both sine and cosine will cancel out if we integrate over  μΤ₀ .
+  Perfect, what's left?
+
+   α[κ]                  //  A complex number in exponential form,
+  ————— exp( j φ[κ] )    //  whose magnitude is  α[κ] / 2
+    2                    //  and whose argument is  φ[κ]
+
+  So:
+
+     μT₀                                            μT₀
+    ⌠  N                                           ⌠  α[κ]
+    |  ∑ α[n]cos( nω₀t + φ[n] )exp( —jκω₀t )dt  =  | ————— exp( jφ[κ] )dt
+    ⌡ n=1                                          ⌡   2
+     0                                              0
+                            μT₀
+        α[κ]               ⌠
+    =  ————— exp( j φ[κ] ) | dt
+         2                 ⌡
+                            0
+
+        α[κ]
+    =  ————— exp( jφ[κ] )(μT₀ — 0)
+         2
+
+            α[κ]
+    =  μT₀ ————— exp( jφ[κ] )
+             2
+
+  If we define:
+
+              α[κ]
+    X(κ)  =  ————— exp( jφ[κ] )
+               2
+
+  then:
+                      μT₀
+                 1   ⌠   N
+      X(κ)  =  ————— |   ∑ α[n]cos( nω₀t + φ[n] )exp( —jκω₀t )dt
+                μT₀  ⌡ n = 1
+                      0
+  Then:
+
+    α[κ]  =  2·|X(κ)|
+
+  and:
+
+    φ[κ]  =  arg( X(κ) )
+
+  Let's clean that up.
+  First: μ is undefined (apart from positive integer).
+  What's the best value for it?
+  You might recognise:  avg  =  int / span  from earlier.
+  So our formula for  X(κ)  is an average.
+  At the end of a period T₀, everything cancels out
+  except the amplitude and phase we're extracting.
+  So it would seem that μ doesn't really matter ——
+  —— because if  X(κ)  is constant, it's equal to its average value.
+  But if we drop this assumption, then we need a span as short as possible:
+  the smallest positive integer is 1.
+  So we can drop μ: if amplitude and phase are constant, no difference ——
+  —— if not: better approximation.
+  Ok.
+
+  We start at zero... What does this zero mean?
+  It's not an absolute fixed point in time: it's just the beginning of T₀.
+  So the fact that it looks like a referential is actually confusing,
+  since our referential is actually T₀.
+  We don't care where the integration starts or where it ends:
+  as long as it lasts exactly T₀.
+  The cleanest way to display T₀ as the only referential,
+  while preserving the integration span,
+  is probably to split T₀ in its middle.
+  So the range of integration becomes:  [—T₀/2 , +T₀/2].
+  Ok, minus and plus still imply a zero,
+  but (1) we don't see it;
+  and (2) our integration is now symmetrical around this zero ——
+  —— which (as you undoubtedly remember) cancels any sine component ——
+  —— which means any imaginary component...
+  /*
+    What we're building now is a hybrid form of the Fourier series.
+
+    https://en.wikipedia.org/wiki/Fourier_series#Amplitude-phase_form
+
+    Except we're mixing real and complex trigonometry —— which no one seems to do ——
+    —— as if the equal sign in Euler's identity was somehow suspicious.
+
+    I stopped here to mention this because:
+    Joseph Fourier derived this system of equations
+    while studying the propagation of heat in a metal rod.
+    So everywhere we use time as a variable,
+    Joseph had a one-dimensional space.
+    Since his experiment consisted in applying heat in the middle of the rod
+    and studying the dissipation in both directions,
+    splitting T₀ in half was actually the straightforward move from his perspective.
+  */
+
+  What else?
+  Our spectrum could very well have infinite harmonics.
+  So N doesn't have to be undefined.
+  Let:    N = ∞ , then:
+
+                   +T₀/2                                         //
+               1   ⌠  ∞                                          //  where  T_₀ = T₀
+    X(κ)  =  ————— |  ∑ α[n]cos( nω₀t + φ[n] )exp( —jκω₀t )dt    //  for the sake of symmetry
+              T_₀  ⌡ n=1                                         //  (and OCDs).
+                   —T₀/2                                         //
+
+  [Fourier series]  https://www.desmos.com/calculator/zhamhdokfl
+
+  Wow! It actually does work, like, for real!
+
+  How much further can we push?
+  Really, we have two parameters left:  ω₀  and  T₀  ——
+  —— whose relationship is:
+
+    f₀  =  1/T₀  ╮      ╭  ω₀  =  2π/T₀
+                 ├  =>  ┤
+    ω₀  =  2πf₀  ╯      ╰  T₀  =  2π/ω₀
+
+         ╭  1/T₀  =  ω₀/2π
+    <=>  ┤
+         ╰  ±T₀/2  =  ±2π/2ω₀  =  ±π/ω₀
+
+  So, really, we have one parameter:  ω₀  ——
+  —— the fundamental frequency —— or the lowest frequency in the spectrum.
+  Or: since each partial's frequency is an integer multiple of ω₀,
+  add it to one partial's frequency, you get the next partial's frequency;
+  so, in the frequency domain, ω₀ is the distance between any two partials:
+  let  p[n]  and  p[n+1]  be two consecutive partials in our spectrum,
+  and let  ω[n]  and  ω[n+1]  be their respective frequencies.
+  Then:
+
+    #  p[n]  =  cos( ω[n]t + φ[n] )
+             =  cos( nω₀t + φ[n] )
+
+    #  p[n+1]  =  cos( ω[n+1]t + φ[n+1] )
+               =  cos( (n + 1)ω₀t + φ[n+1] )
+
+    =>    ω[n+1] — ω[n]  =  (n + 1)ω₀ — nω₀
+                         =  nω₀ + ω₀ — nω₀
+                         =  ω₀
+
+  So it's the difference between consecutive frequencies ——
+  —— so, basically a non-infinitesimal differential.
+  Its limit values are:
+
+    (1)  ∞  ——>  our spectrum is infinitely ultrasonic
+                 and its partials are infinitely apart;
+
+    (2)  0 (DC)  ——>  our spectrum's fundamental is a constant
+                      and its partials are infinitely close to each other.
+
+  Case (1) is pretty much the answer to
+  "what's the most useless mathematical model of which an engineer can think?"...
+  Case (2) is a non-harmonic signal with a continuous spectrum.
+  That's interesting.
+  Discrete vs. continuous doesn't have to be a dichotomy:
+  continuous is a limit-case of discrete.
+  Then, instead of non-infinitesimal differential,
+  ω₀ is a non-necessarily-infinitesimal differential.
+  In syllogistic, when reversing propositions, necessity becomes contingency,
+  which, in a deterministic universe,
+  is indistinguishable from potentiality.
+  So ω₀ is a potentially infinitesimal differential.
+  Choose your favourite adverb (your favourite accident),
+  it's *essentially* (in the most rigorously literal meaning) ——
+  —— a differential.
+
+  Let's rename stuff:
+
+    ω₀  <——  dω    │     nω₀  <——  ndω  =  ω    │     κω₀  <——  κdω  =  ω_p
+                   │    α[n]  <——  α(ω)         │    α[κ]  <——  α(ω_p)
+                   │    φ[n]  <——  φ(ω)         │    φ[κ]  <——  φ(ω_p)
+                   │                            │    X(κ)  <——  X(ω_p)
+  Then:
+
+    ±T₀/2  =  ±π/dω
+
+  and:
+
+    1/T_₀  =  dω/2π
+
+  So:
+               +π/dω                                                //  Ok, this can look vertiginous.
+               ⌠  ╭  +∞                         ╮                   //  But we haven't modified anything
+               |  │ ⌠                       dω  │                   //  except for the variables' names.
+    X(ω_p)  =  |  │ | α(ω)cos( ωt + φ(ω) ) ———— │exp(—j ω_p t)dt    //
+               |  │ ⌡                       2π  │                   //  The terms inside parenthesis are
+               ⌡  ╰  dω                         ╯                   //  the updated expression of  ƒ(t) ,
+               -π/dω                                                //  the full signal.
+
+  Can our spectrum have a constant partial?
+  Let's define:
+
+    ω_dc = 0
+
+  and:
+
+    p_dc  =  α(0)cos( ω_dc (t — t₀) )    (the constant partial)
+
+  We get:
+
+   p_dc  =  α(0)cos(0)  =  α(0)
+
+  Then:
+
+    p_dc·exp(—j ω_p t)  =  α(0)exp(—j ω_p t)
+
+                        =  α(0)cos(—ω_p t) + j·α(0)sin(—ω_p t)
+
+                        =  α(0)cos(ω_p t) — j·α(0)sin(ω_p t)
+
+  Since ω_p is an integer multiple of dω,
+  this will cancel to zero when we integrate over time.
+  Now can we use the formula to get  α(0) ?
+
+    p_dc exp(—j ω_dc t)  =  p_dc exp(0)  =  p_dc  =  α(0)
+
+  Then if we integrate from  —π/dω  to  +π/dω ,
+  the span is:
+
+     π  —  —π       2π
+    ——————————  =  ————
+        dω          dω
+
+  So:
+
+    +π/dω
+    ⌠                           dω                      dω        2π
+    | α(0)cos( ω_dc (t — t₀) ) ———— exp(—j ω_dc t)  =  ———— α(0) ————
+    ⌡                           2π                      2π        dω
+    -π/dω
+
+    =  α(0)  =  Χ(ω_dc)  =  X(0)
+
+
+  If it's constant over time, we get the exact value,
+  if not we get the average value over the window of temporal integration.
+  Perfect: we can start the frequency integration at zero.
+  The uncertainty about the DC partial
+  is what prevented us from using a bilateral complex integral.
+  Now, we just have to check what happens to negative-frequency partials
+  once multiplied with our normalising sinusoid:
+
+    α(ω) cos( ωt + φ(ω) ) exp(—j ω_p t)
+
+             exp( jωt + jφ(ω) ) + exp( —jωt — jφ(ω) )
+    =  α(ω) ————————————————————————————————————————— exp(—j ω_p t)
+                                2
+
+        α(ω)    ╭                     ╮    α(ω)    ╭                      ╮
+    =  ————— exp│jωt + jφ(ω) — j·ω_p·t│ + ————— exp│—jωt — jφ(ω) — j·ω_p·t│
+         2      ╰                     ╯     2      ╰                      ╯
+
+        α(ω)    ╭     ╮   ╭           ╮    α(ω)    ╭      ╮   ╭            ╮
+    =  ————— exp│jφ(ω)│exp│j(ω — ω_p)t│ + ————— exp│—jφ(ω)│exp│—j(ω + ω_p)t│
+         2      ╰     ╯   ╰           ╯     2      ╰      ╯   ╰            ╯
+
+  The frequencies become:  ω — ω_p  and  —ω — ω_p .
+  All these terms are integer multiples of dω,
+  so their partials will all cancel to zero once we integrate over time —— except if  ω = ω_p  ——
+  —— then the negative frequency doubles (still integer multiple, alles gut);
+  and the positive one becomes zero.
+  Only  X(ω_p)  is left.
+  /*
+    Notice (or remember) that the negative—frequency part of cosine has an opposite phase ——
+    —— cosine is the sum of a complex conjugate pair.
+    This explains why it's real:
+
+      z + conj(z)  =  Re(z) + j·Im(z) + Re(z) — j·Im(z)
+
+                   =  2·Re(z)
+
+    So if we want to split our cosine and go bilateral,
+    we need to address this matter.
+    We'll need the signum (or sign or sgn) function:
+
+      sign(x)  =  (x == 0.0)  ?  0  :  x / abs(x)
+
+    that is:
+       0  if x is null
+      —1  if it's negative
+      +1  if it's positive
+    (assuming x is real,
+    otherwise it normalises its magnitude to 1
+    and places it on the unit—circle).
+    //  https://en.wikipedia.org/wiki/Sign_function
+
+    Then, since:
+
+      x ≥ 0  <=>  |x| = x
+
+    and:
+
+      x < 0  <=>  |x| = —x
+
+    if we substitute:
+
+      φ(ω)  <——  φ(|ω|)·sgn(ω)
+
+    we get:
+
+      ω > 0    =>    jωt + φ(|ω|)·sgn(ω)  =  jωt + φ(ω)
+
+    and:
+
+      ω < 0    =>    jωt + φ(|ω|)·sgn(ω)  =  jωt — φ(—ω)
+
+    and:
+
+      ω = 0    =>    jωt + φ(|ω|)·sgn(ω)  =  0
+
+    Finally:    α(—ω)  =  α(ω)
+    so we can use  α(|ω|)  for both the positive and negative component.
+    Perfect.
+  */
+  Go.
+               +π/dω
+               ⌠  ╭ +∞                                                 ╮
+               |  │ ⌠  α(|ω|)    ╭              ╮   ╭           ╮  dω  │
+    X(ω_p)  =  |  │ | ——————— exp│jφ(|ω|)·sgn(ω)│exp│j(ω — ω_p)t│ ———— │dt
+               |  │ ⌡    2       ╰              ╯   ╰           ╯  2π  │
+               ⌡  ╰ -∞                                                 ╯
+               -π/dω
+
+  Meet the Fourier transform (not inverse this time).
+  //  https://en.wikipedia.org/wiki/Fourier_transform
+
+  You probably won't encounter this way of expressing it elsewhere,
+  but we've built it together: you know it's valid.
+  (Shall I dare call it the Working-class Fourier transform?)
+  It doesn't have one single consensual expression
+  because the division by 2π (being a constant)
+  can be placed anywhere.
+  We've left it inside the inverse transform ( ƒ(t) , everything inside parenthesis ),
+  that's one possibility;
+  we'll leave it exactly that way to keep a trace of the original  1/T₀  (dω/2π) visible;
+  (also, because: nice side effect: it converts rad/s into Hz —— section #04).
+  It's often left with the inverse transform but moved outside of its integral.
+  It can be transferred to the (not inverse) transform, or split in half:
+
+               1       1      //  and equally shared
+    1/2π  =  ————— · —————    //  by each transform
+             √{2π}   √{2π}    //  (inverse and not)
+
+  for the sake of symmetry.
+  /*
+    I get the appeal:
+    if your whole ecosystem is symmetrical,
+    you only have to process half of it.
+
+    Obsessing over palindromes can nourish art ——
+    —— ask Anton Webern;
+    or even sociology ——
+    —— ask Guy Debord.
+  */
+
+  Of course, no one bothers with absolute values and the sgn function:
+  the phase is quietly assumed automatically reversed.
+  In fact, you rarely encounter both integrals together like this:
+  X(ω_p)  integrates  ƒ(t) exp(—j ω_p t)  over time,
+  and  ƒ(t)  integrates  X(ω_p)  over frequency ——
+  ——  α(ω)  and  φ(ω)  being embedded in  X(ω_p) .
+
+  Finally, since  π/dω  tends to infinity when dω tends to zero
+  (which it should, by definition of "infinitesimal"),
+  the range of the temporal integration is classically simplified as  [—∞ , +∞]  ——
+  —— which gives a beautiful symmetry to the nested integrals,
+  but erases the record of how we got there (by stretching the Fourier series).
+  Plus, free usage of the differential as a regular number is highly non-conventional ——
+  —— that's where we diverge the most.
+  /*
+    EDIT:
+    I complain a lot about zero and infinity being multivalued
+    and their symbols being imprecise in that regard,
+    as well as about infinitesimals being exclusive to analytical mathematics (i.e. banned from algebra),
+    while they've had a counterpart in physics for decades (Plank units...).
+    I'm not apologising, just warning: be ready for grumpy grandpa grumping.
+
+    Матрёшка:
+    Writing this comment is the exact moment when I decided to define my own Calculus environment:
+    (apparently in surprisingly frequent concord with Bernhard Riemann)
+    attempting to unify languages and restore the archaic hierarchy:
+    Calculus is maths, algebra is maths;
+    maths are the language of science;
+    science describes nature.
+    If this bores you: skip section #11 "The ι manifesto"...
+  */
+
+
+
+===================================================================================================
+#08  ἀρχαί
+===================================================================================================
+
+  Let's go full-on first principles.
+
+  //  Change
+  Let  ƒ(x)  be some function of some variable x;
+  and a and b be any values of x (they can be equal if they will).
+  Let's agree to stick to the largest set of numbers we need: complex numbers
+  (which include real numbers, positive integers, etc.).
+
+  When x evolves from a to b
+  (I didn't write "increase" because it could very well be a decrease or a stagnation) ——
+  ——  it goes from  x = a  to  x = b .
+  Since:    b  =  b + a — a  =  a  +  (b — a) ,
+  going from a to b is adding  (b — a)  to a.
+  Then  (b — a)  is the change of x between a and b.
+  Let's call it dx.
+  Then:
+
+    b  =  a + dx
+
+  So:    ƒ(b)  =  ƒ(a + dx)
+  Which means that, when x changes from a to b,
+  ƒ(x)  changes from  ƒ(a)  to  ƒ(b)  =  ƒ(a + dx) .
+  The difference between  ƒ(b)  and  ƒ(a)  is:
+
+    ƒ(b) — ƒ(a)  =  ƒ(a + dx) — ƒ(a)
+
+  That's the change of  ƒ(x)  when x goes from a to b.
+  Let's call it dƒ.
+
+  Since a and b can be anything, we could decide that:  a = x .
+  Then dx would express the change of x from any value;
+  and  ƒ(x + dx) — ƒ(x)  would be the corresponding change of  ƒ(x) .
+
+  //  Rate
+  The Latin verb "reor, reri", whose past participle is "ratus, -a, -um", means
+  "to reckon, to compute, to think, to judge, ..." —— basically: "to use a brain".
+  It gave "ratio": "reason" (sometimes loosely confused with "cause"),
+  which passed to English and German with the meaning of "arithmetical division".
+  Reor (or rather its participle ratus, -a, -um) also gave "rate"
+  which describes a proportional relationship between two things.
+
+  E.g.:  if there are 1,000,000 flat-earthers amongst 8,000,000,000 Earthers:
+
+       1,000,000           1
+    ———————————————  =  ———————  =  1/8  E—3  =  0.125·0.001
+     8,000,000,000       8,000
+
+    =  0.000125    is the rate of flat-earthers.
+
+  Times 100 gives you a percentage:  0.0125 % .
+
+  Or, if you've walked 1 km in ten minutes:
+
+     1,000
+    ———————  =  10/6  =  1 + 2/3 m/s  is your average walking rate.
+      600
+
+  (A frequency —— cycles or radians per second —— is therefore a rate.
+  Just like any speed.)
+
+  //  Rate of change
+  If we want to know how much  ƒ(x)  changes in proportion of a corresponding change in x,
+  we'll get:
+
+     dƒ       ƒ(x + dx) — ƒ(x)        //  The ratio of changes,
+    ————  =  —————————————————        //  commonly referred to as *rate of change*
+     dx             dx                //  or first derivative.
+
+  Except that this formula implies that  dƒ/dx  is constant:
+
+     dƒ                   ƒ(x + dx) — ƒ(x)
+    ————  =  k    <=>    —————————————————  =  k
+     dx                          dx
+
+                  <=>    ƒ(x + dx)  =  k·dx + ƒ(x)
+
+  If we know the initial value:
+
+    ƒ(0)  =  c
+
+    =>    ƒ(0 + dx)  =  k dx  +  ƒ(0)  =  k dx  +  c
+
+  Since dx can be anything,
+  we've just found the generic expression of functions with a constant rate of change:
+
+    ƒ(x)  =  k x  +  ƒ(0)
+
+  where k is constant (notice that nothing prevents any one of the terms from being zero).
+
+  These functions are called linear because they're the equations of straight lines.
+  If k is non-zero, a linear function is called affine.
+  Both terms are very frequently used interchangeably.
+  Although, if k and c are null,
+  ƒ(x)  =  0  is a straight line (the abscissa axis),
+  yet the function is not affine per se.
+  (We'll properly deal with this terminology when discussing polynomials
+  in Chapter V "Poles and zeroes".)
+
+  //  Calculus
+  The big idea of Calculus is to pick two points on a non-linear function,
+  assume it's linear between these two points,
+  repeat at fixed horizontal intervals to get an approximation;
+  then reduce the interval as much as possible to get a more precise approximation;
+  the ultimate limit being zero.
+  But dividing by dx when dx equals zero won't help,
+  so we explicitly express it as a limit.
+
+  (We're sticking to Riemann integrals for now,
+  so continuity is a requirement of integration until further notice ——
+  —— real numbers as well.)
+  https://en.wikipedia.org/wiki/Riemann_integral
+  https://en.wikipedia.org/wiki/Bernhard_Riemann
+
+  When I write "assume it's linear between these two points",
+  "linear" could have two meanings: constant or affine.
+  Affine leads to trapezoidal integration
+  (which will have to wait for Chapter VII "Ones and zeroes").
+  Constant means we build our functions with successive flat steps in a staircase fashion
+  (which is the Leibnizian standard).
+  E.g.:
+
+    ƒ(x)  =  1/x
+                           1        1             x — x — dx
+                        ———————— — ———           ————————————
+           dƒ            x + dx     x              x² + x·dx
+    =>    ————  =  lim ————————————————  =  lim ——————————————
+           dx     dx—>0       dx           dx—>0      dx
+
+                         — dx/dx                —1
+                =  lim  ——————————  =  lim  ———————————
+                  dx—>0  x²+ x·dx     dx—>0  x² + x·dx
+
+  As dx tends to zero, so does  x dx ,
+  so  x²  +  x dx  tends to x²,
+  so:    dƒ/dx  =  -1/x² .
+  This rate of change is always negative (if x is real)
+  so the function is always decaying.
+  /*
+    Look at that:
+    the function is undefined at zero,
+    its rate of change is symmetrical around it...
+    If the curve is your frame of reference
+    (meaning you travel on it and see everything else moving) ——
+    you'll jump from minus infinity to plus infinity without noticing:
+    your acceleration will remain smoothly continuous.
+    (You may experience an infinitesimal blackout... but maybe it just happened, how would you know?)
+    As if real numbers were on a circumference
+    where minus infinity and plus infinity were the same point.    #makeRiemannSphereGreatAgain
+    Pretty much like if you're on a moon of a moon of a moon of a moon of a planet of a star,
+    and look at the sky,
+    everything revolves around you ——
+    —— short-sighted frames of reference make the marvellous trivial.
+  */
+
+  Now what if:
+                         //  4 cases:
+                         //    (1)  a and b are constant:
+           b             //         X is constant and its rate of change is null;
+          ⌠              //    (2)  a is constant, b is not:
+    X  =  | ƒ(x)dx  ?    //         X is a function of b and should be written  X (b) ;
+          ⌡              //    (3)  b is constant, a is not:
+          a              //         X is a function of a and should be written  X (a) ;
+                         //    (4)  a and b are varying:
+                         //         X is a function of both and should be written  X (a , b) .
+
+  Let's go with case (2):                      b + db     b
+                                              ⌠          ⌠
+                                              | ƒ(x)dx — | ƒ(x)dx
+               b                              ⌡          ⌡
+              ⌠                  dX            a          a
+    X (b)  =  | ƒ(x)dx    =>    ————  =  lim —————————————————————
+              ⌡                  db     db—>0         db
+               a
+
+                   ╭  b + db        b             b          ╮
+                   │ ⌠       dx    ⌠       dx    ⌠       dx  │
+           =  lim  │ | ƒ(x) ———— + | ƒ(x) ———— — | ƒ(x) ———— │
+             db—>0 │ ⌡       db    ⌡       db    ⌡       db  │
+                   ╰  b             a             a          ╯
+
+                   b + db        //
+     dX           ⌠       dx     //  I can think of three paths
+    ————  =  lim  | ƒ(x) ————    //  by which we can go from here.
+     db     db—>0 ⌡       db     //  Let's try all three.
+                   b             //
+
+  //  First path (the Clean):
+  We're dividing the integral by:  db  =  b + db — b  =  span .
+  So we're computing the average of all the values between  ƒ(b)  and  ƒ(b + db) .
+  As db tends to zero,  b + db  tends to b,
+  and  ƒ(b + db)  tends to  ƒ(b) .
+  So the limit case is the average value of a constant, ergo:
+
+    dX/db  =  ƒ(b)
+
+  //  Second path (the Unorthodox):
+
+                   b + db        //  Induction time!
+     dX           ⌠       dx     //  3 possibilities:
+    ————  =  lim  | ƒ(x) ————    //    (1)  db < dx
+     db     db—>0 ⌡       db     //    (2)  db > dx
+                   b             //    (3)  db = dx
+
+  Possibility (1):  db < dx
+  Then:  b + dx  >  b + db .
+  The integral exceeds its prescribed range.
+  Possibility (1) wasn't a possibility.
+
+  Possibility (2):  db > dx
+  Then db could be smaller.
+  The limit is not a limit.
+  Possibility (2) wasn't a possibility.
+
+  Possibility (3):  db = dx
+  Then:  b + dx  =  b + db .
+  The integral has only one step:
+
+                   b + db
+     dX           ⌠       dx                      dx
+    ————  =  lim  | ƒ(x) ————  =  lim  ƒ(b + db) ————
+     db     db—>0 ⌡       db     db—>0            db
+                   b             db=dx
+
+          =  lim  ƒ(b + db)  =  ƒ(b)
+            db—>0
+  /*
+    Why this is unorthodox:
+      seeking two limits at once could be thought of as equivalent to implying that:  0/0 = 1 .
+    Which tends to hold for odd functions in Calculus,
+    where limits and rates of change and limits *of* rates of change work around the aporia.
+    /*
+      Take  x/x  or  sin(x)/sin(x)  or [whatever] over [the same whatever] ——
+      —— the curve is 1 everywhere and undefined when [whatever] is zero.
+      But since it's 1 before and after, the rate of change is zero everywhere,
+      and as you tend to 0/0,
+      no rate of change can make the ratio escape 1.
+      This, though, relies on a rather bold petitio principii:
+        constant rational functions have no domain discontinuity...
+      A principle every one is free to reject or admit.
+      Even functions, like  x/x²  break this tendency ——
+      —— as well as some asymmetrical functions like  (exp(x) — 1)/4x² .
+    */
+    Whereas, in algebra,
+    0/0 is always multi—valued (and therefore undefined):    x·0 = 0  =>  0/0 = x
+    i.e. literally anything —— pretty similarly to infinity.
+    /*
+      I personally consider zero alone already multivalued by itself.
+      It's not like  0/0  has a second term by the way.
+      Quote me at your own risks.
+    */
+
+    The reason why I pause on this will be obvious in section #11.
+  */
+
+  //  Third path (the Clumsy)
+  Let's give possibility (1) a second chance.
+  We're looking at the limit of db.
+  So let's assume everything else is fixed.
+  That is: dx is infinitesimal but not undefined nor literally zero.
+  Then the integral won't exceed its prescribed span:
+  it will remain stuck at step zero:  ƒ(x)  =  ƒ(b)
+  —— because  b + dx  would exceed  b + db , it never happens.
+  So  ƒ(x)  =  ƒ(b)  everywhere inside the integral;
+  so it's constant;
+  so it can be extracted (factored out).
+  Then:
+                          b + db
+     dX            ƒ(b)  ⌠
+    ————  =  lim  —————— | dx
+     db     db—>0   db   ⌡
+                          b
+
+                   ƒ(b)
+          =  lim  —————— (b + db — b)
+            db—>0   db
+
+                        db
+          =  lim  ƒ(b) ————  =  ƒ(b)
+            db—>0       db
+  /*
+    Why clumsy?
+    Because if you actually compute an integral with a null span,
+    you're not stuck with the first value: you get zero.
+    Remember:  dx  =  span / nb
+    —— if span is zero, so is dx, then each step is multiplied by zero.
+    But there's zero step... or one step? (the zeroth one?)
+    The clumsy path fights hard against my intuition.
+    If it serves yours, good, go with it.
+    If not, choose your favourite path and do not let the other two pollute your focus!
+    I personally prefer the Clean (as my biased nomenclature suggests),
+    but actually came up with the Unorthodox first
+    and derived the clumsy by trying to fix it.
+    The Clean arrived last...
+    The destination felt obvious, the path really wasn't.
+  */
+
+  Ok, so:  ƒ(x)  is the rate of change (or first derivative) of  X(x) .
+  So  X(x)  is an *antiderivative* of  ƒ(x) .
+
+  Finding the rate of change of a function is called differentiating.
+  We've just started to show how differentiation and integration are reciprocal operations.
+  This suggests that we could retrieve a function from its first derivative...
+  Spoiler: yes, but...
+  Is it enough?
+
+  //  E.g.
+                                                            ___
+    g(x)  =  x² — x — 1        &&        h(x)  =  x² — x + √ 5
+
+     dg           (x + dx)² — (x + dx) — 1 — x² + x + 1
+    ————  =  lim ——————————————————————————————————————
+     dx     dx—>0                  dx
+
+                  x² + 2xdx + dx² — x — dx — 1 — x² + x + 1
+          =  lim ——————————————————————————————————————————
+            dx—>0                    dx
+
+                  2x·dx + dx² — dx
+          =  lim ——————————————————
+            dx—>0       dx
+
+                  ╭     dx     dx²    dx  ╮
+          =  lim  │ 2x ———— + ———— — ———— │
+            dx—>0 ╰     dx     dx     dx  ╯
+
+          =  2x — 1 + lim dx
+                     dx—>0
+
+          =  2x — 1
+                                              ___             ___
+     dh           x² + 2xdx + dx² — x — dx + √ 5  — x² + x — √ 5
+    ————  =  lim ————————————————————————————————————————————————
+     dx     dx—>0                       dx
+
+                  ╭     dx     dx²    dx  ╮
+          =  lim  │ 2x ———— + ———— — ———— │
+            dx—>0 ╰     dx     dx     dx  ╯
+
+          =  2x — 1  =  dg/dx
+
+  So if we're given the differential equation:  dƒ/dx  =  2 x  —  1 ,
+  the solution could be  g(x)  or  h(x) ,
+  or: replace the constant terms by what you like,
+  it will never affect the rate of change.
+  (Because it's identical in the output at x and at  x + dx
+  so the subtraction in the numerator will always cancel it.)
+  So the differential equation has an infinity of solutions
+  (an infinity of possible constant terms):
+
+    ƒ(x)  =  x² — x + k        //  where k can be any constant
+
+  But now say we know one value of  ƒ(x) :
+
+    ƒ(λ)  =  ε
+
+  Then:
+
+    λ² — λ + k  =  ε    <=>    k  =  ε — λ² + λ
+
+                         =>    ƒ(x)  =  x² — x + (ε — λ² + λ)
+
+  If  λ = 0  then  k = ε .
+  So one value of a function and its rate of change (first derivative)
+  are sufficient to retrieve its expression.
+  Knowing the value at zero is optimal —— but not required.
+  The known value is often referred to as "initial conditions",
+  which could sound like a mandatory zero —— but nope.
+  /*
+    Lagrange's notation:
+
+      ƒ'(x)    <——    dƒ/dx
+
+    whence:
+
+      F'(x)  =  ƒ(x)
+
+    meaning that  F(x)  is the antiderivative of  ƒ(x)  with a constant term of zero
+    (I'll call it "reference-antiderivative"),
+    then any antiderivative of  ƒ(x)  has the form:
+
+      F(x) + k  —— where k is any constant.
+
+    This notation is convenient, but also a tad confusing:
+    in French (Lagrange's language) an antiderivative is called a "primitive".
+    So the symbol "prime" designates the antithesis of "primitive".
+    Luckily this book tries its best no to speak French.
+    I'll be using a hybrid notation:
+      #  Lagrange (big F) for reference-antiderivative (null constant term),
+      #  Leibniz ( dƒ/dx ) for derivatives.
+
+    https://en.wikipedia.org/wiki/Notation_for_differentiation#Leibniz's_notation
+    https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange's_notation
+    https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange
+    https://archive.org/details/theoriedesfoncti00lagr/page/30/mode/2up
+  */
+
+  Ok, so how do we reconstruct a function from these two data?
+  Let  ƒ(x)  be some function; and let us know  dƒ/dx  and  ƒ (a) .
+  We want to find  ƒ(b) .
+  Or: we know dƒ
+  (i.e. the change of  ƒ(x)  corresponding to dx (i.e. an infinitesimal change in x)).
+  That is:
+
+    ƒ(x + dx)  =  ƒ(x) + { ƒ(x + dx) — ƒ(x) }  =  ƒ(x) + dƒ
+
+                                    x + dξ
+               dƒ                  ⌠  dƒ
+    =  ƒ(x) + ———— dx  =  ƒ(x)  +  | ———— dξ
+               dx                  ⌡  dξ
+                                    x
+
+  Where ξ is an alias of x, allowing it to be constant inside the integral.
+
+  Let's be over-casually heretical and decide that a and b are so close together
+  that they're exactly 4 infinitesimal steps apart.
+  (For the purpose of example only.)
+  Then:
+
+    b  =  a + 4dx
+
+  then:
+
+    ƒ(b)  =  ƒ(a + 4dx)  =  ƒ(a) + dƒ + dƒ + dƒ + dƒ
+
+  (This looks like 4 times dƒ but it has to keep the form of a sum,
+  because, unless  ƒ(x)  is linear, dƒ is not a constant.)
+
+    ƒ(b)  =  ƒ(a) + { ƒ(a + dx) — ƒ(a) }
+                  + { ƒ(a + 2dx) — ƒ(a + dx) }
+                  + { ƒ(a + 3dx) — ƒ(a + 2dx) }
+                  + { ƒ(a + 4dx) — ƒ(a + 3dx) }
+
+  The curly brackets are facultative, they just help identify dƒ.
+  Notice that each term of the sum gets cancelled by its opposite,
+  except the positive term of the last dƒ:
+
+    ƒ(a  +  4 dx)  =  ƒ(b)
+
+  Good: the equal sign isn't lying.
+  Moving on:
+
+                     dƒ        dƒ        dƒ        dƒ
+    ƒ(b)  =  ƒ(a) + ———— dx + ———— dx + ———— dx + ———— dx
+                     dx        dx        dx        dx
+
+                     a + 4dx              b
+                    ⌠  dƒ                ⌠  dƒ
+          =  ƒ(a) + | ———— dx  =  ƒ(a) + | ———— dx
+                    ⌡  dx                ⌡  dx
+                     a                    a
+
+  Now, as a and b grow apart from each other,
+  more and more instances of dx fit between them.
+  Earlier we had:
+
+    dx  =  span/nb    <=>    nb·dx  =  span
+
+  here nb starts tending to infinity,
+  so we won't write the full sum,
+  but the mechanics remain the same:
+
+                     b
+                    ⌠  dƒ
+    ƒ(b)  =  ƒ(a) + | ———— dx
+                    ⌡  dx
+                     a
+            b
+           ⌠  dƒ
+    <=>    | ———— dx  =  ƒ(b) — ƒ(a)    for all a and b.
+           ⌡  dx
+            a
+
+  /*
+    Even if  a > b ?
+    Let's check.
+    E.g.:
+
+      a = 6    &&    b = 3    &&    nb = 12
+
+    Then:
+
+      span  =  b — a  =  3 — 6  =  —3
+
+      dx  =  span/nb  =  —3/12  =  —1/4
+
+      a + dx + dx + dx + dx + dx + dx + dx + dx + dx + dx + dx + dx
+      =  6 + 12·(—1/4)  =  6 — 12/4  =  6 — 3  =  3
+      =  b
+
+    ok.
+  */
+  ƒ(x)  is an antiderivative of  dƒ/dx  whose constant term is encoded in  ƒ(a) .
+  The reference-antiderivative has a constant term of zero.
+  Compared to it,  ƒ(x)  has a vertical offset equal to its constant term,
+  so the difference between their respective values
+  anywhere is the constant term of  ƒ(x) .
+  Since we know both their values at a, we can find it.
+
+  Let's invent a problem.
+
+                     b          //  We know the expression of  ƒ(x) ;
+                    ⌠           //  we know a and  X(a) ;
+    X(b)  =  X(a) + | ƒ(x)dx    //  we know b;
+                    ⌡           //
+                     a          //  we want  X(b) .
+
+  We know that:  X(x)  =  F(x) + k
+  /*
+    where  F(x)  is the reference-antiderivative of  ƒ(x)
+    and k is some constant.
+  */
+  So:  k  =  X(x) — F(x)
+
+  If we find the expression of  F(x) , we know  F(a) ,
+  then we know  X(a) — F(a)  =  k .
+  Then:
+
+    X(b)  =  F(b) + k  =  F(b) + X(a) — F(a)
+
+          =  X(a) + { F(b) — F(a) }
+
+  Then:
+
+     b                          //  This may seem like a redundant result...
+    ⌠                           //
+    | ƒ(x)dx  =  F(b) — F(a)    //  Except this time involves the unique reference-antiderivative,
+    ⌡                           //  the one whose constant term is zero —— not any antiderivative.
+     a                          //  Now we can express integrals in algebraic terms.
+
+  E.g.:
+              ___
+    F(x)  =  √ x
+
+  then:
+                            ________      ___     //  These square roots in the numerator must go.
+              dF           √ x + dx   —  √ x      //  Both of them.
+    ƒ(x)  =  ————  =  lim ———————————————————     //  We need a magical factor
+              dx     dx—>0        dx              //  that cleans up everything at once.
+
+  /*
+    Let's find a general solution to:
+
+      (a — b)·k  =  a² — b²
+
+      (Assuming  a ≠ b  ——  otherwise the difference is zero and k is undefined.)
+
+             a² — b²         a — b + b         a — b — a
+      k  =  —————————  =  a ———————————  +  b ———————————
+              a — b            a — b             a — b
+
+               a — b        a b          a — b        a b
+         =  a ———————  +  ———————  +  b ———————  —  ———————
+               a — b       a — b         a — b       a — b
+
+         =  a + b
+
+    Let's check that result:
+
+      (a — b)(a + b)  =  a² + ab — ab + b²  =  a² + b²
+
+    ok.
+  */
+  So:
+                    { √(x + dx) — √(x) }{ √(x + dx) + √(x) }
+      ƒ(x)  =  lim —————————————————————————————————————————
+              dx—>0         dx{ √(x + dx) + √(x) }
+
+                           x + dx — x
+            =  lim  ————————————————————————
+              dx—>0  dx{ √(x + dx) + √(x) }
+
+                           dx/dx              1
+            =  lim  ——————————————————  =  ———————
+              dx—>0  √(x + dx) + √(x)       2√(x)
+
+  Now, say we face:
+                     b                   b
+                    ⌠   dx              ⌠
+    X(b)  =  X(a) + | ——————  =  X(a) + | ƒ(x)dx
+                    ⌡  2√(x)            ⌡
+                     a                   a
+                                            ___    ___
+          =  X(a) + F(b) — F(a)  =  X(a) + √ b  — √ a
+
+  If we know a,  X(a)  and b, we can compute  X(b) .
+  For instance:    a = 16 ,  b = 25  and  X(a) = 17
+  then:
+                   ____    ____
+    X(b)  =  17 + √ 25  — √ 16   =  17 + 5 — 4  =  18
+
+  or better yet, if we leave b undefined:
+                                          ___    ____
+    X(x)  =  X(a) + F(x) — F(a)  =  17 + √ x  — √ 16
+              ___                   ___
+          =  √ x  + 17 — 4  =  √ x  + 13
+
+  we get the algebraic expression of  X(x) .
+                          ___
+  Let's say:    X(x)  =  √ x  — 2/3
+  and pretend we don't know the formula yet;
+  let's also say that our initial conditions give:
+
+    X(36)  =  6 — 2/3  =  16/3
+
+  and again pretend we only have the final result;
+  then:
+                                              ___    ____
+    X(x)  =  X(36) + F(x) — F(36)  =  16/3 + √ x  — √ 36
+
+              ___                 ___    16 — 18
+          =  √ x  + 16/3 — 6  =  √ x  — —————————
+                                            3
+              ___
+          =  √ x  — 2/3
+
+  It works!
+
+  But as you've seen,
+  it requires finding the reference—antiderivative of the function inside the integral...
+  Finding a first (or nth) derivative can be tricky sometimes,
+  but at least we have a formula to apply ——
+  —— we have a problem and seek a solution.
+  There's no general formula for antiderivatives:
+  we have a solution and seek an infinity of problems to then discriminate...
+  (That's top—down thinking territory. Take notes and keep them safe...)
+  It requires experience with derivatives, memory and pattern recognition ——
+  —— which can be vertiginous.
+
+  That's why, in this book,
+  I'll try to always find derivatives from scratch without shortcuts ——
+  —— with maximum struggle —— because:
+  pain is the best mnemotechnic tool I know ——
+  —— traumatisms stick with you for longer than tattoos ——
+  —— you won't forget them accidentally ——
+  —— you won't forget them, period.
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————
+/*          "Does this guy know how to party or what?"                                           */
+/*                                                       ——  Mike Myers (Wayne's World)          */
+===================================================================================================
+#09  Swiß connection
+===================================================================================================
+
+  [IN PROGRESS]
+
+
+
+===================================================================================================
+#10  Cardinal sine
+===================================================================================================
+
+  [IN PROGRESS]
+
+
+
+===================================================================================================
+#11  The ι manifesto
+===================================================================================================
+
+  [IN PROGRESS]
